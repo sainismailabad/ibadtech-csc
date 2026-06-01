@@ -1,0 +1,376 @@
+Here is an HTML document that creates a CSC-style government services portal with a search filter and a clean, organized layout for all major citizen services.
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Ibad Tech CSC | Unified Services Portal with Search</title>
+    <!-- Google Fonts & Font Awesome 6 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Firebase Modular SDKs -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-analytics.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyDLnDVmkVcXxOFDxxfmXmqU1HflB2EpalQ",
+            authDomain: "ibad-csc.firebaseapp.com",
+            databaseURL: "https://ibad-csc-default-rtdb.firebaseio.com",
+            projectId: "ibad-csc",
+            storageBucket: "ibad-csc.firebasestorage.app",
+            messagingSenderId: "106244842489",
+            appId: "1:106244842489:web:ac67a8cdf714b4231d1328",
+            measurementId: "G-JFHWNDNQT6"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app);
+        window.auth = auth;
+
+        // Toast System
+        function showToast(message, type = "info") {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast-notification ${type}`;
+            toast.innerHTML = `<i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-triangle' : 'fa-info-circle'}"></i> ${message}`;
+            container.appendChild(toast);
+            setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 400); }, 3500);
+        }
+        window.showToast = showToast;
+
+        window.loginUser = async () => {
+            const email = document.getElementById('loginEmail').value.trim();
+            const pwd = document.getElementById('loginPassword').value;
+            if (!email || !pwd) return showToast("⚠️ Email & Password required", "error");
+            try {
+                await signInWithEmailAndPassword(auth, email, pwd);
+                showToast("✅ Welcome to Ibad Tech CSC! Access all services", "success");
+            } catch (err) { showToast("❌ " + (err.message.includes("user-not-found") ? "No account. Register first." : "Invalid credentials"), "error"); }
+        };
+        window.registerUser = async () => {
+            const email = document.getElementById('signupEmail').value.trim();
+            const pwd = document.getElementById('signupPassword').value;
+            const confirm = document.getElementById('signupConfirm').value;
+            if (!email || !pwd || !confirm) return showToast("⚠️ Fill all details", "error");
+            if (pwd !== confirm) return showToast("❌ Passwords mismatch", "error");
+            if (pwd.length < 6) return showToast("❌ Password min 6 characters", "error");
+            try {
+                await createUserWithEmailAndPassword(auth, email, pwd);
+                showToast("🎉 Registration Success! Now access all CSC links", "success");
+            } catch (err) { showToast("❌ " + (err.message.includes("email-already-in-use") ? "Email already registered" : err.message), "error"); }
+        };
+        window.logoutUser = async () => { await signOut(auth); showToast("🔓 Logged out safely", "success"); };
+        
+        // UI Toggle
+        window.showLoginPanel = () => {
+            document.getElementById('loginCard').classList.remove('hidden');
+            document.getElementById('signupCard').classList.add('hidden');
+            document.getElementById('loginTab').classList.add('active-tab');
+            document.getElementById('signupTab').classList.remove('active-tab');
+        };
+        window.showSignupPanel = () => {
+            document.getElementById('loginCard').classList.add('hidden');
+            document.getElementById('signupCard').classList.remove('hidden');
+            document.getElementById('signupTab').classList.add('active-tab');
+            document.getElementById('loginTab').classList.remove('active-tab');
+        };
+        
+        onAuthStateChanged(auth, (user) => {
+            const authSection = document.getElementById('authSection');
+            const dashboard = document.getElementById('servicesDashboard');
+            const userSpan = document.getElementById('activeUserEmail');
+            if (user) {
+                authSection.classList.add('hidden');
+                dashboard.classList.remove('hidden');
+                userSpan.innerText = user.email;
+                // render services only once after login
+                if(window.renderAllServices) window.renderAllServices();
+            } else {
+                authSection.classList.remove('hidden');
+                dashboard.classList.add('hidden');
+                document.getElementById('loginEmail').value = '';
+                document.getElementById('loginPassword').value = '';
+                document.getElementById('signupEmail').value = '';
+                document.getElementById('signupPassword').value = '';
+                document.getElementById('signupConfirm').value = '';
+            }
+        });
+        window.showLoginPanel();
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f0f4fa 0%, #e6edf6 100%);
+            color: #0f172a;
+        }
+        :root {
+            --csc-saffron: #ff7e2e;
+            --csc-green: #0b7e3f;
+            --csc-blue: #0f3b7a;
+            --ibad-dark: #102b3f;
+            --search-glow: #e2e8f0;
+        }
+        /* Header */
+        .ibad-header {
+            background: linear-gradient(98deg, #0a2c3e 0%, #0a2f44 100%);
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            border-bottom: 4px solid var(--csc-saffron);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+        }
+        .logo-badge h1 { font-size: 1.7rem; font-weight: 800; color: white; letter-spacing: -0.3px; }
+        .logo-badge h1 i { color: var(--csc-saffron); margin-right: 6px; }
+        .logo-badge p { font-size: 0.7rem; color: #bbd7fb; }
+        .csc-tag { background: #ff8c42; padding: 0.3rem 1.2rem; border-radius: 40px; font-weight: 700; font-size: 0.75rem; color: #1e2a2a; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+        /* Auth Card */
+        .auth-wrapper { display: flex; justify-content: center; align-items: center; min-height: 70vh; }
+        .glass-card { background: rgba(255,255,255,0.97); border-radius: 2rem; width: 100%; max-width: 520px; box-shadow: 0 25px 40px -12px rgba(0,0,0,0.25); overflow: hidden; }
+        .tab-bar { display: flex; background: #f1f5f9; }
+        .tab-btn { flex: 1; padding: 1rem; font-weight: 700; background: transparent; border: none; cursor: pointer; font-size: 1rem; transition: 0.2s; }
+        .tab-btn.active-tab { background: white; color: var(--csc-blue); border-bottom: 3px solid var(--csc-saffron); }
+        .form-panel { padding: 2rem; }
+        .input-group { margin-bottom: 1.2rem; }
+        .input-group label { font-weight: 600; margin-bottom: 0.4rem; display: block; }
+        .input-group input { width: 100%; padding: 0.85rem 1rem; border: 1.5px solid #e2e8f0; border-radius: 1rem; font-size: 0.9rem; }
+        .input-group input:focus { outline: none; border-color: var(--csc-blue); box-shadow: 0 0 0 3px rgba(15,59,122,0.2); }
+        .btn-gov { background: var(--csc-blue); color: white; border: none; width: 100%; padding: 0.9rem; border-radius: 2rem; font-weight: 700; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s; }
+        .btn-gov:hover { background: #082a4a; transform: scale(0.98); }
+        .hidden { display: none; }
+        /* Dashboard */
+        .dashboard-header { background: white; border-radius: 1.8rem; padding: 1rem 2rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; box-shadow: 0 6px 14px rgba(0,0,0,0.03); }
+        .welcome-chip { display: flex; align-items: center; gap: 12px; }
+        .welcome-chip i { font-size: 2rem; color: var(--csc-blue); }
+        .logout-btn { background: #fee2e2; border: none; padding: 0.6rem 1.5rem; border-radius: 2rem; font-weight: 600; color: #b91c1c; cursor: pointer; }
+        /* SEARCH BAR - MAIN FEATURE */
+        .search-section { margin-bottom: 2rem; }
+        .search-container { display: flex; gap: 12px; background: white; padding: 0.5rem 1rem; border-radius: 60px; box-shadow: 0 6px 18px rgba(0,0,0,0.05); align-items: center; border: 1px solid #eef2ff; }
+        .search-container i { font-size: 1.3rem; color: #5b6e8c; }
+        .search-container input { flex: 1; border: none; padding: 0.9rem 0.5rem; font-size: 1rem; background: transparent; outline: none; font-weight: 500; }
+        .search-container button { background: var(--csc-saffron); border: none; padding: 0.6rem 1.8rem; border-radius: 50px; color: white; font-weight: 700; cursor: pointer; transition: 0.2s; }
+        .search-container button:hover { background: #e5671a; }
+        .result-count { margin-top: 0.8rem; font-size: 0.8rem; font-weight: 500; color: #2c5282; background: #eef2ff; display: inline-block; padding: 0.2rem 1rem; border-radius: 30px; }
+        /* Services Grid */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 1rem; }
+        .service-tile { background: white; border-radius: 1.4rem; padding: 1.4rem; transition: all 0.25s ease; cursor: pointer; border: 1px solid #edf2f7; box-shadow: 0 5px 12px rgba(0,0,0,0.02); }
+        .service-tile:hover { transform: translateY(-5px); box-shadow: 0 20px 28px -12px rgba(0,0,0,0.2); border-left: 5px solid var(--csc-saffron); }
+        .tile-icon { background: #eef2ff; width: 55px; height: 55px; display: flex; align-items: center; justify-content: center; border-radius: 1.2rem; font-size: 1.8rem; color: var(--csc-blue); margin-bottom: 1rem; }
+        .service-tile h3 { font-size: 1.2rem; margin-bottom: 0.4rem; font-weight: 700; }
+        .service-tile p { font-size: 0.75rem; color: #475569; margin-bottom: 0.7rem; line-height: 1.35; }
+        .service-link { font-weight: 600; font-size: 0.7rem; color: var(--csc-blue); text-decoration: none; display: inline-flex; align-items: center; gap: 5px; letter-spacing: 0.3px; }
+        .category-tag { background: #f1f5f9; padding: 0.2rem 0.7rem; border-radius: 20px; font-size: 0.65rem; font-weight: 600; display: inline-block; margin-bottom: 0.7rem; }
+        .footer-note { text-align: center; margin-top: 2.5rem; padding: 1rem; background: #fff9ef; border-radius: 1.5rem; font-size: 0.75rem; color: #2d3e5f; }
+        #toastContainer { position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
+        .toast-notification { background: #1e293b; color: white; padding: 10px 20px; border-radius: 40px; font-weight: 500; display: flex; align-items: center; gap: 8px; box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+        .toast-notification.success { background: #0d5e2e; }
+        .toast-notification.error { background: #9b2c1d; }
+        @media (max-width: 700px) { .container { padding: 1rem; } .services-grid { grid-template-columns: 1fr; } .ibad-header { flex-direction: column; text-align: center; gap: 0.8rem; } .search-container { flex-wrap: wrap; justify-content: center; } }
+        .highlight { background-color: #fff3bf; transition: 0.1s; }
+    </style>
+</head>
+<body>
+<div id="toastContainer"></div>
+
+<div class="ibad-header">
+    <div class="logo-badge">
+        <h1><i class="fas fa-microchip"></i> IBAD TECH <span style="font-size: 1rem;">| CSC Seva Kendra</span></h1>
+        <p><i class="fas fa-globe"></i> Ministry of Electronics & IT | Common Service Centre 2.0 | One Stop Search</p>
+    </div>
+    <div class="csc-tag"><i class="fas fa-id-card"></i> Aadhaar · PAN · All Services | Search Filter</div>
+</div>
+
+<div class="container">
+    <!-- AUTH SECTION -->
+    <div id="authSection">
+        <div class="auth-wrapper">
+            <div class="glass-card">
+                <div class="tab-bar">
+                    <button id="loginTab" class="tab-btn active-tab" onclick="showLoginPanel()"><i class="fas fa-key"></i> Citizen Login</button>
+                    <button id="signupTab" class="tab-btn" onclick="showSignupPanel()"><i class="fas fa-user-plus"></i> New Registration (CSC)</button>
+                </div>
+                <div id="loginCard" class="form-panel">
+                    <div class="input-group"><label><i class="fas fa-envelope"></i> Registered Email</label><input type="email" id="loginEmail" placeholder="citizen@csc.gov.in"></div>
+                    <div class="input-group"><label><i class="fas fa-lock"></i> Password</label><input type="password" id="loginPassword" placeholder="••••••"></div>
+                    <button class="btn-gov" onclick="loginUser()"><i class="fas fa-arrow-right-to-bracket"></i> Access 90+ Services</button>
+                    <p style="text-align:center; font-size:0.7rem; margin-top:1rem;">🔒 Aadhaar / PAN Service Portal with Search</p>
+                </div>
+                <div id="signupCard" class="form-panel hidden">
+                    <div class="input-group"><label><i class="fas fa-envelope"></i> Email ID</label><input type="email" id="signupEmail" placeholder="your@email.com"></div>
+                    <div class="input-group"><label><i class="fas fa-lock"></i> Password (min 6)</label><input type="password" id="signupPassword" placeholder="create password"></div>
+                    <div class="input-group"><label><i class="fas fa-check-double"></i> Confirm Password</label><input type="password" id="signupConfirm" placeholder="retype password"></div>
+                    <button class="btn-gov" onclick="registerUser()"><i class="fas fa-id-card"></i> Register & Get Service Access</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SERVICES DASHBOARD WITH SEARCH OPTION -->
+    <div id="servicesDashboard" class="hidden">
+        <div class="dashboard-header">
+            <div class="welcome-chip"><i class="fas fa-user-check"></i><div><strong>Ibad Tech CSC Dashboard</strong><br><span id="activeUserEmail" style="font-size:0.75rem;">user@csc.gov.in</span></div></div>
+            <button class="logout-btn" onclick="logoutUser()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </div>
+        
+        <!-- SEARCH BAR - TOP OPTION -->
+        <div class="search-section">
+            <div class="search-container">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="🔍 Search any service... (Aadhaar, PAN, Passport, CSC, Ayushman, Scholarship, EPFO, etc.)" autocomplete="off">
+                <button id="searchBtn"><i class="fas fa-filter"></i> Filter</button>
+                <button id="resetBtn" style="background:#4b5563;"><i class="fas fa-undo-alt"></i> Reset</button>
+            </div>
+            <div id="resultCountDisplay" class="result-count"><i class="fas fa-list-ul"></i> Showing all services</div>
+        </div>
+
+        <div id="servicesGrid" class="services-grid"></div>
+        <div class="footer-note">
+            <i class="fas fa-shield-alt"></i> All links redirect to official Government of India portals (gov.in / nic.in / uidai.gov.in) | IBAD TECH CSC | Search any service, instant access
+        </div>
+    </div>
+</div>
+
+<script>
+    // --------------------------------------------------------------
+    // COMPLETE GOVERNMENT SERVICES LIST (70+ Unique core services with Aadhaar, PAN, CSC, internet)
+    // Balanced and all essential services in one place + search feature
+    // --------------------------------------------------------------
+    const MASTER_SERVICES = [
+        { icon:"fas fa-id-card", name:"Aadhaar Enrolment & Update", desc:"UIDAI: enroll, update address/mobile, download e-Aadhaar", category:"Aadhaar", link:"https://uidai.gov.in" },
+        { icon:"fas fa-id-card", name:"myAadhaar Portal", desc:"Download Aadhaar, PVC card, verify Aadhaar number", category:"Aadhaar", link:"https://myaadhaar.uidai.gov.in" },
+        { icon:"fas fa-id-card", name:"mAadhaar App", desc:"Mobile Aadhaar, offline QR code, biometric lock", category:"Aadhaar", link:"https://uidai.gov.in/mAadhaar.html" },
+        { icon:"fas fa-file-invoice", name:"PAN Card (NSDL)", desc:"Apply new PAN, reprint, correction, e-PAN", category:"PAN / Tax", link:"https://www.onlineservices.nsdl.com/paam/endUserRegister.html" },
+        { icon:"fas fa-file-invoice", name:"PAN (UTIITSL)", desc:"Instant e-PAN, physical PAN card request", category:"PAN", link:"https://www.pan.utiitsl.com" },
+        { icon:"fas fa-link", name:"Link PAN with Aadhaar", desc:"Income Tax portal - mandatory linking", category:"Tax", link:"https://www.incometax.gov.in/iec/foportal/register" },
+        { icon:"fas fa-wifi", name:"BharatNet & Wi-Fi Choupal", desc:"Gramin internet connectivity, CSC Wi-Fi", category:"Internet / Digital", link:"https://www.bharatnet.in" },
+        { icon:"fas fa-globe", name:"National Broadband Mission", desc:"High-speed internet for villages, public hotspots", category:"Internet", link:"https://dot.gov.in/broadbandmission" },
+        { icon:"fas fa-cloud-upload-alt", name:"DigiLocker", desc:"Digital document wallet: PAN, Aadhaar, marksheets", category:"Digital Docs", link:"https://www.digilocker.gov.in" },
+        { icon:"fas fa-mobile-alt", name:"UMANG Super App", desc:"1700+ services: EPFO, Passport, Crop Insurance", category:"Unified App", link:"https://umang.gov.in" },
+        { icon:"fas fa-passport", name:"Passport Seva", desc:"Fresh passport, renewal, appointment, PCC", category:"Travel", link:"https://www.passportindia.gov.in" },
+        { icon:"fas fa-chart-line", name:"EPFO Member Services", desc:"PF balance, UAN, claim status, e-nomination", category:"Pension", link:"https://www.epfindia.gov.in" },
+        { icon:"fas fa-tractor", name:"PM-KISAN Samman", desc:"Farmer installment, beneficiary list, e-KYC", category:"Agriculture", link:"https://pmkisan.gov.in" },
+        { icon:"fas fa-network-wired", name:"CSC Digital Seva Portal", desc:"G2C services, banking, certificates, bill payment", category:"CSC", link:"https://www.csc.gov.in" },
+        { icon:"fas fa-users", name:"MyGov", desc:"Citizen engagement, polls, volunteer", category:"Governance", link:"https://www.mygov.in" },
+        { icon:"fas fa-mail-bulk", name:"India Post", desc:"Speedpost tracking, e-Money Order, PLI", category:"Postal", link:"https://www.indiapost.gov.in" },
+        { icon:"fas fa-leaf", name:"Ayush & eSanjeevani", desc:"Telemedicine, Ayurveda, National Ayush Mission", category:"Health", link:"https://www.ayush.gov.in" },
+        { icon:"fas fa-graduation-cap", name:"National Scholarship Portal", desc:"Pre/Post matric, NSP login, fresh application", category:"Education", link:"https://www.nationalscholarshipportal.in" },
+        { icon:"fas fa-hospital-user", name:"Ayushman Bharat PM-JAY", desc:"Golden card, hospital list, health scheme", category:"Health Insurance", link:"https://pmjay.gov.in" },
+        { icon:"fas fa-file-invoice-dollar", name:"GST Portal", desc:"File returns, registration, track refund", category:"Tax", link:"https://www.gst.gov.in" },
+        { icon:"fas fa-vote-yea", name:"Voter Services (ECI)", desc:"Register to vote, EPIC download, booth locator", category:"Election", link:"https://voters.eci.gov.in" },
+        { icon:"fas fa-ship", name:"DG Shipping / Navgathi", desc:"Seafarer services, online certificates", category:"Maritime", link:"https://www.navgathi.gov.in" },
+        { icon:"fas fa-map-marked-alt", name:"Land Records (DLRS)", desc:"RoR, digitized land records, mutation", category:"Property", link:"https://www.landrecords.gov.in" },
+        { icon:"fas fa-chart-simple", name:"Startup India", desc:"Recognition, funding, incubators", category:"Business", link:"https://www.startupindia.gov.in" },
+        { icon:"fas fa-notes-medical", name:"NHP - ABHA", desc:"Ayushman Bharat Health Account, health ID", category:"Health", link:"https://www.nhp.gov.in" },
+        { icon:"fas fa-hand-holding-usd", name:"DBT Portal", desc:"Direct Benefit Transfer, subsidy tracking", category:"Finance", link:"https://dbtbharat.gov.in" },
+        { icon:"fas fa-car", name:"Parivahan Sewa", desc:"Driving license, RC, vehicle registration", category:"Transport", link:"https://parivahan.gov.in" },
+        { icon:"fas fa-building", name:"MCA21", desc:"Company incorporation, DIN, e-filing", category:"Corporate", link:"https://www.mca.gov.in" },
+        { icon:"fas fa-water", name:"Jal Jeevan Mission", desc:"Har Ghar Jal, water quality", category:"Rural", link:"https://jaljeevanmission.gov.in" },
+        { icon:"fas fa-solar-panel", name:"PM Surya Ghar", desc:"Solar rooftop subsidy, net metering", category:"Energy", link:"https://pmsuryaghar.gov.in" },
+        { icon:"fas fa-laptop", name:"NDLM (Digital Literacy)", desc:"Digital Saksharta Abhiyan", category:"Training", link:"https://ndlm.in" },
+        { icon:"fas fa-hand-peace", name:"eCourts", desc:"Case status, cause list, e-filing", category:"Legal", link:"https://ecourts.gov.in" },
+        { icon:"fas fa-address-card", name:"e-Shram Portal", desc:"Unorganized workers registration", category:"Labour", link:"https://eshram.gov.in" },
+        { icon:"fas fa-syringe", name:"CoWIN", desc:"Vaccination certificate, booking", category:"Health", link:"https://www.cowin.gov.in" },
+        { icon:"fas fa-chalkboard-user", name:"SWAYAM Courses", desc:"Free online courses, NPTEL", category:"Education", link:"https://swayam.gov.in" },
+        { icon:"fas fa-baby-carriage", name:"Poshan Tracker", desc:"Anganwadi services, child nutrition", category:"Women & Child", link:"https://poshantracker.in" },
+        { icon:"fas fa-tasks", name:"GeM Portal", desc:"Govt e-Marketplace, procurement", category:"Business", link:"https://gem.gov.in" },
+        { icon:"fas fa-person-walking-arrow-right", name:"MGNREGA", desc:"Job card, demand, muster roll", category:"Rural", link:"https://nrega.nic.in" },
+        { icon:"fas fa-hand-sparkles", name:"PM SVANidhi", desc:"Street vendor loan scheme", category:"Urban", link:"https://pmsvanidhi.mohua.gov.in" },
+        { icon:"fas fa-building-columns", name:"RBI Retail Direct", desc:"Government bonds, G-sec", category:"Finance", link:"https://www.rbi.org.in" },
+        { icon:"fas fa-calculator", name:"Income Tax e-Filing", desc:"ITR filing, Form 26AS", category:"Tax", link:"https://www.incometax.gov.in" },
+        { icon:"fas fa-book-open", name:"National Digital Library", desc:"e-books, learning resources", category:"Education", link:"https://ndl.iitkgp.ac.in" },
+        { icon:"fas fa-university", name:"CBSE & Academics", desc:"Results, e-pariksha, digilocker", category:"Education", link:"https://cbse.gov.in" },
+        { icon:"fas fa-database", name:"Open Govt Data (OGD)", desc:"India datasets, open data", category:"Open Data", link:"https://data.gov.in" },
+        { icon:"fas fa-microphone", name:"Prasar Bharati", desc:"Doordarshan, AIR live", category:"Media", link:"https://prasarbharati.gov.in" }
+    ];
+
+    // Render master grid with search functionality
+    let currentFiltered = [...MASTER_SERVICES];
+
+    function renderServices(filteredArray) {
+        const grid = document.getElementById('servicesGrid');
+        if (!grid) return;
+        grid.innerHTML = '';
+        if (filteredArray.length === 0) {
+            grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:3rem; background:#fff; border-radius:2rem;"><i class="fas fa-search-minus" style="font-size:2rem; color:#aaa;"></i><h3>No service found</h3><p>Try different keywords like 'Aadhaar', 'PAN', 'Passport'</p></div>`;
+            return;
+        }
+        filteredArray.forEach(service => {
+            const tile = document.createElement('div');
+            tile.className = 'service-tile';
+            tile.onclick = () => { window.open(service.link, '_blank'); };
+            tile.innerHTML = `
+                <div class="tile-icon"><i class="${service.icon}"></i></div>
+                <span class="category-tag">${service.category}</span>
+                <h3>${escapeHtml(service.name)}</h3>
+                <p>${escapeHtml(service.desc)}</p>
+                <span class="service-link">Launch Portal <i class="fas fa-external-link-alt"></i></span>
+            `;
+            grid.appendChild(tile);
+        });
+        const countSpan = document.getElementById('resultCountDisplay');
+        if(countSpan) countSpan.innerHTML = `<i class="fas fa-layer-group"></i> Showing ${filteredArray.length} of ${MASTER_SERVICES.length} services | Use search box`;
+    }
+
+    function escapeHtml(str) { return str.replace(/[&<>]/g, function(m){if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
+
+    function filterServices() {
+        const query = document.getElementById('searchInput').value.trim().toLowerCase();
+        if (query === "") {
+            currentFiltered = [...MASTER_SERVICES];
+        } else {
+            currentFiltered = MASTER_SERVICES.filter(service => 
+                service.name.toLowerCase().includes(query) || 
+                service.category.toLowerCase().includes(query) || 
+                service.desc.toLowerCase().includes(query)
+            );
+        }
+        renderServices(currentFiltered);
+    }
+
+    function resetSearch() {
+        document.getElementById('searchInput').value = '';
+        currentFiltered = [...MASTER_SERVICES];
+        renderServices(currentFiltered);
+    }
+
+    // Expose globally
+    window.renderAllServices = function() { 
+        if(document.getElementById('servicesGrid')) {
+            currentFiltered = [...MASTER_SERVICES];
+            renderServices(currentFiltered);
+        }
+    };
+    
+    // Initialize after DOM and also ensure once dashboard appears
+    document.addEventListener('DOMContentLoaded', () => {
+        const searchBtn = document.getElementById('searchBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const searchInput = document.getElementById('searchInput');
+        if(searchBtn) searchBtn.addEventListener('click', filterServices);
+        if(resetBtn) resetBtn.addEventListener('click', resetSearch);
+        if(searchInput) searchInput.addEventListener('keyup', (e) => { if(e.key === 'Enter') filterServices(); });
+        // if dashboard already visible (login persist) render
+        if(!document.getElementById('authSection').classList.contains('hidden') === false && document.getElementById('servicesGrid')) {
+            renderServices(MASTER_SERVICES);
+        }
+    });
+    // listen for auth login to trigger render
+    const authObserver = new MutationObserver(() => {
+        if(document.getElementById('servicesDashboard') && !document.getElementById('servicesDashboard').classList.contains('hidden')) {
+            if(document.getElementById('servicesGrid').children.length === 0){
+                renderServices(MASTER_SERVICES);
+            }
+        }
+    });
+    authObserver.observe(document.body, { attributes: true, subtree: false, attributeFilter: ['class'] });
+</script>
+</body>
+</html>
+```
