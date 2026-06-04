@@ -3,24 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ibad Tech | Digital Marketing | Web Development | Graphic Design</title>
-
-  <meta name="google-adsense-account" content="ca-pub-1336136297225442">
-
-  <!-- SEO Meta Tags -->
-  <meta name="description" content="Ibad Tech offers Digital Marketing, Graphic Design, Web & App Development, and IT Services. Based in Kurukshetra, Haryana." />
-  <meta name="keywords" content="Ibad Tech, Digital Marketing, Graphic Design, Web Development, App Development, IT Services, Kurukshetra, Haryana, India" />
-  <meta name="author" content="Ibad Tech" />
-
-  <!-- Open Graph (for social media sharing) -->
-  <meta property="og:title" content="Ibad Tech | Digital Marketing, Web & App Services" />
-  <meta property="og:description" content="Explore expert digital marketing, graphic design, and modern website development services by Ibad Tech." />
-  <meta property="og:image" content="https://sainismailabad.github.io/ibadtech/Logo.jpg" />
-  <meta property="og:url" content="https://sainismailabad.github.io/ibadtech/" />
-  <meta property="og:type" content="website" />
-
-  <!-- Favicon -->
-  <link rel="icon" href="Logo.jpg" type="image/jpeg" />
+  <title>Contact Us | Ibad Tech - Get in Touch</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,8 +13,10 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+  <!-- EmailJS SDK -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
   <style>
-    /* Reset and Base Styles */
     * {
       margin: 0;
       padding: 0;
@@ -47,14 +32,16 @@
       --gray: #6b7280;
       --accent: #f59e0b;
       --gradient: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      --error: #ef4444;
+      --success: #10b981;
     }
 
     body {
       font-family: 'Poppins', sans-serif;
       line-height: 1.6;
       color: var(--dark);
-      background-color: #f0f4f8;
-      overflow-x: hidden;
+      background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+      min-height: 100vh;
     }
 
     .container {
@@ -64,145 +51,6 @@
       padding: 0 20px;
     }
 
-    section {
-      padding: 80px 0;
-    }
-
-    h1, h2, h3, h4 {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 20px;
-    }
-
-    h2 {
-      font-size: 2.8rem;
-      text-align: center;
-      position: relative;
-      margin-bottom: 60px;
-    }
-
-    h2:after {
-      content: '';
-      display: block;
-      width: 80px;
-      height: 5px;
-      background: var(--gradient);
-      margin: 15px auto 0;
-      border-radius: 5px;
-    }
-
-    p {
-      margin-bottom: 15px;
-      font-size: 1.1rem;
-    }
-
-    a {
-      text-decoration: none;
-      color: var(--primary);
-      transition: all 0.3s ease;
-    }
-
-    a:hover {
-      color: var(--primary-dark);
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 15px 35px;
-      background: var(--gradient);
-      color: white;
-      border-radius: 50px;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-size: 1.1rem;
-      box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
-      position: relative;
-      overflow: hidden;
-      z-index: 1;
-    }
-
-    .btn:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 0%;
-      height: 100%;
-      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
-      transition: all 0.3s ease;
-      z-index: -1;
-    }
-
-    .btn:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
-    }
-
-    .btn:hover:before {
-      width: 100%;
-    }
-
-    .btn-outline {
-      background: transparent;
-      border: 3px solid var(--primary);
-      color: var(--primary);
-      box-shadow: none;
-    }
-
-    .btn-outline:before {
-      background: var(--gradient);
-    }
-
-    .btn-outline:hover {
-      color: white;
-    }
-
-    /* 3D Effects */
-    .card-3d {
-      transform-style: preserve-3d;
-      perspective: 1000px;
-      transition: all 0.5s ease;
-    }
-
-    .card-3d:hover {
-      transform: translateY(-10px) rotateX(5deg);
-    }
-
-    /* Ad container styles */
-    .ad-unit {
-      margin: 30px 0;
-      text-align: center;
-      background: #f8fafc;
-      border-radius: 20px;
-      padding: 15px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      transition: all 0.2s ease;
-    }
-    .ad-unit-sidebar {
-      margin: 25px 0;
-      text-align: center;
-      background: #ffffff;
-      border-radius: 16px;
-      padding: 15px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-    }
-    .ad-label {
-      font-size: 0.7rem;
-      color: #94a3b8;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 12px;
-    }
-    .adsense-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      overflow: hidden;
-    }
     /* Header Styles */
     .header {
       background: rgba(255, 255, 255, 0.95);
@@ -227,6 +75,7 @@
       width: auto;
       border-radius: 10px;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
     }
 
     .header-text {
@@ -248,11 +97,13 @@
 
     /* Navigation */
     .navbar {
-      background: #ffffff;
-      box-shadow: 0 4px 6px -2px rgba(0,0,0,0.05);
-      position: sticky;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 15px 0;
+      position: fixed;
       top: 90px;
+      width: 100%;
       z-index: 999;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
 
     .navbar ul {
@@ -269,11 +120,12 @@
 
     .navbar a {
       display: block;
-      padding: 18px 25px;
+      padding: 15px 25px;
       color: var(--dark);
       font-weight: 600;
       transition: all 0.3s ease;
       font-size: 1rem;
+      text-decoration: none;
     }
 
     .navbar a:hover {
@@ -297,167 +149,269 @@
       width: 70%;
     }
 
+    .active {
+      color: var(--primary) !important;
+    }
+
     .check {
       color: var(--accent) !important;
       font-weight: 700 !important;
     }
 
-    /* Hero Section */
-    .hero {
-      background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
-      color: white;
-      text-align: center;
-      padding: 200px 0 130px;
-      margin-top: 85px;
-      position: relative;
-      overflow: hidden;
+    /* Contact Section */
+    .contact-section {
+      padding: 220px 0 100px;
+      min-height: 100vh;
     }
 
-    .hero:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon points="0,0 100,100 0,100" fill="rgba(37,99,235,0.15)"/></svg>');
-      background-size: 100% 100%;
-      z-index: -1;
-    }
-
-    .hero h1 {
-      font-size: 3.8rem;
-      margin-bottom: 25px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
-      animation: fadeInDown 1s ease;
-    }
-
-    .hero p {
-      font-size: 1.4rem;
-      max-width: 800px;
-      margin: 0 auto 40px;
-      opacity: 0.95;
-      animation: fadeInUp 1s ease;
-    }
-
-    .hero-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 25px;
-      margin-top: 30px;
-      animation: fadeIn 1.5s ease;
-    }
-
-    /* Services Section */
-    .services {
-      background: white;
-      position: relative;
-    }
-
-    .service-container {
+    .contact-wrapper {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 40px;
-      margin-top: 50px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .service-card {
+      grid-template-columns: 1fr 1.2fr;
+      gap: 50px;
       background: white;
-      border-radius: 20px;
+      border-radius: 30px;
       overflow: hidden;
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
-      transition: all 0.4s ease;
-      text-align: center;
-      padding: 40px 30px;
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      position: relative;
-      z-index: 1;
-      cursor: pointer;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     }
 
-    .service-card:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+    /* Contact Info Side */
+    .contact-info {
       background: var(--gradient);
-      opacity: 0;
-      z-index: -1;
-      transition: all 0.5s ease;
-      border-radius: 20px;
-    }
-
-    .service-card:hover {
-      transform: translateY(-15px) scale(1.02);
-      box-shadow: 0 25px 45px rgba(0, 0, 0, 0.12);
-    }
-
-    .service-card:hover:before {
-      opacity: 1;
-    }
-
-    .service-card:hover h3,
-    .service-card:hover p {
+      padding: 50px 40px;
       color: white;
-    }
-
-    .service-card h3 {
-      font-size: 1.7rem;
-      margin: 25px 0 20px;
-      color: var(--dark);
-      transition: all 0.3s ease;
-    }
-
-    .service-image {
-      width: 100px;
-      height: 100px;
-      object-fit: contain;
-      margin: 0 auto;
-      transition: all 0.3s ease;
-    }
-
-    .service-card:hover .service-image {
-      filter: brightness(0) invert(1);
-      transform: scale(1.08);
-    }
-
-    /* About Section */
-    .about {
-      background: linear-gradient(to bottom, #f0f4f8, #e2e8f0);
       position: relative;
       overflow: hidden;
     }
 
-    .about-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
+    .contact-info:before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .contact-info h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
       position: relative;
-      z-index: 1;
     }
 
-    .about-image {
-      width: 100%;
-      border-radius: 20px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-      transform: rotate(-2deg);
-      transition: all 0.5s ease;
+    .contact-info h2:after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: white;
+      margin-top: 15px;
+      border-radius: 2px;
     }
 
-    .about-image:hover {
-      transform: rotate(0deg) scale(1.02);
+    .contact-info > p {
+      font-size: 1rem;
+      opacity: 0.9;
+      margin-bottom: 40px;
     }
 
-    .about-text p {
-      margin-bottom: 25px;
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .info-icon {
+      width: 50px;
+      height: 50px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+    }
+
+    .info-details h4 {
       font-size: 1.1rem;
+      margin-bottom: 5px;
+    }
+
+    .info-details p,
+    .info-details a {
+      color: rgba(255, 255, 255, 0.9);
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+
+    .info-details a:hover {
+      color: white;
+      text-decoration: underline;
+    }
+
+    .social-links-contact {
+      display: flex;
+      gap: 15px;
+      margin-top: 40px;
+    }
+
+    .social-links-contact a {
+      width: 45px;
+      height: 45px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    .social-links-contact a:hover {
+      background: white;
+      color: var(--primary);
+      transform: translateY(-5px);
+    }
+
+    /* Form Side */
+    .contact-form {
+      padding: 50px 40px;
+      background: white;
+    }
+
+    .contact-form h2 {
+      font-size: 2rem;
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+
+    .contact-form > p {
+      color: var(--gray);
+      margin-bottom: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    .form-group label i {
+      margin-right: 8px;
+      color: var(--primary);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 14px 18px;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-family: 'Poppins', sans-serif;
+      transition: all 0.3s ease;
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 16px;
+      background: var(--gradient);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .submit-btn:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+      transition: all 0.3s ease;
+      z-index: -1;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+    }
+
+    .submit-btn:hover:before {
+      width: 100%;
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Alert Messages */
+    .alert {
+      padding: 15px 20px;
+      border-radius: 12px;
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      animation: slideIn 0.3s ease;
+    }
+
+    .alert-success {
+      background: #d1fae5;
+      color: #065f46;
+      border-left: 4px solid var(--success);
+    }
+
+    .alert-error {
+      background: #fee2e2;
+      color: #991b1b;
+      border-left: 4px solid var(--error);
+    }
+
+    .alert i {
+      font-size: 1.2rem;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* Footer */
@@ -465,7 +419,7 @@
       background: var(--dark);
       color: white;
       text-align: center;
-      padding: 50px 0 30px;
+      padding: 40px 0 30px;
       position: relative;
     }
 
@@ -477,36 +431,6 @@
       width: 100%;
       height: 5px;
       background: var(--gradient);
-    }
-
-    .footer-content {
-      display: flex;
-      flex-direction: column;
-      gap: 25px;
-    }
-
-    .social-links {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-    }
-
-    .social-links a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 48px;
-      height: 48px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 50%;
-      color: white;
-      transition: all 0.3s ease;
-      font-size: 1.3rem;
-    }
-
-    .social-links a:hover {
-      background: var(--primary);
-      transform: translateY(-5px) rotate(5deg);
     }
 
     /* WhatsApp Button */
@@ -529,40 +453,11 @@
 
     .whatsapp-button:hover {
       transform: scale(1.1) rotate(5deg);
-      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
     }
 
     .whatsapp-icon {
       width: 35px;
       height: 35px;
-    }
-
-    /* Animations */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes fadeInUp {
-      from { 
-        opacity: 0;
-        transform: translateY(50px);
-      }
-      to { 
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fadeInDown {
-      from { 
-        opacity: 0;
-        transform: translateY(-50px);
-      }
-      to { 
-        opacity: 1;
-        transform: translateY(0);
-      }
     }
 
     @keyframes pulse {
@@ -571,17 +466,14 @@
       100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
     }
 
-    /* Responsive Design */
+    /* Responsive */
     @media (max-width: 992px) {
-      .about-content {
+      .contact-wrapper {
         grid-template-columns: 1fr;
-        gap: 40px;
       }
-      .hero h1 {
-        font-size: 2.8rem;
-      }
-      .navbar {
-        top: 105px;
+      
+      .contact-info {
+        padding: 40px 30px;
       }
     }
 
@@ -590,40 +482,32 @@
         flex-direction: column;
         text-align: center;
       }
+      
       .header-text {
         text-align: center;
-        margin-top: 12px;
+        margin-top: 15px;
       }
+      
       .navbar {
-        top: 115px;
+        top: 130px;
       }
+      
       .navbar ul {
         flex-wrap: wrap;
       }
+      
       .navbar a {
-        padding: 12px 16px;
-        font-size: 0.9rem;
+        padding: 10px 15px;
+        font-size: 0.85rem;
       }
-      .hero {
-        padding: 170px 0 90px;
-        margin-top: 70px;
+      
+      .contact-section {
+        padding: 200px 0 60px;
       }
-      .hero h1 {
-        font-size: 2rem;
-      }
-      .hero p {
-        font-size: 1rem;
-      }
-      h2 {
-        font-size: 2rem;
-      }
-      .hero-buttons {
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-      }
-      .service-container {
-        grid-template-columns: 1fr;
+      
+      .contact-info h2,
+      .contact-form h2 {
+        font-size: 1.8rem;
       }
     }
   </style>
@@ -633,171 +517,132 @@
   <!-- Header -->
   <header class="header">
     <div class="container">
-      <a href="#">
-        <img src="Logo.jpg" alt="Ibad Tech Logo" class="logo" />
+      <a href="index.html">
+        <img src="https://sainismailabad.github.io/ibadtech/Logo.jpg" alt="Ibad Tech Logo" class="logo" />
       </a>
       <div class="header-text">
-        <h1 class="ibad">Ibad Tech</h1>
+        <h1>Ibad Tech</h1>
         <p>Digital Marketing | Graphic Design | Web Developer | IT Services</p>
       </div>
     </div>
   </header>
 
-  <!-- Navigation Bar -->
+  <!-- Navigation -->
   <nav class="navbar">
     <div class="container">
       <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="https://www.instagram.com/ibad_tech?igsh=OW5rNzc0dmE3a2t4" target="_blank">Portfolio</a></li>
-        <li><a href="#about">About</a></li>
-        <!-- Contact link pointing to local Contact.html file inside same folder -->
-        <li><a href="Contact.html" target="_blank">Contact</a></li>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="digital.html">Services</a></li>
+        <li><a href="https://www.instagram.com/ibad_tech" target="_blank">Portfolio</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="Contact.html" class="active">Contact</a></li>
         <li><a href="https://sainismailabad.github.io/Social-media-growth-/" target="_blank" class="check">Social Media Growth</a></li>
       </ul>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <section id="home" class="hero">
+  <!-- Contact Section -->
+  <section class="contact-section">
     <div class="container">
-      <h1>Transform Your Digital Presence</h1>
-      <p>We provide innovative digital solutions to help businesses grow and thrive in the modern digital landscape.</p>
-      <div class="hero-buttons">
-        <!-- Get Started button points to Contact.html (same local file) -->
-        <a href="Contact.html" target="_blank" class="btn">Get Started</a>
-        <a href="#services" class="btn btn-outline">Our Services</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Services Section -->
-  <section id="services" class="services">
-    <div class="container">
-      <h2>Our Services</h2>
-      <div class="service-container">
-        <a href="digital.html" target="_blank" style="text-decoration: none; color: inherit;">
-          <div class="service-card card-3d">
-            <img src="digital-marketing-image.png" alt="Digital Marketing" class="service-image" />
-            <h3>Digital Marketing</h3>
-            <p>Boost your business with advanced SEO, social media marketing, and PPC campaigns.</p>
+      <div class="contact-wrapper">
+        <!-- Left Side - Contact Info -->
+        <div class="contact-info">
+          <h2>Let's Talk</h2>
+          <p>Have a project in mind? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+          
+          <div class="info-item">
+            <div class="info-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="info-details">
+              <h4>Visit Us</h4>
+              <p>Kathgarh Road, Ismailabad, Kurukshetra, Haryana, 136129</p>
+            </div>
           </div>
-        </a>
-
-        <a href="https://www.behance.net/78f58aea" target="_blank" style="text-decoration: none; color: inherit;">
-          <div class="service-card card-3d">
-            <img src="Graphic.jpg" alt="Graphic Design" class="service-image" />
-            <h3>Graphic Design</h3>
-            <p>Creative logos, brochures, and social media graphics tailored to your brand identity.</p>
+          
+          <div class="info-item">
+            <div class="info-icon">
+              <i class="fas fa-phone-alt"></i>
+            </div>
+            <div class="info-details">
+              <h4>Call Us</h4>
+              <a href="tel:+917056836166">+91 7056836166</a>
+            </div>
           </div>
-        </a>
-
-        <div class="service-card card-3d">
-          <img src="Web degain.jpg" alt="Web Design" class="service-image" />
-          <h3>Web Development</h3>
-          <p>Modern, responsive websites built with latest technologies for outstanding online presence.</p>
-        </div>
-
-        <div class="service-card card-3d">
-          <img src="It services.jpg" alt="App Development" class="service-image" />
-          <h3>App Development</h3>
-          <p>Fast, scalable Android & iOS mobile apps delivering exceptional user experiences.</p>
-        </div>
-
-        <a href="https://sales.gromo.in/gp-website/g/w-eoAMuF4UKkEwDg3M-uD" target="_blank" style="text-decoration: none; color: inherit;">
-          <div class="service-card card-3d">
-            <img src="Cl.png" alt="Financial Products" class="service-image" />
-            <h3>Financial Products</h3>
-            <p>Credit cards, savings accounts, demat, personal loans & investment opportunities.</p>
+          
+          <div class="info-item">
+            <div class="info-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="info-details">
+              <h4>Email Us</h4>
+              <a href="mailto:sainsanty2@gmail.com">sainsanty2@gmail.com</a>
+            </div>
           </div>
-        </a>
+          
+          <div class="social-links-contact">
+            <a href="https://www.facebook.com/share/19CEtXPCrr/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/ibad_tech" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
 
-        <div class="service-card card-3d">
-          <i class="fas fa-headset service-image" style="font-size: 3.5rem; color: var(--primary); line-height:1;"></i>
-          <h3>IT Consulting</h3>
-          <p>Expert IT infrastructure optimization and digital strategy for maximum efficiency.</p>
-        </div>
-      </div>
-      
-      <!-- AdSense ad unit -->
-      <div class="ad-unit">
-        <div class="ad-label">- Sponsored Advertising -</div>
-        <div class="adsense-container">
-          <ins class="adsbygoogle"
-               style="display:block; min-width:300px; width:100%; height:auto;"
-               data-ad-client="ca-pub-1336136297225442"
-               data-ad-slot="1234567890"
-               data-ad-format="auto"
-               data-full-width-responsive="true"></ins>
-          <script>
-               (adsbygoogle = window.adsbygoogle || []).push({});
-          </script>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- About Section -->
-  <section id="about" class="about">
-    <div class="container">
-      <h2>About Us</h2>
-      <div class="about-content">
-        <div class="about-text">
-          <p>
-            Located at Kathgarh Road, Ismailabad, Kurukshetra, Haryana, Ibad Tech specializes in delivering 
-            innovative solutions for businesses of all sizes. Our dedicated team of experts ensures quality 
-            services tailored to your specific goals and requirements.
-          </p>
-          <p>
-            With years of experience in the digital industry, we understand what it takes to help businesses 
-            succeed in today's competitive market. We combine creativity with technical expertise to deliver 
-            results that exceed expectations.
-          </p>
-          <p>
-            Our mission is to empower businesses with cutting-edge digital solutions that drive growth, 
-            enhance visibility, and maximize return on investment.
-          </p>
-          <!-- Get In Touch button now points to Contact.html (local file) -->
-          <a href="Contact.html" target="_blank" class="btn">Get In Touch</a>
-        </div>
-        <div class="about-image-container">
-          <img src="About us.jpg" alt="About Ibad Tech" class="about-image" />
+        <!-- Right Side - Contact Form -->
+        <div class="contact-form">
+          <h2>Get In Touch</h2>
+          <p>Fill out the form below and we'll get back to you within 24 hours.</p>
+          
+          <div id="alertMessage" style="display: none;"></div>
+          
+          <form id="contactForm">
+            <div class="form-group">
+              <label><i class="fas fa-user"></i> Full Name *</label>
+              <input type="text" id="user_name" name="user_name" placeholder="Enter your full name" required>
+            </div>
+            
+            <div class="form-group">
+              <label><i class="fas fa-envelope"></i> Email Address *</label>
+              <input type="email" id="user_email" name="user_email" placeholder="Enter your email address" required>
+            </div>
+            
+            <div class="form-group">
+              <label><i class="fas fa-phone"></i> Phone Number</label>
+              <input type="tel" id="user_phone" name="user_phone" placeholder="Enter your phone number (optional)">
+            </div>
+            
+            <div class="form-group">
+              <label><i class="fas fa-cogs"></i> Select Service *</label>
+              <select id="service" name="service" required>
+                <option value="">-- Select a service --</option>
+                <option value="Digital Marketing">📈 Digital Marketing</option>
+                <option value="Graphic Design">🎨 Graphic Design</option>
+                <option value="Web Development">💻 Web Development</option>
+                <option value="App Development">📱 App Development</option>
+                <option value="IT Consulting">🖥️ IT Consulting</option>
+                <option value="Financial Products">💰 Financial Products</option>
+                <option value="Other">❓ Other</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label><i class="fas fa-comment"></i> Your Message *</label>
+              <textarea id="message" name="message" placeholder="Tell us about your project or requirements..." required></textarea>
+            </div>
+            
+            <button type="submit" class="submit-btn" id="submitBtn">
+              <i class="fas fa-paper-plane"></i> Send Message
+            </button>
+          </form>
         </div>
       </div>
     </div>
   </section>
-  
-  <!-- Additional content ad unit (fluid) -->
-  <div class="container" style="margin-bottom: 30px;">
-    <div class="ad-unit-sidebar">
-      <div class="ad-label">- Recommended for you -</div>
-      <ins class="adsbygoogle"
-           style="display:block; text-align:center;"
-           data-ad-layout="in-article"
-           data-ad-format="fluid"
-           data-ad-client="ca-pub-1336136297225442"
-           data-ad-slot="9876543210"></ins>
-      <script>
-           (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
-    </div>
-  </div>
 
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <div class="footer-content">
-        <div class="social-links">
-          <a href="https://www.facebook.com/share/19CEtXPCrr/" target="_blank"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://www.instagram.com/ibad_tech?igsh=OW5rNzc0dmE3a2t4" target="_blank"><i class="fab fa-instagram"></i></a>
-          <a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
-          <a href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-        </div>
-        <p><strong>Address:</strong> Kathgarh Road, Ismailabad, Kurukshetra, Haryana, 136129</p>
-        <p><strong>Phone:</strong> <a href="tel:+917056836166" style="color: #fff;">+91 7056836166</a></p>
-        <p><strong>Email:</strong> <a href="mailto:sainsanty2@gmail.com" style="color: #fff;">sainsanty2@gmail.com</a></p>
-        <p>&copy; 2025 Ibad Tech. All Rights Reserved. | Empowering Digital India</p>
-      </div>
+      <p>&copy; 2025 Ibad Tech. All Rights Reserved. | Empowering Digital India</p>
     </div>
   </footer>
 
@@ -807,62 +652,122 @@
   </a>
 
   <script>
-    // Smooth scroll for navigation links
-    document.querySelectorAll('.navbar a[href^="#"], .hero-buttons a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        const hash = this.getAttribute('href');
-        if(hash && hash !== '#' && hash.startsWith('#')) {
-          e.preventDefault();
-          const targetElement = document.querySelector(hash);
-          if(targetElement) {
-            const offset = 100;
-            const elementPosition = targetElement.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - offset;
-            window.scrollTo({
-              top: offsetPosition,
-              behavior: 'smooth'
-            });
-          }
-        }
-      });
-    });
+    // ✅ EmailJS Configuration - Your Complete Credentials
+    const EMAILJS_PUBLIC_KEY = "m3gD2ef27h4eSPrAU";
+    const EMAILJS_PRIVATE_KEY = "J7Q3gJRXwqiT7Xs7B8dZm";
+    const EMAILJS_SERVICE_ID = "service_uyhz1vs";
+    const EMAILJS_TEMPLATE_ID = "template_s0udci5";
     
-    // Scroll animations (Intersection Observer)
-    document.addEventListener('DOMContentLoaded', function() {
-      const animatedElements = document.querySelectorAll('.service-card, .about-image, .about-text');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1 });
+    // Initialize EmailJS with public key
+    (function() {
+      emailjs.init({
+        publicKey: EMAILJS_PUBLIC_KEY,
+        blockHeadless: false,
+        limitRate: {
+          id: 'app',
+          throttle: 10000
+        },
+      });
+    })();
+    
+    const form = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const alertDiv = document.getElementById('alertMessage');
+    
+    function showAlert(message, type) {
+      alertDiv.style.display = 'block';
+      alertDiv.innerHTML = `
+        <div class="alert alert-${type}">
+          <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-triangle'}"></i>
+          <span>${message}</span>
+        </div>
+      `;
       
-      animatedElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-      });
-    });
-
-    // Simple parallax effect for hero section
-    window.addEventListener('scroll', function() {
-      const scrolled = window.pageYOffset;
-      const hero = document.querySelector('.hero');
-      if(hero) hero.style.backgroundPositionY = -(scrolled * 0.2) + 'px';
-    });
-    
-    // Additional safety for AdSense after dynamic loads
-    if (typeof adsbygoogle !== 'undefined') {
-      try {
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      } catch(e) { 
-        console.warn("AdSense additional push");
-      }
+      // Scroll to alert
+      alertDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      
+      // Auto hide after 5 seconds
+      setTimeout(() => {
+        alertDiv.style.display = 'none';
+      }, 5000);
     }
+    
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      // Get form values
+      const name = document.getElementById('user_name').value.trim();
+      const email = document.getElementById('user_email').value.trim();
+      const phone = document.getElementById('user_phone').value.trim();
+      const service = document.getElementById('service').value;
+      const message = document.getElementById('message').value.trim();
+      
+      // Validation
+      if (!name) {
+        showAlert('Please enter your name', 'error');
+        return;
+      }
+      if (!email) {
+        showAlert('Please enter your email address', 'error');
+        return;
+      }
+      if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+        showAlert('Please enter a valid email address', 'error');
+        return;
+      }
+      if (!service) {
+        showAlert('Please select a service', 'error');
+        return;
+      }
+      if (!message) {
+        showAlert('Please enter your message', 'error');
+        return;
+      }
+      
+      // Disable button and show loading
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+      
+      try {
+        // Prepare template parameters for EmailJS
+        const templateParams = {
+          user_name: name,
+          user_email: email,
+          user_phone: phone || 'Not provided',
+          service_type: service,
+          user_message: message,
+          to_email: 'sainsanty2@gmail.com',
+          reply_to: email
+        };
+        
+        console.log('Sending email with params:', templateParams);
+        
+        // Send email using EmailJS
+        const response = await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
+        
+        console.log('Email sent successfully!', response);
+        
+        // Show success message
+        showAlert('✅ Thank you! Your message has been sent successfully. We will get back to you within 24 hours!', 'success');
+        
+        // Reset form
+        form.reset();
+        
+      } catch (error) {
+        console.error('Email sending failed:', error);
+        let errorMsg = '❌ Failed to send message. ';
+        if (error.text) {
+          errorMsg += error.text;
+        } else {
+          errorMsg += 'Please try again later or contact us directly via phone.';
+        }
+        showAlert(errorMsg, 'error');
+      } finally {
+        // Re-enable button
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+      }
+    });
   </script>
 </body>
 </html>
