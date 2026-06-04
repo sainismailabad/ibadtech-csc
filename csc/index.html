@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>IBAD TECH CSC | Professional Digital Seva Portal | National Services · Fasal · DL · eKYC</title>
+    
+    <!-- Google AdSense 网站验证 meta 标签 -->
+    <meta name="google-adsense-account" content="ca-pub-1336136297225442">
+    
+    <!-- Google AdSense 广告代码 -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1336136297225442"
+     crossorigin="anonymous"></script>
+    
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Firebase Modular SDKs -->
@@ -107,8 +115,34 @@
         .csc-badge { background: #ff8c42; padding: 0.3rem 1.2rem; border-radius: 40px; font-weight: 700; font-size: 0.75rem; }
         .container { max-width: 1400px; margin: 0 auto; padding: 1.5rem; }
         
+        /* 广告容器样式 */
+        .ad-container {
+            margin: 20px 0;
+            text-align: center;
+            background: rgba(255,255,255,0.9);
+            border-radius: 1rem;
+            padding: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .ad-label {
+            font-size: 0.65rem;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        .ad-inline {
+            margin: 24px 0;
+        }
+        .ad-sidebar {
+            margin: 20px 0;
+            background: white;
+            border-radius: 1.2rem;
+            padding: 15px;
+        }
+        
         .auth-wrapper { display: flex; justify-content: center; align-items: center; min-height: 70vh; }
-        .glass-card { background: rgba(255,255,255,0.98); border-radius: 2rem; width: 100%; max-width: 520px; box-shadow: 0 25px 45px -12px rgba(0,0,0,0.25); overflow: hidden; }
+        .glass-card { background: rgba(255,255,255,0.98); border-radius: 2rem; width: 100%; max-width: 550px; box-shadow: 0 25px 45px -12px rgba(0,0,0,0.25); overflow: hidden; }
         .tab-bar { display: flex; background: #f1f5f9; }
         .tab-btn { flex: 1; padding: 1rem; font-weight: 700; background: transparent; border: none; cursor: pointer; font-size: 1rem; transition: 0.2s; }
         .tab-btn.active-tab { background: white; color: var(--csc-blue); border-bottom: 3px solid var(--csc-saffron); }
@@ -119,6 +153,9 @@
         .input-group input:focus { outline: none; border-color: var(--csc-blue); box-shadow: 0 0 0 3px rgba(15,59,122,0.2); }
         .btn-gov { background: var(--csc-blue); color: white; border: none; width: 100%; padding: 0.9rem; border-radius: 2rem; font-weight: 700; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s; }
         .btn-gov:hover { background: #082a4a; transform: scale(0.98); }
+        .whatsapp-assist { margin-top: 1rem; text-align: center; border-top: 1px dashed #ccc; padding-top: 1rem; }
+        .whatsapp-btn { background: #25D366; color: white; border: none; padding: 0.5rem 1rem; border-radius: 40px; font-size: 0.75rem; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; transition: 0.2s; text-decoration: none; }
+        .whatsapp-btn:hover { background: #128C7E; transform: scale(0.98); }
         .hidden { display: none; }
         
         .dashboard-header { background: white; border-radius: 1.5rem; padding: 1rem 2rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
@@ -173,6 +210,19 @@
                     <div class="input-group"><label><i class="fas fa-envelope"></i> Registered Email</label><input type="email" id="loginEmail" placeholder="citizen@csc.gov.in"></div>
                     <div class="input-group"><label><i class="fas fa-lock"></i> Password</label><input type="password" id="loginPassword" placeholder="••••••"></div>
                     <button class="btn-gov" onclick="loginUser()"><i class="fas fa-arrow-right-to-bracket"></i> Access All Professional Services</button>
+                    
+                    <!-- 登录页面底部广告 -->
+                    <div class="ad-container" style="margin-top: 1.5rem;">
+                        <div class="ad-label">- Sponsored -</div>
+                        <ins class="adsbygoogle"
+                             style="display:block"
+                             data-ad-client="ca-pub-1336136297225442"
+                             data-ad-slot="1234567890"
+                             data-ad-format="auto"
+                             data-full-width-responsive="true"></ins>
+                        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                    </div>
+                    
                     <p style="text-align:center; font-size:0.7rem; margin-top:1rem;">🔒 National Portal · Fasal · Driving License · eKYC · Aadhaar · PAN · CSC</p>
                 </div>
                 <div id="signupCard" class="form-panel hidden">
@@ -180,6 +230,23 @@
                     <div class="input-group"><label><i class="fas fa-lock"></i> Password (min 6)</label><input type="password" id="signupPassword" placeholder="create password"></div>
                     <div class="input-group"><label><i class="fas fa-check-double"></i> Confirm Password</label><input type="password" id="signupConfirm" placeholder="retype password"></div>
                     <button class="btn-gov" onclick="registerUser()"><i class="fas fa-id-card"></i> Register & Get Service Access</button>
+                    
+                    <!-- 注册页面底部广告 -->
+                    <div class="ad-container" style="margin-top: 1.5rem;">
+                        <div class="ad-label">- Advertisement -</div>
+                        <ins class="adsbygoogle"
+                             style="display:block"
+                             data-ad-client="ca-pub-1336136297225442"
+                             data-ad-slot="1234567890"
+                             data-ad-format="auto"
+                             data-full-width-responsive="true"></ins>
+                        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                    </div>
+                    
+                    <div class="whatsapp-assist">
+                        <a href="https://wa.me/917056836166?text=Hello%20IBAD%20TECH%2C%20I%20need%20assistance%20for%20new%20registration%20%2F%20service%20enquiry" target="_blank" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> Need Help? Contact on WhatsApp (+91 70568 36166)</a>
+                        <p style="font-size: 0.65rem; margin-top: 8px;">📞 For New Registration support & service queries, chat with our team</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -191,10 +258,22 @@
             <button class="logout-btn" onclick="logoutUser()"><i class="fas fa-sign-out-alt"></i> Logout</button>
         </div>
         
+        <!-- 顶部横幅广告 -->
+        <div class="ad-container ad-inline">
+            <div class="ad-label">- Advertisement -</div>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-1336136297225442"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+        
         <div class="search-section">
             <div class="search-container">
                 <i class="fas fa-search"></i>
-                <input type="text" id="searchInput" placeholder="🔍 Real-time search... (National Portal, Fasal, Driving License, Aadhaar, eKYC, PAN, Haryana)" autocomplete="off">
+                <input type="text" id="searchInput" placeholder="🔍 Real-time search... (National Portal, Fasal, Driving License, Family ID, Ration Card, Aadhaar, eKYC, PAN, Haryana)" autocomplete="off">
                 <button id="resetBtn" class="reset"><i class="fas fa-undo-alt"></i> Reset</button>
             </div>
             <div class="category-filters" id="categoryFilters">
@@ -211,33 +290,42 @@
             </div>
             <div id="resultCountDisplay" class="result-count"><i class="fas fa-list-ul"></i> Loading professional services...</div>
         </div>
+        
         <div id="servicesGrid" class="services-grid"></div>
-        <div class="footer-note"><i class="fas fa-shield-alt"></i> All links redirect to official Government portals | National Portal of India: 13,569+ Services | Fasal Panjikaran (Crop Registration) | Driving License Apply/Update with eKYC | Aadhaar Download</div>
+        
+        <!-- 服务网格之间的内嵌广告（会在渲染后动态插入） -->
+        <div id="inlineAdPlaceholder" style="margin: 20px 0;"></div>
+        
+        <!-- 底部横幅广告 -->
+        <div class="ad-container ad-inline" style="margin-top: 30px;">
+            <div class="ad-label">- Sponsored -</div>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-1336136297225442"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+        
+        <div class="footer-note"><i class="fas fa-shield-alt"></i> All links redirect to official Government portals | National Portal of India: 13,569+ Services | Fasal Panjikaran (Crop Registration) | Driving License Apply/Update with eKYC | Aadhaar Download | New: Family ID & Ration Card Services for Haryana</div>
     </div>
 </div>
 
 <script>
-    // ======================= PROFESSIONAL SERVICES DATABASE =======================
-    // Includes National Portal of India, Fasal Panjikaran, Driving License with eKYC, etc.
+    // ======================= PROFESSIONAL SERVICES DATABASE (UPDATED) =======================
     const ALL_SERVICES = [
-        // ---------- NATIONAL PORTAL OF INDIA (INDIA.GOV.IN) ----------
         { name: "National Portal of India - All Services", desc: "Access 13,569+ Government Services - Central & State Schemes, Forms, Information", cat: "national", icon: "fas fa-flag-india", link: "https://www.india.gov.in/services" },
         { name: "India.gov.in - Important Services", desc: "Streamline interactions, save time - All citizen centric services", cat: "national", icon: "fas fa-globe", link: "https://www.india.gov.in" },
-        
-        // ---------- AGRICULTURE / FASAL PANJIKARAN (Crop Registration) ----------
         { name: "Fasal Panjikaran (Crop Registration)", desc: "किसान फसल पंजीकरण - Register crops for PMFBY insurance & benefits", cat: "agriculture", icon: "fas fa-leaf", link: "https://fasal.haryana.gov.in/" },
         { name: "PM Kisan eKYC & Registration", desc: "PM Kisan Samman Nidhi - Farmer eKYC & beneficiary status", cat: "agriculture", icon: "fas fa-tractor", link: "https://pmkisan.gov.in" },
         { name: "PM Fasal Bima Yojana (PMFBY)", desc: "Crop insurance scheme - Apply for insurance", cat: "agriculture", icon: "fas fa-umbrella", link: "https://pmfby.gov.in" },
         { name: "Soil Health Card", desc: "Apply for soil health card - फसल के लिए मिट्टी जांच", cat: "agriculture", icon: "fas fa-seedling", link: "https://soilhealth.dac.gov.in" },
-        
-        // ---------- TRANSPORT / DRIVING LICENSE APPLY & UPDATE with eKYC ----------
         { name: "Driving License Apply Online (Sarathi)", desc: "Apply for new Driving License - Complete online application with eKYC", cat: "transport", icon: "fas fa-id-card", link: "https://sarathi.parivahan.gov.in" },
         { name: "Driving License Renewal & Update", desc: "Renew DL, update address/photo - Online with eKYC", cat: "transport", icon: "fas fa-sync-alt", link: "https://parivahan.gov.in/sarathiservice" },
         { name: "Learner's License Apply", desc: "Apply for learner's permit online - LL test", cat: "transport", icon: "fas fa-graduation-cap", link: "https://sarathi.parivahan.gov.in" },
         { name: "Vehicle Registration (RC) Online", desc: "New vehicle registration & RC eKYC", cat: "transport", icon: "fas fa-car", link: "https://parivahan.gov.in" },
         { name: "International Driving Permit", desc: "Apply for IDP for travel abroad", cat: "transport", icon: "fas fa-globe", link: "https://parivahan.gov.in" },
-        
-        // ---------- eKYC SERVICES (Complete) ----------
         { name: "Aadhaar eKYC", desc: "UIDAI official eKYC portal - Biometric/OTP", cat: "ekyc", icon: "fas fa-id-card", link: "https://uidai.gov.in" },
         { name: "Download Aadhaar Card (e-Aadhaar)", desc: "Direct download registered Aadhaar PDF", cat: "ekyc", icon: "fas fa-download", link: "https://myaadhaar.uidai.gov.in/genricDownloadAadhaar/en" },
         { name: "Aadhaar Update Online", desc: "Update address, mobile, photo in Aadhaar", cat: "ekyc", icon: "fas fa-edit", link: "https://myaadhaar.uidai.gov.in" },
@@ -247,34 +335,26 @@
         { name: "E-Shram Card eKYC", desc: "Unorganized workers registration & eKYC", cat: "ekyc", icon: "fas fa-address-card", link: "https://eshram.gov.in" },
         { name: "EPFO eKYC (UAN)", desc: "PF member eKYC for UAN activation", cat: "ekyc", icon: "fas fa-chart-line", link: "https://www.epfindia.gov.in" },
         { name: "DigiLocker eKYC", desc: "Digital locker KYC for documents", cat: "ekyc", icon: "fas fa-cloud-upload-alt", link: "https://www.digilocker.gov.in" },
-        
-        // ---------- TOOLS ----------
         { name: "Resume Builder", desc: "Create professional resume online", cat: "tools", icon: "fas fa-file-alt", link: "https://www.resume.com/" },
         { name: "SmallPDF - PDF Editor", desc: "Edit, convert, merge PDFs", cat: "tools", icon: "fas fa-file-pdf", link: "https://smallpdf.com/" },
         { name: "Photopea (Photoshop)", desc: "Online photo editor like Photoshop", cat: "tools", icon: "fas fa-palette", link: "https://www.photopea.com/" },
         { name: "Remove Background", desc: "Remove.bg - AI background remover", cat: "tools", icon: "fas fa-image", link: "https://www.remove.bg/" },
-        
-        // ---------- HARYANA SPECIFIC ----------
+        { name: "Mera Parivar Family ID (Haryana)", desc: "Download Family ID, View Family Member Details, Apply for Certificates (Parivar Pehchan Patra)", cat: "haryana", icon: "fas fa-users", link: "https://meraparivar.haryana.gov.in/" },
+        { name: "Ration Card Download - ePDS Haryana", desc: "Search & Download Ration Card / NFSA beneficiary details | Food & Supplies Dept.", cat: "haryana", icon: "fas fa-utensils", link: "https://epds.haryanafood.gov.in/search-rc/" },
         { name: "Fasal Panjikaran Haryana", desc: "हरियाणा फसल पंजीकरण - Crop registration portal", cat: "haryana", icon: "fas fa-leaf", link: "https://fasal.haryana.gov.in/" },
         { name: "SARAL Haryana", desc: "Haryana e-District services - Income, Caste, Domicile", cat: "haryana", icon: "fas fa-file-alt", link: "https://saralharyana.gov.in/" },
         { name: "Haryana Police Clearance", desc: "Police verification certificate", cat: "haryana", icon: "fas fa-shield", link: "https://haryanapolice.gov.in" },
         { name: "e-GRAS Haryana", desc: "Revenue payment gateway", cat: "haryana", icon: "fas fa-rupee-sign", link: "https://egrashry.nic.in/" },
         { name: "Jamabandi Haryana", desc: "Land records portal", cat: "haryana", icon: "fas fa-map", link: "https://jamabandi.nic.in/" },
-        
-        // ---------- CSC & CERTIFICATES ----------
         { name: "CSC Digital Seva Portal", desc: "Main CSC service portal for VLE & citizens", cat: "csc", icon: "fas fa-network-wired", link: "https://digitalseva.csc.gov.in/" },
         { name: "CSC VLE Registration", desc: "New VLE registration for CSC center", cat: "csc", icon: "fas fa-user-plus", link: "https://register.csc.gov.in/" },
         { name: "CSC eKYC Services", desc: "Digital Seva eKYC for various schemes", cat: "csc", icon: "fas fa-id-card", link: "https://digitalseva.csc.gov.in" },
         { name: "LegalDesk Affidavit", desc: "Online affidavit maker", cat: "csc", icon: "fas fa-gavel", link: "https://legaldesk.com/affidavits" },
-        
-        // ---------- ID CARDS & DOCUMENTS ----------
         { name: "PAN Card Apply (UTI)", desc: "New PAN card application online", cat: "idcard", icon: "fas fa-id-card", link: "https://www.pan.utiitsl.com/PAN/newA.html" },
         { name: "Download e-PAN Card", desc: "Instant e-PAN download", cat: "idcard", icon: "fas fa-download", link: "https://www.pan.utiitsl.com/PAN_ONLINE/ePANCardHome" },
         { name: "Voter ID Apply Online", desc: "Register to vote - EPIC download", cat: "idcard", icon: "fas fa-vote-yea", link: "https://voters.eci.gov.in" },
         { name: "ABHA Health ID", desc: "Ayushman Bharat Health Account", cat: "idcard", icon: "fas fa-notes-medical", link: "https://abha.abdm.gov.in/" },
         { name: "Passport Seva", desc: "Apply for passport, renewal, PCC", cat: "idcard", icon: "fas fa-passport", link: "https://www.passportindia.gov.in" },
-        
-        // ---------- BUSINESS & TAX ----------
         { name: "MSME / UDYAM Registration", desc: "Udyam MSME registration", cat: "business", icon: "fas fa-industry", link: "https://udyamregistration.gov.in/" },
         { name: "GST Registration", desc: "GST portal all services", cat: "business", icon: "fas fa-file-invoice-dollar", link: "https://www.gst.gov.in/" },
         { name: "Income Tax e-Filing", desc: "ITR filing, Form 26AS", cat: "business", icon: "fas fa-calculator", link: "https://www.incometax.gov.in" }
@@ -305,23 +385,32 @@
         countSpan.innerHTML = `<i class="fas fa-layer-group"></i> Showing ${filtered.length} of ${ALL_SERVICES.length} professional services (matching: "${currentSearch || 'all'}")`;
         
         if (filtered.length === 0) {
-            grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:3rem; background:white; border-radius:1.5rem;"><i class="fas fa-search-minus" style="font-size:2rem; color:#aaa;"></i><h3>No service found</h3><p>Try: National Portal, Fasal, Driving License, Aadhaar, eKYC, PAN</p></div>`;
+            grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:3rem; background:white; border-radius:1.5rem;"><i class="fas fa-search-minus" style="font-size:2rem; color:#aaa;"></i><h3>No service found</h3><p>Try: National Portal, Fasal, Driving License, Family ID, Ration Card, Aadhaar, eKYC, PAN</p></div>`;
             return;
         }
         
         grid.innerHTML = filtered.map(s => {
             let applyBadge = "";
-            if (s.name.toLowerCase().includes("apply") || s.name.toLowerCase().includes("registration") || s.name.toLowerCase().includes("panjikaran")) {
+            if (s.name.toLowerCase().includes("apply") || s.name.toLowerCase().includes("registration") || s.name.toLowerCase().includes("panjikaran") || s.name.toLowerCase().includes("family")) {
                 applyBadge = '<span class="apply-badge"><i class="fas fa-check-circle"></i> Apply Online</span>';
             }
             if (s.name.toLowerCase().includes("update") || s.name.toLowerCase().includes("renew")) {
                 applyBadge = '<span class="apply-badge"><i class="fas fa-sync-alt"></i> Update Available</span>';
+            }
+            if (s.name.toLowerCase().includes("download") || s.name.toLowerCase().includes("ration")) {
+                applyBadge = '<span class="apply-badge"><i class="fas fa-download"></i> Download/View</span>';
             }
             if (s.cat === "ekyc" || s.name.toLowerCase().includes("ekyc")) {
                 applyBadge = '<span class="apply-badge"><i class="fas fa-lock"></i> eKYC Ready</span>';
             }
             if (s.cat === "national") {
                 applyBadge = '<span class="apply-badge"><i class="fas fa-flag-india"></i> 13,569+ Services</span>';
+            }
+            if (s.link.includes("meraparivar")) {
+                applyBadge = '<span class="apply-badge"><i class="fas fa-id-card"></i> Family ID Portal</span>';
+            }
+            if (s.link.includes("epds.haryanafood")) {
+                applyBadge = '<span class="apply-badge"><i class="fas fa-utensils"></i> Ration Card Download</span>';
             }
             return `
             <div class="service-card" onclick="window.open('${s.link}', '_blank')">
@@ -377,6 +466,13 @@
                 renderServices();
             });
         });
+        
+        // 额外推送一次广告确保加载
+        setTimeout(() => {
+            if (typeof adsbygoogle !== 'undefined') {
+                try { (adsbygoogle = window.adsbygoogle || []).push({}); } catch(e) {}
+            }
+        }, 500);
     });
 </script>
 </body>
