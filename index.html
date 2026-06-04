@@ -27,6 +27,10 @@
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google AdSense (核准的发布商代码) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1336136297225442"
+     crossorigin="anonymous"></script>
 
   <style>
     /* Reset and Base Styles */
@@ -169,6 +173,39 @@
       transform: translateY(-10px) rotateX(5deg);
     }
 
+    /* Ad container styles - seamlessly integrated */
+    .ad-unit {
+      margin: 30px 0;
+      text-align: center;
+      background: #f8fafc;
+      border-radius: 20px;
+      padding: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      transition: all 0.2s ease;
+    }
+    .ad-unit-sidebar {
+      margin: 25px 0;
+      text-align: center;
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    }
+    .ad-label {
+      font-size: 0.7rem;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+    /* Responsive ad container for Google AdSense */
+    .adsense-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      overflow: hidden;
+    }
     /* Header Styles */
     .header {
       background: rgba(255, 255, 255, 0.95);
@@ -674,12 +711,13 @@
     <div class="container">
       <h2>Our Services</h2>
       <div class="service-container">
-<a href="digital.html" target="_blank" style="text-decoration: none; color: inherit;">
-        <div class="service-card card-3d">
-          <img src="digital-marketing-image.png" alt="Digital Marketing" class="service-image" />
-          <h3>Digital Marketing</h3>
-          <p>Boost your business with our advanced marketing strategies including SEO, social media marketing, and PPC campaigns.</p>
-        </div>
+        <a href="digital.html" target="_blank" style="text-decoration: none; color: inherit;">
+          <div class="service-card card-3d">
+            <img src="digital-marketing-image.png" alt="Digital Marketing" class="service-image" />
+            <h3>Digital Marketing</h3>
+            <p>Boost your business with our advanced marketing strategies including SEO, social media marketing, and PPC campaigns.</p>
+          </div>
+        </a>
 
         <a href="https://www.behance.net/78f58aea" target="_blank" style="text-decoration: none; color: inherit;">
           <div class="service-card card-3d">
@@ -714,8 +752,24 @@
           <h3>IT Consulting</h3>
           <p>Expert advice and solutions to optimize your IT infrastructure and digital strategy for maximum efficiency.</p>
         </div>
-
       </div>
+      
+      <!-- Responsive Ad Unit (Display Ad) placed between services and about section for better visibility -->
+      <div class="ad-unit">
+        <div class="ad-label">- Advertisement -</div>
+        <div class="adsense-container">
+          <ins class="adsbygoogle"
+               style="display:block; min-width:300px; width:100%; height:auto;"
+               data-ad-client="ca-pub-1336136297225442"
+               data-ad-slot="1234567890"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>
+               (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+        </div>
+      </div>
+      
     </div>
   </section>
 
@@ -747,6 +801,22 @@
       </div>
     </div>
   </section>
+  
+  <!-- Sidebar style Ad integration (In-between content, but as a wide banner) -->
+  <div class="container" style="margin-bottom: 30px;">
+    <div class="ad-unit-sidebar">
+      <div class="ad-label">- Sponsored Listing -</div>
+      <ins class="adsbygoogle"
+           style="display:block; text-align:center;"
+           data-ad-layout="in-article"
+           data-ad-format="fluid"
+           data-ad-client="ca-pub-1336136297225442"
+           data-ad-slot="9876543210"></ins>
+      <script>
+           (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+  </div>
 
   <!-- Footer -->
   <footer class="footer">
@@ -803,8 +873,15 @@
     window.addEventListener('scroll', function() {
       const scrolled = window.pageYOffset;
       const hero = document.querySelector('.hero');
-      hero.style.backgroundPositionY = -(scrolled * 0.2) + 'px';
+      if(hero) hero.style.backgroundPositionY = -(scrolled * 0.2) + 'px';
     });
+    
+    // Ensure any dynamic AdSense ads are re-pushed if needed (safe)
+    if (typeof adsbygoogle !== 'undefined') {
+      try {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      } catch(e) { console.warn("AdSense push minor"); }
+    }
   </script>
 
 </body>
