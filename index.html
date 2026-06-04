@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Ibad Tech | Digital Marketing | Web Development | Graphic Design</title>
 
+  <!-- Google AdSense 网站验证 meta 标签 (用于所有权验证) -->
+  <meta name="google-adsense-account" content="ca-pub-1336136297225442">
+
   <!-- SEO Meta Tags -->
   <meta name="description" content="Ibad Tech offers Digital Marketing, Graphic Design, Web & App Development, and IT Services. Based in Kurukshetra, Haryana." />
   <meta name="keywords" content="Ibad Tech, Digital Marketing, Graphic Design, Web Development, App Development, IT Services, Kurukshetra, Haryana, India" />
@@ -28,7 +31,7 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <!-- Google AdSense (核准的发布商代码) -->
+  <!-- Google AdSense 广告代码 (已核准的发布商ID) -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1336136297225442"
      crossorigin="anonymous"></script>
 
@@ -754,9 +757,9 @@
         </div>
       </div>
       
-      <!-- Responsive Ad Unit (Display Ad) placed between services and about section for better visibility -->
+      <!-- 广告单元：响应式 AdSense 广告展示 -->
       <div class="ad-unit">
-        <div class="ad-label">- Advertisement -</div>
+        <div class="ad-label">- Sponsored Advertising -</div>
         <div class="adsense-container">
           <ins class="adsbygoogle"
                style="display:block; min-width:300px; width:100%; height:auto;"
@@ -802,10 +805,10 @@
     </div>
   </section>
   
-  <!-- Sidebar style Ad integration (In-between content, but as a wide banner) -->
+  <!-- 额外的内容广告单元 (侧边栏风格，流体布局) -->
   <div class="container" style="margin-bottom: 30px;">
     <div class="ad-unit-sidebar">
-      <div class="ad-label">- Sponsored Listing -</div>
+      <div class="ad-label">- Recommended for you -</div>
       <ins class="adsbygoogle"
            style="display:block; text-align:center;"
            data-ad-layout="in-article"
@@ -831,7 +834,7 @@
         <p><strong>Address:</strong> Kathgarh Road, Ismailabad, Kurukshetra, Haryana, 136129</p>
         <p><strong>Phone:</strong> <a href="tel:+917056836166" style="color: #fff;">+91 7056836166</a></p>
         <p><strong>Email:</strong> <a href="mailto:sainsanty2@gmail.com" style="color: #fff;">sainsanty2@gmail.com</a></p>
-        <p>&copy; 2024 Ibad Tech. All Rights Reserved.</p>
+        <p>&copy; 2025 Ibad Tech. All Rights Reserved. | Empowering Digital India</p>
       </div>
     </div>
   </footer>
@@ -863,7 +866,7 @@
         observer.observe(card);
       });
 
-      // Observe about section
+      // Observe about section elements
       document.querySelectorAll('.about-image, .about-text').forEach(el => {
         observer.observe(el);
       });
@@ -876,11 +879,13 @@
       if(hero) hero.style.backgroundPositionY = -(scrolled * 0.2) + 'px';
     });
     
-    // Ensure any dynamic AdSense ads are re-pushed if needed (safe)
+    // Additional safety to push any pending AdSense ads after dynamic content loads
     if (typeof adsbygoogle !== 'undefined') {
       try {
         (adsbygoogle = window.adsbygoogle || []).push({});
-      } catch(e) { console.warn("AdSense push minor"); }
+      } catch(e) { 
+        console.warn("AdSense additional push (non-critical)");
+      }
     }
   </script>
 
