@@ -1,0 +1,205 @@
+/* === Container Utility === */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 15px;
+}
+
+/* === Header === */
+.header {
+  background: linear-gradient(135deg, #ff6f61, #ff9671);
+  color: white;
+  padding: 30px 15px;
+  text-align: center;
+}
+.logo {
+  width: 80px;
+  margin-bottom: 10px;
+}
+.header-text h1 {
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+}
+.header-text p {
+  font-size: 1.1rem;
+}
+
+/* === Navbar === */
+.navbar {
+  background: #ff9671;
+  padding: 10px 0;
+}
+.navbar ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.navbar a {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s;
+}
+.navbar a:hover {
+  color: #003366;
+}
+
+/* === Services Section === */
+.services {
+  padding: 50px 20px;
+  background: #fdf5e6;
+  text-align: center;
+}
+.services h2 {
+  font-size: 2.2rem;
+  margin-bottom: 30px;
+}
+.service-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+.service-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  width: 300px;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.service-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+.service-card h3 {
+  margin-bottom: 10px;
+  color: #ff6f61;
+}
+.service-card p {
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+}
+.service-image {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+/* === About Section === */
+.about {
+  background: #ff9671;
+  color: white;
+  padding: 50px 20px;
+  text-align: center;
+}
+.about h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+.about p {
+  max-width: 800px;
+  margin: auto;
+  font-size: 1rem;
+}
+.about-image {
+  width: 100%;
+  max-width: 600px;
+  margin-top: 25px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* === Contact Section === */
+.contact {
+  background: #f4f4f4;
+  padding: 50px 20px;
+  text-align: center;
+}
+.contact h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+.contact p {
+  margin: 10px 0;
+  font-size: 1rem;
+}
+.contact a {
+  color: #007bff;
+  text-decoration: none;
+}
+.contact a:hover {
+  text-decoration: underline;
+}
+
+/* === Footer === */
+.footer {
+  background: #333;
+  color: white;
+  text-align: center;
+  padding: 15px 10px;
+  font-size: 0.9rem;
+}
+
+/* === WhatsApp Button Floating === */
+.whatsapp-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #25D366;
+  color: white;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
+.whatsapp-icon {
+  width: 30px;
+  height: 30px;
+}
+
+/* === Responsive Media === */
+@media (max-width: 768px) {
+  .header-text h1 {
+    font-size: 1.8rem;
+  }
+  .header-text p {
+    font-size: 0.95rem;
+  }
+
+  .navbar ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .service-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .service-card {
+    width: 90%;
+    max-width: 350px;
+  }
+
+  .about p {
+    font-size: 0.95rem;
+    padding: 0 10px;
+  }
+
+  .about-image {
+    width: 90%;
+    max-width: 100%;
+  }
+
+  .contact p {
+    font-size: 0.95rem;
+  }
+}

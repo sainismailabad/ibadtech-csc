@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ibad Tech - Contact</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script>
+    (function () {
+      emailjs.init("m3gD2ef27h4eSPrAU"); // Your EmailJS Public Key
+    })();
+  </script>
+
+  <style>
+    /* Reset and Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --secondary: #10b981;
+      --dark: #1f2937;
+      --light: #f9fafb;
+      --gray: #6b7280;
+      --accent: #f59e0b;
+      --gradient: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      color: var(--dark);
+      background-color: #f0f4f8;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    section {
+      padding: 80px 0;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 2.8rem;
+      text-align: center;
+      position: relative;
+      margin-bottom: 60px;
+    }
+
+    h2:after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 5px;
+      background: var(--gradient);
+      margin: 15px auto 0;
+      border-radius: 5px;
+    }
+
+    p {
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+    }
+
+    a {
+      text-decoration: none;
+      color: var(--primary);
+      transition: all 0.3s ease;
+    }
+
+    a:hover {
+      color: var(--primary-dark);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 15px 35px;
+      background: var(--gradient);
+      color: white;
+      border-radius: 50px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1.1rem;
+      box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .btn:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+      transition: all 0.3s ease;
+      z-index: -1;
+    }
+
+    .btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
+    }
+
+    .btn:hover:before {
+      width: 100%;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 3px solid var(--primary);
+      color: var(--primary);
+      box-shadow: none;
+    }
+
+    .btn-outline:before {
+      background: var(--gradient);
+    }
+
+    .btn-outline:hover {
+      color: white;
+    }
+
+    /* 3D Effects */
+    .card-3d {
+      transform-style: preserve-3d;
+      perspective: 1000px;
+      transition: all 0.5s ease;
+    }
+
+    .card-3d:hover {
+      transform: translateY(-10px) rotateX(5deg);
+    }
+
+    /* Header Styles */
+    .header {
+      background: rgba(255, 255, 255, 0.95);
+      color: var(--dark);
+      padding: 15px 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    .header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      height: 60px;
+      width: auto;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-text {
+      text-align: right;
+    }
+
+    .header-text h1 {
+      font-size: 1.8rem;
+      margin-bottom: 5px;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .header-text p {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    /* Navigation */
+    .navbar {
+      background: transparent;
+      margin-top: 90px;
+    }
+
+    .navbar ul {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .navbar li {
+      position: relative;
+    }
+
+    .navbar a {
+      display: block;
+      padding: 20px 25px;
+      color: var(--dark);
+      font-weight: 600;
+      transition: all 0.3s ease;
+      font-size: 1.1rem;
+    }
+
+    .navbar a:hover {
+      color: var(--primary);
+    }
+
+    .navbar a:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 4px;
+      background: var(--gradient);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+
+    .navbar a:hover:after {
+      width: 80%;
+    }
+
+    .check {
+      color: var(--accent) !important;
+      font-weight: 700 !important;
+    }
+
+    /* Contact Form Section */
+    .contact-section {
+      background: white;
+      position: relative;
+      padding: 120px 0 80px;
+    }
+
+    .contact-section:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon points="0,0 100,0 50,100" fill="rgba(240,244,248,0.3)"/></svg>');
+      background-size: 100% 100%;
+      z-index: 0;
+    }
+
+    .contact-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact-info {
+      padding: 30px;
+    }
+
+    .contact-info h3 {
+      font-size: 1.8rem;
+      margin-bottom: 30px;
+      color: var(--primary);
+    }
+
+    .contact-details {
+      margin-bottom: 30px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 25px;
+    }
+
+    .contact-icon {
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin-right: 15px;
+      min-width: 30px;
+      text-align: center;
+    }
+
+    .contact-text h4 {
+      font-size: 1.2rem;
+      margin-bottom: 5px;
+    }
+
+    .contact-text p, .contact-text a {
+      font-size: 1.1rem;
+      color: var(--dark);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      background: var(--gradient);
+      border-radius: 50%;
+      color: white;
+      transition: all 0.3s ease;
+      font-size: 1.2rem;
+    }
+
+    .social-links a:hover {
+      transform: translateY(-5px) rotate(10deg);
+      box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+    }
+
+    /* Contact Form */
+    .contact-form {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      padding: 40px 30px;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact-form:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--gradient);
+      opacity: 0;
+      z-index: -1;
+      transition: all 0.5s ease;
+    }
+
+    .contact-form:hover:before {
+      opacity: 0.03;
+    }
+
+    .contact-form h3 {
+      font-size: 1.8rem;
+      margin-bottom: 30px;
+      text-align: center;
+      color: var(--primary);
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--dark);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 15px 20px;
+      border: 2px solid #e2e8f0;
+      border-radius: 10px;
+      font-family: 'Poppins', sans-serif;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+      transform: translateY(-2px);
+    }
+
+    select.form-control {
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 15px center;
+      background-size: 16px;
+    }
+
+    /* Loader CSS */
+    .loader {
+      display: none;
+      margin: 20px auto;
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid var(--primary);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+
+    #successMessage {
+      display: none;
+      color: var(--secondary);
+      font-weight: bold;
+      text-align: center;
+      margin-top: 20px;
+      padding: 15px;
+      background: rgba(16, 185, 129, 0.1);
+      border-radius: 10px;
+      animation: fadeInUp 0.6s ease forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: white;
+      background: #25D366;
+      padding: 15px 25px;
+      border-radius: 50px;
+      margin-top: 20px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+    }
+
+    .whatsapp-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+      color: white;
+    }
+
+    .whatsapp-btn img {
+      width: 24px;
+      margin-right: 10px;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--dark);
+      color: white;
+      text-align: center;
+      padding: 50px 0 30px;
+      position: relative;
+    }
+
+    .footer:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: var(--gradient);
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .footer p {
+      margin-bottom: 0;
+    }
+
+    /* WhatsApp Button */
+    .whatsapp-button {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 70px;
+      height: 70px;
+      background: #25d366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+      z-index: 99;
+      transition: all 0.3s ease;
+      animation: pulse 2s infinite;
+    }
+
+    .whatsapp-button:hover {
+      transform: scale(1.1) rotate(5deg);
+      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
+    }
+
+    .whatsapp-icon {
+      width: 35px;
+      height: 35px;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+      70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .contact-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header .container {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .header-text {
+        text-align: center;
+        margin-top: 15px;
+      }
+      
+      .navbar ul {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .navbar a {
+        padding: 15px;
+        font-size: 1rem;
+      }
+      
+      h2 {
+        font-size: 2.2rem;
+      }
+      
+      .contact-form {
+        padding: 30px 20px;
+      }
+      
+      .contact-info {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <a href="index.html">
+        <img src="Logo.jpg" alt="Ibad Tech Logo" class="logo" />
+      </a>
+      <div class="header-text">
+        <h1 class="ibad">Ibad Tech</h1>
+        <p>Digital Marketing | Graphic Design | Web Developer | IT Services</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="https://www.instagram.com/ibad_tech?igsh=OW5rNzc0dmE3a2t4" target="_blank">Portfolio</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="contact.html" class="check">Contact</a></li>
+        <li><a href="https://sainismailabad.github.io/Social-media-growth-/" target="_blank">Social Media Growth</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <div class="container">
+      <h2>Contact Us</h2>
+      <div class="contact-container">
+        <div class="contact-info card-3d">
+          <h3>Get In Touch</h3>
+          
+          <div class="contact-details">
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <div class="contact-text">
+                <h4>Address</h4>
+                <p>Kathgarh Road, Ismailabad, Kurukshetra, Haryana, 136129</p>
+              </div>
+            </div>
+            
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i class="fas fa-phone-alt"></i>
+              </div>
+              <div class="contact-text">
+                <h4>Phone</h4>
+                <p><a href="tel:+917056836166">+91 7056836166</a></p>
+              </div>
+            </div>
+            
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div class="contact-text">
+                <h4>Email</h4>
+                <p><a href="mailto:sainsanty2@gmail.com">sainsanty2@gmail.com</a></p>
+              </div>
+            </div>
+            
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i class="fas fa-clock"></i>
+              </div>
+              <div class="contact-text">
+                <h4>Business Hours</h4>
+                <p>Monday - Saturday: 9AM - 6PM</p>
+                <p>Sunday: Closed</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="social-links">
+            <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/ibad_tech?igsh=OW5rNzc0dmE3a2t4" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+          
+          <a href="https://api.whatsapp.com/send?phone=+917056836166" target="_blank" class="whatsapp-btn">
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WhatsApp Icon" />
+            <span>Chat on WhatsApp</span>
+          </a>
+        </div>
+        
+        <div class="contact-form card-3d">
+          <h3>Send us a Message</h3>
+          <form id="contactForm">
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input type="text" name="name" id="name" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" name="email" id="email" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone (with country code):</label>
+              <input type="tel" name="phone" id="phone" class="form-control" placeholder="+91XXXXXXXXXX" required />
+            </div>
+
+            <div class="form-group">
+              <label for="service">Select Service:</label>
+              <select name="service" id="service" class="form-control" required>
+                <option value="">-- Select Service --</option>
+                <option value="Graphic Designing">Graphic Designing</option>
+                <option value="Digital Marketing">Digital Marketing</option>
+                <option value="Web Development">Web Development</option>
+                <option value="App Development">App Development</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn">Send Message</button>
+            <div class="loader" id="loader"></div>
+          </form>
+
+          <p id="successMessage">✅ Message sent! Our team will contact you shortly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <p>&copy; 2024 Ibad Tech. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Button -->
+  <a href="https://wa.me/7056836166" class="whatsapp-button" target="_blank">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WhatsApp" class="whatsapp-icon" />
+  </a>
+
+  <!-- Firebase + EmailJS -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCfBmA6mq8OgsWbkz7Jh7vdR6uoxPnRL6k",
+      authDomain: "ibadtech.firebaseapp.com",
+      databaseURL: "https://ibadtech-default-rtdb.firebaseio.com",
+      projectId: "ibadtech",
+      storageBucket: "ibadtech.firebasestorage.app",
+      messagingSenderId: "254898827052",
+      appId: "1:254898827052:web:acc0976a32aecef221c689"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+
+    const form = document.getElementById("contactForm");
+    const successMsg = document.getElementById("successMessage");
+    const loader = document.getElementById("loader");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const name = form.name.value.trim();
+      const email = form.email.value.trim();
+      const phone = form.phone.value.trim();
+      const service = form.service.value;
+
+      if (!name || !email || !phone || !service) {
+        alert("Please fill in all fields.");
+        return;
+      }
+
+      loader.style.display = "block";
+
+      try {
+        // Save to Firebase
+        await push(ref(database, "contacts"), {
+          name,
+          email,
+          phone,
+          service,
+          createdAt: Date.now()
+        });
+
+        // Send email via EmailJS
+        await emailjs.send("service_uyhz1vs", "template_s0udci5", {
+          name,
+          email,
+          message: `Phone: ${phone}\nService: ${service}`
+        });
+
+        loader.style.display = "none";
+        successMsg.style.display = "block";
+        successMsg.style.animation = "fadeInUp 0.6s ease forwards";
+        form.reset();
+
+        setTimeout(() => { successMsg.style.display = "none"; }, 5000);
+      } catch (err) {
+        loader.style.display = "none";
+        console.error("Error:", err);
+        alert("❌ Something went wrong. Please try again.");
+      }
+    });
+  </script>
+</body>
+</html>
