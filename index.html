@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Ibad Tech | Digital Marketing | Web Development | Graphic Design</title>
 
-
-<meta name="google-adsense-account" content="ca-pub-1336136297225442">
+  <meta name="google-adsense-account" content="ca-pub-1336136297225442">
 
   <!-- SEO Meta Tags -->
   <meta name="description" content="Ibad Tech offers Digital Marketing, Graphic Design, Web & App Development, and IT Services. Based in Kurukshetra, Haryana." />
@@ -30,10 +29,8 @@
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
 
   <style>
-    /* Reset and Base Styles */
     * {
       margin: 0;
       padding: 0;
@@ -162,7 +159,6 @@
       color: white;
     }
 
-    /* 3D Effects */
     .card-3d {
       transform-style: preserve-3d;
       perspective: 1000px;
@@ -173,7 +169,6 @@
       transform: translateY(-10px) rotateX(5deg);
     }
 
-    /* Ad container styles - seamlessly integrated */
     .ad-unit {
       margin: 30px 0;
       text-align: center;
@@ -198,7 +193,6 @@
       letter-spacing: 1px;
       margin-bottom: 12px;
     }
-    /* Responsive ad container for Google AdSense */
     .adsense-container {
       display: flex;
       justify-content: center;
@@ -206,7 +200,7 @@
       flex-direction: column;
       overflow: hidden;
     }
-    /* Header Styles */
+
     .header {
       background: rgba(255, 255, 255, 0.95);
       color: var(--dark);
@@ -249,7 +243,6 @@
       opacity: 0.9;
     }
 
-    /* Navigation */
     .navbar {
       background: transparent;
     }
@@ -301,7 +294,6 @@
       font-weight: 700 !important;
     }
 
-    /* Hero Section */
     .hero {
       background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
       color: white;
@@ -309,18 +301,6 @@
       padding: 180px 0 120px;
       position: relative;
       overflow: hidden;
-    }
-
-    .hero:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon points="0,0 100,100 0,100" fill="rgba(37,99,235,0.1)"/></svg>');
-      background-size: 100% 100%;
-      z-index: -1;
     }
 
     .hero h1 {
@@ -348,22 +328,9 @@
       animation: fadeIn 1.5s ease;
     }
 
-    /* Services Section */
     .services {
       background: white;
       position: relative;
-    }
-
-    .services:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon points="0,0 100,0 50,100" fill="rgba(240,244,248,0.3)"/></svg>');
-      background-size: 100% 100%;
-      z-index: 0;
     }
 
     .service-container {
@@ -437,37 +404,10 @@
       transform: scale(1.1);
     }
 
-    /* About Section */
     .about {
       background: linear-gradient(to bottom, #f0f4f8, #e2e8f0);
       position: relative;
       overflow: hidden;
-    }
-
-    .about:before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -50px;
-      width: 300px;
-      height: 300px;
-      background: var(--primary);
-      border-radius: 50%;
-      opacity: 0.1;
-      z-index: 0;
-    }
-
-    .about:after {
-      content: '';
-      position: absolute;
-      bottom: -50%;
-      left: -50px;
-      width: 300px;
-      height: 300px;
-      background: var(--accent);
-      border-radius: 50%;
-      opacity: 0.1;
-      z-index: 0;
     }
 
     .about-content {
@@ -496,7 +436,6 @@
       font-size: 1.2rem;
     }
 
-    /* Footer */
     .footer {
       background: var(--dark);
       color: white;
@@ -545,7 +484,6 @@
       transform: translateY(-5px) rotate(10deg);
     }
 
-    /* WhatsApp Button */
     .whatsapp-button {
       position: fixed;
       bottom: 30px;
@@ -573,7 +511,6 @@
       height: 35px;
     }
 
-    /* Animations */
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
@@ -607,12 +544,10 @@
       100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
     }
 
-    /* Responsive Design */
     @media (max-width: 992px) {
       .about-content {
         grid-template-columns: 1fr;
       }
-      
       .hero h1 {
         font-size: 3rem;
       }
@@ -623,42 +558,33 @@
         flex-direction: column;
         text-align: center;
       }
-      
       .header-text {
         text-align: center;
         margin-top: 15px;
       }
-      
       .navbar ul {
         flex-wrap: wrap;
         justify-content: center;
       }
-      
       .navbar a {
         padding: 15px;
       }
-      
       .hero {
         padding: 150px 0 80px;
       }
-      
       .hero h1 {
         font-size: 2.5rem;
       }
-      
       .hero p {
         font-size: 1.1rem;
       }
-      
       h2 {
         font-size: 2.2rem;
       }
-      
       .hero-buttons {
         flex-direction: column;
         align-items: center;
       }
-      
       .service-container {
         grid-template-columns: 1fr;
       }
@@ -667,7 +593,6 @@
 </head>
 <body>
 
-  <!-- Header -->
   <header class="header">
     <div class="container">
       <a href="#">
@@ -680,7 +605,6 @@
     </div>
   </header>
 
-  <!-- Navigation Bar -->
   <nav class="navbar">
     <div class="container">
       <ul>
@@ -688,25 +612,24 @@
         <li><a href="#services">Services</a></li>
         <li><a href="https://www.instagram.com/ibad_tech?igsh=OW5rNzc0dmE3a2t4" target="_blank">Portfolio</a></li>
         <li><a href="#about">About</a></li>
-        <li><a href="https://www.ibadtech.com/Contact.html">Contact</a></li>
+        <li><a href="Contact.html" target="_blank">Contact</a></li>
         <li><a href="https://sainismailabad.github.io/Social-media-growth-/" target="_blank" class="check">Social Media Growth</a></li>
       </ul>
     </div>
   </nav>
 
-  <!-- Hero Section -->
   <section id="home" class="hero">
     <div class="container">
       <h1>Transform Your Digital Presence</h1>
       <p>We provide innovative digital solutions to help businesses grow and thrive in the modern digital landscape.</p>
       <div class="hero-buttons">
-        <a href="https://sainismailabad.github.io/ibadtech/Contact.html" class="btn">Get Started</a>
+        <!-- 🔥 FIXED: Get Started button opens Contact.html locally -->
+        <a href="Contact.html" target="_blank" class="btn">Get Started</a>
         <a href="#services" class="btn btn-outline">Our Services</a>
       </div>
     </div>
   </section>
 
-  <!-- Services Section -->
   <section id="services" class="services">
     <div class="container">
       <h2>Our Services</h2>
@@ -754,7 +677,6 @@
         </div>
       </div>
       
-      <!-- 广告单元：响应式 AdSense 广告展示 -->
       <div class="ad-unit">
         <div class="ad-label">- Sponsored Advertising -</div>
         <div class="adsense-container">
@@ -769,11 +691,9 @@
           </script>
         </div>
       </div>
-      
     </div>
   </section>
 
-  <!-- About Section -->
   <section id="about" class="about">
     <div class="container">
       <h2>About Us</h2>
@@ -793,7 +713,8 @@
             Our mission is to empower businesses with cutting-edge digital solutions that drive growth, 
             enhance visibility, and maximize return on investment.
           </p>
-          <a href="https://sainismailabad.github.io/ibadtech/Contact.html" class="btn">Get In Touch</a>
+          <!-- 🔥 FIXED: Get In Touch button opens Contact.html locally -->
+          <a href="Contact.html" target="_blank" class="btn">Get In Touch</a>
         </div>
         <div class="about-image-container">
           <img src="About us.jpg" alt="About Ibad Tech" class="about-image" />
@@ -802,7 +723,6 @@
     </div>
   </section>
   
-  <!-- 额外的内容广告单元 (侧边栏风格，流体布局) -->
   <div class="container" style="margin-bottom: 30px;">
     <div class="ad-unit-sidebar">
       <div class="ad-label">- Recommended for you -</div>
@@ -818,7 +738,6 @@
     </div>
   </div>
 
-  <!-- Footer -->
   <footer class="footer">
     <div class="container">
       <div class="footer-content">
@@ -836,13 +755,11 @@
     </div>
   </footer>
 
-  <!-- WhatsApp Button -->
   <a href="https://wa.me/7056836166" class="whatsapp-button" target="_blank">
     <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WhatsApp" class="whatsapp-icon" />
   </a>
 
   <script>
-    // Add scroll animation
     document.addEventListener('DOMContentLoaded', function() {
       const observerOptions = {
         root: null,
@@ -858,25 +775,21 @@
         });
       }, observerOptions);
 
-      // Observe service cards
       document.querySelectorAll('.service-card').forEach(card => {
         observer.observe(card);
       });
 
-      // Observe about section elements
       document.querySelectorAll('.about-image, .about-text').forEach(el => {
         observer.observe(el);
       });
     });
 
-    // Simple parallax effect for hero section
     window.addEventListener('scroll', function() {
       const scrolled = window.pageYOffset;
       const hero = document.querySelector('.hero');
       if(hero) hero.style.backgroundPositionY = -(scrolled * 0.2) + 'px';
     });
     
-    // Additional safety to push any pending AdSense ads after dynamic content loads
     if (typeof adsbygoogle !== 'undefined') {
       try {
         (adsbygoogle = window.adsbygoogle || []).push({});
