@@ -14,6 +14,7 @@
   <meta property="og:description" content="Scale your business with professional web development, digital marketing, and design solutions.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="Logo.jpg">
+  <meta property="og:url" content="https://ibadtech.com">
   
   <!-- Favicon -->
   <link rel="icon" href="Logo.jpg" type="image/jpeg">
@@ -27,6 +28,28 @@
   <!-- Font Awesome (async) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+
+  <!-- Schema Markup -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Ibad Tech",
+    "url": "https://ibadtech.com",
+    "logo": "https://ibadtech.com/Logo.jpg",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+917056836166",
+      "contactType": "customer service",
+      "areaServed": "IN",
+      "availableLanguage": "English"
+    },
+    "sameAs": [
+      "https://www.facebook.com/share/19CEtXPCrr/",
+      "https://www.instagram.com/ibad_tech"
+    ]
+  }
+  </script>
 
   <style>
     * {
@@ -201,7 +224,7 @@
       color: var(--primary);
     }
 
-    /* Hamburger Menu - Instant Load */
+    /* Hamburger Menu */
     .menu-toggle {
       display: none;
       background: var(--gradient-primary);
@@ -444,11 +467,25 @@
 </header>
 
 <nav class="navbar">
-  <div class="container"><ul class="nav-menu"><li><a href="#home" class="active">Home</a></li><li><a href="#services">Services</a></li><li><a href="#solutions">Solutions</a></li><li><a href="https://www.instagram.com/ibad_tech" target="_blank">Portfolio</a></li><li><a href="#contact">Contact</a></li></ul></div>
+  <div class="container">
+    <ul class="nav-menu">
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#solutions">Solutions</a></li>
+      <li><a href="https://www.instagram.com/ibad_tech" target="_blank">Portfolio</a></li>
+      <li><a href="contact.html" id="contactNavLink">Contact</a></li>
+    </ul>
+  </div>
 </nav>
 
 <div class="mobile-nav" id="mobileNav">
-  <ul><li><a href="#home">Home</a></li><li><a href="#services">Services</a></li><li><a href="#solutions">Solutions</a></li><li><a href="https://www.instagram.com/ibad_tech" target="_blank">Portfolio</a></li><li><a href="#contact">Contact</a></li></ul>
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#solutions">Solutions</a></li>
+    <li><a href="https://www.instagram.com/ibad_tech" target="_blank">Portfolio</a></li>
+    <li><a href="contact.html" id="mobileContactLink">Contact</a></li>
+  </ul>
   <div class="mobile-phone"><i class="fas fa-phone-alt"></i><span>+91 70568 36166</span></div>
 </div>
 <div class="nav-overlay" id="navOverlay"></div>
@@ -456,10 +493,15 @@
 <!-- Hero Section -->
 <section id="home" class="hero">
   <div class="container">
-    <div data-aos="fade-up"><div class="hero-badge">✨ Trusted by 300+ Businesses</div>
-    <h1>Scale Your Business <span>Digitally</span><br>With Ibad Tech</h1>
-    <p style="font-size: 1.05rem; color: var(--gray); max-width: 600px; margin: 24px 0 32px;">Professional Web Development, Digital Marketing, Graphic Design and Business Solutions for Modern Businesses.</p>
-    <div style="display: flex; gap: 16px; flex-wrap: wrap;"><a href="#contact" class="btn-primary">Get Free Quote <i class="fas fa-arrow-right"></i></a><a href="#services" class="btn-outline">Our Solutions</a></div></div>
+    <div data-aos="fade-up">
+      <div class="hero-badge">✨ Trusted by 300+ Businesses</div>
+      <h1>Scale Your Business <span>Digitally</span><br>With Ibad Tech</h1>
+      <p style="font-size: 1.05rem; color: var(--gray); max-width: 600px; margin: 24px 0 32px;">Professional Web Development, Digital Marketing, Graphic Design and Business Solutions for Modern Businesses.</p>
+      <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+        <a href="contact.html" class="btn-primary">Get Free Quote <i class="fas fa-arrow-right"></i></a>
+        <a href="#services" class="btn-outline">Our Solutions</a>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -485,7 +527,7 @@
 
 <!-- Solutions -->
 <section id="solutions"><div class="container"><div class="split-grid">
-  <div data-aos="fade-right"><div class="hero-badge" style="margin-bottom: 16px;">📈 Performance First</div><h2 style="text-align: left; margin-bottom: 20px;">Digital Marketing <span>Excellence</span></h2><p style="margin-bottom: 20px; color: var(--gray);">From SEO that ranks #1 to high-converting social campaigns, our performance marketing team uses AI-driven analytics to maximize ROI. We've helped 200+ brands increase organic traffic by 300%.</p><ul style="list-style: none; margin: 24px 0;"><li style="margin-bottom: 12px;"><i class="fas fa-check-circle" style="color: var(--primary);"></i> Organic SEO & Local SEO</li><li style="margin-bottom: 12px;"><i class="fas fa-check-circle" style="color: var(--primary);"></i> Google Ads & PPC Management</li><li style="margin-bottom: 12px;"><i class="fas fa-check-circle" style="color: var(--primary);"></i> Social Media Growth</li></ul><a href="#contact" class="btn-primary">Boost Your Brand <i class="fas fa-rocket"></i></a></div>
+  <div data-aos="fade-right"><div class="hero-badge" style="margin-bottom: 16px;">📈 Performance First</div><h2 style="text-align: left; margin-bottom: 20px;">Digital Marketing <span>Excellence</span></h2><p style="margin-bottom: 20px; color: var(--gray);">From SEO that ranks #1 to high-converting social campaigns, our performance marketing team uses AI-driven analytics to maximize ROI. We've helped 200+ brands increase organic traffic by 300%.</p><ul style="list-style: none; margin: 24px 0;"><li style="margin-bottom: 12px;"><i class="fas fa-check-circle" style="color: var(--primary);"></i> Organic SEO & Local SEO</li><li style="margin-bottom: 12px;"><i class="fas fa-check-circle" style="color: var(--primary);"></i> Google Ads & PPC Management</li><li style="margin-bottom: 12px;"><i class="fas fa-check-circle" style="color: var(--primary);"></i> Social Media Growth</li></ul><a href="contact.html" class="btn-primary">Boost Your Brand <i class="fas fa-rocket"></i></a></div>
   <div data-aos="fade-left"><div style="border-radius: 32px; overflow: hidden; box-shadow: var(--shadow-xl);"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Digital Marketing" loading="lazy" style="width:100%"></div></div>
 </div></div></section>
 
@@ -504,12 +546,12 @@
 </div></div></section>
 
 <!-- CTA -->
-<div class="container"><div class="cta-banner" data-aos="zoom-in-up"><h2 style="color: white; margin-bottom: 16px;">Ready to Elevate Your Business?</h2><p style="color: rgba(255,255,255,0.9); margin-bottom: 28px;">Get a personalized strategy session and free audit. Let's turn visitors into loyal customers.</p><a href="#contact" class="btn-primary" style="background: white; color: var(--primary-dark);">Book Free Consultation <i class="fas fa-calendar-alt"></i></a></div></div>
+<div class="container"><div class="cta-banner" data-aos="zoom-in-up"><h2 style="color: white; margin-bottom: 16px;">Ready to Elevate Your Business?</h2><p style="color: rgba(255,255,255,0.9); margin-bottom: 28px;">Get a personalized strategy session and free audit. Let's turn visitors into loyal customers.</p><a href="contact.html" class="btn-primary" style="background: white; color: var(--primary-dark);">Book Free Consultation <i class="fas fa-calendar-alt"></i></a></div></div>
 
 <!-- Footer -->
 <footer class="footer" id="contact"><div class="container"><div class="footer-grid">
   <div class="footer-col"><div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; justify-content: center;"><img src="Logo.jpg" alt="Ibad Tech" style="height: 44px; border-radius: 10px;" loading="lazy" onerror="this.style.display='none'"><h3 style="font-size: 1.3rem;">Ibad Tech</h3></div><p>Enterprise digital solutions that drive real ROI. Committed to excellence and innovation.</p><div style="display: flex; gap: 12px; margin-top: 20px; justify-content: center;"><a href="https://www.facebook.com/share/19CEtXPCrr/" target="_blank" aria-label="Facebook" style="color:white; background: rgba(255,255,255,0.1); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 12px;"><i class="fab fa-facebook-f"></i></a><a href="https://www.instagram.com/ibad_tech" target="_blank" aria-label="Instagram" style="color:white; background: rgba(255,255,255,0.1); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 12px;"><i class="fab fa-instagram"></i></a><a href="#" aria-label="LinkedIn" style="color:white; background: rgba(255,255,255,0.1); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 12px;"><i class="fab fa-linkedin-in"></i></a></div></div>
-  <div class="footer-col"><h4>Quick Links</h4><a href="#home" style="color: var(--gray-light); text-decoration: none; display: block; margin-bottom: 12px;">Home</a><a href="#services" style="color: var(--gray-light); text-decoration: none; display: block; margin-bottom: 12px;">Services</a><a href="#solutions" style="color: var(--gray-light); text-decoration: none; display: block; margin-bottom: 12px;">Solutions</a><a href="https://www.instagram.com/ibad_tech" target="_blank" style="color: var(--gray-light); text-decoration: none;">Portfolio</a></div>
+  <div class="footer-col"><h4>Quick Links</h4><a href="#home" style="color: var(--gray-light); text-decoration: none; display: block; margin-bottom: 12px;">Home</a><a href="#services" style="color: var(--gray-light); text-decoration: none; display: block; margin-bottom: 12px;">Services</a><a href="#solutions" style="color: var(--gray-light); text-decoration: none; display: block; margin-bottom: 12px;">Solutions</a><a href="https://www.instagram.com/ibad_tech" target="_blank" style="color: var(--gray-light); text-decoration: none;">Portfolio</a><a href="contact.html" style="color: var(--gray-light); text-decoration: none; display: block; margin-top: 12px;">Contact</a></div>
   <div class="footer-col"><h4>Our Expertise</h4><p style="color: var(--gray-light);">SEO / PPC</p><p style="color: var(--gray-light);">Web & App Dev</p><p style="color: var(--gray-light);">Branding & UI/UX</p><p style="color: var(--gray-light);">IT Consulting</p></div>
   <div class="footer-col"><h4>Get In Touch</h4><p style="color: var(--gray-light);"><i class="fas fa-map-marker-alt"></i> Kathgarh Road, Ismailabad, Kurukshetra</p><p style="color: var(--gray-light);"><i class="fas fa-phone"></i> +91 70568 36166</p><p style="color: var(--gray-light);"><i class="fas fa-envelope"></i> sainsanty2@gmail.com</p><p style="color: var(--gray-light);"><i class="fas fa-clock"></i> Mon-Sat: 9AM - 7PM</p></div>
 </div><div style="text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08);"><p style="color: var(--gray-light);">&copy; 2025 Ibad Tech — All rights reserved. Built for digital excellence.</p></div></div></footer>
@@ -535,9 +577,11 @@
   const updateActive = () => {
     let current = ""; sections.forEach(s => { if (pageYOffset >= s.offsetTop - 140) current = s.getAttribute("id"); });
     document.querySelectorAll(".nav-menu a, .mobile-nav a").forEach(link => {
-      link.classList.remove("active");
-      if (link.getAttribute("href") === `#${current}`) link.classList.add("active");
-      if (current === "" && link.getAttribute("href") === "#home") link.classList.add("active");
+      if (link.getAttribute('href') && link.getAttribute('href').startsWith('#')) {
+        link.classList.remove("active");
+        if (link.getAttribute('href') === `#${current}`) link.classList.add("active");
+        if (current === "" && link.getAttribute('href') === "#home") link.classList.add("active");
+      }
     });
   };
   window.addEventListener("scroll", updateActive); window.addEventListener("load", updateActive);
