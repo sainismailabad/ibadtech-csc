@@ -2,18 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>Ibad Tech | Full-Service Digital Agency</title>
-  <meta name="description" content="Ibad Tech delivers premium Digital Marketing, Graphic Design, Web & App Development, IT Consulting, and Financial Products. Based in Kurukshetra, Haryana.">
-  <meta name="keywords" content="Ibad Tech, digital marketing, web development, app development, graphic design, IT consulting, Kurukshetra">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <title>Ibad Tech | Enterprise-Grade Digital Solutions</title>
+  <meta name="description" content="Ibad Tech delivers enterprise-level Digital Marketing, Graphic Design, Web & App Development, IT Consulting, and Financial Products.">
+  <meta name="keywords" content="Ibad Tech, Digital Marketing, Web Development, App Development, Graphic Design, Kurukshetra">
   <meta name="author" content="Ibad Tech">
   <link rel="icon" href="Logo.jpg" type="image/jpeg">
 
-  <!-- Fonts & Icons -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- AOS Animation -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
   <style>
@@ -26,25 +30,25 @@
     :root {
       --primary: #6366f1;
       --primary-dark: #4f46e5;
-      --primary-light: #a5b4fc;
+      --primary-light: #818cf8;
+      --primary-soft: #e0e7ff;
       --secondary: #06b6d4;
-      --accent: #f59e0b;
-      --dark: #0f172a;
-      --light: #f8fafc;
-      --gray: #475569;
-      --gray-light: #94a3b8;
+      --accent: #f97316;
+      --dark: #0a0c10;
+      --dark-card: #11131a;
+      --light: #f9fafb;
+      --gray: #6b7280;
+      --gray-light: #9ca3af;
       --white: #ffffff;
+      --border-light: rgba(255,255,255,0.08);
       --gradient-primary: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
-      --gradient-dark: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-      --gradient-accent: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
-      --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
-      --shadow-md: 0 8px 24px rgba(0,0,0,0.08);
-      --shadow-lg: 0 20px 32px -12px rgba(0,0,0,0.12);
-      --shadow-xl: 0 30px 48px -16px rgba(0,0,0,0.2);
-    }
-
-    html {
-      scroll-behavior: smooth;
+      --gradient-accent: linear-gradient(135deg, #f97316 0%, #f59e0b 100%);
+      --gradient-dark: linear-gradient(145deg, #0a0c10 0%, #111827 100%);
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+      --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+      --shadow-2xl: 0 25px 50px -12px rgba(0,0,0,0.25);
     }
 
     body {
@@ -57,24 +61,25 @@
     .container {
       max-width: 1280px;
       margin: 0 auto;
-      padding: 0 40px;
+      padding: 0 32px;
     }
 
-    section {
-      padding: 100px 0;
-    }
-
-    h1, h2, h3, h4 {
+    /* Typography */
+    h1, h2, h3, h4, .logo-text {
       font-family: 'Space Grotesk', monospace;
       font-weight: 700;
-      line-height: 1.2;
       letter-spacing: -0.02em;
     }
 
+    h1 {
+      font-size: 3.5rem;
+      line-height: 1.1;
+    }
+
     h2 {
-      font-size: 2.8rem;
+      font-size: 2.5rem;
       text-align: center;
-      margin-bottom: 56px;
+      margin-bottom: 48px;
       position: relative;
     }
 
@@ -88,27 +93,27 @@
     h2:after {
       content: '';
       position: absolute;
-      bottom: -16px;
+      bottom: -14px;
       left: 50%;
       transform: translateX(-50%);
-      width: 80px;
-      height: 4px;
+      width: 64px;
+      height: 3px;
       background: var(--gradient-primary);
       border-radius: 4px;
     }
 
-    .btn-primary, .btn-outline, .btn-accent {
+    /* Buttons */
+    .btn-primary, .btn-outline, .btn-ghost {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      padding: 14px 32px;
-      border-radius: 60px;
+      gap: 8px;
+      padding: 12px 28px;
+      border-radius: 40px;
       font-weight: 600;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       text-decoration: none;
-      transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      transition: all 0.3s ease;
       cursor: pointer;
-      border: none;
     }
 
     .btn-primary {
@@ -118,31 +123,25 @@
     }
 
     .btn-primary:hover {
-      transform: translateY(-3px);
+      transform: translateY(-2px);
       box-shadow: var(--shadow-xl);
     }
 
     .btn-outline {
       background: transparent;
-      border: 2px solid var(--primary);
+      border: 1.5px solid var(--primary);
       color: var(--primary);
     }
 
     .btn-outline:hover {
-      background: var(--gradient-primary);
+      background: var(--primary);
       color: white;
-      border-color: transparent;
-      transform: translateY(-3px);
+      transform: translateY(-2px);
     }
 
-    .btn-accent {
-      background: var(--gradient-accent);
-      color: white;
-    }
-
-    /* Header Sticky */
+    /* ========== ENTERPRISE HEADER + STICKY NAV ========== */
     .header {
-      background: rgba(255,255,255,0.96);
+      background: rgba(255,255,255,0.98);
       backdrop-filter: blur(12px);
       position: fixed;
       top: 0;
@@ -156,7 +155,6 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
     }
 
     .logo-wrapper {
@@ -166,15 +164,21 @@
       text-decoration: none;
     }
 
-    .logo {
-      height: 48px;
-      width: auto;
-      border-radius: 12px;
-      object-fit: cover;
+    .logo-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--gradient-primary);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: white;
     }
 
     .logo-text h1 {
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       background: var(--gradient-primary);
       -webkit-background-clip: text;
       background-clip: text;
@@ -182,102 +186,108 @@
     }
 
     .logo-text p {
-      font-size: 0.65rem;
+      font-size: 0.6rem;
       color: var(--gray);
     }
 
     .header-contact {
-      background: rgba(99,102,241,0.1);
-      padding: 8px 20px;
+      background: rgba(99,102,241,0.08);
+      padding: 8px 18px;
       border-radius: 40px;
       font-weight: 600;
-      color: var(--primary-dark);
+      font-size: 0.85rem;
     }
 
-    /* Modern Navbar - Sticky + Smooth */
+    /* Sticky Navigation - Glassmorphism Enterprise */
     .navbar {
       position: sticky;
-      top: 72px;
-      background: rgba(255,255,255,0.98);
+      top: 68px;
+      background: rgba(255,255,255,0.96);
       backdrop-filter: blur(16px);
       z-index: 1001;
-      border-bottom: 1px solid rgba(0,0,0,0.05);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
       box-shadow: var(--shadow-sm);
     }
 
     .nav-container {
       max-width: 1280px;
       margin: 0 auto;
-      padding: 0 40px;
+      padding: 0 32px;
     }
 
     .navbar ul {
       display: flex;
       justify-content: center;
-      gap: 12px;
+      gap: 8px;
       list-style: none;
-      padding: 12px 0;
+      padding: 10px 0;
       flex-wrap: wrap;
     }
 
     .navbar a {
       padding: 10px 24px;
       font-weight: 600;
+      font-size: 0.9rem;
       color: var(--dark);
       text-decoration: none;
       border-radius: 60px;
       transition: all 0.2s;
-      font-size: 0.9rem;
     }
 
     .navbar a:hover, .navbar a.active {
       background: var(--gradient-primary);
       color: white;
-      transform: translateY(-2px);
     }
 
-    /* Hero Module */
+    /* Hero Section - Modern Enterprise */
     .hero {
-      background: linear-gradient(125deg, #ffffff 0%, #eef2ff 100%);
-      padding: 180px 0 100px;
+      background: linear-gradient(115deg, #ffffff 0%, #f3f4ff 100%);
+      padding: 170px 0 90px;
       position: relative;
+      overflow: hidden;
     }
 
     .hero-badge {
       display: inline-block;
       background: rgba(99,102,241,0.12);
-      padding: 6px 18px;
+      padding: 5px 14px;
       border-radius: 60px;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 600;
       color: var(--primary-dark);
       margin-bottom: 24px;
     }
 
     .hero h1 {
-      font-size: 3.8rem;
       margin-bottom: 20px;
     }
 
-    /* Services Module - Enhanced Grid */
+    .hero h1 span {
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* Services Grid Premium */
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
-      gap: 32px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
     }
 
     .service-card {
-      background: var(--white);
-      border-radius: 32px;
-      padding: 40px 28px;
-      transition: all 0.4s;
+      background: white;
+      border-radius: 28px;
+      padding: 36px 28px;
+      transition: all 0.35s;
       box-shadow: var(--shadow-md);
-      border: 1px solid rgba(99,102,241,0.1);
+      border: 1px solid rgba(99,102,241,0.08);
       text-align: center;
     }
 
     .service-card:hover {
-      transform: translateY(-12px);
+      transform: translateY(-8px);
       box-shadow: var(--shadow-xl);
       border-color: var(--primary-light);
     }
@@ -293,320 +303,348 @@
       gap: 32px;
       text-align: center;
     }
+    .stat-number {
+      font-size: 2.6rem;
+      font-weight: 800;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
 
-    /* About Module */
-    .about-grid {
+    /* About + Marketing Split */
+    .split-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 60px;
       align-items: center;
     }
 
-    /* Testimonials Module (New) */
+    .feature-badge {
+      display: inline-flex;
+      background: var(--primary-soft);
+      padding: 6px 16px;
+      border-radius: 60px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 20px;
+    }
+
+    /* Testimonial Cards */
     .testimonial-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
+      gap: 28px;
     }
     .testimonial-card {
       background: white;
-      border-radius: 28px;
-      padding: 32px;
+      border-radius: 24px;
+      padding: 28px;
       box-shadow: var(--shadow-md);
     }
 
     /* CTA Banner */
-    .cta-module {
+    .cta-banner {
       background: var(--gradient-primary);
-      border-radius: 48px;
-      padding: 60px 40px;
+      border-radius: 40px;
+      padding: 56px 48px;
       text-align: center;
       margin: 40px auto;
     }
 
-    /* Footer */
+    /* Footer Enterprise */
     .footer {
       background: var(--dark);
       color: white;
-      padding: 60px 0 30px;
+      padding: 60px 0 32px;
     }
     .footer-grid {
       display: grid;
       grid-template-columns: repeat(4,1fr);
-      gap: 40px;
+      gap: 48px;
     }
 
-    /* WhatsApp */
+    /* WhatsApp Float */
     .whatsapp-float {
       position: fixed;
       bottom: 28px;
       right: 28px;
-      width: 58px;
-      height: 58px;
+      width: 56px;
+      height: 56px;
       background: #25d366;
       border-radius: 30px;
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 99;
-      box-shadow: 0 15px 30px rgba(37,211,102,0.3);
+      box-shadow: 0 10px 25px rgba(37,211,102,0.3);
       transition: all 0.3s;
     }
 
+    /* Responsive */
     @media (max-width: 1024px) {
-      .container, .nav-container { padding: 0 30px; }
-      h2 { font-size: 2.3rem; }
-      .hero h1 { font-size: 3rem; }
+      .container, .nav-container { padding: 0 24px; }
+      h1 { font-size: 2.8rem; }
+      h2 { font-size: 2.2rem; }
       .stats-grid { grid-template-columns: repeat(2,1fr); }
       .footer-grid { grid-template-columns: repeat(2,1fr); }
     }
 
     @media (max-width: 768px) {
-      section { padding: 70px 0; }
-      .navbar { top: 68px; }
+      .navbar { top: 64px; }
       .navbar ul { overflow-x: auto; justify-content: flex-start; flex-wrap: nowrap; scrollbar-width: thin; }
       .navbar a { white-space: nowrap; }
-      .hero { padding: 160px 0 70px; }
-      .hero h1 { font-size: 2.2rem; }
-      .about-grid { grid-template-columns: 1fr; gap: 35px; }
-      .stats-grid { grid-template-columns: 1fr; }
+      .hero { padding: 150px 0 70px; }
+      h1 { font-size: 2rem; }
+      .split-grid { grid-template-columns: 1fr; gap: 40px; }
+      .stats-grid { grid-template-columns: 1fr; gap: 24px; }
       .footer-grid { grid-template-columns: 1fr; text-align: center; }
-      .btn-primary, .btn-outline { padding: 12px 24px; }
+      .cta-banner { padding: 40px 24px; margin: 20px 0; border-radius: 32px; }
+      .btn-primary, .btn-outline { padding: 10px 20px; font-size: 0.85rem; }
     }
 
     @media (max-width: 550px) {
-      .header-contact { font-size: 0.7rem; padding: 5px 12px; }
-      .logo { height: 38px; }
+      .logo-icon { width: 36px; height: 36px; font-size: 1rem; }
       .logo-text p { display: none; }
+      .header-contact { font-size: 0.7rem; padding: 5px 12px; }
+      .container { padding: 0 20px; }
+      h2 { font-size: 1.8rem; }
     }
   </style>
 </head>
 <body>
 
-<!-- Header Section -->
+<!-- Header Premium -->
 <header class="header">
   <div class="container">
     <a href="index.html" class="logo-wrapper">
-      <img src="Logo.jpg" alt="Ibad Tech" class="logo" onerror="this.src='https://placehold.co/200x200?text=IT'">
+      <div class="logo-icon">IT</div>
       <div class="logo-text">
         <h1>Ibad Tech</h1>
-        <p>Premium Digital Solutions</p>
+        <p>Enterprise Digital Solutions</p>
       </div>
     </a>
     <div class="header-contact">
-      <i class="fas fa-phone-alt"></i> +91 7056836166
+      <i class="fas fa-phone-alt"></i> +91 70568 36166
     </div>
   </div>
 </header>
 
-<!-- Sticky Navigation (Modular & Modern) -->
+<!-- Sticky Navigation (Modern) -->
 <nav class="navbar">
   <div class="nav-container">
     <ul>
       <li><a href="#home" class="active">Home</a></li>
-      <li><a href="#services-module">Services</a></li>
-      <li><a href="#digital-marketing">Digital Mktg</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#solutions">Solutions</a></li>
       <li><a href="https://www.instagram.com/ibad_tech" target="_blank">Portfolio</a></li>
-      <li><a href="#contact-module">Contact</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
 </nav>
 
-<!-- Hero Module -->
+<!-- Hero Section -->
 <section id="home" class="hero">
   <div class="container">
-    <div class="hero-content" data-aos="fade-up">
-      <div class="hero-badge">✨ India's Trusted Digital Agency 2025</div>
-      <h1 data-aos="fade-up" data-aos-delay="80">Scale Your Business <span>Digitally</span><br>With Ibad Tech</h1>
-      <p data-aos="fade-up" data-aos-delay="150" style="font-size: 1.1rem; max-width: 650px; margin: 0 auto 30px; color: var(--gray);">Top-tier marketing, stunning designs, web & app development — everything you need to dominate online.</p>
-      <div class="hero-buttons" data-aos="fade-up" data-aos-delay="220">
-        <a href="#contact-module" class="btn-primary">Get Free Quote <i class="fas fa-arrow-right"></i></a>
-        <a href="#services-module" class="btn-outline">Our Solutions</a>
+    <div data-aos="fade-up">
+      <div class="hero-badge">⚡ Trusted by 300+ Brands</div>
+      <h1>Scale Your Business <span>Digitally</span><br>With Ibad Tech</h1>
+      <p style="font-size: 1.05rem; color: var(--gray); max-width: 600px; margin: 20px 0 32px;">Top-tier marketing, stunning designs, web & app development — everything you need to dominate online.</p>
+      <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+        <a href="#contact" class="btn-primary">Get Free Quote <i class="fas fa-arrow-right"></i></a>
+        <a href="#services" class="btn-outline">Our Solutions</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Services Section Module -->
-<section id="services-module">
+<!-- Services Core Module -->
+<section id="services">
   <div class="container">
     <h2 data-aos="fade-up">Our <span>Core</span> Services</h2>
     <div class="services-grid">
-      <div class="service-card" data-aos="fade-up" data-aos-delay="0">
-        <div class="service-icon"><i class="fas fa-chart-line fa-2x" style="background: var(--gradient-primary); -webkit-background-clip: text; background-clip: text; color: transparent;"></i></div>
-        <h3>Digital Marketing</h3>
+      <div class="service-card" data-aos="fade-up">
+        <div class="service-icon"><i class="fas fa-chart-line fa-2x" style="color: var(--primary);"></i></div>
+        <h3 style="margin: 18px 0 12px;">Digital Marketing</h3>
         <p>SEO, Social Media, PPC & Content Marketing — Data-driven strategies for explosive growth.</p>
       </div>
-      <div class="service-card" data-aos="fade-up" data-aos-delay="100">
-        <div class="service-icon"><i class="fas fa-palette fa-2x" style="background: var(--gradient-primary); -webkit-background-clip: text; background-clip: text; color: transparent;"></i></div>
-        <h3>Graphic Design</h3>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="50">
+        <div class="service-icon"><i class="fas fa-palette fa-2x" style="color: var(--primary);"></i></div>
+        <h3 style="margin: 18px 0 12px;">Graphic Design</h3>
         <p>Logo, branding, motion graphics, and visual identity that captivates your audience.</p>
       </div>
-      <div class="service-card" data-aos="fade-up" data-aos-delay="200">
-        <div class="service-icon"><i class="fas fa-code fa-2x" style="background: var(--gradient-primary); -webkit-background-clip: text; background-clip: text; color: transparent;"></i></div>
-        <h3>Web Development</h3>
-        <p>Modern, lightning-fast websites with seamless UX and scalable backend.</p>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="service-icon"><i class="fas fa-code fa-2x" style="color: var(--primary);"></i></div>
+        <h3 style="margin: 18px 0 12px;">Web Development</h3>
+        <p>Modern, lightning-fast websites with seamless UX and scalable backend infrastructure.</p>
       </div>
-      <div class="service-card" data-aos="fade-up" data-aos-delay="300">
-        <div class="service-icon"><i class="fas fa-mobile-alt fa-2x" style="background: var(--gradient-primary); -webkit-background-clip: text; background-clip: text; color: transparent;"></i></div>
-        <h3>App Development</h3>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="150">
+        <div class="service-icon"><i class="fas fa-mobile-alt fa-2x" style="color: var(--primary);"></i></div>
+        <h3 style="margin: 18px 0 12px;">App Development</h3>
         <p>Native & cross-platform mobile apps with premium UI/UX and real-time sync.</p>
       </div>
-      <div class="service-card" data-aos="fade-up" data-aos-delay="400">
-        <div class="service-icon"><i class="fas fa-chart-pie fa-2x" style="background: var(--gradient-primary); -webkit-background-clip: text; background-clip: text; color: transparent;"></i></div>
-        <h3>Financial Products</h3>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="service-icon"><i class="fas fa-chart-pie fa-2x" style="color: var(--primary);"></i></div>
+        <h3 style="margin: 18px 0 12px;">Financial Products</h3>
         <p>Credit cards, loans, investment tools — smart fintech solutions for modern wealth.</p>
       </div>
-      <div class="service-card" data-aos="fade-up" data-aos-delay="500">
-        <div class="service-icon"><i class="fas fa-headset fa-2x" style="background: var(--gradient-primary); -webkit-background-clip: text; background-clip: text; color: transparent;"></i></div>
-        <h3>IT Consulting</h3>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="250">
+        <div class="service-icon"><i class="fas fa-headset fa-2x" style="color: var(--primary);"></i></div>
+        <h3 style="margin: 18px 0 12px;">IT Consulting</h3>
         <p>Cloud migration, AI strategy, digital transformation — future-proof your infrastructure.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Digital Marketing Highlight Module -->
-<section id="digital-marketing" style="background: linear-gradient(145deg, #f1f5f9, #ffffff);">
-  <div class="container">
-    <div class="about-grid" style="gap: 50px;">
-      <div data-aos="fade-right">
-        <h2 style="text-align: left; margin-bottom: 20px;">Digital Marketing <span>Excellence</span></h2>
-        <p style="font-size: 1rem; margin-bottom: 20px;">From SEO that ranks #1 to high-converting social campaigns, our performance marketing team uses AI-driven analytics to maximize ROI. We've helped 200+ brands increase organic traffic by 300%.</p>
-        <div class="feature-list" style="display: flex; flex-direction: column; gap: 15px;">
-          <div><i class="fas fa-check-circle" style="color: var(--primary);"></i> Organic SEO & Local SEO</div>
-          <div><i class="fas fa-check-circle" style="color: var(--primary);"></i> Google Ads & PPC Management</div>
-          <div><i class="fas fa-check-circle" style="color: var(--primary);"></i> Social Media Growth (Instagram, FB, LinkedIn)</div>
-          <div><i class="fas fa-check-circle" style="color: var(--primary);"></i> Email Marketing Automation</div>
-        </div>
-        <a href="#contact-module" class="btn-primary" style="margin-top: 25px;">Boost Your Brand <i class="fas fa-rocket"></i></a>
-      </div>
-      <div data-aos="fade-left">
-        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Digital Marketing" style="width: 100%; border-radius: 32px; box-shadow: var(--shadow-lg);">
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Stats Module -->
+<!-- Stats Section -->
 <section class="stats-section">
   <div class="container">
-    <h2 data-aos="fade-up">Our <span>Impact</span></h2>
+    <h2 data-aos="fade-up" style="color: white;">Our <span>Impact</span></h2>
     <div class="stats-grid">
       <div class="stat-card" data-aos="fade-up"><div class="stat-number">720+</div><div class="stat-label">Projects Delivered</div></div>
-      <div class="stat-card" data-aos="fade-up" data-aos-delay="100"><div class="stat-number">310+</div><div class="stat-label">Happy Clients</div></div>
-      <div class="stat-card" data-aos="fade-up" data-aos-delay="200"><div class="stat-number">99%</div><div class="stat-label">Client Retention</div></div>
-      <div class="stat-card" data-aos="fade-up" data-aos-delay="300"><div class="stat-number">24/7</div><div class="stat-label">Priority Support</div></div>
+      <div class="stat-card" data-aos="fade-up" data-aos-delay="50"><div class="stat-number">310+</div><div class="stat-label">Happy Clients</div></div>
+      <div class="stat-card" data-aos="fade-up" data-aos-delay="100"><div class="stat-number">99%</div><div class="stat-label">Client Retention</div></div>
+      <div class="stat-card" data-aos="fade-up" data-aos-delay="150"><div class="stat-number">24/7</div><div class="stat-label">Priority Support</div></div>
     </div>
   </div>
 </section>
 
-<!-- About Us Module -->
-<section>
+<!-- Digital Marketing + About Split (Unique Layout) -->
+<section id="solutions">
   <div class="container">
-    <h2 data-aos="fade-up">About <span>Ibad Tech</span></h2>
-    <div class="about-grid">
-      <div class="about-image" data-aos="fade-right">
-        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Team">
+    <div class="split-grid">
+      <div data-aos="fade-right">
+        <div class="feature-badge">📈 Performance First</div>
+        <h2 style="text-align: left; margin-bottom: 20px; font-size: 2rem;">Digital Marketing <span>Excellence</span></h2>
+        <p style="margin-bottom: 20px; color: var(--gray);">From SEO that ranks #1 to high-converting social campaigns, our performance marketing team uses AI-driven analytics to maximize ROI. We've helped 200+ brands increase organic traffic by 300%.</p>
+        <ul style="list-style: none; margin: 24px 0;">
+          <li style="margin-bottom: 12px;"><i class="fas fa-check-circle" style="color: var(--primary);"></i> Organic SEO & Local SEO</li>
+          <li style="margin-bottom: 12px;"><i class="fas fa-check-circle" style="color: var(--primary);"></i> Google Ads & PPC Management</li>
+          <li style="margin-bottom: 12px;"><i class="fas fa-check-circle" style="color: var(--primary);"></i> Social Media Growth (Instagram, FB, LinkedIn)</li>
+        </ul>
+        <a href="#contact" class="btn-primary">Boost Your Brand <i class="fas fa-rocket"></i></a>
       </div>
-      <div class="about-text" data-aos="fade-left">
-        <h3>Your Growth Partner <span style="color: var(--primary);">Since 2019</span></h3>
-        <p>Located at Kathgarh Road, Ismailabad, Kurukshetra — we are a team of creative developers, designers, and marketing gurus. Our mission is to deliver future-ready digital solutions that generate real business impact.</p>
-        <p>We combine innovation with empathy, ensuring every project resonates with your audience. Let's build something extraordinary.</p>
-        <div class="feature-list" style="display: grid; grid-template-columns: repeat(2,1fr);">
-          <div><i class="fas fa-award"></i> Award-winning team</div>
-          <div><i class="fas fa-globe"></i> Global standard delivery</div>
-          <div><i class="fas fa-clock"></i> On-time guaranteed</div>
-          <div><i class="fas fa-shield-alt"></i> 100% secure</div>
+      <div data-aos="fade-left">
+        <div style="background: var(--primary-soft); border-radius: 32px; overflow: hidden; box-shadow: var(--shadow-xl);">
+          <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Digital Marketing" style="width: 100%; height: auto; display: block;">
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Testimonials Module (New) -->
-<section style="background: #f1f5fe;">
+<!-- About Ibad Tech -->
+<section>
+  <div class="container">
+    <div class="split-grid" style="direction: rtl;">
+      <div data-aos="fade-left" style="direction: ltr;">
+        <div class="feature-badge">🏆 Since 2019</div>
+        <h2 style="text-align: left; margin-bottom: 20px;">About <span>Ibad Tech</span></h2>
+        <p style="margin-bottom: 16px;">Located at Kathgarh Road, Ismailabad, Kurukshetra — we are a team of creative developers, designers, and marketing gurus. Our mission is to deliver future-ready digital solutions that generate real business impact.</p>
+        <p>We combine innovation with empathy, ensuring every project resonates with your audience. Let's build something extraordinary.</p>
+        <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-top: 28px;">
+          <div><i class="fas fa-award" style="color: var(--primary);"></i> Award-winning</div>
+          <div><i class="fas fa-globe" style="color: var(--primary);"></i> Global standards</div>
+          <div><i class="fas fa-clock" style="color: var(--primary);"></i> On-time delivery</div>
+        </div>
+      </div>
+      <div data-aos="fade-right" style="direction: ltr;">
+        <div style="border-radius: 32px; overflow: hidden; box-shadow: var(--shadow-xl);">
+          <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Team Ibad Tech" style="width: 100%;">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section style="background: #f5f7ff;">
   <div class="container">
     <h2 data-aos="fade-up">Client <span>Love</span></h2>
     <div class="testimonial-grid">
-      <div class="testimonial-card" data-aos="fade-up"><i class="fas fa-quote-left" style="color: var(--primary); font-size: 2rem; opacity: 0.5;"></i><p style="margin: 15px 0;">“Ibad Tech transformed our online presence. SEO results skyrocketed within months. Professional and creative!”</p><h4>- Rohan Sharma</h4></div>
-      <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100"><i class="fas fa-quote-left" style="color: var(--primary); font-size: 2rem; opacity: 0.5;"></i><p style="margin: 15px 0;">“Their app development team built a flawless fintech app. Highly recommend for quality & support.”</p><h4>- Neha Verma</h4></div>
-      <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200"><i class="fas fa-quote-left" style="color: var(--primary); font-size: 2rem; opacity: 0.5;"></i><p style="margin: 15px 0;">“Best graphic design and branding experience. Our logo and website look premium!”</p><h4>- Ankit Bansal</h4></div>
+      <div class="testimonial-card" data-aos="fade-up"><i class="fas fa-quote-left" style="color: var(--primary-light); font-size: 2rem;"></i><p style="margin: 16px 0;">“Ibad Tech transformed our online presence. SEO results skyrocketed within months. Professional and creative!”</p><h4>— Rohan Sharma</h4></div>
+      <div class="testimonial-card" data-aos="fade-up" data-aos-delay="50"><i class="fas fa-quote-left" style="color: var(--primary-light); font-size: 2rem;"></i><p style="margin: 16px 0;">“Their app development team built a flawless fintech app. Highly recommend for quality & support.”</p><h4>— Neha Verma</h4></div>
+      <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100"><i class="fas fa-quote-left" style="color: var(--primary-light); font-size: 2rem;"></i><p style="margin: 16px 0;">“Best graphic design and branding experience. Our logo and website look premium!”</p><h4>— Ankit Bansal</h4></div>
     </div>
   </div>
 </section>
 
-<!-- CTA Banner Premium -->
+<!-- CTA Banner -->
 <div class="container">
-  <div class="cta-module" data-aos="zoom-in-up">
-    <h2 style="color: white; margin-bottom: 15px;">Ready to Elevate Your Business?</h2>
+  <div class="cta-banner" data-aos="zoom-in-up">
+    <h2 style="color: white; margin-bottom: 16px;">Ready to Elevate Your Business?</h2>
     <p style="color: rgba(255,255,255,0.9); margin-bottom: 28px;">Get a personalized strategy session and free audit. Let's turn visitors into loyal customers.</p>
-    <a href="#contact-module" class="btn-primary" style="background: white; color: var(--primary-dark);">Book Free Consultation <i class="fas fa-calendar-alt"></i></a>
+    <a href="#contact" class="btn-primary" style="background: white; color: var(--primary-dark);">Book Free Consultation <i class="fas fa-calendar-alt"></i></a>
   </div>
 </div>
 
-<!-- Contact Module (Footer integrated) -->
-<footer class="footer" id="contact-module">
+<!-- Footer + Contact -->
+<footer class="footer" id="contact">
   <div class="container">
     <div class="footer-grid">
       <div class="footer-col">
-        <h4><i class="fas fa-crown"></i> Ibad Tech</h4>
-        <p>Premium digital solutions that drive real ROI. We're committed to excellence, innovation, and client success.</p>
-        <div class="social-icons" style="display: flex; gap: 12px; margin-top: 20px;">
-          <a href="https://www.facebook.com/share/19CEtXPCrr/" target="_blank" style="color:white; background: rgba(255,255,255,0.1); padding: 10px; border-radius: 12px;"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://www.instagram.com/ibad_tech" target="_blank" style="color:white; background: rgba(255,255,255,0.1); padding: 10px; border-radius: 12px;"><i class="fab fa-instagram"></i></a>
-          <a href="#" style="color:white; background: rgba(255,255,255,0.1); padding: 10px; border-radius: 12px;"><i class="fab fa-linkedin-in"></i></a>
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+          <div class="logo-icon" style="background: var(--gradient-primary);">IT</div>
+          <h3 style="font-size: 1.3rem;">Ibad Tech</h3>
+        </div>
+        <p>Enterprise digital solutions that drive real ROI. We're committed to excellence, innovation, and client success.</p>
+        <div style="display: flex; gap: 12px; margin-top: 20px;">
+          <a href="https://www.facebook.com/share/19CEtXPCrr/" target="_blank" style="color:white; background: rgba(255,255,255,0.1); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 12px;"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/ibad_tech" target="_blank" style="color:white; background: rgba(255,255,255,0.1); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 12px;"><i class="fab fa-instagram"></i></a>
+          <a href="#" style="color:white; background: rgba(255,255,255,0.1); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 12px;"><i class="fab fa-linkedin-in"></i></a>
         </div>
       </div>
       <div class="footer-col">
         <h4>Quick Links</h4>
-        <a href="#home" style="color: var(--gray-light); text-decoration: none; display: block; margin-bottom: 10px;">Home</a>
-        <a href="#services-module" style="color: var(--gray-light); text-decoration: none; display: block; margin-bottom: 10px;">Services</a>
-        <a href="#digital-marketing" style="color: var(--gray-light); text-decoration: none; display: block; margin-bottom: 10px;">Digital Marketing</a>
+        <a href="#home" style="color: var(--gray-light); text-decoration: none; display: block; margin-bottom: 12px;">Home</a>
+        <a href="#services" style="color: var(--gray-light); text-decoration: none; display: block; margin-bottom: 12px;">Services</a>
+        <a href="#solutions" style="color: var(--gray-light); text-decoration: none; display: block; margin-bottom: 12px;">Solutions</a>
         <a href="https://www.instagram.com/ibad_tech" target="_blank" style="color: var(--gray-light); text-decoration: none;">Portfolio</a>
       </div>
       <div class="footer-col">
         <h4>Our Expertise</h4>
-        <p>SEO / PPC</p>
-        <p>Web & App Dev</p>
-        <p>Branding & UI/UX</p>
-        <p>IT Consulting</p>
+        <p style="color: var(--gray-light);">SEO / PPC</p>
+        <p style="color: var(--gray-light);">Web & App Dev</p>
+        <p style="color: var(--gray-light);">Branding & UI/UX</p>
+        <p style="color: var(--gray-light);">IT Consulting</p>
       </div>
       <div class="footer-col">
         <h4>Get In Touch</h4>
-        <p><i class="fas fa-map-marker-alt"></i> Kathgarh Road, Ismailabad, Kurukshetra, Haryana</p>
-        <p><i class="fas fa-phone"></i> +91 7056836166</p>
-        <p><i class="fas fa-envelope"></i> sainsanty2@gmail.com</p>
-        <p><i class="fas fa-clock"></i> Mon-Sat: 9AM - 7PM</p>
+        <p style="color: var(--gray-light);"><i class="fas fa-map-marker-alt"></i> Kathgarh Road, Ismailabad, Kurukshetra</p>
+        <p style="color: var(--gray-light);"><i class="fas fa-phone"></i> +91 7056836166</p>
+        <p style="color: var(--gray-light);"><i class="fas fa-envelope"></i> sainsanty2@gmail.com</p>
+        <p style="color: var(--gray-light);"><i class="fas fa-clock"></i> Mon-Sat: 9AM - 7PM</p>
       </div>
     </div>
-    <div class="footer-bottom" style="text-align: center; margin-top: 50px; padding-top: 25px; border-top: 1px solid rgba(255,255,255,0.1);">
-      <p>&copy; 2025 Ibad Tech — All rights reserved. Built with <i class="fas fa-heart" style="color: #6366f1;"></i> for digital excellence.</p>
+    <div style="text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08);">
+      <p style="color: var(--gray-light);">&copy; 2025 Ibad Tech — All rights reserved. Built for digital excellence.</p>
     </div>
   </div>
 </footer>
 
 <!-- WhatsApp -->
 <a href="https://wa.me/917056836166" class="whatsapp-float" target="_blank">
-  <i class="fab fa-whatsapp" style="font-size: 32px; color: white;"></i>
+  <i class="fab fa-whatsapp" style="font-size: 28px; color: white;"></i>
 </a>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-  AOS.init({ duration: 800, once: true, offset: 80 });
-  // Active nav highlight
-  const sections = document.querySelectorAll("section[id], div[id]");
-  const navItems = document.querySelectorAll(".navbar a");
+  AOS.init({ duration: 700, once: true, offset: 60 });
+  // Active Nav Scroll
+  const sections = document.querySelectorAll("section[id]");
+  const navLinks = document.querySelectorAll(".navbar a");
   window.addEventListener("scroll", () => {
     let current = "";
     sections.forEach(section => {
-      const sectionTop = section.offsetTop - 150;
+      const sectionTop = section.offsetTop - 140;
       if (pageYOffset >= sectionTop) current = section.getAttribute("id");
     });
-    navItems.forEach(link => {
+    navLinks.forEach(link => {
       link.classList.remove("active");
       if (link.getAttribute("href") === `#${current}`) link.classList.add("active");
-      else if (current === "" && link.getAttribute("href") === "#home") link.classList.add("active");
+      if (current === "" && link.getAttribute("href") === "#home") link.classList.add("active");
     });
   });
 </script>
