@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
-  <title>Ibad Tech | Premium Digital Solutions</title>
-  <meta name="description" content="Ibad Tech offers Digital Marketing, Graphic Design, Web & App Development, IT Consulting, and Financial Products.">
+  <title>Ibad Tech | Elite Digital Solutions</title>
+  <meta name="description" content="Ibad Tech offers premium Digital Marketing, Graphic Design, Web & App Development, IT Consulting, and Financial Products.">
   <meta name="keywords" content="Ibad Tech, Digital Marketing, Web Development, App Development, Graphic Design, Kurukshetra">
   <meta name="author" content="Ibad Tech">
   
@@ -13,7 +13,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -41,10 +41,12 @@
       --gray-light: #94a3b8;
       --white: #ffffff;
       --gradient-primary: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
+      --gradient-dark: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
       --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
       --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
       --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
-      --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1);
+      --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.15);
+      --shadow-2xl: 0 25px 50px -12px rgba(0,0,0,0.25);
     }
 
     body {
@@ -194,29 +196,30 @@
       flex-shrink: 0;
     }
 
-    /* Hamburger Menu */
+    /* Hamburger Menu - Smooth Animation */
     .menu-toggle {
       display: none;
       background: var(--gradient-primary);
       border: none;
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
       cursor: pointer;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: 6px;
-      transition: all 0.3s;
+      gap: 5px;
+      transition: all 0.3s ease;
       flex-shrink: 0;
+      box-shadow: var(--shadow-md);
     }
 
     .menu-toggle span {
       width: 24px;
-      height: 2px;
+      height: 2.5px;
       background: white;
       border-radius: 4px;
-      transition: all 0.3s;
+      transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     }
 
     .menu-toggle.active span:nth-child(1) {
@@ -224,6 +227,7 @@
     }
     .menu-toggle.active span:nth-child(2) {
       opacity: 0;
+      transform: scaleX(0);
     }
     .menu-toggle.active span:nth-child(3) {
       transform: rotate(-45deg) translate(6px, -6px);
@@ -268,21 +272,21 @@
       color: white;
     }
 
-    /* Mobile Navigation */
+    /* Mobile Navigation Drawer - Smooth */
     .mobile-nav {
       position: fixed;
       top: 72px;
       left: -100%;
-      width: 80%;
-      max-width: 320px;
+      width: 85%;
+      max-width: 340px;
       height: calc(100vh - 72px);
       background: rgba(255,255,255,0.98);
       backdrop-filter: blur(20px);
       z-index: 1000;
-      transition: left 0.3s ease;
-      box-shadow: var(--shadow-xl);
-      border-right: 1px solid rgba(0,0,0,0.05);
-      padding: 24px 20px;
+      transition: left 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      box-shadow: var(--shadow-2xl);
+      border-right: 1px solid rgba(0,0,0,0.08);
+      padding: 28px 24px;
       overflow-y: auto;
     }
 
@@ -294,14 +298,14 @@
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 12px;
     }
 
     .mobile-nav a {
       display: block;
       padding: 14px 20px;
       font-weight: 600;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       color: var(--dark);
       text-decoration: none;
       border-radius: 16px;
@@ -321,6 +325,7 @@
       align-items: center;
       gap: 12px;
       font-weight: 700;
+      font-size: 1rem;
       color: var(--primary-dark);
     }
 
@@ -333,6 +338,7 @@
       background: rgba(0,0,0,0.5);
       z-index: 999;
       display: none;
+      backdrop-filter: blur(4px);
     }
 
     .nav-overlay.active {
@@ -387,23 +393,34 @@
       color: transparent;
     }
 
-    /* Stats Section - IMPROVED & CLEAN */
+    /* Stats Section - Premium Card Style with Border Radius */
     .stats-section {
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      background: var(--gradient-dark);
       width: 100%;
-      padding: 80px 0;
+      padding: 85px 0;
     }
 
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 40px;
+      gap: 30px;
       text-align: center;
     }
 
     .stat-card {
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(8px);
+      border-radius: 28px;
+      padding: 32px 20px;
       text-align: center;
-      padding: 20px;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(99,102,241,0.4);
     }
 
     .stat-number {
@@ -418,8 +435,8 @@
     }
 
     .stat-label {
-      color: rgba(255,255,255,0.8);
-      font-size: 1rem;
+      color: rgba(255,255,255,0.85);
+      font-size: 0.95rem;
       font-weight: 500;
       letter-spacing: 0.3px;
     }
@@ -443,6 +460,11 @@
       border-radius: 24px;
       padding: 28px;
       box-shadow: var(--shadow-md);
+      transition: all 0.3s;
+    }
+    .testimonial-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-xl);
     }
 
     .cta-banner {
@@ -477,16 +499,20 @@
       align-items: center;
       justify-content: center;
       z-index: 99;
-      box-shadow: 0 10px 25px rgba(37,211,102,0.3);
+      box-shadow: 0 10px 25px rgba(37,211,102,0.4);
       text-decoration: none;
+      transition: all 0.3s;
+    }
+    .whatsapp-float:hover {
+      transform: scale(1.08);
     }
 
-    /* Responsive */
+    /* Responsive - Perfect Mobile */
     @media (max-width: 1024px) {
       .container, .nav-container { padding: 0 24px; }
       h1 { font-size: 2.8rem; }
       h2 { font-size: 2.2rem; }
-      .stats-grid { gap: 30px; }
+      .stats-grid { gap: 20px; }
       .stat-number { font-size: 2.5rem; }
     }
 
@@ -496,24 +522,30 @@
       .navbar { display: none; }
       .hero { padding: 140px 0 60px; }
       h1 { font-size: 1.9rem; }
+      h2 { font-size: 1.8rem; }
       .split-grid { grid-template-columns: 1fr; gap: 40px; }
-      .stats-grid { grid-template-columns: repeat(2,1fr); gap: 20px; }
+      .stats-grid { grid-template-columns: repeat(2,1fr); gap: 16px; }
       .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 32px; }
       .logo-img { height: 40px; }
       .logo-text p { display: none; }
       .container { padding: 0 20px; }
-      h2 { font-size: 1.8rem; }
       .cta-banner { padding: 35px 20px; border-radius: 28px; margin: 30px 0; }
-      .stat-number { font-size: 2rem; }
+      .stat-card { padding: 24px 16px; border-radius: 24px; }
+      .stat-number { font-size: 2.2rem; }
       .stat-label { font-size: 0.85rem; }
+      .service-card { padding: 28px 20px; }
     }
 
     @media (max-width: 550px) {
-      .stats-grid { grid-template-columns: 1fr; gap: 24px; }
+      .stats-grid { grid-template-columns: 1fr; gap: 16px; }
       h1 { font-size: 1.7rem; }
       .container { padding: 0 16px; }
-      .logo-img { height: 36px; }
+      .logo-img { height: 38px; }
       .logo-text h1 { font-size: 1.1rem; }
+      .menu-toggle { width: 44px; height: 44px; }
+      .hero-badge { font-size: 0.7rem; }
+      .btn-primary, .btn-outline { padding: 10px 20px; font-size: 0.85rem; }
+      .stat-number { font-size: 2rem; }
     }
   </style>
 </head>
@@ -554,7 +586,7 @@
   </div>
 </nav>
 
-<!-- Mobile Navigation -->
+<!-- Mobile Navigation Drawer -->
 <div class="mobile-nav" id="mobileNav">
   <ul>
     <li><a href="#home">Home</a></li>
@@ -603,7 +635,7 @@
       <div class="service-card" data-aos="fade-up" data-aos-delay="100">
         <div class="service-icon"><i class="fas fa-code"></i></div>
         <h3 style="margin: 18px 0 12px;">Web Development</h3>
-        <p>Modern, lightning-fast websites with seamless UX and scalable backend infrastructure.</p>
+        <p>Modern, lightning-fast websites with seamless UX and scalable backend.</p>
       </div>
       <div class="service-card" data-aos="fade-up" data-aos-delay="150">
         <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
@@ -618,13 +650,13 @@
       <div class="service-card" data-aos="fade-up" data-aos-delay="250">
         <div class="service-icon"><i class="fas fa-headset"></i></div>
         <h3 style="margin: 18px 0 12px;">IT Consulting</h3>
-        <p>Cloud migration, AI strategy, digital transformation — future-proof your infrastructure.</p>
+        <p>Cloud migration, AI strategy, digital transformation — future-proof infrastructure.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Stats Section - IMPROVED & PROFESSIONAL -->
+<!-- Stats Section - IMPACT with Premium Cards -->
 <section class="stats-section">
   <div class="container">
     <h2 data-aos="fade-up" style="color: white;">Our <span>Impact</span></h2>
@@ -681,7 +713,7 @@
         <div class="hero-badge" style="margin-bottom: 16px;">🏆 Since 2019</div>
         <h2 style="text-align: left; margin-bottom: 20px;">About <span>Ibad Tech</span></h2>
         <p style="margin-bottom: 16px;">Located at Kathgarh Road, Ismailabad, Kurukshetra — we are a team of creative developers, designers, and marketing gurus. Our mission is to deliver future-ready digital solutions that generate real business impact.</p>
-        <p>We combine innovation with empathy, ensuring every project resonates with your audience. Let's build something extraordinary.</p>
+        <p>We combine innovation with empathy, ensuring every project resonates with your audience.</p>
         <div style="display: flex; gap: 20px; margin-top: 28px; flex-wrap: wrap;">
           <div><i class="fas fa-award" style="color: var(--primary);"></i> Award-winning</div>
           <div><i class="fas fa-globe" style="color: var(--primary);"></i> Global standards</div>
@@ -783,7 +815,7 @@
 <script>
   AOS.init({ duration: 700, once: true, offset: 60 });
 
-  // Mobile Menu Toggle
+  // Mobile Menu Toggle - Instant Response
   const menuToggle = document.getElementById('menuToggle');
   const mobileNav = document.getElementById('mobileNav');
   const navOverlay = document.getElementById('navOverlay');
@@ -792,12 +824,14 @@
     mobileNav.classList.remove('active');
     navOverlay.classList.remove('active');
     menuToggle.classList.remove('active');
+    document.body.style.overflow = '';
   }
 
   function openMenu() {
     mobileNav.classList.add('active');
     navOverlay.classList.add('active');
     menuToggle.classList.add('active');
+    document.body.style.overflow = 'hidden';
   }
 
   menuToggle.addEventListener('click', (e) => {
@@ -816,7 +850,7 @@
     link.addEventListener('click', closeMenu);
   });
 
-  // Active Nav Highlight
+  // Active Nav Highlight on Scroll
   const sections = document.querySelectorAll("section[id]");
   const desktopLinks = document.querySelectorAll(".nav-menu a");
   const mobileLinksArray = document.querySelectorAll(".mobile-nav a");
