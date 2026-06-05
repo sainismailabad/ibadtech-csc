@@ -7,6 +7,13 @@
   <meta name="description" content="Get in touch with Ibad Tech for professional web development, digital marketing, graphic design, and IT consulting services.">
   <meta name="keywords" content="Contact Ibad Tech, Digital Marketing Agency, Web Development, Graphic Design, Kurukshetra">
   <meta name="author" content="Ibad Tech">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Contact Ibad Tech | Premium Digital Solutions">
+  <meta property="og:description" content="Get in touch with us for professional digital solutions.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="Logo.jpg">
   
   <!-- Favicon -->
   <link rel="icon" href="Logo.jpg" type="image/jpeg">
@@ -438,22 +445,62 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Footer */
+    /* Footer Premium */
     .footer {
       background: var(--dark);
       color: white;
-      text-align: center;
-      padding: 40px 0 30px;
+      padding: 60px 0 32px;
     }
-    .footer:before {
-      content: '';
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 48px;
+      margin-bottom: 40px;
+    }
+    .footer-col h4 {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      font-family: 'Space Grotesk', monospace;
+    }
+    .footer-col p, .footer-col a {
+      color: var(--gray-light);
+      text-decoration: none;
       display: block;
-      width: 100%;
-      height: 3px;
-      background: var(--gradient-primary);
-      margin-bottom: 30px;
+      margin-bottom: 10px;
+      font-size: 0.85rem;
+      transition: all 0.3s;
     }
-    .footer p { font-size: 0.8rem; color: var(--gray-light); }
+    .footer-col a:hover {
+      color: var(--primary-light);
+      transform: translateX(5px);
+    }
+    .social-icons {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .social-icons a {
+      width: 38px;
+      height: 38px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+    .social-icons a:hover {
+      background: var(--gradient-primary);
+      transform: translateY(-3px);
+    }
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      color: var(--gray-light);
+      font-size: 0.8rem;
+    }
 
     /* WhatsApp */
     .whatsapp-float {
@@ -477,6 +524,7 @@
     /* Responsive */
     @media (max-width: 1024px) {
       .container { padding: 0 24px; }
+      .footer-grid { gap: 32px; }
     }
     @media (max-width: 992px) {
       .contact-wrapper { grid-template-columns: 1fr; gap: 0; border-radius: 28px; }
@@ -495,6 +543,8 @@
       .info-item { gap: 12px; margin-bottom: 18px; }
       .info-icon { width: 40px; height: 40px; }
       .submit-btn { padding: 12px; }
+      .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 30px; }
+      .social-icons { justify-content: center; }
     }
     @media (max-width: 550px) {
       .logo-img { height: 40px; }
@@ -646,10 +696,48 @@
   </div>
 </section>
 
-<!-- Footer -->
+<!-- Footer Premium -->
 <footer class="footer">
   <div class="container">
-    <p>&copy; 2025 Ibad Tech — All Rights Reserved. Built for digital excellence.</p>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; justify-content: center;">
+          <img src="Logo.jpg" alt="Ibad Tech" style="height: 44px; border-radius: 10px;" onerror="this.style.display='none'">
+          <h3 style="font-size: 1.3rem;">Ibad Tech</h3>
+        </div>
+        <p>Premium digital solutions for modern businesses. We help you grow, innovate, and succeed online.</p>
+        <div class="social-icons">
+          <a href="https://www.facebook.com/share/19CEtXPCrr/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/ibad_tech" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="digital.html">Digital Marketing</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Our Services</h4>
+        <a href="digital.html">Digital Marketing</a>
+        <a href="#">Web Development</a>
+        <a href="#">App Development</a>
+        <a href="#">IT Consulting</a>
+        <a href="#">Graphic Design</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact Info</h4>
+        <p><i class="fas fa-phone-alt"></i> +91 70568 36166</p>
+        <p><i class="fas fa-envelope"></i> sainsanty2@gmail.com</p>
+        <p><i class="fas fa-map-marker-alt"></i> Kathgarh Road, Ismailabad, Kurukshetra, Haryana - 136129</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Ibad Tech — All Rights Reserved. Built for digital excellence.</p>
+    </div>
   </div>
 </footer>
 
