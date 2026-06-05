@@ -353,7 +353,8 @@
     .services-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 28px;
+      gap: 32px;
+      margin-bottom: 20px;
     }
     .service-card {
       background: rgba(255,255,255,0.9);
@@ -373,7 +374,7 @@
     }
     .service-icon i { font-size: 2.5rem; background: var(--gradient-primary); -webkit-background-clip: text; background-clip: text; color: transparent; }
 
-    /* Impact Section - Premium Cards */
+    /* Impact Section - Premium Cards - EXTRA ROUNDED CORNERS */
     .stats-section {
       background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
       padding: 85px 0;
@@ -381,12 +382,12 @@
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 28px;
+      gap: 32px;
     }
     .stat-card {
       background: rgba(255,255,255,0.05);
       backdrop-filter: blur(8px);
-      border-radius: 28px;
+      border-radius: 48px;  /* Increased from 32px to 48px for very rounded/attractive corners */
       padding: 32px 24px;
       text-align: center;
       transition: all 0.3s;
@@ -396,14 +397,46 @@
     .stat-number { font-size: 3rem; font-weight: 800; background: var(--gradient-primary); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 12px; }
     .stat-label { color: rgba(255,255,255,0.85); font-size: 0.95rem; font-weight: 500; }
 
-    /* Split Layout */
-    .split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-    .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px; }
+    /* Split Layout - Performance First Section Spacing Fixed */
+    .split-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+    
+    /* Extra spacing for Performance First section */
+    #solutions {
+      padding-top: 40px;
+    }
+    
+    /* Space between stats section and solutions section */
+    .stats-section + #solutions {
+      margin-top: 20px;
+    }
+
+    .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; }
     .testimonial-card { background: white; border-radius: 24px; padding: 28px; box-shadow: var(--shadow-md); transition: all 0.3s; }
     .testimonial-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-xl); }
-    .cta-banner { background: var(--gradient-primary); border-radius: 40px; padding: 56px 48px; text-align: center; margin: 40px auto; }
+    .cta-banner { background: var(--gradient-primary); border-radius: 40px; padding: 56px 48px; text-align: center; margin: 60px auto; }
     .footer { background: var(--dark); color: white; padding: 60px 0 32px; }
     .footer-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 48px; }
+
+    /* Section spacing */
+    section {
+      margin-bottom: 0;
+    }
+    
+    /* Extra spacing between sections */
+    #services, #solutions, .stats-section, .testimonial-section {
+      margin-bottom: 0;
+    }
+    
+    /* Ensure proper spacing between cards and containers */
+    .container + .container {
+      margin-top: 0;
+    }
 
     /* WhatsApp Pulse */
     .whatsapp-float {
@@ -429,6 +462,8 @@
       .container { padding: 0 24px; }
       .stats-grid { gap: 20px; }
       .stat-number { font-size: 2.5rem; }
+      .services-grid { gap: 24px; }
+      .testimonial-grid { gap: 24px; }
     }
     @media (max-width: 768px) {
       .header-phone { display: none; }
@@ -436,17 +471,23 @@
       .navbar { display: none; }
       .hero { padding: 150px 0 60px; }
       .split-grid { grid-template-columns: 1fr; gap: 40px; }
-      .stats-grid { grid-template-columns: repeat(2,1fr); gap: 16px; }
+      .stats-grid { grid-template-columns: repeat(2,1fr); gap: 20px; }
       .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 32px; }
-      .stat-card { padding: 24px 16px; }
+      .stat-card { padding: 24px 16px; border-radius: 36px; }
       .stat-number { font-size: 2rem; }
       .container { padding: 0 20px; }
+      .services-grid { gap: 20px; }
+      .testimonial-grid { gap: 20px; }
+      .cta-banner { margin: 40px 20px; padding: 40px 24px; }
+      #solutions { padding-top: 20px; }
     }
     @media (max-width: 550px) {
       .stats-grid { grid-template-columns: 1fr; }
       h1 { font-size: 1.8rem; }
       .logo-img { height: 40px; }
       .logo-text p { display: none; }
+      .services-grid { gap: 16px; }
+      .stat-card { border-radius: 32px; }
     }
 
     /* Animations */
@@ -506,7 +547,7 @@
   </div>
 </section>
 
-<!-- Services Section - Click on any card goes to services.html -->
+<!-- Services Section -->
 <section id="services"><div class="container"><h2 data-aos="fade-up">Our <span>Premium</span> Services</h2>
 <div class="services-grid">
   <div class="service-card" data-aos="fade-up" onclick="window.location.href='services.html'"><div class="service-icon"><i class="fas fa-chart-line"></i></div><h3 style="margin: 18px 0 12px;">Digital Marketing</h3><p>SEO, Social Media, PPC & Content Marketing — Data-driven strategies for explosive growth.</p></div>
@@ -517,7 +558,7 @@
   <div class="service-card" data-aos="fade-up" data-aos-delay="250" onclick="window.location.href='services.html'"><div class="service-icon"><i class="fas fa-headset"></i></div><h3 style="margin: 18px 0 12px;">IT Consulting</h3><p>Cloud migration, AI strategy, digital transformation — future-proof infrastructure.</p></div>
 </div></div></section>
 
-<!-- Impact Section - Premium Stats with Counters -->
+<!-- Impact Section - EXTRA ROUNDED CORNERS (48px border-radius) -->
 <section class="stats-section"><div class="container"><h2 data-aos="fade-up" style="color: white;">Our <span>Impact</span></h2>
 <div class="stats-grid">
   <div class="stat-card" data-aos="fade-up" data-aos-delay="0"><div class="stat-number"><span class="counter" data-target="520">0</span>+</div><div class="stat-label"><i class="fas fa-project-diagram"></i> Projects Completed</div></div>
