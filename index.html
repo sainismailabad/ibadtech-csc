@@ -53,12 +53,14 @@
       background: var(--light);
       color: var(--dark);
       overflow-x: hidden;
+      width: 100%;
     }
 
     .container {
       max-width: 1280px;
       margin: 0 auto;
       padding: 0 32px;
+      width: 100%;
     }
 
     h1, h2, h3, .logo-text {
@@ -109,6 +111,7 @@
       font-size: 0.9rem;
       text-decoration: none;
       transition: all 0.3s ease;
+      cursor: pointer;
     }
 
     .btn-primary {
@@ -133,7 +136,7 @@
       color: white;
     }
 
-    /* Header with Logo & Hamburger */
+    /* Header */
     .header {
       background: rgba(255,255,255,0.98);
       backdrop-filter: blur(12px);
@@ -156,6 +159,7 @@
       align-items: center;
       gap: 12px;
       text-decoration: none;
+      flex-shrink: 0;
     }
 
     .logo-img {
@@ -178,7 +182,7 @@
       color: var(--gray);
     }
 
-    /* Mobile Number - Desktop visible */
+    /* Desktop Phone */
     .header-phone {
       background: rgba(99,102,241,0.12);
       padding: 10px 20px;
@@ -189,9 +193,10 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      flex-shrink: 0;
     }
 
-    /* Hamburger Menu Button (Mobile Only) */
+    /* Hamburger Menu Button */
     .menu-toggle {
       display: none;
       background: var(--gradient-primary);
@@ -205,6 +210,7 @@
       align-items: center;
       gap: 6px;
       transition: all 0.3s;
+      flex-shrink: 0;
     }
 
     .menu-toggle span {
@@ -225,7 +231,7 @@
       transform: rotate(-45deg) translate(6px, -6px);
     }
 
-    /* Navigation - Desktop */
+    /* Desktop Navbar */
     .navbar {
       position: sticky;
       top: 72px;
@@ -233,7 +239,6 @@
       backdrop-filter: blur(16px);
       z-index: 1001;
       border-bottom: 1px solid rgba(0,0,0,0.06);
-      transition: all 0.3s;
     }
 
     .nav-container {
@@ -248,7 +253,6 @@
       gap: 8px;
       list-style: none;
       padding: 12px 0;
-      transition: all 0.3s;
     }
 
     .nav-menu a {
@@ -266,7 +270,7 @@
       color: white;
     }
 
-    /* Mobile Navigation (Hidden by default) */
+    /* Mobile Navigation Drawer */
     .mobile-nav {
       position: fixed;
       top: 72px;
@@ -281,6 +285,7 @@
       box-shadow: var(--shadow-xl);
       border-right: 1px solid rgba(0,0,0,0.05);
       padding: 24px 20px;
+      overflow-y: auto;
     }
 
     .mobile-nav.active {
@@ -341,6 +346,7 @@
     .hero {
       background: linear-gradient(115deg, #ffffff 0%, #f1f4ff 100%);
       padding: 170px 0 90px;
+      width: 100%;
     }
 
     .hero-badge {
@@ -387,6 +393,7 @@
     /* Stats */
     .stats-section {
       background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      width: 100%;
     }
     .stats-grid {
       display: grid;
@@ -434,6 +441,7 @@
       background: var(--dark);
       color: white;
       padding: 60px 0 32px;
+      width: 100%;
     }
     .footer-grid {
       display: grid;
@@ -457,28 +465,30 @@
       text-decoration: none;
     }
 
-    /* Responsive */
+    /* ========== FIXED RESPONSIVE - NO RIGHT SPACE ========== */
     @media (max-width: 1024px) {
-      .container, .nav-container { padding: 0 24px; }
+      .container, .nav-container {
+        padding: 0 24px;
+      }
       h1 { font-size: 2.8rem; }
       h2 { font-size: 2.2rem; }
     }
 
     @media (max-width: 768px) {
       .header-phone {
-        display: none; /* Hide phone number on mobile, show hamburger */
+        display: none;
       }
       .menu-toggle {
         display: flex;
       }
       .navbar {
-        display: none; /* Hide desktop navbar on mobile */
+        display: none;
       }
       .hero {
-        padding: 150px 0 70px;
+        padding: 140px 0 60px;
       }
       h1 {
-        font-size: 2rem;
+        font-size: 1.9rem;
       }
       .split-grid {
         grid-template-columns: 1fr;
@@ -486,10 +496,12 @@
       }
       .stats-grid {
         grid-template-columns: repeat(2,1fr);
+        gap: 24px;
       }
       .footer-grid {
         grid-template-columns: 1fr;
         text-align: center;
+        gap: 32px;
       }
       .logo-img {
         height: 40px;
@@ -505,6 +517,26 @@
       }
       .cta-banner {
         padding: 35px 20px;
+        border-radius: 28px;
+        margin: 30px 0;
+      }
+      .services-grid {
+        gap: 20px;
+      }
+      .service-card {
+        padding: 28px 20px;
+      }
+      /* Fix any overflow */
+      body, html {
+        overflow-x: hidden;
+        width: 100%;
+      }
+      .hero-content, .hero, section, .container {
+        overflow-x: hidden;
+      }
+      .btn-primary, .btn-outline {
+        padding: 10px 20px;
+        font-size: 0.85rem;
       }
     }
 
@@ -512,12 +544,30 @@
       .stats-grid {
         grid-template-columns: 1fr;
       }
+      h1 {
+        font-size: 1.7rem;
+      }
+      .hero-badge {
+        font-size: 0.7rem;
+      }
+      .container {
+        padding: 0 16px;
+      }
+      .logo-wrapper {
+        gap: 8px;
+      }
+      .logo-img {
+        height: 36px;
+      }
+      .logo-text h1 {
+        font-size: 1.1rem;
+      }
     }
   </style>
 </head>
 <body>
 
-<!-- Header with Logo & Hamburger Menu Button -->
+<!-- Header -->
 <header class="header">
   <div class="container">
     <a href="index.html" class="logo-wrapper">
@@ -527,13 +577,11 @@
         <p>Premium Digital Solutions</p>
       </div>
     </a>
-    <!-- Hamburger Menu Button (Mobile) -->
     <button class="menu-toggle" id="menuToggle" aria-label="Menu">
       <span></span>
       <span></span>
       <span></span>
     </button>
-    <!-- Desktop Phone Number -->
     <div class="header-phone">
       <i class="fas fa-phone-alt"></i>
       <span>+91 70568 36166</span>
@@ -541,7 +589,7 @@
   </div>
 </header>
 
-<!-- Desktop Navigation (visible on tablet/desktop) -->
+<!-- Desktop Navigation -->
 <nav class="navbar">
   <div class="nav-container">
     <ul class="nav-menu">
@@ -554,7 +602,7 @@
   </div>
 </nav>
 
-<!-- Mobile Navigation Panel -->
+<!-- Mobile Navigation Drawer -->
 <div class="mobile-nav" id="mobileNav">
   <ul>
     <li><a href="#home">Home</a></li>
@@ -637,7 +685,7 @@
   </div>
 </section>
 
-<!-- Digital Marketing Section -->
+<!-- Digital Marketing Excellence -->
 <section id="solutions">
   <div class="container">
     <div class="split-grid">
@@ -787,15 +835,12 @@
 
   navOverlay.addEventListener('click', closeMenu);
 
-  // Close menu when clicking on a mobile nav link
   const mobileLinks = mobileNav.querySelectorAll('a');
   mobileLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-      closeMenu();
-    });
+    link.addEventListener('click', closeMenu);
   });
 
-  // Active Nav Highlight on scroll
+  // Active Nav Highlight
   const sections = document.querySelectorAll("section[id]");
   const desktopLinks = document.querySelectorAll(".nav-menu a");
   const mobileLinksArray = document.querySelectorAll(".mobile-nav a");
@@ -806,13 +851,11 @@
       const sectionTop = section.offsetTop - 140;
       if (pageYOffset >= sectionTop) current = section.getAttribute("id");
     });
-    
     desktopLinks.forEach(link => {
       link.classList.remove("active");
       if (link.getAttribute("href") === `#${current}`) link.classList.add("active");
       if (current === "" && link.getAttribute("href") === "#home") link.classList.add("active");
     });
-    
     mobileLinksArray.forEach(link => {
       link.classList.remove("active");
       if (link.getAttribute("href") === `#${current}`) link.classList.add("active");
