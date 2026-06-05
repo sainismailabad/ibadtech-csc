@@ -8,7 +8,6 @@
   <meta name="keywords" content="Ibad Tech, Digital Marketing, Web Development, App Development, Graphic Design, Kurukshetra">
   <meta name="author" content="Ibad Tech">
   
-  <!-- Favicon -->
   <link rel="icon" href="Logo.jpg" type="image/jpeg">
   
   <!-- Fonts -->
@@ -182,7 +181,6 @@
       color: var(--gray);
     }
 
-    /* Desktop Phone */
     .header-phone {
       background: rgba(99,102,241,0.12);
       padding: 10px 20px;
@@ -196,7 +194,7 @@
       flex-shrink: 0;
     }
 
-    /* Hamburger Menu Button */
+    /* Hamburger Menu */
     .menu-toggle {
       display: none;
       background: var(--gradient-primary);
@@ -270,7 +268,7 @@
       color: white;
     }
 
-    /* Mobile Navigation Drawer */
+    /* Mobile Navigation */
     .mobile-nav {
       position: fixed;
       top: 72px;
@@ -326,7 +324,6 @@
       color: var(--primary-dark);
     }
 
-    /* Overlay */
     .nav-overlay {
       position: fixed;
       top: 72px;
@@ -390,26 +387,44 @@
       color: transparent;
     }
 
-    /* Stats */
+    /* Stats Section - IMPROVED & CLEAN */
     .stats-section {
       background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
       width: 100%;
+      padding: 80px 0;
     }
+
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(4,1fr);
-      gap: 32px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
       text-align: center;
     }
+
+    .stat-card {
+      text-align: center;
+      padding: 20px;
+    }
+
     .stat-number {
-      font-size: 2.5rem;
+      font-size: 3rem;
       font-weight: 800;
       background: var(--gradient-primary);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
+      margin-bottom: 12px;
+      line-height: 1.2;
     }
 
+    .stat-label {
+      color: rgba(255,255,255,0.8);
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+
+    /* Split Layout */
     .split-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -417,6 +432,7 @@
       align-items: center;
     }
 
+    /* Testimonials */
     .testimonial-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -465,103 +481,39 @@
       text-decoration: none;
     }
 
-    /* ========== FIXED RESPONSIVE - NO RIGHT SPACE ========== */
+    /* Responsive */
     @media (max-width: 1024px) {
-      .container, .nav-container {
-        padding: 0 24px;
-      }
+      .container, .nav-container { padding: 0 24px; }
       h1 { font-size: 2.8rem; }
       h2 { font-size: 2.2rem; }
+      .stats-grid { gap: 30px; }
+      .stat-number { font-size: 2.5rem; }
     }
 
     @media (max-width: 768px) {
-      .header-phone {
-        display: none;
-      }
-      .menu-toggle {
-        display: flex;
-      }
-      .navbar {
-        display: none;
-      }
-      .hero {
-        padding: 140px 0 60px;
-      }
-      h1 {
-        font-size: 1.9rem;
-      }
-      .split-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-      .stats-grid {
-        grid-template-columns: repeat(2,1fr);
-        gap: 24px;
-      }
-      .footer-grid {
-        grid-template-columns: 1fr;
-        text-align: center;
-        gap: 32px;
-      }
-      .logo-img {
-        height: 40px;
-      }
-      .logo-text p {
-        display: none;
-      }
-      .container {
-        padding: 0 20px;
-      }
-      h2 {
-        font-size: 1.8rem;
-      }
-      .cta-banner {
-        padding: 35px 20px;
-        border-radius: 28px;
-        margin: 30px 0;
-      }
-      .services-grid {
-        gap: 20px;
-      }
-      .service-card {
-        padding: 28px 20px;
-      }
-      /* Fix any overflow */
-      body, html {
-        overflow-x: hidden;
-        width: 100%;
-      }
-      .hero-content, .hero, section, .container {
-        overflow-x: hidden;
-      }
-      .btn-primary, .btn-outline {
-        padding: 10px 20px;
-        font-size: 0.85rem;
-      }
+      .header-phone { display: none; }
+      .menu-toggle { display: flex; }
+      .navbar { display: none; }
+      .hero { padding: 140px 0 60px; }
+      h1 { font-size: 1.9rem; }
+      .split-grid { grid-template-columns: 1fr; gap: 40px; }
+      .stats-grid { grid-template-columns: repeat(2,1fr); gap: 20px; }
+      .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 32px; }
+      .logo-img { height: 40px; }
+      .logo-text p { display: none; }
+      .container { padding: 0 20px; }
+      h2 { font-size: 1.8rem; }
+      .cta-banner { padding: 35px 20px; border-radius: 28px; margin: 30px 0; }
+      .stat-number { font-size: 2rem; }
+      .stat-label { font-size: 0.85rem; }
     }
 
     @media (max-width: 550px) {
-      .stats-grid {
-        grid-template-columns: 1fr;
-      }
-      h1 {
-        font-size: 1.7rem;
-      }
-      .hero-badge {
-        font-size: 0.7rem;
-      }
-      .container {
-        padding: 0 16px;
-      }
-      .logo-wrapper {
-        gap: 8px;
-      }
-      .logo-img {
-        height: 36px;
-      }
-      .logo-text h1 {
-        font-size: 1.1rem;
-      }
+      .stats-grid { grid-template-columns: 1fr; gap: 24px; }
+      h1 { font-size: 1.7rem; }
+      .container { padding: 0 16px; }
+      .logo-img { height: 36px; }
+      .logo-text h1 { font-size: 1.1rem; }
     }
   </style>
 </head>
@@ -602,7 +554,7 @@
   </div>
 </nav>
 
-<!-- Mobile Navigation Drawer -->
+<!-- Mobile Navigation -->
 <div class="mobile-nav" id="mobileNav">
   <ul>
     <li><a href="#home">Home</a></li>
@@ -672,15 +624,27 @@
   </div>
 </section>
 
-<!-- Stats Section -->
+<!-- Stats Section - IMPROVED & PROFESSIONAL -->
 <section class="stats-section">
   <div class="container">
     <h2 data-aos="fade-up" style="color: white;">Our <span>Impact</span></h2>
     <div class="stats-grid">
-      <div class="stat-card" data-aos="fade-up"><div class="stat-number">720+</div><div class="stat-label">Projects Delivered</div></div>
-      <div class="stat-card" data-aos="fade-up" data-aos-delay="50"><div class="stat-number">310+</div><div class="stat-label">Happy Clients</div></div>
-      <div class="stat-card" data-aos="fade-up" data-aos-delay="100"><div class="stat-number">99%</div><div class="stat-label">Client Retention</div></div>
-      <div class="stat-card" data-aos="fade-up" data-aos-delay="150"><div class="stat-number">24/7</div><div class="stat-label">Priority Support</div></div>
+      <div class="stat-card" data-aos="fade-up" data-aos-delay="0">
+        <div class="stat-number">720+</div>
+        <div class="stat-label">Projects Delivered</div>
+      </div>
+      <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="stat-number">310+</div>
+        <div class="stat-label">Happy Clients</div>
+      </div>
+      <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="stat-number">99%</div>
+        <div class="stat-label">Client Retention</div>
+      </div>
+      <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
+        <div class="stat-number">24/7</div>
+        <div class="stat-label">Priority Support</div>
+      </div>
     </div>
   </div>
 </section>
@@ -696,7 +660,7 @@
         <ul style="list-style: none; margin: 24px 0;">
           <li style="margin-bottom: 12px;"><i class="fas fa-check-circle" style="color: var(--primary);"></i> Organic SEO & Local SEO</li>
           <li style="margin-bottom: 12px;"><i class="fas fa-check-circle" style="color: var(--primary);"></i> Google Ads & PPC Management</li>
-          <li style="margin-bottom: 12px;"><i class="fas fa-check-circle" style="color: var(--primary);"></i> Social Media Growth</li>
+          <li style="margin-bottom: 12px;"><i class="fas fa-check-circle" style="color: var(--primary);"></i> Social Media Growth (Instagram, FB, LinkedIn)</li>
         </ul>
         <a href="#contact" class="btn-primary">Boost Your Brand <i class="fas fa-rocket"></i></a>
       </div>
@@ -717,7 +681,7 @@
         <div class="hero-badge" style="margin-bottom: 16px;">🏆 Since 2019</div>
         <h2 style="text-align: left; margin-bottom: 20px;">About <span>Ibad Tech</span></h2>
         <p style="margin-bottom: 16px;">Located at Kathgarh Road, Ismailabad, Kurukshetra — we are a team of creative developers, designers, and marketing gurus. Our mission is to deliver future-ready digital solutions that generate real business impact.</p>
-        <p>We combine innovation with empathy, ensuring every project resonates with your audience.</p>
+        <p>We combine innovation with empathy, ensuring every project resonates with your audience. Let's build something extraordinary.</p>
         <div style="display: flex; gap: 20px; margin-top: 28px; flex-wrap: wrap;">
           <div><i class="fas fa-award" style="color: var(--primary);"></i> Award-winning</div>
           <div><i class="fas fa-globe" style="color: var(--primary);"></i> Global standards</div>
@@ -738,9 +702,21 @@
   <div class="container">
     <h2 data-aos="fade-up">Client <span>Love</span></h2>
     <div class="testimonial-grid">
-      <div class="testimonial-card" data-aos="fade-up"><i class="fas fa-quote-left" style="color: var(--primary-light); font-size: 2rem;"></i><p style="margin: 16px 0;">“Ibad Tech transformed our online presence. SEO results skyrocketed within months. Professional and creative!”</p><h4>— Rohan Sharma</h4></div>
-      <div class="testimonial-card" data-aos="fade-up" data-aos-delay="50"><i class="fas fa-quote-left" style="color: var(--primary-light); font-size: 2rem;"></i><p style="margin: 16px 0;">“Their app development team built a flawless fintech app. Highly recommend for quality & support.”</p><h4>— Neha Verma</h4></div>
-      <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100"><i class="fas fa-quote-left" style="color: var(--primary-light); font-size: 2rem;"></i><p style="margin: 16px 0;">“Best graphic design and branding experience. Our logo and website look premium!”</p><h4>— Ankit Bansal</h4></div>
+      <div class="testimonial-card" data-aos="fade-up">
+        <i class="fas fa-quote-left" style="color: var(--primary-light); font-size: 2rem;"></i>
+        <p style="margin: 16px 0;">“Ibad Tech transformed our online presence. SEO results skyrocketed within months. Professional and creative!”</p>
+        <h4>— Rohan Sharma</h4>
+      </div>
+      <div class="testimonial-card" data-aos="fade-up" data-aos-delay="50">
+        <i class="fas fa-quote-left" style="color: var(--primary-light); font-size: 2rem;"></i>
+        <p style="margin: 16px 0;">“Their app development team built a flawless fintech app. Highly recommend for quality & support.”</p>
+        <h4>— Neha Verma</h4>
+      </div>
+      <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+        <i class="fas fa-quote-left" style="color: var(--primary-light); font-size: 2rem;"></i>
+        <p style="margin: 16px 0;">“Best graphic design and branding experience. Our logo and website look premium!”</p>
+        <h4>— Ankit Bansal</h4>
+      </div>
     </div>
   </div>
 </section>
