@@ -4,4 +4,4 @@ Allow: /
 User-agent: Mediapartners-Google
 Allow: /
 
-Sitemap: https://apkavail.com/sitemap.xml
+Sitemap: https://ibadtech.com/sitemap.xml
