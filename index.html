@@ -3,21 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=1.0"/>
-  <title>Ibad Tech | Premium Digital Solutions - Home</title>
-  <meta name="description" content="Ibad Tech offers premium Digital Marketing, Graphic Design, Web & App Development, and IT Services." />
-  <meta name="keywords" content="Ibad Tech, Digital Marketing, Graphic Design, Web Development, App Development" />
+  <title>Ibad Tech | Elite Digital Solutions</title>
+  <meta name="description" content="Ibad Tech delivers elite Digital Marketing, Graphic Design, Web & App Development, and Financial IT Solutions." />
+  <meta name="keywords" content="Ibad Tech, Digital Marketing, Graphic Design, Web Development, App Development, Kurukshetra" />
   <meta name="author" content="Ibad Tech" />
   <link rel="icon" href="Logo.jpg" type="image/jpeg" />
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts + Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <!-- AOS Animation -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
   <style>
@@ -34,9 +30,11 @@
       --secondary: #06b6d4;
       --dark: #0f172a;
       --light: #f8fafc;
-      --gray: #64748b;
+      --gray: #475569;
+      --gray-light: #94a3b8;
       --white: #ffffff;
       --gradient-1: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
+      --gradient-dark: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
       --shadow-sm: 0 4px 6px -2px rgba(0, 0, 0, 0.05);
       --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
       --shadow-lg: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
@@ -62,7 +60,7 @@
     }
 
     section {
-      padding: 80px 0;
+      padding: 90px 0;
     }
 
     h1, h2, h3, h4 {
@@ -92,165 +90,198 @@
       bottom: -12px;
       left: 50%;
       transform: translateX(-50%);
-      width: 70px;
-      height: 3px;
+      width: 80px;
+      height: 4px;
       background: var(--gradient-1);
-      border-radius: 3px;
+      border-radius: 4px;
     }
 
     /* Buttons */
     .btn-primary {
       display: inline-block;
-      padding: 12px 28px;
+      padding: 14px 32px;
       background: var(--gradient-1);
       color: white;
-      border-radius: 12px;
+      border-radius: 40px;
       font-weight: 600;
       border: none;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
       font-size: 0.95rem;
       text-decoration: none;
       box-shadow: var(--shadow-md);
+      text-align: center;
     }
 
     .btn-primary:hover {
       transform: translateY(-3px);
       box-shadow: var(--shadow-xl);
+      background: linear-gradient(135deg, #4f46e5 0%, #0891b2 100%);
     }
 
     .btn-outline {
       background: transparent;
       border: 2px solid var(--primary);
       color: var(--primary);
+      box-shadow: none;
     }
 
     .btn-outline:hover {
       background: var(--gradient-1);
       color: white;
       border-color: transparent;
+      transform: translateY(-3px);
     }
 
-    /* Header */
+    /* ===== MODERN HEADER + STICKY NAV ===== */
     .header {
-      background: rgba(255, 255, 255, 0.98);
-      backdrop-filter: blur(20px);
-      padding: 12px 0;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(12px);
+      padding: 10px 0;
       position: fixed;
       width: 100%;
       top: 0;
-      z-index: 1000;
+      z-index: 1001;
       box-shadow: var(--shadow-sm);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
     }
 
     .header .container {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-wrap: nowrap;
-      gap: 15px;
+      gap: 20px;
     }
 
     .logo-wrapper {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       text-decoration: none;
       flex-shrink: 0;
     }
 
     .logo {
-      height: 45px;
+      height: 48px;
       width: auto;
-      border-radius: 10px;
+      border-radius: 14px;
+      box-shadow: var(--shadow-sm);
+      object-fit: cover;
     }
 
     .logo-text h1 {
-      font-size: 1.2rem;
+      font-size: 1.35rem;
       background: var(--gradient-1);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
       margin-bottom: 0;
+      line-height: 1.2;
     }
 
     .logo-text p {
-      font-size: 0.6rem;
+      font-size: 0.65rem;
       color: var(--gray);
-      display: none;
+      letter-spacing: 0.3px;
     }
 
     .header-phone {
-      color: var(--gray);
-      font-size: 0.8rem;
+      background: rgba(99, 102, 241, 0.1);
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-weight: 600;
+      color: var(--primary-dark);
+      font-size: 0.85rem;
       white-space: nowrap;
-      flex-shrink: 0;
     }
 
     .header-phone i {
+      margin-right: 8px;
       color: var(--primary);
-      margin-right: 6px;
     }
 
-    /* Navigation */
+    /* Sticky Navigation - modern glassmorphism */
     .navbar {
-      background: var(--white);
-      box-shadow: var(--shadow-sm);
-      position: fixed;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 8px 20px -6px rgba(0, 0, 0, 0.05);
+      position: sticky;
       top: 69px;
       width: 100%;
-      z-index: 999;
+      z-index: 1000;
       border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-      overflow-x: auto;
-      white-space: nowrap;
+      transition: all 0.3s ease;
     }
 
     .navbar ul {
       display: flex;
       justify-content: center;
+      align-items: center;
       list-style: none;
-      gap: 4px;
-      padding: 10px 15px;
+      gap: 8px;
+      padding: 12px 20px;
+      flex-wrap: wrap;
     }
 
     .navbar a {
-      display: block;
-      padding: 8px 18px;
+      display: inline-block;
+      padding: 10px 22px;
       color: var(--dark);
-      font-weight: 500;
-      transition: all 0.3s ease;
-      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.25s ease;
+      font-size: 0.9rem;
       border-radius: 50px;
       text-decoration: none;
-      white-space: nowrap;
+      letter-spacing: -0.2px;
     }
 
     .navbar a:hover, .navbar a.active {
       background: var(--gradient-1);
       color: white;
+      box-shadow: var(--shadow-sm);
+      transform: translateY(-2px);
     }
 
-    /* Hero */
+    /* Hero Section */
     .hero {
-      padding: 160px 0 80px;
-      background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
+      padding: 170px 0 90px;
+      background: linear-gradient(125deg, #ffffff 0%, #eef2ff 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero:before {
+      content: '';
+      position: absolute;
+      top: -30%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(99,102,241,0.08) 0%, rgba(6,182,212,0.02) 70%);
+      border-radius: 50%;
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
       text-align: center;
     }
 
     .hero-badge {
       display: inline-block;
-      padding: 5px 14px;
-      background: rgba(99, 102, 241, 0.1);
-      border-radius: 50px;
+      padding: 6px 18px;
+      background: rgba(99, 102, 241, 0.12);
+      border-radius: 60px;
       font-size: 0.8rem;
-      color: var(--primary);
-      font-weight: 500;
+      color: var(--primary-dark);
+      font-weight: 600;
       margin-bottom: 20px;
+      backdrop-filter: blur(4px);
     }
 
     .hero h1 {
-      font-size: 3rem;
+      font-size: 3.7rem;
       margin-bottom: 20px;
     }
 
@@ -262,33 +293,27 @@
     }
 
     .hero p {
-      font-size: 1rem;
+      font-size: 1.1rem;
       color: var(--gray);
-      max-width: 650px;
-      margin: 0 auto 30px;
+      max-width: 680px;
+      margin: 0 auto 32px;
+      line-height: 1.5;
     }
 
-    .hero-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
-
-    /* Services Grid */
+    /* Service Cards Premium */
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 25px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
     }
 
     .service-card {
       background: var(--white);
-      border-radius: 20px;
-      padding: 35px 25px;
+      border-radius: 28px;
+      padding: 38px 28px;
       transition: all 0.4s ease;
       box-shadow: var(--shadow-md);
-      border: 1px solid rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(99, 102, 241, 0.1);
       text-align: center;
       cursor: pointer;
       text-decoration: none;
@@ -296,24 +321,24 @@
     }
 
     .service-card:hover {
-      transform: translateY(-8px);
+      transform: translateY(-10px);
       box-shadow: var(--shadow-xl);
       border-color: var(--primary-light);
     }
 
     .service-icon {
-      width: 70px;
-      height: 70px;
-      background: linear-gradient(135deg, rgba(99,102,241,0.1) 0%, rgba(6,182,212,0.1) 100%);
-      border-radius: 18px;
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(145deg, rgba(99,102,241,0.1) 0%, rgba(6,182,212,0.08) 100%);
+      border-radius: 24px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 20px;
+      margin: 0 auto 24px;
     }
 
     .service-icon i {
-      font-size: 2rem;
+      font-size: 2.3rem;
       background: var(--gradient-1);
       -webkit-background-clip: text;
       background-clip: text;
@@ -321,240 +346,150 @@
     }
 
     .service-card h3 {
-      font-size: 1.3rem;
-      margin-bottom: 12px;
-      color: var(--dark);
-    }
-
-    .service-card p {
-      color: var(--gray);
-      font-size: 0.85rem;
-      line-height: 1.6;
+      font-size: 1.45rem;
+      margin-bottom: 14px;
     }
 
     /* Stats */
     .stats-section {
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      background: var(--gradient-dark);
       color: white;
-    }
-
-    .stats-section h2 {
-      color: white;
-    }
-
-    .stats-section h2:after {
-      background: var(--gradient-1);
     }
 
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 25px;
+      gap: 30px;
       text-align: center;
     }
 
     .stat-number {
-      font-size: 2.5rem;
+      font-size: 2.7rem;
       font-weight: 800;
       background: var(--gradient-1);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
-    .stat-label {
-      font-size: 0.85rem;
-      color: var(--gray-light);
-    }
-
-    /* About */
+    /* About Section modern */
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 50px;
+      gap: 60px;
       align-items: center;
     }
 
     .about-image {
-      border-radius: 20px;
+      border-radius: 32px;
       overflow: hidden;
       box-shadow: var(--shadow-xl);
+      transition: transform 0.4s;
     }
 
     .about-image img {
       width: 100%;
       height: auto;
       display: block;
+      transition: transform 0.5s;
     }
 
-    .about-text h3 {
-      font-size: 1.8rem;
-      margin-bottom: 15px;
-    }
-
-    .about-text p {
-      color: var(--gray);
-      margin-bottom: 15px;
-      line-height: 1.6;
-      font-size: 0.9rem;
+    .about-image:hover img {
+      transform: scale(1.02);
     }
 
     .feature-list {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-      margin: 25px 0;
+      gap: 18px;
+      margin: 30px 0;
     }
 
     .feature-item {
+      background: rgba(99, 102, 241, 0.04);
+      padding: 10px 12px;
+      border-radius: 18px;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
 
-    .feature-item i {
-      width: 28px;
-      height: 28px;
-      background: rgba(99, 102, 241, 0.1);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--primary);
-      font-size: 0.8rem;
-    }
-
-    .feature-item span {
-      font-size: 0.85rem;
-    }
-
-    /* CTA */
+    /* CTA Premium */
     .cta-section {
       background: var(--gradient-1);
-      border-radius: 30px;
-      margin: 40px auto;
-      padding: 50px 40px;
+      border-radius: 40px;
+      margin: 40px auto 60px;
+      padding: 60px 40px;
       text-align: center;
-      color: white;
-    }
-
-    .cta-section h2 {
-      color: white;
-      font-size: 2rem;
-      margin-bottom: 15px;
-    }
-
-    .cta-section h2:after {
-      background: white;
-    }
-
-    .cta-section p {
-      font-size: 1rem;
-      margin-bottom: 25px;
-      opacity: 0.95;
     }
 
     .cta-section .btn-primary {
       background: white;
-      color: var(--primary);
+      color: var(--primary-dark);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     }
 
-    /* Footer */
+    .cta-section .btn-primary:hover {
+      background: var(--dark);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    /* Footer Premium */
     .footer {
       background: var(--dark);
       color: white;
-      padding: 50px 0 30px;
+      padding: 60px 0 30px;
     }
 
     .footer-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 35px;
-      margin-bottom: 40px;
-    }
-
-    .footer-col h4 {
-      font-size: 1rem;
-      margin-bottom: 15px;
-    }
-
-    .footer-col p, .footer-col a {
-      color: var(--gray-light);
-      font-size: 0.85rem;
-      text-decoration: none;
-      display: block;
-      margin-bottom: 8px;
-      transition: all 0.3s;
-    }
-
-    .footer-col a:hover {
-      color: var(--primary-light);
-      transform: translateX(5px);
-    }
-
-    .social-icons {
-      display: flex;
-      gap: 12px;
-      margin-top: 15px;
-      flex-wrap: wrap;
+      gap: 40px;
+      margin-bottom: 45px;
     }
 
     .social-icons a {
-      width: 36px;
-      height: 36px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.08);
+      transition: all 0.2s;
     }
 
     .social-icons a:hover {
       background: var(--gradient-1);
-      transform: translateY(-3px);
+      transform: translateY(-4px);
     }
 
-    .footer-bottom {
-      text-align: center;
-      padding-top: 25px;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      color: var(--gray-light);
-      font-size: 0.75rem;
-    }
-
-    /* WhatsApp */
+    /* WhatsApp Float */
     .whatsapp-float {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 55px;
-      height: 55px;
-      background: #25d366;
-      border-radius: 50%;
+      bottom: 28px;
+      right: 28px;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(145deg, #25d366, #20b859);
+      border-radius: 30px;
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 99;
-      transition: all 0.3s ease;
-      box-shadow: var(--shadow-lg);
+      box-shadow: 0 15px 30px rgba(37, 211, 102, 0.3);
       text-decoration: none;
     }
 
-    .whatsapp-float i {
-      font-size: 28px;
-      color: white;
-    }
-
-    .whatsapp-float:hover {
-      transform: scale(1.1);
-    }
-
-    /* Responsive */
-    @media (max-width: 1024px) {
+    /* RESPONSIVE MASTER */
+    @media (max-width: 1100px) {
       .container {
         padding: 0 30px;
+      }
+      h2 {
+        font-size: 2.5rem;
+      }
+    }
+
+    @media (max-width: 900px) {
+      section {
+        padding: 70px 0;
       }
       .stats-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -562,8 +497,15 @@
       .footer-grid {
         grid-template-columns: repeat(2, 1fr);
       }
-      h2 {
-        font-size: 2.3rem;
+      .navbar ul {
+        gap: 4px;
+      }
+      .navbar a {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+      }
+      .hero h1 {
+        font-size: 2.8rem;
       }
     }
 
@@ -571,139 +513,131 @@
       .container {
         padding: 0 20px;
       }
-      section {
-        padding: 60px 0;
+      .header .container {
+        gap: 12px;
       }
-      h2 {
-        font-size: 1.8rem;
+      .logo {
+        height: 42px;
+      }
+      .logo-text h1 {
+        font-size: 1.1rem;
+      }
+      .header-phone {
+        font-size: 0.7rem;
+        padding: 5px 12px;
+      }
+      .navbar {
+        top: 60px;
+      }
+      .navbar ul {
+        justify-content: flex-start;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding: 10px 16px;
+        scrollbar-width: thin;
+      }
+      .navbar a {
+        white-space: nowrap;
       }
       .hero {
-        padding: 140px 0 60px;
+        padding: 150px 0 65px;
       }
       .hero h1 {
-        font-size: 2rem;
+        font-size: 2.2rem;
       }
       .hero p {
-        font-size: 0.9rem;
-      }
-      .hero-buttons {
-        flex-direction: column;
-        align-items: center;
-      }
-      .hero-buttons .btn-primary {
-        width: 200px;
-        text-align: center;
-      }
-      .services-grid {
-        grid-template-columns: 1fr;
+        font-size: 1rem;
       }
       .about-grid {
         grid-template-columns: 1fr;
-        gap: 30px;
-      }
-      .about-text h3 {
-        font-size: 1.5rem;
+        gap: 35px;
       }
       .feature-list {
         grid-template-columns: 1fr;
       }
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+      .cta-section {
+        padding: 40px 24px;
+        margin: 20px 10px 40px;
+      }
+      h2 {
+        font-size: 2rem;
       }
       .stat-number {
         font-size: 2rem;
       }
-      .cta-section {
-        padding: 35px 25px;
-        margin: 20px;
-      }
-      .cta-section h2 {
-        font-size: 1.5rem;
-      }
-      .cta-section p {
-        font-size: 0.9rem;
-      }
-      .footer-grid {
-        grid-template-columns: 1fr;
-        text-align: center;
-        gap: 25px;
-      }
-      .social-icons {
-        justify-content: center;
-      }
-      .footer-col a:hover {
-        transform: translateX(0);
-      }
     }
 
-    @media (max-width: 480px) {
-      .container {
-        padding: 0 15px;
-      }
-      .logo-wrapper {
-        gap: 6px;
+    @media (max-width: 550px) {
+      .logo-text p {
+        display: none;
       }
       .logo {
-        height: 35px;
-      }
-      .logo-text h1 {
-        font-size: 0.9rem;
-      }
-      .header-phone {
-        font-size: 0.65rem;
+        height: 38px;
       }
       .header-phone i {
         display: none;
       }
-      .navbar a {
-        padding: 6px 14px;
-        font-size: 0.7rem;
+      .header-phone {
+        font-size: 0.65rem;
+        background: transparent;
+        padding: 0;
+        font-weight: 700;
       }
-      .hero h1 {
-        font-size: 1.6rem;
+      .hero-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
       }
-      .service-card h3 {
-        font-size: 1.2rem;
+      .btn-primary {
+        width: 220px;
+        padding: 12px 18px;
       }
       .stats-grid {
         grid-template-columns: 1fr;
+        gap: 24px;
       }
-      .btn-primary {
-        padding: 10px 20px;
-        font-size: 0.85rem;
+      .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .social-icons {
+        justify-content: center;
       }
       .whatsapp-float {
-        width: 50px;
-        height: 50px;
-        bottom: 15px;
-        right: 15px;
+        width: 52px;
+        height: 52px;
+        bottom: 20px;
+        right: 20px;
       }
       .whatsapp-float i {
-        font-size: 25px;
+        font-size: 26px;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
+  <!-- Premium Header -->
   <header class="header">
     <div class="container">
       <a href="index.html" class="logo-wrapper">
-        <img src="Logo.jpg" alt="Ibad Tech" class="logo" />
+        <img src="Logo.jpg" alt="Ibad Tech" class="logo" onerror="this.src='https://placehold.co/200x200?text=IT'"/>
         <div class="logo-text">
           <h1>Ibad Tech</h1>
           <p>Premium Digital Solutions</p>
         </div>
       </a>
       <div class="header-phone">
-        <i class="fas fa-phone-alt"></i> +91 7056836166
+        <i class="fas fa-phone-alt"></i> +91 70568 36166
       </div>
     </div>
   </header>
 
-  <!-- Navigation -->
+  <!-- Sticky Modern Navigation -->
   <nav class="navbar">
     <div class="container">
       <ul>
@@ -716,22 +650,22 @@
     </div>
   </nav>
 
-  <!-- Hero Section -->
+  <!-- Hero Premium -->
   <section class="hero">
     <div class="container">
       <div class="hero-content">
-        <div class="hero-badge" data-aos="fade-up">✨ Award Winning Digital Agency</div>
-        <h1 data-aos="fade-up" data-aos-delay="100">Transform Your <span>Digital</span><br>Presence Today</h1>
-        <p data-aos="fade-up" data-aos-delay="200">We help businesses grow with cutting-edge digital marketing, stunning designs, and powerful web solutions.</p>
-        <div class="hero-buttons" data-aos="fade-up" data-aos-delay="300">
-          <a href="contact.html" class="btn-primary">Get Started <i class="fas fa-arrow-right"></i></a>
-          <a href="services.html" class="btn-primary btn-outline">Explore Services</a>
+        <div class="hero-badge" data-aos="fade-up">✨ Elite Digital Partner 2025</div>
+        <h1 data-aos="fade-up" data-aos-delay="80">Transform Your <span>Digital</span><br>Empire Today</h1>
+        <p data-aos="fade-up" data-aos-delay="150">Data-driven marketing, breathtaking design, and robust web apps — we craft digital success stories for brands that matter.</p>
+        <div class="hero-buttons" data-aos="fade-up" data-aos-delay="220">
+          <a href="contact.html" class="btn-primary">Launch Project <i class="fas fa-rocket"></i></a>
+          <a href="services.html" class="btn-primary btn-outline">Explore Solutions</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Services Section -->
+  <!-- Services Section Modern -->
   <section>
     <div class="container">
       <h2 data-aos="fade-up">Our <span>Premium</span> Services</h2>
@@ -739,102 +673,90 @@
         <a href="digital.html" class="service-card" data-aos="fade-up" data-aos-delay="0">
           <div class="service-icon"><i class="fas fa-chart-line"></i></div>
           <h3>Digital Marketing</h3>
-          <p>SEO, Social Media, PPC - Complete digital marketing solutions to boost your online presence.</p>
+          <p>SEO, Social Media, PPC & growth strategies that dominate search & convert leads into loyal customers.</p>
         </a>
         <div class="service-card" data-aos="fade-up" data-aos-delay="100">
           <div class="service-icon"><i class="fas fa-palette"></i></div>
           <h3>Graphic Design</h3>
-          <p>Stunning visuals, brand identity, logos, and creative designs that make your business stand out.</p>
+          <p>Exquisite branding, logo design, motion graphics, and visual storytelling that leaves a lasting impression.</p>
         </div>
         <div class="service-card" data-aos="fade-up" data-aos-delay="200">
           <div class="service-icon"><i class="fas fa-code"></i></div>
           <h3>Web Development</h3>
-          <p>Modern, responsive, and high-performance websites built with the latest technologies.</p>
+          <p>Lightning-fast, responsive, and SEO-optimized websites powered by modern frameworks & scalable tech.</p>
         </div>
         <div class="service-card" data-aos="fade-up" data-aos-delay="300">
           <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
           <h3>App Development</h3>
-          <p>Native and cross-platform mobile apps that deliver exceptional user experiences.</p>
+          <p>Native & cross-platform apps with smooth UI/UX, push notifications, and high-performance backend.</p>
         </div>
         <div class="service-card" data-aos="fade-up" data-aos-delay="400">
           <div class="service-icon"><i class="fas fa-chart-pie"></i></div>
           <h3>Financial Products</h3>
-          <p>Credit cards, loans, investments - comprehensive financial solutions for your needs.</p>
+          <p>Smart credit cards, loans, investment tools — fintech solutions tailored for modern wealth growth.</p>
         </div>
         <div class="service-card" data-aos="fade-up" data-aos-delay="500">
           <div class="service-icon"><i class="fas fa-headset"></i></div>
           <h3>IT Consulting</h3>
-          <p>Expert IT strategy, infrastructure optimization, and digital transformation consulting.</p>
+          <p>Strategic digital transformation, cloud optimization, and AI-driven consulting for enterprises.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Stats Section -->
+  <!-- Stats Interactive -->
   <section class="stats-section">
     <div class="container">
       <h2 data-aos="fade-up">Our <span>Impact</span> in Numbers</h2>
       <div class="stats-grid">
-        <div class="stat-card" data-aos="fade-up" data-aos-delay="0">
-          <div class="stat-number">500+</div>
-          <div class="stat-label">Projects Delivered</div>
-        </div>
-        <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
-          <div class="stat-number">200+</div>
-          <div class="stat-label">Happy Clients</div>
-        </div>
-        <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
-          <div class="stat-number">98%</div>
-          <div class="stat-label">Client Retention</div>
-        </div>
-        <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
-          <div class="stat-number">24/7</div>
-          <div class="stat-label">Support Available</div>
-        </div>
+        <div class="stat-card" data-aos="fade-up" data-aos-delay="0"><div class="stat-number">650+</div><div class="stat-label">Projects Completed</div></div>
+        <div class="stat-card" data-aos="fade-up" data-aos-delay="100"><div class="stat-number">280+</div><div class="stat-label">Global Clients</div></div>
+        <div class="stat-card" data-aos="fade-up" data-aos-delay="200"><div class="stat-number">99%</div><div class="stat-label">Client Retention</div></div>
+        <div class="stat-card" data-aos="fade-up" data-aos-delay="300"><div class="stat-number">24/7</div><div class="stat-label">Priority Support</div></div>
       </div>
     </div>
   </section>
 
-  <!-- About Section -->
+  <!-- About Premium Story -->
   <section>
     <div class="container">
       <h2 data-aos="fade-up">About <span>Ibad Tech</span></h2>
       <div class="about-grid">
         <div class="about-image" data-aos="fade-right">
-          <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="About Ibad Tech">
+          <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Agency teamwork">
         </div>
         <div class="about-text" data-aos="fade-left">
-          <h3>We Create Digital <span style="color: var(--primary);">Success Stories</span></h3>
-          <p>Located at Kathgarh Road, Ismailabad, Kurukshetra, Haryana, Ibad Tech specializes in delivering innovative solutions for businesses of all sizes.</p>
-          <p>With years of experience in the digital industry, we combine creativity with technical expertise to deliver results that exceed expectations.</p>
+          <h3>Creating <span style="color: var(--primary);">Digital Excellence</span> Since 2019</h3>
+          <p>Headquartered at Kathgarh Road, Ismailabad, Kurukshetra, Haryana — Ibad Tech delivers world-class digital products & marketing ecosystems that drive measurable ROI.</p>
+          <p>We merge creative intelligence with cutting-edge engineering to deliver exceptional websites, apps, and campaigns that outperform expectations.</p>
           <div class="feature-list">
-            <div class="feature-item"><i class="fas fa-check-circle"></i><span>5+ Years Experience</span></div>
-            <div class="feature-item"><i class="fas fa-check-circle"></i><span>Expert Team Members</span></div>
-            <div class="feature-item"><i class="fas fa-check-circle"></i><span>24/7 Support</span></div>
-            <div class="feature-item"><i class="fas fa-check-circle"></i><span>100% Satisfaction</span></div>
+            <div class="feature-item"><i class="fas fa-check-circle" style="color:var(--primary);"></i><span>8+ Years Average Expertise</span></div>
+            <div class="feature-item"><i class="fas fa-check-circle" style="color:var(--primary);"></i><span>ISO Certified Processes</span></div>
+            <div class="feature-item"><i class="fas fa-check-circle" style="color:var(--primary);"></i><span>365 Days Support</span></div>
+            <div class="feature-item"><i class="fas fa-check-circle" style="color:var(--primary);"></i><span>100% Satisfaction Guarantee</span></div>
           </div>
-          <a href="contact.html" class="btn-primary">Get In Touch <i class="fas fa-arrow-right"></i></a>
+          <a href="contact.html" class="btn-primary">Start a Conversation →</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA Section -->
+  <!-- CTA Premium Modern -->
   <div class="container">
     <div class="cta-section" data-aos="zoom-in-up">
-      <h2>Ready to Grow Your Business?</h2>
-      <p>Let's work together to take your digital presence to the next level. Get a free consultation today!</p>
-      <a href="contact.html" class="btn-primary">Get Free Consultation <i class="fas fa-arrow-right"></i></a>
+      <h2>Scale Your Business Exponentially</h2>
+      <p>Book a free strategic session with our experts. Get a customized roadmap that drives real growth.</p>
+      <a href="contact.html" class="btn-primary">Claim Free Consultation →</a>
     </div>
   </div>
 
-  <!-- Footer -->
+  <!-- Footer Pro -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col">
           <h4>Ibad Tech</h4>
-          <p>Premium digital solutions for modern businesses. We help you grow, innovate, and succeed online.</p>
+          <p>Premium digital architects & growth partners. From web dev to AI marketing, we elevate brands.</p>
           <div class="social-icons">
             <a href="https://www.facebook.com/share/19CEtXPCrr/" target="_blank"><i class="fab fa-facebook-f"></i></a>
             <a href="https://www.instagram.com/ibad_tech" target="_blank"><i class="fab fa-instagram"></i></a>
@@ -850,28 +772,28 @@
           <a href="contact.html">Contact</a>
         </div>
         <div class="footer-col">
-          <h4>Services</h4>
-          <a href="digital.html">Digital Marketing</a>
-          <a href="#">Graphic Design</a>
-          <a href="#">Web Development</a>
-          <a href="#">App Development</a>
+          <h4>Core Services</h4>
+          <a href="digital.html">Performance Marketing</a>
+          <a href="#">UI/UX & Branding</a>
+          <a href="#">Full-Stack Dev</a>
+          <a href="#">App Engineering</a>
         </div>
         <div class="footer-col">
-          <h4>Contact Info</h4>
-          <p><i class="fas fa-map-marker-alt"></i> Kathgarh Road, Ismailabad</p>
-          <p><i class="fas fa-phone-alt"></i> +91 7056836166</p>
+          <h4>Connect</h4>
+          <p><i class="fas fa-map-marker-alt"></i> Kathgarh Road, Ismailabad, Kurukshetra</p>
+          <p><i class="fas fa-phone-alt"></i> +91 70568 36166</p>
           <p><i class="fas fa-envelope"></i> sainsanty2@gmail.com</p>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2025 Ibad Tech. All Rights Reserved. | Designed with <i class="fas fa-heart" style="color: var(--primary);"></i> in India</p>
+        <p>&copy; 2025 Ibad Tech — All Rights Reserved. Crafted with <i class="fas fa-heart" style="color: #6366f1;"></i> in India</p>
       </div>
     </div>
   </footer>
 
   <!-- WhatsApp Button -->
-  <a href="https://wa.me/7056836166" class="whatsapp-float" target="_blank">
-    <i class="fab fa-whatsapp"></i>
+  <a href="https://wa.me/917056836166" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp" style="font-size: 30px; color: white;"></i>
   </a>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -879,7 +801,28 @@
     AOS.init({
       duration: 800,
       once: true,
-      offset: 100
+      offset: 100,
+      easing: 'ease-out-quad'
+    });
+    // Active link highlight on scroll - optional
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.navbar a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 150;
+        if (scrollY >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        } else if (current === '' && link.getAttribute('href') === 'index.html') {
+          link.classList.add('active');
+        }
+      });
     });
   </script>
 </body>
