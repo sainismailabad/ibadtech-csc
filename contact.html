@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=1.0"/>
-  <title>Contact Us | Ibad Tech - Premium Digital Solutions</title>
-  <meta name="description" content="Get in touch with Ibad Tech for professional digital marketing, web development, graphic design, and IT services." />
-  <link rel="icon" href="https://sainismailabad.github.io/ibadtech/Logo.jpg" type="image/jpeg" />
-
-  <!-- Google Fonts -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Contact Ibad Tech | Premium Digital Solutions</title>
+  <meta name="description" content="Get in touch with Ibad Tech for professional web development, digital marketing, graphic design, and IT consulting services.">
+  <meta name="keywords" content="Contact Ibad Tech, Digital Marketing Agency, Web Development, Graphic Design, Kurukshetra">
+  <meta name="author" content="Ibad Tech">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="Logo.jpg" type="image/jpeg">
+  
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+  
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <!-- EmailJS SDK -->
+  
+  <!-- EmailJS -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
   <style>
@@ -26,21 +30,27 @@
     }
 
     :root {
-      --primary: #6366f1;
-      --primary-dark: #4f46e5;
-      --primary-light: #818cf8;
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --primary-light: #3b82f6;
       --secondary: #06b6d4;
+      --accent: #8b5cf6;
       --dark: #0f172a;
       --light: #f8fafc;
       --gray: #64748b;
+      --gray-light: #94a3b8;
       --white: #ffffff;
       --success: #10b981;
       --error: #ef4444;
-      --gradient-1: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
-      --shadow-sm: 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-      --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
-      --shadow-lg: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
-      --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      --gradient-primary: linear-gradient(135deg, #2563eb 0%, #06b6d4 100%);
+      --gradient-accent: linear-gradient(135deg, #8b5cf6 0%, #2563eb 100%);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07);
+      --shadow-lg: 0 10px 25px -3px rgba(0,0,0,0.08);
+      --shadow-xl: 0 20px 30px -8px rgba(0,0,0,0.1);
+      --shadow-2xl: 0 25px 50px -12px rgba(0,0,0,0.15);
+      --border-radius: 24px;
+      --border-radius-sm: 16px;
     }
 
     body {
@@ -51,173 +61,226 @@
     }
 
     .container {
-      width: 100%;
       max-width: 1280px;
       margin: 0 auto;
-      padding: 0 40px;
+      padding: 0 32px;
+      width: 100%;
+    }
+
+    h1, h2, h3, .logo-text {
+      font-family: 'Space Grotesk', monospace;
+      font-weight: 700;
+      letter-spacing: -0.02em;
     }
 
     /* Header */
     .header {
-      background: rgba(255, 255, 255, 0.98);
-      backdrop-filter: blur(20px);
-      padding: 12px 0;
+      background: rgba(255,255,255,0.98);
+      backdrop-filter: blur(12px);
       position: fixed;
-      width: 100%;
       top: 0;
-      z-index: 1000;
-      box-shadow: var(--shadow-sm);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      width: 100%;
+      z-index: 1002;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
     }
 
     .header .container {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      flex-wrap: nowrap;
-      gap: 15px;
+      align-items: center;
     }
 
     .logo-wrapper {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       text-decoration: none;
-      flex-shrink: 0;
     }
 
-    .logo {
-      height: 45px;
+    .logo-img {
+      height: 48px;
       width: auto;
-      border-radius: 10px;
+      border-radius: 14px;
     }
 
     .logo-text h1 {
-      font-size: 1.2rem;
-      background: var(--gradient-1);
+      font-size: 1.4rem;
+      background: var(--gradient-primary);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      margin-bottom: 0;
     }
 
     .logo-text p {
       font-size: 0.6rem;
       color: var(--gray);
-      display: none;
     }
 
     .header-phone {
-      color: var(--gray);
-      font-size: 0.8rem;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-
-    .header-phone i {
+      background: rgba(37,99,235,0.1);
+      padding: 10px 20px;
+      border-radius: 60px;
+      font-weight: 700;
+      font-size: 0.9rem;
       color: var(--primary);
-      margin-right: 6px;
     }
 
-    /* Navigation */
+    /* Hamburger Menu */
+    .menu-toggle {
+      display: none;
+      background: var(--gradient-primary);
+      border: none;
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      cursor: pointer;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.3s;
+      box-shadow: var(--shadow-md);
+    }
+
+    .menu-toggle span {
+      width: 24px;
+      height: 2.5px;
+      background: white;
+      border-radius: 4px;
+      transition: all 0.3s;
+    }
+
+    .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+    .menu-toggle.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+
+    /* Desktop Nav */
     .navbar {
-      background: var(--white);
-      box-shadow: var(--shadow-sm);
-      position: fixed;
-      top: 69px;
-      width: 100%;
-      z-index: 999;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-      overflow-x: auto;
-      white-space: nowrap;
+      position: sticky;
+      top: 76px;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(16px);
+      z-index: 1001;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
     }
 
-    .navbar ul {
+    .nav-menu {
       display: flex;
       justify-content: center;
+      gap: 8px;
       list-style: none;
-      gap: 4px;
-      padding: 10px 15px;
+      padding: 12px 0;
     }
 
-    .navbar a {
-      display: block;
-      padding: 8px 18px;
+    .nav-menu a {
+      padding: 10px 24px;
+      font-weight: 600;
+      font-size: 0.9rem;
       color: var(--dark);
-      font-weight: 500;
-      transition: all 0.3s ease;
-      font-size: 0.85rem;
-      border-radius: 50px;
       text-decoration: none;
-      white-space: nowrap;
+      border-radius: 60px;
+      transition: all 0.2s;
     }
 
-    .navbar a:hover, .navbar a.active {
-      background: var(--gradient-1);
+    .nav-menu a:hover, .nav-menu a.active {
+      background: var(--gradient-primary);
       color: white;
     }
 
-    .check {
-      background: linear-gradient(135deg, rgba(99,102,241,0.1) 0%, rgba(6,182,212,0.1) 100%);
-      color: var(--primary) !important;
+    /* Mobile Nav Drawer */
+    .mobile-nav {
+      position: fixed;
+      top: 76px;
+      right: -100%;
+      width: 85%;
+      max-width: 340px;
+      height: calc(100vh - 76px);
+      background: rgba(255,255,255,0.98);
+      backdrop-filter: blur(20px);
+      z-index: 1000;
+      transition: right 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      box-shadow: var(--shadow-2xl);
+      border-left: 1px solid rgba(0,0,0,0.08);
+      padding: 28px 24px;
+      overflow-y: auto;
     }
 
-    /* Hero Section */
+    .mobile-nav.active { right: 0; }
+    .mobile-nav ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .mobile-nav a {
+      display: block;
+      padding: 14px 20px;
+      font-weight: 600;
+      font-size: 1.05rem;
+      color: var(--dark);
+      text-decoration: none;
+      border-radius: 16px;
+      transition: all 0.2s;
+    }
+    .mobile-nav a:hover, .mobile-nav a.active { background: var(--gradient-primary); color: white; }
+    .mobile-phone { margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.1); display: flex; align-items: center; gap: 12px; font-weight: 700; color: var(--primary); }
+    .nav-overlay {
+      position: fixed;
+      top: 76px;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 999;
+      display: none;
+      backdrop-filter: blur(4px);
+    }
+    .nav-overlay.active { display: block; }
+
+    /* Page Hero */
     .page-hero {
-      background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
-      padding: 160px 0 50px;
+      background: linear-gradient(135deg, #ffffff 0%, #eef2ff 50%, #f8fafc 100%);
+      padding: 170px 0 60px;
       text-align: center;
     }
-
     .page-hero h1 {
-      font-size: 2.5rem;
-      font-family: 'Space Grotesk', monospace;
-      margin-bottom: 15px;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      margin-bottom: 16px;
     }
-
     .page-hero h1 span {
-      background: var(--gradient-1);
+      background: var(--gradient-primary);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
     }
-
     .page-hero p {
       font-size: 1rem;
       color: var(--gray);
       max-width: 600px;
       margin: 0 auto;
-      padding: 0 15px;
     }
 
-    /* Contact Section */
+    /* Contact Section Premium */
     .contact-section {
-      padding: 40px 0 80px;
+      padding: 60px 0 80px;
     }
-
     .contact-wrapper {
       display: grid;
       grid-template-columns: 1fr 1.2fr;
       gap: 40px;
       background: var(--white);
-      border-radius: 28px;
+      border-radius: var(--border-radius);
       overflow: hidden;
       box-shadow: var(--shadow-xl);
     }
 
-    /* Contact Info Side */
+    /* Contact Info Side - Premium Glassmorphism */
     .contact-info {
-      background: var(--gradient-1);
-      padding: 40px 30px;
+      background: var(--gradient-primary);
+      padding: 48px 36px;
       color: white;
+      position: relative;
     }
-
     .contact-info h2 {
       font-size: 1.8rem;
-      margin-bottom: 15px;
-      font-family: 'Space Grotesk', monospace;
+      margin-bottom: 16px;
     }
-
     .contact-info h2:after {
       content: '';
       display: block;
@@ -225,73 +288,59 @@
       height: 3px;
       background: white;
       margin-top: 12px;
-      border-radius: 2px;
+      border-radius: 3px;
     }
-
     .contact-info > p {
       font-size: 0.9rem;
       opacity: 0.9;
-      margin-bottom: 30px;
+      margin-bottom: 32px;
       line-height: 1.5;
     }
-
     .info-item {
       display: flex;
       align-items: flex-start;
-      gap: 15px;
-      margin-bottom: 22px;
+      gap: 16px;
+      margin-bottom: 24px;
     }
-
     .info-icon {
-      width: 42px;
-      height: 42px;
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 12px;
+      width: 44px;
+      height: 44px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 1.1rem;
       flex-shrink: 0;
     }
-
     .info-details h4 {
       font-size: 0.95rem;
       margin-bottom: 4px;
       font-weight: 600;
     }
-
-    .info-details p,
-    .info-details a {
-      color: rgba(255, 255, 255, 0.85);
+    .info-details p, .info-details a {
+      color: rgba(255,255,255,0.85);
       text-decoration: none;
       font-size: 0.85rem;
-      word-break: break-word;
     }
-
-    .info-details a:hover {
-      color: white;
-    }
-
+    .info-details a:hover { color: white; }
     .social-links-contact {
       display: flex;
       gap: 12px;
-      margin-top: 30px;
+      margin-top: 32px;
       flex-wrap: wrap;
     }
-
     .social-links-contact a {
-      width: 38px;
-      height: 38px;
-      background: rgba(255, 255, 255, 0.15);
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.15);
       border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
-      font-size: 1rem;
-      transition: all 0.3s ease;
+      transition: all 0.3s;
     }
-
     .social-links-contact a:hover {
       background: white;
       color: var(--primary);
@@ -300,98 +349,81 @@
 
     /* Form Side */
     .contact-form {
-      padding: 40px 35px;
+      padding: 48px 40px;
       background: var(--white);
     }
-
     .contact-form h2 {
       font-size: 1.8rem;
       color: var(--dark);
       margin-bottom: 8px;
-      font-family: 'Space Grotesk', monospace;
     }
-
     .contact-form > p {
       color: var(--gray);
-      margin-bottom: 25px;
+      margin-bottom: 28px;
       font-size: 0.9rem;
     }
-
     .form-group {
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
-
     .form-group label {
       display: block;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       font-weight: 600;
       color: var(--dark);
       font-size: 0.85rem;
     }
-
     .form-group label i {
       margin-right: 8px;
       color: var(--primary);
     }
-
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
+    .form-group input, .form-group select, .form-group textarea {
       width: 100%;
       padding: 12px 16px;
       border: 2px solid #e2e8f0;
-      border-radius: 12px;
+      border-radius: 14px;
       font-size: 0.9rem;
       font-family: 'Inter', sans-serif;
-      transition: all 0.3s ease;
+      transition: all 0.3s;
       outline: none;
       background: var(--light);
     }
-
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
       border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
     }
-
     .form-group textarea {
       resize: vertical;
-      min-height: 100px;
+      min-height: 110px;
     }
-
     .submit-btn {
       width: 100%;
       padding: 14px;
-      background: var(--gradient-1);
+      background: var(--gradient-primary);
       color: white;
       border: none;
-      border-radius: 12px;
+      border-radius: 14px;
       font-size: 0.95rem;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.3s;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
     }
-
     .submit-btn:hover {
       transform: translateY(-2px);
       box-shadow: var(--shadow-lg);
     }
-
     .submit-btn:disabled {
       opacity: 0.6;
       cursor: not-allowed;
-      transform: none;
     }
 
-    /* Alert Messages */
+    /* Alert */
     .alert {
       padding: 12px 16px;
-      border-radius: 12px;
+      border-radius: 14px;
       margin-bottom: 20px;
       display: flex;
       align-items: center;
@@ -399,32 +431,11 @@
       animation: slideIn 0.3s ease;
       font-size: 0.85rem;
     }
-
-    .alert-success {
-      background: #d1fae5;
-      color: #065f46;
-      border-left: 4px solid var(--success);
-    }
-
-    .alert-error {
-      background: #fee2e2;
-      color: #991b1b;
-      border-left: 4px solid var(--error);
-    }
-
-    .alert i {
-      font-size: 1rem;
-    }
-
+    .alert-success { background: #d1fae5; color: #065f46; border-left: 4px solid var(--success); }
+    .alert-error { background: #fee2e2; color: #991b1b; border-left: 4px solid var(--error); }
     @keyframes slideIn {
-      from {
-        opacity: 0;
-        transform: translateY(-10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     /* Footer */
@@ -432,407 +443,289 @@
       background: var(--dark);
       color: white;
       text-align: center;
-      padding: 30px 0 20px;
+      padding: 40px 0 30px;
     }
-
     .footer:before {
       content: '';
       display: block;
       width: 100%;
       height: 3px;
-      background: var(--gradient-1);
+      background: var(--gradient-primary);
       margin-bottom: 30px;
     }
-
-    .footer p {
-      font-size: 0.8rem;
-    }
+    .footer p { font-size: 0.8rem; color: var(--gray-light); }
 
     /* WhatsApp */
     .whatsapp-float {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 55px;
-      height: 55px;
+      bottom: 28px;
+      right: 28px;
+      width: 56px;
+      height: 56px;
       background: #25d366;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 99;
-      transition: all 0.3s ease;
-      box-shadow: var(--shadow-lg);
+      box-shadow: 0 10px 25px rgba(37,211,102,0.4);
       text-decoration: none;
+      animation: pulse 2s infinite;
     }
-
-    .whatsapp-float i {
-      font-size: 28px;
-      color: white;
-    }
-
-    .whatsapp-float:hover {
-      transform: scale(1.1);
-    }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37,211,102,0.7); } 70% { box-shadow: 0 0 0 12px rgba(37,211,102,0); } 100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); } }
 
     /* Responsive */
+    @media (max-width: 1024px) {
+      .container { padding: 0 24px; }
+    }
     @media (max-width: 992px) {
-      .contact-wrapper {
-        grid-template-columns: 1fr;
-        gap: 0;
-      }
-      .contact-info {
-        padding: 35px 30px;
-      }
-      .contact-form {
-        padding: 35px 30px;
-      }
+      .contact-wrapper { grid-template-columns: 1fr; gap: 0; border-radius: 28px; }
+      .contact-info { padding: 40px 30px; }
+      .contact-form { padding: 40px 30px; }
     }
-
     @media (max-width: 768px) {
-      .container {
-        padding: 0 20px;
-      }
-      .header .container {
-        gap: 8px;
-      }
-      .logo {
-        height: 40px;
-      }
-      .logo-text h1 {
-        font-size: 1rem;
-      }
-      .header-phone {
-        font-size: 0.7rem;
-      }
-      .header-phone i {
-        font-size: 0.7rem;
-      }
-      .navbar {
-        top: 63px;
-      }
-      .navbar a {
-        padding: 6px 14px;
-        font-size: 0.75rem;
-      }
-      .page-hero {
-        padding: 140px 0 40px;
-      }
-      .page-hero h1 {
-        font-size: 2rem;
-      }
-      .page-hero p {
-        font-size: 0.9rem;
-      }
-      .contact-section {
-        padding: 30px 0 60px;
-      }
-      .contact-info h2,
-      .contact-form h2 {
-        font-size: 1.5rem;
-      }
-      .contact-form {
-        padding: 30px 25px;
-      }
-      .contact-info {
-        padding: 30px 25px;
-      }
-      .info-item {
-        gap: 12px;
-        margin-bottom: 18px;
-      }
-      .info-icon {
-        width: 38px;
-        height: 38px;
-        font-size: 1rem;
-      }
-      .info-details h4 {
-        font-size: 0.85rem;
-      }
-      .info-details p,
-      .info-details a {
-        font-size: 0.8rem;
-      }
-      .submit-btn {
-        padding: 12px;
-        font-size: 0.9rem;
-      }
-      .whatsapp-float {
-        width: 50px;
-        height: 50px;
-        bottom: 15px;
-        right: 15px;
-      }
-      .whatsapp-float i {
-        font-size: 25px;
-      }
+      .header-phone { display: none; }
+      .menu-toggle { display: flex; }
+      .navbar { display: none; }
+      .page-hero { padding: 150px 0 50px; }
+      .page-hero h1 { font-size: 2rem; }
+      .contact-section { padding: 40px 0 60px; }
+      .contact-info h2, .contact-form h2 { font-size: 1.5rem; }
+      .container { padding: 0 20px; }
+      .info-item { gap: 12px; margin-bottom: 18px; }
+      .info-icon { width: 40px; height: 40px; }
+      .submit-btn { padding: 12px; }
     }
-
-    @media (max-width: 480px) {
-      .container {
-        padding: 0 15px;
-      }
-      .logo-wrapper {
-        gap: 6px;
-      }
-      .logo {
-        height: 35px;
-      }
-      .logo-text h1 {
-        font-size: 0.9rem;
-      }
-      .header-phone {
-        font-size: 0.65rem;
-      }
-      .header-phone i {
-        display: none;
-      }
-      .navbar a {
-        padding: 5px 12px;
-        font-size: 0.7rem;
-      }
-      .page-hero h1 {
-        font-size: 1.8rem;
-      }
-      .contact-form h2,
-      .contact-info h2 {
-        font-size: 1.3rem;
-      }
-      .contact-form > p,
-      .contact-info > p {
-        font-size: 0.85rem;
-      }
-      .form-group input,
-      .form-group select,
-      .form-group textarea {
-        padding: 10px 14px;
-        font-size: 0.85rem;
-      }
-      .social-links-contact a {
-        width: 35px;
-        height: 35px;
-      }
-      .footer p {
-        font-size: 0.7rem;
-      }
+    @media (max-width: 550px) {
+      .logo-img { height: 40px; }
+      .logo-text p { display: none; }
+      .page-hero h1 { font-size: 1.8rem; }
+      .contact-info, .contact-form { padding: 28px 20px; }
+      .form-group input, .form-group select, .form-group textarea { padding: 10px 14px; }
+      .whatsapp-float { width: 50px; height: 50px; bottom: 20px; right: 20px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
-  <header class="header">
-    <div class="container">
-      <a href="index.html" class="logo-wrapper">
-        <img src="Logo.jpg" alt="Ibad Tech" class="logo" />
-        <div class="logo-text">
-          <h1>Ibad Tech</h1>
-          <p>Premium Digital Solutions</p>
-        </div>
-      </a>
-      <div class="header-phone">
-        <i class="fas fa-phone-alt"></i> +91 7056836166
-      </div>
-    </div>
-  </header>
+<!-- Header -->
+<header class="header">
+  <div class="container">
+    <a href="index.html" class="logo-wrapper">
+      <img src="Logo.jpg" alt="Ibad Tech Logo" class="logo-img" onerror="this.src='https://placehold.co/200x200?text=IT'">
+      <div class="logo-text"><h1>Ibad Tech</h1><p>Premium Digital Solutions</p></div>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="header-phone"><i class="fas fa-phone-alt"></i><span>+91 70568 36166</span></div>
+  </div>
+</header>
 
-  <!-- Navigation -->
-  <nav class="navbar">
-    <div class="container">
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="digital.html">Digital Marketing</a></li>
-        <li><a href="https://www.instagram.com/ibad_tech" target="_blank">Portfolio</a></li>
-        <li><a href="contact.html" class="active">Contact</a></li>
-        <li><a href="https://sainismailabad.github.io/Social-media-growth-/" target="_blank" class="check">Social Media Growth</a></li>
-      </ul>
-    </div>
-  </nav>
+<!-- Desktop Navigation -->
+<nav class="navbar">
+  <div class="container">
+    <ul class="nav-menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="digital.html">Digital Marketing</a></li>
+      <li><a href="https://www.instagram.com/ibad_tech" target="_blank">Portfolio</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+  </div>
+</nav>
 
-  <!-- Hero Section -->
-  <section class="page-hero">
-    <div class="container">
-      <h1>Get In <span>Touch</span></h1>
-      <p>Have a project in mind? We'd love to hear from you. Send us a message and we'll respond within 24 hours.</p>
-    </div>
-  </section>
+<!-- Mobile Navigation -->
+<div class="mobile-nav" id="mobileNav">
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="digital.html">Digital Marketing</a></li>
+    <li><a href="https://www.instagram.com/ibad_tech" target="_blank">Portfolio</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+  <div class="mobile-phone"><i class="fas fa-phone-alt"></i><span>+91 70568 36166</span></div>
+</div>
+<div class="nav-overlay" id="navOverlay"></div>
 
-  <!-- Contact Section -->
-  <section class="contact-section">
-    <div class="container">
-      <div class="contact-wrapper">
-        <!-- Left Side - Contact Info -->
-        <div class="contact-info">
-          <h2>Let's Talk</h2>
-          <p>We're here to help and answer any question you might have. We look forward to hearing from you.</p>
-          
-          <div class="info-item">
-            <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
-            <div class="info-details">
-              <h4>Visit Us</h4>
-              <p>Kathgarh Road, Ismailabad, Kurukshetra, Haryana - 136129</p>
-            </div>
-          </div>
-          
-          <div class="info-item">
-            <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
-            <div class="info-details">
-              <h4>Call Us</h4>
-              <a href="tel:+917056836166">+91 7056836166</a>
-            </div>
-          </div>
-          
-          <div class="info-item">
-            <div class="info-icon"><i class="fas fa-envelope"></i></div>
-            <div class="info-details">
-              <h4>Email Us</h4>
-              <a href="mailto:sainsanty2@gmail.com">sainsanty2@gmail.com</a>
-            </div>
-          </div>
-          
-          <div class="social-links-contact">
-            <a href="https://www.facebook.com/share/19CEtXPCrr/" target="_blank"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://www.instagram.com/ibad_tech" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-            <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="container">
+    <h1>Get In <span>Touch</span></h1>
+    <p>Have a project in mind? We'd love to hear from you. Send us a message and we'll respond within 24 hours.</p>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact-section">
+  <div class="container">
+    <div class="contact-wrapper">
+      <!-- Left Side - Contact Info -->
+      <div class="contact-info">
+        <h2>Let's Talk</h2>
+        <p>We're here to help and answer any question you might have. We look forward to hearing from you.</p>
+        
+        <div class="info-item">
+          <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="info-details">
+            <h4>Visit Us</h4>
+            <p>Kathgarh Road, Ismailabad, Kurukshetra, Haryana - 136129</p>
           </div>
         </div>
-
-        <!-- Right Side - Contact Form -->
-        <div class="contact-form">
-          <h2>Send a Message</h2>
-          <p>Fill out the form below and we'll get back to you within 24 hours.</p>
-          
-          <div id="alertMessage" style="display: none;"></div>
-          
-          <form id="contactForm">
-            <div class="form-group">
-              <label><i class="fas fa-user"></i> Full Name *</label>
-              <input type="text" id="user_name" name="user_name" placeholder="Enter your full name" required>
-            </div>
-            
-            <div class="form-group">
-              <label><i class="fas fa-envelope"></i> Email Address *</label>
-              <input type="email" id="user_email" name="user_email" placeholder="Enter your email address" required>
-            </div>
-            
-            <div class="form-group">
-              <label><i class="fas fa-phone"></i> Phone Number</label>
-              <input type="tel" id="user_phone" name="user_phone" placeholder="Enter your phone number (optional)">
-            </div>
-            
-            <div class="form-group">
-              <label><i class="fas fa-cogs"></i> Select Service *</label>
-              <select id="service" name="service" required>
-                <option value="">-- Select a service --</option>
-                <option value="Digital Marketing">📈 Digital Marketing</option>
-                <option value="Graphic Design">🎨 Graphic Design</option>
-                <option value="Web Development">💻 Web Development</option>
-                <option value="App Development">📱 App Development</option>
-                <option value="IT Consulting">🖥️ IT Consulting</option>
-                <option value="Financial Products">💰 Financial Products</option>
-                <option value="Other">❓ Other</option>
-              </select>
-            </div>
-            
-            <div class="form-group">
-              <label><i class="fas fa-comment"></i> Your Message *</label>
-              <textarea id="message" name="message" placeholder="Tell us about your project or requirements..." required></textarea>
-            </div>
-            
-            <button type="submit" class="submit-btn" id="submitBtn">
-              <i class="fas fa-paper-plane"></i> Send Message
-            </button>
-          </form>
+        
+        <div class="info-item">
+          <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
+          <div class="info-details">
+            <h4>Call Us</h4>
+            <a href="tel:+917056836166">+91 70568 36166</a>
+          </div>
+        </div>
+        
+        <div class="info-item">
+          <div class="info-icon"><i class="fas fa-envelope"></i></div>
+          <div class="info-details">
+            <h4>Email Us</h4>
+            <a href="mailto:sainsanty2@gmail.com">sainsanty2@gmail.com</a>
+          </div>
+        </div>
+        
+        <div class="social-links-contact">
+          <a href="https://www.facebook.com/share/19CEtXPCrr/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/ibad_tech" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+          <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
         </div>
       </div>
+
+      <!-- Right Side - Contact Form -->
+      <div class="contact-form">
+        <h2>Send a Message</h2>
+        <p>Fill out the form below and we'll get back to you within 24 hours.</p>
+        
+        <div id="alertMessage" style="display: none;"></div>
+        
+        <form id="contactForm">
+          <div class="form-group">
+            <label><i class="fas fa-user"></i> Full Name *</label>
+            <input type="text" id="user_name" placeholder="Enter your full name" required>
+          </div>
+          
+          <div class="form-group">
+            <label><i class="fas fa-envelope"></i> Email Address *</label>
+            <input type="email" id="user_email" placeholder="Enter your email address" required>
+          </div>
+          
+          <div class="form-group">
+            <label><i class="fas fa-phone"></i> Phone Number</label>
+            <input type="tel" id="user_phone" placeholder="Enter your phone number (optional)">
+          </div>
+          
+          <div class="form-group">
+            <label><i class="fas fa-cogs"></i> Select Service *</label>
+            <select id="service" required>
+              <option value="">-- Select a service --</option>
+              <option value="Digital Marketing">📈 Digital Marketing</option>
+              <option value="Graphic Design">🎨 Graphic Design</option>
+              <option value="Web Development">💻 Web Development</option>
+              <option value="App Development">📱 App Development</option>
+              <option value="IT Consulting">🖥️ IT Consulting</option>
+              <option value="Financial Products">💰 Financial Products</option>
+              <option value="Other">❓ Other</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label><i class="fas fa-comment"></i> Your Message *</label>
+            <textarea id="message" placeholder="Tell us about your project or requirements..." required></textarea>
+          </div>
+          
+          <button type="submit" class="submit-btn" id="submitBtn">
+            <i class="fas fa-paper-plane"></i> Send Message
+          </button>
+        </form>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <p>&copy; 2025 Ibad Tech. All Rights Reserved. | Empowering Digital India</p>
-    </div>
-  </footer>
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2025 Ibad Tech — All Rights Reserved. Built for digital excellence.</p>
+  </div>
+</footer>
 
-  <!-- WhatsApp Button -->
-  <a href="https://wa.me/7056836166" class="whatsapp-float" target="_blank">
-    <i class="fab fa-whatsapp"></i>
-  </a>
+<!-- WhatsApp -->
+<a href="https://wa.me/917056836166" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+  <i class="fab fa-whatsapp" style="font-size: 28px; color: white;"></i>
+</a>
 
-  <script>
-    // ✅ EmailJS Configuration
-    const EMAILJS_PUBLIC_KEY = "m3gD2ef27h4eSPrAU";
-    const EMAILJS_SERVICE_ID = "service_uyhz1vs";
-    const EMAILJS_TEMPLATE_ID = "template_s0udci5";
+<script>
+  // EmailJS Configuration
+  const EMAILJS_PUBLIC_KEY = "m3gD2ef27h4eSPrAU";
+  const EMAILJS_SERVICE_ID = "service_uyhz1vs";
+  const EMAILJS_TEMPLATE_ID = "template_s0udci5";
+  
+  emailjs.init(EMAILJS_PUBLIC_KEY);
+  
+  const form = document.getElementById('contactForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const alertDiv = document.getElementById('alertMessage');
+  
+  function showAlert(message, type) {
+    alertDiv.style.display = 'block';
+    alertDiv.innerHTML = `<div class="alert alert-${type}"><i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-triangle'}"></i><span>${message}</span></div>`;
+    alertDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    setTimeout(() => { alertDiv.style.display = 'none'; }, 6000);
+  }
+  
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
     
-    // Initialize EmailJS
-    emailjs.init(EMAILJS_PUBLIC_KEY);
+    const name = document.getElementById('user_name').value.trim();
+    const email = document.getElementById('user_email').value.trim();
+    const phone = document.getElementById('user_phone').value.trim();
+    const service = document.getElementById('service').value;
+    const message = document.getElementById('message').value.trim();
     
-    const form = document.getElementById('contactForm');
-    const submitBtn = document.getElementById('submitBtn');
-    const alertDiv = document.getElementById('alertMessage');
+    if (!name) { showAlert('Please enter your name', 'error'); return; }
+    if (!email) { showAlert('Please enter your email address', 'error'); return; }
+    if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) { showAlert('Please enter a valid email address', 'error'); return; }
+    if (!service) { showAlert('Please select a service', 'error'); return; }
+    if (!message) { showAlert('Please enter your message', 'error'); return; }
     
-    function showAlert(message, type) {
-      alertDiv.style.display = 'block';
-      alertDiv.innerHTML = `
-        <div class="alert alert-${type}">
-          <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-triangle'}"></i>
-          <span>${message}</span>
-        </div>
-      `;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+    
+    try {
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+        to_email: 'sainsanty2@gmail.com',
+        user_name: name,
+        user_email: email,
+        user_phone: phone || 'Not provided',
+        service_type: service,
+        user_message: message,
+        reply_to: email
+      });
       
-      alertDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      
-      setTimeout(() => {
-        alertDiv.style.display = 'none';
-      }, 6000);
+      showAlert('Thank you! Your message has been sent successfully. We will get back to you within 24 hours!', 'success');
+      form.reset();
+    } catch (error) {
+      console.error(error);
+      showAlert('Failed to send message. Please call us directly at +91 70568 36166', 'error');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
     }
-    
-    form.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      
-      const name = document.getElementById('user_name').value.trim();
-      const email = document.getElementById('user_email').value.trim();
-      const phone = document.getElementById('user_phone').value.trim();
-      const service = document.getElementById('service').value;
-      const message = document.getElementById('message').value.trim();
-      
-      if (!name) { showAlert('⚠️ Please enter your name', 'error'); return; }
-      if (!email) { showAlert('⚠️ Please enter your email address', 'error'); return; }
-      if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) { showAlert('⚠️ Please enter a valid email address', 'error'); return; }
-      if (!service) { showAlert('⚠️ Please select a service', 'error'); return; }
-      if (!message) { showAlert('⚠️ Please enter your message', 'error'); return; }
-      
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-      
-      try {
-        const templateParams = {
-          to_email: 'sainsanty2@gmail.com',
-          user_name: name,
-          user_email: email,
-          user_phone: phone || 'Not provided',
-          service_type: service,
-          user_message: message,
-          reply_to: email
-        };
-        
-        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
-        
-        showAlert('✅ Thank you! Your message has been sent successfully. We will get back to you within 24 hours!', 'success');
-        form.reset();
-        
-      } catch (error) {
-        console.error('Error:', error);
-        showAlert('❌ Failed to send message. Please call us directly at +91 7056836166', 'error');
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
-      }
-    });
-  </script>
+  });
+  
+  // Mobile Menu Toggle
+  const menuToggle = document.getElementById('menuToggle');
+  const mobileNav = document.getElementById('mobileNav');
+  const navOverlay = document.getElementById('navOverlay');
+  const closeMenu = () => { mobileNav.classList.remove('active'); navOverlay.classList.remove('active'); menuToggle.classList.remove('active'); document.body.style.overflow = ''; };
+  const openMenu = () => { mobileNav.classList.add('active'); navOverlay.classList.add('active'); menuToggle.classList.add('active'); document.body.style.overflow = 'hidden'; };
+  menuToggle.addEventListener('click', (e) => { e.stopPropagation(); mobileNav.classList.contains('active') ? closeMenu() : openMenu(); });
+  navOverlay.addEventListener('click', closeMenu);
+  document.querySelectorAll('.mobile-nav a').forEach(link => link.addEventListener('click', closeMenu));
+</script>
 </body>
 </html>
