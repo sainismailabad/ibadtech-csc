@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=1.0"/>
   <title>Contact Us | Ibad Tech - Premium Digital Solutions</title>
   <meta name="description" content="Get in touch with Ibad Tech for professional digital marketing, web development, graphic design, and IT services." />
   <link rel="icon" href="https://sainismailabad.github.io/ibadtech/Logo.jpg" type="image/jpeg" />
@@ -30,17 +30,13 @@
       --primary-dark: #4f46e5;
       --primary-light: #818cf8;
       --secondary: #06b6d4;
-      --secondary-dark: #0891b2;
       --dark: #0f172a;
-      --dark-light: #1e293b;
-      --gray: #64748b;
-      --gray-light: #94a3b8;
       --light: #f8fafc;
+      --gray: #64748b;
       --white: #ffffff;
       --success: #10b981;
       --error: #ef4444;
       --gradient-1: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
-      --gradient-2: linear-gradient(135deg, #4f46e5 0%, #0891b2 100%);
       --shadow-sm: 0 4px 6px -2px rgba(0, 0, 0, 0.05);
       --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
       --shadow-lg: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
@@ -65,7 +61,7 @@
     .header {
       background: rgba(255, 255, 255, 0.98);
       backdrop-filter: blur(20px);
-      padding: 16px 0;
+      padding: 12px 0;
       position: fixed;
       width: 100%;
       top: 0;
@@ -78,24 +74,26 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
+      gap: 15px;
     }
 
     .logo-wrapper {
       display: flex;
       align-items: center;
-      gap: 15px;
+      gap: 10px;
       text-decoration: none;
+      flex-shrink: 0;
     }
 
     .logo {
-      height: 55px;
+      height: 45px;
       width: auto;
-      border-radius: 12px;
+      border-radius: 10px;
     }
 
     .logo-text h1 {
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       background: var(--gradient-1);
       -webkit-background-clip: text;
       background-clip: text;
@@ -104,18 +102,21 @@
     }
 
     .logo-text p {
-      font-size: 0.7rem;
+      font-size: 0.6rem;
       color: var(--gray);
+      display: none;
     }
 
     .header-phone {
       color: var(--gray);
-      font-size: 0.9rem;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
     .header-phone i {
       color: var(--primary);
-      margin-right: 8px;
+      margin-right: 6px;
     }
 
     /* Navigation */
@@ -123,30 +124,32 @@
       background: var(--white);
       box-shadow: var(--shadow-sm);
       position: fixed;
-      top: 87px;
+      top: 69px;
       width: 100%;
       z-index: 999;
       border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      overflow-x: auto;
+      white-space: nowrap;
     }
 
     .navbar ul {
       display: flex;
       justify-content: center;
       list-style: none;
-      gap: 8px;
-      flex-wrap: wrap;
-      padding: 12px 0;
+      gap: 4px;
+      padding: 10px 15px;
     }
 
     .navbar a {
       display: block;
-      padding: 10px 24px;
+      padding: 8px 18px;
       color: var(--dark);
       font-weight: 500;
       transition: all 0.3s ease;
-      font-size: 0.95rem;
+      font-size: 0.85rem;
       border-radius: 50px;
       text-decoration: none;
+      white-space: nowrap;
     }
 
     .navbar a:hover, .navbar a.active {
@@ -162,15 +165,14 @@
     /* Hero Section */
     .page-hero {
       background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
-      padding: 200px 0 80px;
+      padding: 160px 0 50px;
       text-align: center;
-      position: relative;
     }
 
     .page-hero h1 {
-      font-size: 3.5rem;
+      font-size: 2.5rem;
       font-family: 'Space Grotesk', monospace;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
 
     .page-hero h1 span {
@@ -181,23 +183,24 @@
     }
 
     .page-hero p {
-      font-size: 1.2rem;
+      font-size: 1rem;
       color: var(--gray);
-      max-width: 700px;
+      max-width: 600px;
       margin: 0 auto;
+      padding: 0 15px;
     }
 
     /* Contact Section */
     .contact-section {
-      padding: 60px 0 100px;
+      padding: 40px 0 80px;
     }
 
     .contact-wrapper {
       display: grid;
       grid-template-columns: 1fr 1.2fr;
-      gap: 50px;
+      gap: 40px;
       background: var(--white);
-      border-radius: 32px;
+      border-radius: 28px;
       overflow: hidden;
       box-shadow: var(--shadow-xl);
     }
@@ -205,55 +208,55 @@
     /* Contact Info Side */
     .contact-info {
       background: var(--gradient-1);
-      padding: 50px 40px;
+      padding: 40px 30px;
       color: white;
-      position: relative;
     }
 
     .contact-info h2 {
-      font-size: 2rem;
-      margin-bottom: 20px;
+      font-size: 1.8rem;
+      margin-bottom: 15px;
       font-family: 'Space Grotesk', monospace;
     }
 
     .contact-info h2:after {
       content: '';
       display: block;
-      width: 60px;
-      height: 4px;
+      width: 50px;
+      height: 3px;
       background: white;
-      margin-top: 15px;
+      margin-top: 12px;
       border-radius: 2px;
     }
 
     .contact-info > p {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       opacity: 0.9;
-      margin-bottom: 40px;
-      line-height: 1.6;
+      margin-bottom: 30px;
+      line-height: 1.5;
     }
 
     .info-item {
       display: flex;
-      align-items: center;
-      gap: 18px;
-      margin-bottom: 28px;
+      align-items: flex-start;
+      gap: 15px;
+      margin-bottom: 22px;
     }
 
     .info-icon {
-      width: 48px;
-      height: 48px;
+      width: 42px;
+      height: 42px;
       background: rgba(255, 255, 255, 0.15);
-      border-radius: 16px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
+      flex-shrink: 0;
     }
 
     .info-details h4 {
-      font-size: 1rem;
-      margin-bottom: 5px;
+      font-size: 0.95rem;
+      margin-bottom: 4px;
       font-weight: 600;
     }
 
@@ -261,7 +264,8 @@
     .info-details a {
       color: rgba(255, 255, 255, 0.85);
       text-decoration: none;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
+      word-break: break-word;
     }
 
     .info-details a:hover {
@@ -271,19 +275,20 @@
     .social-links-contact {
       display: flex;
       gap: 12px;
-      margin-top: 40px;
+      margin-top: 30px;
+      flex-wrap: wrap;
     }
 
     .social-links-contact a {
-      width: 42px;
-      height: 42px;
+      width: 38px;
+      height: 38px;
       background: rgba(255, 255, 255, 0.15);
       border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
-      font-size: 1.1rem;
+      font-size: 1rem;
       transition: all 0.3s ease;
     }
 
@@ -295,33 +300,33 @@
 
     /* Form Side */
     .contact-form {
-      padding: 50px 40px;
+      padding: 40px 35px;
       background: var(--white);
     }
 
     .contact-form h2 {
-      font-size: 2rem;
+      font-size: 1.8rem;
       color: var(--dark);
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       font-family: 'Space Grotesk', monospace;
     }
 
     .contact-form > p {
       color: var(--gray);
-      margin-bottom: 30px;
-      font-size: 0.95rem;
+      margin-bottom: 25px;
+      font-size: 0.9rem;
     }
 
     .form-group {
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     .form-group label {
       display: block;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       font-weight: 600;
       color: var(--dark);
-      font-size: 0.9rem;
+      font-size: 0.85rem;
     }
 
     .form-group label i {
@@ -333,10 +338,10 @@
     .form-group select,
     .form-group textarea {
       width: 100%;
-      padding: 14px 18px;
+      padding: 12px 16px;
       border: 2px solid #e2e8f0;
-      border-radius: 14px;
-      font-size: 0.95rem;
+      border-radius: 12px;
+      font-size: 0.9rem;
       font-family: 'Inter', sans-serif;
       transition: all 0.3s ease;
       outline: none;
@@ -352,17 +357,17 @@
 
     .form-group textarea {
       resize: vertical;
-      min-height: 120px;
+      min-height: 100px;
     }
 
     .submit-btn {
       width: 100%;
-      padding: 16px;
+      padding: 14px;
       background: var(--gradient-1);
       color: white;
       border: none;
-      border-radius: 14px;
-      font-size: 1rem;
+      border-radius: 12px;
+      font-size: 0.95rem;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
@@ -385,13 +390,14 @@
 
     /* Alert Messages */
     .alert {
-      padding: 14px 18px;
-      border-radius: 14px;
-      margin-bottom: 25px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      margin-bottom: 20px;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       animation: slideIn 0.3s ease;
+      font-size: 0.85rem;
     }
 
     .alert-success {
@@ -407,7 +413,7 @@
     }
 
     .alert i {
-      font-size: 1.1rem;
+      font-size: 1rem;
     }
 
     @keyframes slideIn {
@@ -426,27 +432,31 @@
       background: var(--dark);
       color: white;
       text-align: center;
-      padding: 40px 0 30px;
+      padding: 30px 0 20px;
     }
 
     .footer:before {
       content: '';
       display: block;
       width: 100%;
-      height: 4px;
+      height: 3px;
       background: var(--gradient-1);
-      margin-bottom: 40px;
+      margin-bottom: 30px;
+    }
+
+    .footer p {
+      font-size: 0.8rem;
     }
 
     /* WhatsApp */
     .whatsapp-float {
       position: fixed;
-      bottom: 30px;
-      right: 30px;
-      width: 60px;
-      height: 60px;
+      bottom: 20px;
+      right: 20px;
+      width: 55px;
+      height: 55px;
       background: #25d366;
-      border-radius: 16px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -456,70 +466,154 @@
       text-decoration: none;
     }
 
+    .whatsapp-float i {
+      font-size: 28px;
+      color: white;
+    }
+
     .whatsapp-float:hover {
       transform: scale(1.1);
     }
 
     /* Responsive */
-    @media (max-width: 1024px) {
-      .container {
-        padding: 0 30px;
-      }
-    }
-
     @media (max-width: 992px) {
       .contact-wrapper {
         grid-template-columns: 1fr;
+        gap: 0;
       }
       .contact-info {
-        padding: 40px 35px;
+        padding: 35px 30px;
+      }
+      .contact-form {
+        padding: 35px 30px;
       }
     }
 
     @media (max-width: 768px) {
       .container {
-        padding: 0 24px;
+        padding: 0 20px;
       }
-      .page-hero {
-        padding: 160px 0 60px;
+      .header .container {
+        gap: 8px;
       }
-      .page-hero h1 {
-        font-size: 2.2rem;
+      .logo {
+        height: 40px;
+      }
+      .logo-text h1 {
+        font-size: 1rem;
+      }
+      .header-phone {
+        font-size: 0.7rem;
+      }
+      .header-phone i {
+        font-size: 0.7rem;
       }
       .navbar {
-        top: 73px;
+        top: 63px;
       }
       .navbar a {
-        padding: 8px 16px;
-        font-size: 0.8rem;
+        padding: 6px 14px;
+        font-size: 0.75rem;
+      }
+      .page-hero {
+        padding: 140px 0 40px;
+      }
+      .page-hero h1 {
+        font-size: 2rem;
+      }
+      .page-hero p {
+        font-size: 0.9rem;
       }
       .contact-section {
-        padding: 40px 0 60px;
+        padding: 30px 0 60px;
       }
       .contact-info h2,
       .contact-form h2 {
-        font-size: 1.6rem;
+        font-size: 1.5rem;
       }
       .contact-form {
-        padding: 35px 25px;
+        padding: 30px 25px;
       }
       .contact-info {
-        padding: 35px 25px;
+        padding: 30px 25px;
+      }
+      .info-item {
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+      .info-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 1rem;
+      }
+      .info-details h4 {
+        font-size: 0.85rem;
+      }
+      .info-details p,
+      .info-details a {
+        font-size: 0.8rem;
+      }
+      .submit-btn {
+        padding: 12px;
+        font-size: 0.9rem;
+      }
+      .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        bottom: 15px;
+        right: 15px;
+      }
+      .whatsapp-float i {
+        font-size: 25px;
       }
     }
 
     @media (max-width: 480px) {
       .container {
-        padding: 0 16px;
+        padding: 0 15px;
       }
-      .contact-form {
-        padding: 30px 20px;
+      .logo-wrapper {
+        gap: 6px;
       }
-      .contact-info {
-        padding: 30px 20px;
+      .logo {
+        height: 35px;
       }
-      .submit-btn {
-        padding: 14px;
+      .logo-text h1 {
+        font-size: 0.9rem;
+      }
+      .header-phone {
+        font-size: 0.65rem;
+      }
+      .header-phone i {
+        display: none;
+      }
+      .navbar a {
+        padding: 5px 12px;
+        font-size: 0.7rem;
+      }
+      .page-hero h1 {
+        font-size: 1.8rem;
+      }
+      .contact-form h2,
+      .contact-info h2 {
+        font-size: 1.3rem;
+      }
+      .contact-form > p,
+      .contact-info > p {
+        font-size: 0.85rem;
+      }
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        padding: 10px 14px;
+        font-size: 0.85rem;
+      }
+      .social-links-contact a {
+        width: 35px;
+        height: 35px;
+      }
+      .footer p {
+        font-size: 0.7rem;
       }
     }
   </style>
@@ -665,7 +759,7 @@
 
   <!-- WhatsApp Button -->
   <a href="https://wa.me/7056836166" class="whatsapp-float" target="_blank">
-    <i class="fab fa-whatsapp" style="font-size: 32px; color: white;"></i>
+    <i class="fab fa-whatsapp"></i>
   </a>
 
   <script>
@@ -694,48 +788,29 @@
       
       setTimeout(() => {
         alertDiv.style.display = 'none';
-      }, 8000);
+      }, 6000);
     }
     
     form.addEventListener('submit', async function(e) {
       e.preventDefault();
       
-      // Get form values
       const name = document.getElementById('user_name').value.trim();
       const email = document.getElementById('user_email').value.trim();
       const phone = document.getElementById('user_phone').value.trim();
       const service = document.getElementById('service').value;
       const message = document.getElementById('message').value.trim();
       
-      // Validation
-      if (!name) {
-        showAlert('⚠️ Please enter your name', 'error');
-        return;
-      }
-      if (!email) {
-        showAlert('⚠️ Please enter your email address', 'error');
-        return;
-      }
-      if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
-        showAlert('⚠️ Please enter a valid email address', 'error');
-        return;
-      }
-      if (!service) {
-        showAlert('⚠️ Please select a service', 'error');
-        return;
-      }
-      if (!message) {
-        showAlert('⚠️ Please enter your message', 'error');
-        return;
-      }
+      if (!name) { showAlert('⚠️ Please enter your name', 'error'); return; }
+      if (!email) { showAlert('⚠️ Please enter your email address', 'error'); return; }
+      if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) { showAlert('⚠️ Please enter a valid email address', 'error'); return; }
+      if (!service) { showAlert('⚠️ Please select a service', 'error'); return; }
+      if (!message) { showAlert('⚠️ Please enter your message', 'error'); return; }
       
-      // Disable button
       submitBtn.disabled = true;
       submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
       
       try {
-        // Email to ADMIN (you)
-        const adminParams = {
+        const templateParams = {
           to_email: 'sainsanty2@gmail.com',
           user_name: name,
           user_email: email,
@@ -745,24 +820,9 @@
           reply_to: email
         };
         
-        console.log('Sending to admin:', adminParams);
-        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, adminParams);
+        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
         
-        // Email to CUSTOMER (confirmation)
-        const customerParams = {
-          to_email: email,
-          user_name: name,
-          user_email: email,
-          user_phone: phone || 'Not provided',
-          service_type: service,
-          user_message: message,
-          reply_to: 'sainsanty2@gmail.com'
-        };
-        
-        console.log('Sending to customer:', customerParams);
-        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, customerParams);
-        
-        showAlert('✅ Thank you! Your message has been sent successfully. A confirmation email has been sent to your inbox.', 'success');
+        showAlert('✅ Thank you! Your message has been sent successfully. We will get back to you within 24 hours!', 'success');
         form.reset();
         
       } catch (error) {
