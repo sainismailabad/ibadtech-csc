@@ -445,6 +445,25 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* Footer Links Style */
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin: 30px 0 20px;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: var(--gray-light);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: all 0.3s;
+    }
+    .footer-links a:hover {
+      color: var(--primary);
+      transform: translateY(-2px);
+    }
+
     /* Footer Premium */
     .footer {
       background: var(--dark);
@@ -545,6 +564,8 @@
       .submit-btn { padding: 12px; }
       .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 30px; }
       .social-icons { justify-content: center; }
+      .footer-links { gap: 20px; }
+      .footer-links a { font-size: 0.75rem; }
     }
     @media (max-width: 550px) {
       .logo-img { height: 40px; }
@@ -553,6 +574,8 @@
       .contact-info, .contact-form { padding: 28px 20px; }
       .form-group input, .form-group select, .form-group textarea { padding: 10px 14px; }
       .whatsapp-float { width: 50px; height: 50px; bottom: 20px; right: 20px; }
+      .footer-links { gap: 15px; }
+      .footer-links a { font-size: 0.7rem; }
     }
   </style>
 </head>
@@ -735,6 +758,14 @@
         <p><i class="fas fa-map-marker-alt"></i> Kathgarh Road, Ismailabad, Kurukshetra, Haryana - 136129</p>
       </div>
     </div>
+    
+    <!-- ✅ Privacy Policy & Terms & Conditions Links Added Here -->
+    <div class="footer-links">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms & Conditions</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+    
     <div class="footer-bottom">
       <p>&copy; 2025 Ibad Tech — All Rights Reserved. Built for digital excellence.</p>
     </div>
