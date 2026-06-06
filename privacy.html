@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Privacy Policy | Ibad Tech</title>
+  <meta name="description" content="Privacy Policy of Ibad Tech - Learn how we collect, use, and protect your personal information.">
+  <meta name="robots" content="index, follow">
+  
+  <link rel="icon" href="Logo.jpg" type="image/jpeg">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --secondary: #06b6d4;
+      --dark: #0f172a;
+      --light: #f8fafc;
+      --gray: #64748b;
+      --white: #ffffff;
+      --gradient-primary: linear-gradient(135deg, #2563eb 0%, #06b6d4 100%);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07);
+      --shadow-lg: 0 10px 25px -3px rgba(0,0,0,0.08);
+    }
+    body { font-family: 'Inter', sans-serif; background: var(--light); color: var(--dark); overflow-x: hidden; }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; width: 100%; }
+    h1, h2, h3, .logo-text { font-family: 'Space Grotesk', monospace; font-weight: 700; letter-spacing: -0.02em; }
+
+    /* Header */
+    .header { background: rgba(255,255,255,0.98); backdrop-filter: blur(12px); position: fixed; top: 0; width: 100%; z-index: 1002; padding: 14px 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
+    .header .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo-wrapper { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .logo-img { height: 48px; width: auto; border-radius: 14px; }
+    .logo-text h1 { font-size: 1.4rem; background: var(--gradient-primary); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .logo-text p { font-size: 0.6rem; color: var(--gray); }
+    .header-phone { background: rgba(37,99,235,0.1); padding: 10px 20px; border-radius: 60px; font-weight: 700; font-size: 0.9rem; color: var(--primary); }
+
+    /* Mobile Menu */
+    .menu-toggle { display: none; background: var(--gradient-primary); border: none; width: 48px; height: 48px; border-radius: 14px; cursor: pointer; flex-direction: column; justify-content: center; align-items: center; gap: 5px; }
+    .menu-toggle span { width: 24px; height: 2.5px; background: white; border-radius: 4px; transition: all 0.3s; }
+    .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+    .menu-toggle.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+
+    /* Navigation */
+    .navbar { position: sticky; top: 76px; background: rgba(255,255,255,0.96); backdrop-filter: blur(16px); z-index: 1001; border-bottom: 1px solid rgba(0,0,0,0.06); }
+    .nav-menu { display: flex; justify-content: center; gap: 8px; list-style: none; padding: 12px 0; }
+    .nav-menu a { padding: 10px 24px; font-weight: 600; font-size: 0.9rem; color: var(--dark); text-decoration: none; border-radius: 60px; transition: all 0.2s; }
+    .nav-menu a:hover { background: var(--gradient-primary); color: white; }
+
+    /* Mobile Nav */
+    .mobile-nav { position: fixed; top: 76px; right: -100%; width: 85%; max-width: 340px; height: calc(100vh - 76px); background: rgba(255,255,255,0.98); backdrop-filter: blur(20px); z-index: 1000; transition: right 0.35s; box-shadow: var(--shadow-lg); border-left: 1px solid rgba(0,0,0,0.08); padding: 28px 24px; overflow-y: auto; }
+    .mobile-nav.active { right: 0; }
+    .mobile-nav ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .mobile-nav a { display: block; padding: 14px 20px; font-weight: 600; font-size: 1.05rem; color: var(--dark); text-decoration: none; border-radius: 16px; }
+    .mobile-nav a:hover { background: var(--gradient-primary); color: white; }
+    .mobile-phone { margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.1); display: flex; align-items: center; gap: 12px; font-weight: 700; color: var(--primary); }
+    .nav-overlay { position: fixed; top: 76px; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; display: none; backdrop-filter: blur(4px); }
+    .nav-overlay.active { display: block; }
+
+    /* Page Hero */
+    .page-hero { background: linear-gradient(135deg, #ffffff 0%, #eef2ff 50%, #f8fafc 100%); padding: 170px 0 50px; text-align: center; }
+    .page-hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); margin-bottom: 16px; }
+    .page-hero h1 span { background: var(--gradient-primary); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .page-hero p { font-size: 1rem; color: var(--gray); max-width: 600px; margin: 0 auto; }
+
+    /* Content Section */
+    .content-section { padding: 60px 0 80px; }
+    .policy-card { background: var(--white); border-radius: 28px; padding: 50px; box-shadow: var(--shadow-lg); }
+    .policy-card h2 { font-size: 1.6rem; color: var(--primary); margin: 30px 0 15px 0; font-family: 'Space Grotesk', monospace; }
+    .policy-card h2:first-of-type { margin-top: 0; }
+    .policy-card h3 { font-size: 1.2rem; color: var(--dark); margin: 20px 0 10px 0; }
+    .policy-card p { color: var(--gray); line-height: 1.7; margin-bottom: 15px; font-size: 0.95rem; }
+    .policy-card ul { margin: 15px 0 15px 25px; color: var(--gray); line-height: 1.7; }
+    .policy-card li { margin-bottom: 8px; }
+    .last-updated { background: #f0f9ff; padding: 12px 20px; border-radius: 12px; display: inline-block; margin-bottom: 30px; font-size: 0.85rem; color: var(--primary); }
+
+    /* Footer */
+    .footer { background: var(--dark); color: white; padding: 50px 0 30px; margin-top: 40px; }
+    .footer-bottom { text-align: center; padding-top: 25px; border-top: 1px solid rgba(255,255,255,0.08); color: var(--gray-light); font-size: 0.8rem; }
+    .footer-links { display: flex; justify-content: center; gap: 30px; margin-bottom: 20px; flex-wrap: wrap; }
+    .footer-links a { color: var(--gray-light); text-decoration: none; font-size: 0.85rem; }
+    .footer-links a:hover { color: var(--primary); }
+
+    /* WhatsApp */
+    .whatsapp-float { position: fixed; bottom: 28px; right: 28px; width: 56px; height: 56px; background: #25d366; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 99; box-shadow: 0 10px 25px rgba(37,211,102,0.4); text-decoration: none; animation: pulse 2s infinite; }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37,211,102,0.7); } 70% { box-shadow: 0 0 0 12px rgba(37,211,102,0); } 100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); } }
+
+    @media (max-width: 768px) {
+      .container { padding: 0 20px; }
+      .header-phone { display: none; }
+      .menu-toggle { display: flex; }
+      .navbar { display: none; }
+      .page-hero { padding: 150px 0 40px; }
+      .policy-card { padding: 30px 25px; }
+      .policy-card h2 { font-size: 1.3rem; }
+    }
+    @media (max-width: 550px) {
+      .logo-img { height: 40px; }
+      .logo-text p { display: none; }
+      .policy-card { padding: 25px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="container">
+    <a href="index.html" class="logo-wrapper">
+      <img src="Logo.jpg" alt="Ibad Tech Logo" class="logo-img" onerror="this.src='https://placehold.co/200x200?text=IT'">
+      <div class="logo-text"><h1>Ibad Tech</h1><p>Premium Digital Solutions</p></div>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="header-phone"><i class="fas fa-phone-alt"></i><span>+91 70568 36166</span></div>
+  </div>
+</header>
+
+<nav class="navbar">
+  <div class="container">
+    <ul class="nav-menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="digital.html">Digital Marketing</a></li>
+      <li><a href="https://www.instagram.com/ibad_tech" target="_blank">Portfolio</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="mobile-nav" id="mobileNav">
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="digital.html">Digital Marketing</a></li>
+    <li><a href="https://www.instagram.com/ibad_tech" target="_blank">Portfolio</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="mobile-phone"><i class="fas fa-phone-alt"></i><span>+91 70568 36166</span></div>
+</div>
+<div class="nav-overlay" id="navOverlay"></div>
+
+<section class="page-hero">
+  <div class="container">
+    <h1>Privacy <span>Policy</span></h1>
+    <p>Your privacy is important to us. Learn how we collect, use, and protect your information.</p>
+  </div>
+</section>
+
+<section class="content-section">
+  <div class="container">
+    <div class="policy-card">
+      <div class="last-updated"><i class="fas fa-calendar-alt"></i> Last Updated: June 06, 2025</div>
+      
+      <h2>1. Information We Collect</h2>
+      <p>At Ibad Tech, we collect information to provide better services to our clients. We collect the following types of information:</p>
+      <ul>
+        <li><strong>Personal Information:</strong> Name, email address, phone number, and company details when you fill out our contact form.</li>
+        <li><strong>Usage Data:</strong> Information about how you use our website, including IP address, browser type, and pages visited.</li>
+        <li><strong>Cookies:</strong> We use cookies to improve your browsing experience and analyze website traffic.</li>
+      </ul>
+
+      <h2>2. How We Use Your Information</h2>
+      <p>We use the information we collect for the following purposes:</p>
+      <ul>
+        <li>To respond to your inquiries and provide customer support</li>
+        <li>To process your service requests and deliver our digital solutions</li>
+        <li>To improve our website, services, and user experience</li>
+        <li>To send periodic emails regarding your projects or promotional offers</li>
+        <li>To comply with legal obligations</li>
+      </ul>
+
+      <h2>3. Information Sharing & Disclosure</h2>
+      <p>We do not sell, trade, or rent your personal information to third parties. We may share your information only in the following circumstances:</p>
+      <ul>
+        <li>With your consent</li>
+        <li>To comply with legal requirements or respond to lawful requests</li>
+        <li>To protect the rights, property, or safety of Ibad Tech, our clients, or others</li>
+        <li>With service providers who assist us in operating our website and delivering services</li>
+      </ul>
+
+      <h2>4. Data Security</h2>
+      <p>We implement industry-standard security measures to protect your personal information. However, no method of transmission over the internet is 100% secure. While we strive to protect your data, we cannot guarantee absolute security.</p>
+
+      <h2>5. Your Rights</h2>
+      <p>You have the right to:</p>
+      <ul>
+        <li>Access the personal information we hold about you</li>
+        <li>Request correction of inaccurate information</li>
+        <li>Request deletion of your personal information</li>
+        <li>Opt-out of marketing communications</li>
+      </ul>
+      <p>To exercise these rights, please contact us at <a href="mailto:sainsanty2@gmail.com" style="color: var(--primary);">sainsanty2@gmail.com</a>.</p>
+
+      <h2>6. Cookies Policy</h2>
+      <p>We use cookies to enhance your browsing experience. You can choose to disable cookies through your browser settings, but this may affect certain features of our website.</p>
+
+      <h2>7. Third-Party Links</h2>
+      <p>Our website may contain links to third-party websites. We are not responsible for the privacy practices or content of these external sites.</p>
+
+      <h2>8. Children's Privacy</h2>
+      <p>Our services are not directed to individuals under the age of 13. We do not knowingly collect personal information from children.</p>
+
+      <h2>9. Changes to This Privacy Policy</h2>
+      <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated revision date.</p>
+
+      <h2>10. Contact Us</h2>
+      <p>If you have any questions about this Privacy Policy, please contact us:</p>
+      <ul>
+        <li><strong>Email:</strong> <a href="mailto:sainsanty2@gmail.com" style="color: var(--primary);">sainsanty2@gmail.com</a></li>
+        <li><strong>Phone:</strong> <a href="tel:+917056836166" style="color: var(--primary);">+91 70568 36166</a></li>
+        <li><strong>Address:</strong> Kathgarh Road, Ismailabad, Kurukshetra, Haryana - 136129</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms & Conditions</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Ibad Tech — All Rights Reserved. Built for digital excellence.</p>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/917056836166" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp" style="font-size: 28px; color: white;"></i></a>
+
+<script>
+  const menuToggle = document.getElementById('menuToggle');
+  const mobileNav = document.getElementById('mobileNav');
+  const navOverlay = document.getElementById('navOverlay');
+  const closeMenu = () => { mobileNav.classList.remove('active'); navOverlay.classList.remove('active'); menuToggle.classList.remove('active'); document.body.style.overflow = ''; };
+  const openMenu = () => { mobileNav.classList.add('active'); navOverlay.classList.add('active'); menuToggle.classList.add('active'); document.body.style.overflow = 'hidden'; };
+  menuToggle.addEventListener('click', (e) => { e.stopPropagation(); mobileNav.classList.contains('active') ? closeMenu() : openMenu(); });
+  navOverlay.addEventListener('click', closeMenu);
+  document.querySelectorAll('.mobile-nav a').forEach(link => link.addEventListener('click', closeMenu));
+</script>
+</body>
+</html>
