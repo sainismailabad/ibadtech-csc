@@ -387,7 +387,7 @@
     .stat-card {
       background: rgba(255,255,255,0.05);
       backdrop-filter: blur(8px);
-      border-radius: 48px;  /* Increased from 32px to 48px for very rounded/attractive corners */
+      border-radius: 48px;
       padding: 32px 24px;
       text-align: center;
       transition: all 0.3s;
@@ -420,8 +420,29 @@
     .testimonial-card { background: white; border-radius: 24px; padding: 28px; box-shadow: var(--shadow-md); transition: all 0.3s; }
     .testimonial-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-xl); }
     .cta-banner { background: var(--gradient-primary); border-radius: 40px; padding: 56px 48px; text-align: center; margin: 60px auto; }
+    
+    /* Footer */
     .footer { background: var(--dark); color: white; padding: 60px 0 32px; }
     .footer-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 48px; }
+
+    /* Footer Links - New */
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin: 30px 0 20px;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: var(--gray-light);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: all 0.3s;
+    }
+    .footer-links a:hover {
+      color: var(--primary);
+      transform: translateY(-2px);
+    }
 
     /* Section spacing */
     section {
@@ -480,6 +501,8 @@
       .testimonial-grid { gap: 20px; }
       .cta-banner { margin: 40px 20px; padding: 40px 24px; }
       #solutions { padding-top: 20px; }
+      .footer-links { gap: 20px; }
+      .footer-links a { font-size: 0.75rem; }
     }
     @media (max-width: 550px) {
       .stats-grid { grid-template-columns: 1fr; }
@@ -488,6 +511,8 @@
       .logo-text p { display: none; }
       .services-grid { gap: 16px; }
       .stat-card { border-radius: 32px; }
+      .footer-links { gap: 15px; }
+      .footer-links a { font-size: 0.7rem; }
     }
 
     /* Animations */
@@ -558,7 +583,7 @@
   <div class="service-card" data-aos="fade-up" data-aos-delay="250" onclick="window.location.href='services.html'"><div class="service-icon"><i class="fas fa-headset"></i></div><h3 style="margin: 18px 0 12px;">IT Consulting</h3><p>Cloud migration, AI strategy, digital transformation — future-proof infrastructure.</p></div>
 </div></div></section>
 
-<!-- Impact Section - EXTRA ROUNDED CORNERS (48px border-radius) -->
+<!-- Impact Section -->
 <section class="stats-section"><div class="container"><h2 data-aos="fade-up" style="color: white;">Our <span>Impact</span></h2>
 <div class="stats-grid">
   <div class="stat-card" data-aos="fade-up" data-aos-delay="0"><div class="stat-number"><span class="counter" data-target="520">0</span>+</div><div class="stat-label"><i class="fas fa-project-diagram"></i> Projects Completed</div></div>
@@ -591,12 +616,57 @@
 <div class="container"><div class="cta-banner" data-aos="zoom-in-up"><h2 style="color: white; margin-bottom: 16px;">Ready to Elevate Your Business?</h2><p style="color: rgba(255,255,255,0.9); margin-bottom: 28px;">Get a personalized strategy session and free audit. Let's turn visitors into loyal customers.</p><a href="contact.html" class="btn-primary" style="background: white; color: var(--primary-dark);">Book Free Consultation <i class="fas fa-calendar-alt"></i></a></div></div>
 
 <!-- Footer -->
-<footer class="footer" id="contact"><div class="container"><div class="footer-grid">
-  <div class="footer-col"><div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; justify-content: center;"><img src="Logo.jpg" alt="Ibad Tech" style="height: 44px; border-radius: 10px;" loading="lazy" onerror="this.style.display='none'"><h3 style="font-size: 1.3rem;">Ibad Tech</h3></div><p>Enterprise digital solutions that drive real ROI. Committed to excellence and innovation.</p><div style="display: flex; gap: 12px; margin-top: 20px; justify-content: center;"><a href="https://www.facebook.com/share/19CEtXPCrr/" target="_blank" aria-label="Facebook" style="color:white; background: rgba(255,255,255,0.1); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 12px;"><i class="fab fa-facebook-f"></i></a><a href="https://www.instagram.com/ibad_tech" target="_blank" aria-label="Instagram" style="color:white; background: rgba(255,255,255,0.1); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 12px;"><i class="fab fa-instagram"></i></a><a href="#" aria-label="LinkedIn" style="color:white; background: rgba(255,255,255,0.1); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 12px;"><i class="fab fa-linkedin-in"></i></a></div></div>
-  <div class="footer-col"><h4>Quick Links</h4><a href="index.html" style="color: var(--gray-light); text-decoration: none; display: block; margin-bottom: 12px;">Home</a><a href="services.html" style="color: var(--gray-light); text-decoration: none; display: block; margin-bottom: 12px;">Services</a><a href="digital.html" style="color: var(--gray-light); text-decoration: none; display: block; margin-bottom: 12px;">Solutions</a><a href="https://www.instagram.com/ibad_tech" target="_blank" style="color: var(--gray-light); text-decoration: none;">Portfolio</a><a href="contact.html" style="color: var(--gray-light); text-decoration: none; display: block; margin-top: 12px;">Contact</a></div>
-  <div class="footer-col"><h4>Our Expertise</h4><p style="color: var(--gray-light);">SEO / PPC</p><p style="color: var(--gray-light);">Web & App Dev</p><p style="color: var(--gray-light);">Branding & UI/UX</p><p style="color: var(--gray-light);">IT Consulting</p></div>
-  <div class="footer-col"><h4>Get In Touch</h4><p style="color: var(--gray-light);"><i class="fas fa-map-marker-alt"></i> Kathgarh Road, Ismailabad, Kurukshetra</p><p style="color: var(--gray-light);"><i class="fas fa-phone"></i> +91 70568 36166</p><p style="color: var(--gray-light);"><i class="fas fa-envelope"></i> sainsanty2@gmail.com</p><p style="color: var(--gray-light);"><i class="fas fa-clock"></i> Mon-Sat: 9AM - 7PM</p></div>
-</div><div style="text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08);"><p style="color: var(--gray-light);">&copy; 2025 Ibad Tech — All rights reserved. Built for digital excellence.</p></div></div></footer>
+<footer class="footer" id="contact">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; justify-content: center;">
+          <img src="Logo.jpg" alt="Ibad Tech" style="height: 44px; border-radius: 10px;" loading="lazy" onerror="this.style.display='none'">
+          <h3 style="font-size: 1.3rem;">Ibad Tech</h3>
+        </div>
+        <p>Enterprise digital solutions that drive real ROI. Committed to excellence and innovation.</p>
+        <div style="display: flex; gap: 12px; margin-top: 20px; justify-content: center;">
+          <a href="https://www.facebook.com/share/19CEtXPCrr/" target="_blank" aria-label="Facebook" style="color:white; background: rgba(255,255,255,0.1); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 12px;"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/ibad_tech" target="_blank" aria-label="Instagram" style="color:white; background: rgba(255,255,255,0.1); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 12px;"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="LinkedIn" style="color:white; background: rgba(255,255,255,0.1); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 12px;"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a href="index.html" style="color: var(--gray-light); text-decoration: none; display: block; margin-bottom: 12px;">Home</a>
+        <a href="services.html" style="color: var(--gray-light); text-decoration: none; display: block; margin-bottom: 12px;">Services</a>
+        <a href="digital.html" style="color: var(--gray-light); text-decoration: none; display: block; margin-bottom: 12px;">Solutions</a>
+        <a href="https://www.instagram.com/ibad_tech" target="_blank" style="color: var(--gray-light); text-decoration: none;">Portfolio</a>
+        <a href="contact.html" style="color: var(--gray-light); text-decoration: none; display: block; margin-top: 12px;">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Our Expertise</h4>
+        <p style="color: var(--gray-light);">SEO / PPC</p>
+        <p style="color: var(--gray-light);">Web & App Dev</p>
+        <p style="color: var(--gray-light);">Branding & UI/UX</p>
+        <p style="color: var(--gray-light);">IT Consulting</p>
+      </div>
+      <div class="footer-col">
+        <h4>Get In Touch</h4>
+        <p style="color: var(--gray-light);"><i class="fas fa-map-marker-alt"></i> Kathgarh Road, Ismailabad, Kurukshetra</p>
+        <p style="color: var(--gray-light);"><i class="fas fa-phone"></i> +91 70568 36166</p>
+        <p style="color: var(--gray-light);"><i class="fas fa-envelope"></i> sainsanty2@gmail.com</p>
+        <p style="color: var(--gray-light);"><i class="fas fa-clock"></i> Mon-Sat: 9AM - 7PM</p>
+      </div>
+    </div>
+    
+    <!-- ✅ Privacy Policy & Terms & Conditions Links Added Here -->
+    <div class="footer-links">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms & Conditions</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+    
+    <div style="text-align: center; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.08);">
+      <p style="color: var(--gray-light);">&copy; 2025 Ibad Tech — All rights reserved. Built for digital excellence.</p>
+    </div>
+  </div>
+</footer>
 
 <a href="https://wa.me/917056836166" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp"><i class="fab fa-whatsapp" style="font-size: 28px; color: white;"></i></a>
 
