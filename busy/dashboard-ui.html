@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Bills - ERP Dashboard</title>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-body: #f3f4f6;
+            --bg-card: #ffffff;
+            --bg-sidebar: #ffffff;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --text-light: #9ca3af;
+            --primary: #3b82f6;
+            --primary-hover: #2563eb;
+            --border: #e5e7eb;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* --- Sidebar Layout --- */
+        .sidebar {
+            width: 260px;
+            background-color: var(--bg-sidebar);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            z-index: 40;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-header {
+            padding: 24px 20px;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .sidebar-menu {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px 0;
+        }
+
+        .menu-label {
+            padding: 0 20px;
+            margin-top: 16px;
+            margin-bottom: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .menu-label:first-child {
+            margin-top: 0;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 20px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .menu-item i {
+            width: 18px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .menu-item:hover {
+            background-color: #f9fafb;
+            color: var(--primary);
+        }
+
+        .menu-item.active {
+            background-color: #eff6ff;
+            color: var(--primary);
+            border-right: 3px solid var(--primary);
+        }
+
+        /* --- Main Content Layout --- */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .topbar {
+            height: 72px;
+            background-color: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            gap: 16px;
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        .page-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .content-wrapper {
+            flex: 1;
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        /* --- Card & Controls --- */
+        .card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .filters {
+            display: flex;
+            gap: 8px;
+        }
+
+        .filter-pill {
+            background: var(--bg-body);
+            color: var(--text-muted);
+            border: 1px solid transparent;
+            padding: 8px 16px;
+            border-radius: 9999px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-pill:hover {
+            background: #e5e7eb;
+        }
+
+        .filter-pill.active {
+            background: var(--primary);
+            color: #ffffff;
+            box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+        }
+
+        .search-container {
+            position: relative;
+            width: 100%;
+            max-width: 320px;
+        }
+
+        .search-container i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 10px 16px 10px 40px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .search-container input:focus {
+            border-color: var(--primary);
+        }
+
+        /* --- Table Layout --- */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 900px; /* Prevents columns from overlapping */
+        }
+
+        .data-table th, .data-table td {
+            padding: 16px 24px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+            white-space: nowrap; /* Prevents text from overwriting on small screens */
+        }
+
+        .data-table th {
+            background: #f9fafb;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .data-table tr:hover {
+            background-color: #f9fafb;
+        }
+
+        /* Specific Column Styles */
+        .col-party {
+            font-weight: 500;
+            color: var(--text-main);
+        }
+
+        .col-amount {
+            font-weight: 700;
+            color: var(--text-main);
+            text-align: right;
+            font-size: 15px;
+        }
+
+        .th-amount {
+            text-align: right;
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-sale {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+
+        .badge-purchase {
+            background-color: #e0f2fe;
+            color: #1e40af;
+        }
+
+        /* Actions */
+        .actions {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .btn-action {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-view { background: #e0e7ff; color: #4f46e5; }
+        .btn-view:hover { background: #c7d2fe; }
+        
+        .btn-edit { background: #f3f4f6; color: #4b5563; }
+        .btn-edit:hover { background: #e5e7eb; }
+        
+        .btn-delete { background: #fee2e2; color: #dc2626; }
+        .btn-delete:hover { background: #fecaca; }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 1024px) {
+            .sidebar {
+                position: fixed;
+                height: 100%;
+                transform: translateX(-100%);
+            }
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            .mobile-toggle {
+                display: block;
+            }
+            .card-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .search-container {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <i class="fas fa-chart-line"></i>
+            <span>ERP System</span>
+        </div>
+        <div class="sidebar-menu">
+            <div class="menu-label">Masters</div>
+            <a href="#" class="menu-item"><i class="fas fa-users"></i> Accounts / Ledgers</a>
+            <a href="#" class="menu-item"><i class="fas fa-boxes"></i> Item Master</a>
+            
+            <div class="menu-label">Transactions</div>
+            <a href="#" class="menu-item"><i class="fas fa-file-invoice"></i> Sales / Quotation</a>
+            <a href="#" class="menu-item"><i class="fas fa-shopping-cart"></i> Purchase / GRN</a>
+            <a href="#" class="menu-item"><i class="fas fa-arrow-up"></i> Payment Out</a>
+            <a href="#" class="menu-item"><i class="fas fa-arrow-down"></i> Receipt In</a>
+            <a href="#" class="menu-item"><i class="fas fa-book"></i> Journal Voucher</a>
+            
+            <div class="menu-label">Modules (ERP)</div>
+            <a href="#" class="menu-item active"><i class="fas fa-list"></i> All Transactions</a>
+            <a href="#" class="menu-item"><i class="fas fa-university"></i> Banking</a>
+            <a href="#" class="menu-item"><i class="fas fa-handshake"></i> CRM / Leads</a>
+            <a href="#" class="menu-item"><i class="fas fa-user-tie"></i> HR & Payroll</a>
+            <a href="#" class="menu-item"><i class="fas fa-folder-open"></i> Documents</a>
+            
+            <div class="menu-label">Compliance & Reports</div>
+            <a href="#" class="menu-item"><i class="fas fa-chart-pie"></i> Reports Center</a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header class="topbar">
+            <button class="mobile-toggle" onclick="document.getElementById('sidebar').classList.toggle('open')">
+                <i class="fas fa-bars"></i>
+            </button>
+            <h1 class="page-title">All Bills</h1>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="card">
+                <!-- Card Header (Filters & Search) -->
+                <div class="card-header">
+                    <div class="filters">
+                        <button class="filter-pill active">All</button>
+                        <button class="filter-pill">Sales</button>
+                        <button class="filter-pill">Purchases</button>
+                    </div>
+                    <div class="search-container">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search bills...">
+                    </div>
+                </div>
+
+                <!-- Table Area -->
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Invoice No.</th>
+                                <th>Date</th>
+                                <th>Party</th>
+                                <th>Type</th>
+                                <th>GST Type</th>
+                                <th class="th-amount">Amount (₹)</th>
+                                <th style="text-align: center;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="billsTableBody">
+                            <!-- Rows populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // --- Mock Data ---
+        let bills = [
+            { id: 1, no: "2026-06-06", date: "2026-06-06", party: "PARTH TRADING COMPANY", type: "sale", gst: "Intrastate (CGST+SGST)", amount: 33468.75 },
+            { id: 2, no: "PUR/2026/01", date: "2026-06-05", party: "ABC SUPPLIERS", type: "purchase", gst: "Interstate (IGST)", amount: 15200.00 },
+            { id: 3, no: "2026-06-07", date: "2026-06-07", party: "XYZ RETAIL", type: "sale", gst: "Intrastate (CGST+SGST)", amount: 5400.50 },
+            { id: 4, no: "PUR/2026/02", date: "2026-06-08", party: "GLOBAL TRADERS", type: "purchase", gst: "Intrastate (CGST+SGST)", amount: 45000.00 },
+            { id: 5, no: "2026-06-09", date: "2026-06-09", party: "PARTH TRADING COMPANY", type: "sale", gst: "Intrastate (CGST+SGST)", amount: 12500.00 }
+        ];
+
+        let currentFilter = 'all'; // all, sale, purchase
+
+        // --- Render Function ---
+        function renderBills() {
+            const tbody = document.getElementById('billsTableBody');
+            const searchTerm = document.querySelector('.search-container input').value.toLowerCase();
+            
+            // Filter logic
+            let filteredBills = bills.filter(bill => {
+                if (currentFilter !== 'all' && bill.type !== currentFilter) return false;
+                if (searchTerm) {
+                    return bill.no.toLowerCase().includes(searchTerm) || 
+                           bill.party.toLowerCase().includes(searchTerm);
+                }
+                return true;
+            });
+
+            // Empty state
+            if (filteredBills.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: var(--text-muted);">No bills found</td></tr>`;
+                return;
+            }
+
+            // Generate rows
+            let html = '';
+            filteredBills.forEach(bill => {
+                const badgeClass = bill.type === 'sale' ? 'badge-sale' : 'badge-purchase';
+                html += `
+                    <tr>
+                        <td>${bill.no}</td>
+                        <td style="color: var(--text-muted);">${bill.date}</td>
+                        <td class="col-party">${bill.party}</td>
+                        <td><span class="badge ${badgeClass}">${bill.type.toUpperCase()}</span></td>
+                        <td style="color: var(--text-muted);">${bill.gst}</td>
+                        <td class="col-amount">₹${bill.amount.toFixed(2)}</td>
+                        <td>
+                            <div class="actions">
+                                <button class="btn-action btn-view" title="View PDF" onclick="alert('Viewing PDF for ${bill.no}')"><i class="fas fa-file-pdf"></i></button>
+                                <button class="btn-action btn-edit" title="Edit" onclick="alert('Editing ${bill.no}')"><i class="fas fa-edit"></i></button>
+                                <button class="btn-action btn-delete" title="Delete" onclick="deleteBill(${bill.id})"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+            tbody.innerHTML = html;
+        }
+
+        // --- Delete Function ---
+        function deleteBill(id) {
+            if (confirm("Are you sure you want to delete this bill?")) {
+                bills = bills.filter(b => b.id !== id);
+                renderBills();
+            }
+        }
+
+        // --- Event Listeners ---
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('.search-container input').addEventListener('input', renderBills);
+
+            const pills = document.querySelectorAll('.filter-pill');
+            pills.forEach(pill => {
+                pill.addEventListener('click', (e) => {
+                    pills.forEach(p => p.classList.remove('active'));
+                    e.target.classList.add('active');
+
+                    const text = e.target.innerText.toLowerCase();
+                    if (text === 'all') currentFilter = 'all';
+                    else if (text === 'sales') currentFilter = 'sale';
+                    else if (text === 'purchases') currentFilter = 'purchase';
+
+                    renderBills();
+                });
+            });
+
+            renderBills();
+        });
+    </script>
+</body>
+</html>

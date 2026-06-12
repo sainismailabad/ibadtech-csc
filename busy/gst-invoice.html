@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GST Tax Invoice</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: #e8e8e8;
+            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+            font-size: 13px;
+            color: #000;
+            padding: 20px;
+            line-height: 1.35;
+        }
+
+        /* === DOUBLE BORDER WRAPPER - EXACT A4 FIT === */
+        .page-wrapper {
+            max-width: 210mm;
+            height: 285mm;
+            margin: 0 auto;
+            background: #fff;
+            border: 3px double #000;
+            padding: 5px;
+            page-break-after: avoid;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .inner-border {
+            border: 1px solid #000;
+            padding: 12px 16px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+        }
+
+        /* === ADJUSTABLE CONTENT AREA (AUTO) === */
+        .content-grow { flex: 1 1 auto; }
+        .content-shrink { flex: 0 0 auto; }
+
+        /* === HEADER === */
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 2px solid #000;
+            padding-bottom: 7px;
+            margin-bottom: 7px;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .company-details { flex: 1 1 58%; }
+
+        .company-details h2 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #000;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            margin-bottom: 2px;
+        }
+
+        .company-details p {
+            font-size: 10px;
+            color: #444;
+            margin-bottom: 1px;
+            line-height: 1.3;
+        }
+
+        .company-details .gstin-label { font-weight: 700; color: #000; }
+
+        .invoice-title { text-align: right; flex-shrink: 0; }
+
+        .invoice-title h1 {
+            font-size: 20px;
+            font-weight: 800;
+            color: #000;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            line-height: 1.1;
+        }
+
+        .invoice-title p { font-size: 9px; color: #444; font-style: italic; }
+
+        /* === BORDERED ROWS (AUTO HEIGHT) === */
+        .flex-row {
+            display: flex;
+            flex-wrap: wrap;
+            border: 1px solid #000;
+            margin-bottom: 6px;
+        }
+
+        .flex-col {
+            flex: 1 1 50%;
+            padding: 5px 8px;
+            min-width: 240px;
+        }
+
+        .flex-col:not(:last-child) { border-right: 1px solid #000; }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: max-content 1fr;
+            gap: 1px 8px;
+            align-items: baseline;
+        }
+
+        .info-grid span:first-child { font-weight: 600; color: #000; white-space: nowrap; }
+        .info-grid span:last-child { color: #444; }
+
+        .flex-col h3 {
+            font-size: 11px;
+            font-weight: 700;
+            color: #000;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            margin-bottom: 3px;
+            border-bottom: 1px dashed #999;
+            padding-bottom: 2px;
+        }
+
+        .flex-col p { font-size: 10px; color: #444; margin-bottom: 1px; }
+        .flex-col p strong { color: #000; }
+
+        /* === TABLE (AUTO ADJUST) === */
+        .table-container { width: 100%; margin: 2px 0 6px; flex-grow: 1; display: flex; flex-direction: column; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            border: 1px solid #000;
+            height: 100%;
+        }
+
+        thead th {
+            background: #e0e0e0;
+            color: #000;
+            font-weight: 700;
+            text-align: center;
+            padding: 5px 3px;
+            font-size: 11.5px;
+            text-transform: uppercase;
+            letter-spacing: 0.2px;
+            border: 1px solid #000;
+        }
+
+        tbody td {
+            padding: 4px 3px;
+            text-align: right;
+            border: 1px solid #000;
+            vertical-align: top;
+        }
+
+        tbody td:nth-child(2) { text-align: left; }
+        tbody tr:last-child td { border-bottom: 2px solid #000; }
+
+        /* === SUMMARY (AUTO) === */
+        .summary-section {
+            display: flex;
+            flex-wrap: wrap;
+            border: 1px solid #000;
+            margin-bottom: 6px;
+        }
+
+        .tax-summary, .totals {
+            flex: 1 1 50%;
+            padding: 6px 10px;
+            min-width: 220px;
+        }
+
+        .totals { border-left: 1px solid #000; background: #f5f5f5; }
+
+        .summary-section h3 {
+            font-size: 11px;
+            font-weight: 700;
+            color: #000;
+            text-transform: uppercase;
+            border-bottom: 2px solid #000;
+            padding-bottom: 3px;
+            margin-bottom: 4px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: 1fr max-content;
+            gap: 2px 8px;
+            align-items: baseline;
+        }
+
+        .summary-grid span:nth-child(odd) { font-weight: 600; color: #000; }
+        .summary-grid span:nth-child(even) { text-align: right; font-weight: 500; }
+
+        .summary-grid .grand-total-label { font-size: 13px; font-weight: 800; color: #000; }
+        .summary-grid .grand-total-value { font-size: 14px; font-weight: 800; color: #000; }
+
+        /* === AMOUNT IN WORDS === */
+        .amount-words {
+            padding: 5px 8px;
+            border: 1px solid #000;
+            margin-bottom: 6px;
+            font-weight: 700;
+            font-size: 11px;
+            color: #000;
+            background: #f5f5f5;
+        }
+        .amount-words span { color: #000; }
+
+        /* === BOTTOM: BANK DETAILS + TERMS (AUTO GRID) === */
+        .bottom-section {
+            display: flex;
+            flex-wrap: wrap;
+            border: 1px solid #000;
+            flex: 0 0 auto;
+        }
+
+        .bottom-left {
+            flex: 1 1 50%;
+            padding: 6px 8px;
+            min-width: 220px;
+            border-right: 1px solid #000;
+        }
+
+        .bottom-right {
+            flex: 1 1 50%;
+            padding: 6px 8px;
+            min-width: 220px;
+        }
+
+        .bottom-left h4, .bottom-right h4 {
+            font-size: 11px;
+            font-weight: 700;
+            color: #000;
+            text-transform: uppercase;
+            border-bottom: 1px solid #000;
+            padding-bottom: 2px;
+            margin-bottom: 4px;
+        }
+
+        .bank-details-grid {
+            display: grid;
+            grid-template-columns: max-content 1fr;
+            gap: 1px 6px;
+            font-size: 9.5px;
+            align-items: baseline;
+        }
+
+        .bank-details-grid span:first-child { font-weight: 600; color: #000; white-space: nowrap; }
+        .bank-details-grid span:last-child { color: #444; }
+
+        .terms-section ol {
+            padding-left: 14px;
+            margin-bottom: 3px;
+            font-size: 9.5px;
+        }
+        .terms-section ol li { margin-bottom: 1px; line-height: 1.3; }
+
+        .signature-box {
+            margin-top: 12px;
+            text-align: right;
+            padding-top: 4px;
+            border-top: 1px solid #999;
+        }
+
+        .signature-box p { font-size: 10px; color: #444; }
+        .signature-box .company-name { font-weight: 700; color: #000; }
+        .signature-box .sig-line { margin-top: 25px; font-weight: 600; color: #000; font-size: 10px; }
+
+        /* === PRINT: PERFECT A4 === */
+        @media print {
+            body {
+                background: #fff !important;
+                padding: 0;
+                margin: 0;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .page-wrapper {
+                width: 210mm;
+                height: 282mm;
+                border: 3px double #000 !important;
+                padding: 4px;
+                margin: 0 auto;
+                box-shadow: none;
+                box-sizing: border-box;
+                page-break-after: avoid;
+                page-break-inside: avoid;
+            }
+
+            .inner-border { padding: 10px 14px; height: 100%; box-sizing: border-box; }
+
+            thead th { background: #e0e0e0 !important; color: #000 !important; }
+            .totals { background: #f5f5f5 !important; }
+            .amount-words { background: #f5f5f5 !important; }
+
+            table { page-break-inside: auto; }
+            tr { page-break-inside: avoid; page-break-after: auto; }
+            thead { display: table-header-group; }
+            tfoot { display: table-footer-group; }
+
+            @page {
+                size: A4;
+                margin: 5mm;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-wrapper">
+    <div class="inner-border">
+
+        <!-- HEADER -->
+        <div class="header-section">
+            <div class="company-details">
+                <h2>ibadtech busy</h2>
+                <p>[Company Address Line 1]</p>
+                <p>[Company Address Line 2], [City], [State] – [Pincode]</p>
+                <p>📞 [Phone Number] &nbsp;|&nbsp; ✉ [Email Address]</p>
+                <p><span class="gstin-label">GSTIN:</span> [Seller GSTIN]</p>
+            </div>
+            <div class="invoice-title">
+                <h1>Tax Invoice</h1>
+                <p>(Original for Recipient)</p>
+            </div>
+        </div>
+
+        <!-- INVOICE & TRANSPORT -->
+        <div class="flex-row">
+            <div class="flex-col">
+                <div class="info-grid">
+                    <span>Invoice No:</span> <span>[INV-202X-XX]</span>
+                    <span>Invoice Date:</span> <span>[DD-MM-YYYY]</span>
+                    <span>Place of Supply:</span> <span>[State Name] ([State Code])</span>
+                    <span>Reverse Charge:</span> <span>[Yes/No]</span>
+                </div>
+            </div>
+            <div class="flex-col">
+                <div class="info-grid">
+                    <span>Transport Mode:</span> <span>[Road/Rail/Air]</span>
+                    <span>Vehicle No:</span> <span>[XX-00-XX-0000]</span>
+                    <span>Station:</span> <span>[City]</span>
+                    <span>E-Way Bill No:</span> <span>[XXXXXXXXXXXX]</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- BILLED TO & SHIPPED TO -->
+        <div class="flex-row">
+            <div class="flex-col">
+                <h3>Billed To</h3>
+                <p><strong>[Customer Name]</strong></p>
+                <p>[Billing Address Line 1]</p>
+                <p>[Billing Address Line 2], [City], [State] – [Pincode]</p>
+                <p><strong>GSTIN:</strong> [Customer GSTIN]</p>
+            </div>
+            <div class="flex-col">
+                <h3>Shipped To</h3>
+                <p><strong>[Shipping Name]</strong></p>
+                <p>[Shipping Address Line 1]</p>
+                <p>[Shipping Address Line 2], [City], [State] – [Pincode]</p>
+                <p><strong>GSTIN:</strong> [Shipping GSTIN]</p>
+            </div>
+        </div>
+
+        <!-- ITEMS TABLE -->
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width:26px;">#</th>
+                        <th>Description of Goods / Services</th>
+                        <th style="width:35px;">Qty</th>
+                        <th style="width:50px;">Rate (₹)</th>
+                        <th style="width:62px;">Taxable (₹)</th>
+                        <th style="width:42px;">CGST (%)</th>
+                        <th style="width:42px;">SGST (%)</th>
+                        <th style="width:58px;">Total (₹)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align:center;">1</td>
+                        <td>[Item Description 1]</td>
+                        <td>[0.00]</td>
+                        <td>[0.00]</td>
+                        <td>[0.00]</td>
+                        <td>[9%]</td>
+                        <td>[9%]</td>
+                        <td>[0.00]</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:center;">2</td>
+                        <td>[Item Description 2]</td>
+                        <td>[0.00]</td>
+                        <td>[0.00]</td>
+                        <td>[0.00]</td>
+                        <td>[9%]</td>
+                        <td>[9%]</td>
+                        <td>[0.00]</td>
+                    </tr>
+                    <tr style="height:30px;">
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- TAX SUMMARY & TOTALS -->
+        <div class="summary-section">
+            <div class="tax-summary">
+                <h3>Tax Summary</h3>
+                <div class="summary-grid">
+                    <span>Total Taxable Amount:</span> <span>₹ [0.00]</span>
+                    <span>CGST Amount:</span> <span>₹ [0.00]</span>
+                    <span>SGST Amount:</span> <span>₹ [0.00]</span>
+                    <span>Round Off:</span> <span>₹ [0.00]</span>
+                </div>
+            </div>
+            <div class="totals">
+                <h3>Totals</h3>
+                <div class="summary-grid">
+                    <span>Subtotal:</span> <span>₹ [0.00]</span>
+                    <span>Total CGST:</span> <span>₹ [0.00]</span>
+                    <span>Total SGST:</span> <span>₹ [0.00]</span>
+                    <span class="grand-total-label">Grand Total:</span> <span class="grand-total-value">₹ [0.00]</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- AMOUNT IN WORDS -->
+        <div class="amount-words">
+            Amount in words: <span>[Rupees Zero Only]</span>
+        </div>
+
+        <!-- BANK DETAILS + TERMS & SIGNATURE -->
+        <div class="bottom-section">
+            <div class="bottom-left">
+                <h4>Bank Details</h4>
+                <div class="bank-details-grid">
+                    <span>Bank Name:</span> <span>[State Bank of India]</span>
+                    <span>Account No:</span> <span>[31XXXXXXXXX5]</span>
+                    <span>IFSC Code:</span> <span>[SBIN000XXXX]</span>
+                    <span>Branch:</span> <span>[Ismailabad]</span>
+                </div>
+            </div>
+            <div class="bottom-right terms-section">
+                <h4>Terms & Conditions</h4>
+                <ol>
+                    <li>Subject to [City] jurisdiction.</li>
+                    <li>Goods once sold will not be taken back.</li>
+                    <li>Interest @ 18% p.a. on delayed payments.</li>
+                </ol>
+                <div class="signature-box">
+                    <p>For <span class="company-name">[Company Name]</span></p>
+                    <div class="sig-line">Authorized Signatory</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
