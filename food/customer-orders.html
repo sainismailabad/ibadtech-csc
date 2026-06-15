@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders - Ibad Foodie</title>
+    <meta name="description" content="Track your food delivery orders, view order status, cancel orders on Ibad Foodie.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-utensils"></i> Ibad Foodie</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="customer-orders.html">My Orders</a></li>
+                    <li class="nav-item" id="nav-logout"><a class="nav-link" href="#" onclick="auth.logout()">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section" style="padding:calc(60px + 80px) 0 50px;">
+        <div class="container">
+            <h1 class="mb-3">🍕 My Orders</h1>
+            <p class="lead mb-0">Track your food delivery & order history</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <div id="auth-required" class="alert alert-warning" style="display:none;">Please <a href="login.html">login</a> to view orders.</div>
+
+        <div id="orders-content">
+            <!-- Summary Cards -->
+            <div class="row mb-4" id="order-summary"></div>
+            
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Order</th>
+                                    <th>Restaurant</th>
+                                    <th>Items</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="customer-orders-table"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="firebase-config.js"></script>
+    <script src="auth.js"></script>
+    <script>
+
+        async function loadOrders() {
+            const authState = await auth.init();
+            if (!authState.user) {
+                document.getElementById('auth-required').style.display = 'block';
+                document.getElementById('orders-content').style.display = 'none';
+                document.querySelector('.hero-section').style.display = 'none';
+                return;
+            }
+            document.getElementById('nav-logout').style.display = 'block';
+            
+            // Listen for notifications
+            let initialLoad = true;
+            db.ref('notifications').orderByChild('userId').equalTo(authState.user.uid).on('child_added', (snapshot) => {
+                if (!initialLoad) {
+                    const notif = snapshot.val();
+                    if (!notif.read) {
+                        alert(`Notification: ${notif.message}`);
+                        auth.markNotificationRead(snapshot.key);
+                        // Refresh orders to show updated status
+                        loadOrdersOnly(authState.user.uid);
+                    }
+                }
+            });
+            setTimeout(() => initialLoad = false, 3000);
+
+            loadOrdersOnly(authState.user.uid);
+        }
+
+        async function loadOrdersOnly(userId) {
+            const tbody = document.getElementById('customer-orders-table');
+            const summary = document.getElementById('order-summary');
+            tbody.innerHTML = '<tr><td colspan="7" class="text-center py-4"><div class="spinner-border text-primary"></div></td></tr>';
+
+            try {
+                const snap = await db.ref('orders').orderByChild('customerId').equalTo(userId).once('value');
+                tbody.innerHTML = '';
+                let total = 0, pending = 0, delivered = 0, cancelled = 0;
+
+                if (snap.exists()) {
+                    const orders = [];
+                    snap.forEach(child => {
+                        const o = child.val();
+                        orders.push({ id: child.key, ...o });
+                        total += o.totalAmount || 0;
+                        if (o.status === 'Pending' || o.status === 'Preparing' || o.status === 'Shipped') pending++;
+                        else if (o.status === 'Delivered') delivered++;
+                        else if (o.status === 'Cancelled') cancelled++;
+                    });
+                    orders.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+
+                    // Summary
+                    summary.innerHTML = `
+                        <div class="col-md-3 col-6 mb-2"><div class="card p-3 text-center"><h6 class="text-muted">📋 Total Orders</h6><h3 class="fw-bold mb-0">${orders.length}</h3></div></div>
+                        <div class="col-md-3 col-6 mb-2"><div class="card p-3 text-center"><h6 class="text-muted">🕐 Active</h6><h3 class="fw-bold text-warning mb-0">${pending}</h3></div></div>
+                        <div class="col-md-3 col-6 mb-2"><div class="card p-3 text-center"><h6 class="text-muted">✅ Delivered</h6><h3 class="fw-bold text-success mb-0">${delivered}</h3></div></div>
+                        <div class="col-md-3 col-6 mb-2"><div class="card p-3 text-center"><h6 class="text-muted">💰 Total Spent</h6><h3 class="fw-bold text-primary mb-0">₹${total.toFixed(2)}</h3></div></div>
+                    `;
+
+                    for (const o of orders) {
+                        const items = o.items ? o.items.map(i => `<small>${i.name} x${i.qty}</small>`).join('<br>') : 'N/A';
+                        const d = o.timestamp ? new Date(o.timestamp).toLocaleDateString() + ' ' + new Date(o.timestamp).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}) : 'N/A';
+                        const isCancellable = o.status === 'Pending' || o.status === 'Preparing';
+                        const isCancelled = o.status === 'Cancelled';
+
+                        // Get delivery boy details if assigned
+                        let deliveryInfo = '';
+                        if (o.deliveryPartnerId && (o.status === 'Shipped' || o.status === 'Out for Delivery' || o.status === 'Delivered')) {
+                            try {
+                                const dpSnap = await db.ref('deliveryPartners/' + o.deliveryPartnerId).once('value');
+                                if (dpSnap.exists()) {
+                                    const dp = dpSnap.val();
+                                    deliveryInfo = `
+                                        <div class="mt-2 p-2 rounded" style="background:#f0fdf4;border:1px solid #bbf7d0;">
+                                            <small class="text-success fw-bold"><i class="fas fa-motorcycle me-1"></i>Delivery Partner:</small><br>
+                                            <small><strong>${dp.name || 'N/A'}</strong></small><br>
+                                            ${dp.phone ? `<small>📞 ${dp.phone}</small><br>` : ''}
+                                            ${dp.vehicleNo ? `<small>🚗 ${dp.vehicleNo}</small>` : ''}
+                                        </div>
+                                    `;
+                                }
+                            } catch(e) {}
+                        } else if (o.status === 'Out for Delivery' || o.status === 'Delivered') {
+                            deliveryInfo = '<div class="mt-2"><small class="text-muted"><i class="fas fa-motorcycle me-1"></i>Delivery partner assigned</small></div>';
+                        }
+
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td><strong>#${o.id.slice(-6)}</strong></td>
+                            <td>${o.restaurantName || 'N/A'}</td>
+                            <td>${items}</td>
+                            <td><strong>₹${(o.totalAmount || 0).toFixed(2)}</strong></td>
+                            <td><span class="status-badge status-${o.status.toLowerCase()}">${o.status}</span>
+                                ${deliveryInfo}
+                            </td>
+                            <td><small>${d}</small></td>
+                            <td class="text-center">
+                                ${isCancellable ? `<button class="btn btn-sm btn-outline-danger" onclick="cancelOrder('${o.id}')"><i class="fas fa-ban"></i> Cancel</button>` : ''}
+                                ${isCancelled ? `<span class="badge bg-danger">Cancelled</span>` : ''}
+                                ${o.status === 'Delivered' ? `<span class="badge bg-success">✅ Delivered</span>` : ''}
+                                ${o.status === 'Out for Delivery' && deliveryInfo ? `<button class="btn btn-sm btn-outline-success mt-1" onclick="alert('Delivery Boy is on the way! 🛵')"><i class="fas fa-map-marker-alt"></i> Track</button>` : ''}
+                            </td>
+                        `;
+                        tbody.appendChild(tr);
+                    }
+                }
+
+                if (!snap.exists() || tbody.children.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="7" class="text-center py-5"><div class="empty-state"><i class="fas fa-box-open"></i><h4>No Orders Yet</h4><p class="text-muted">Order your first meal! 🍕</p><a href="index.html" class="btn btn-primary mt-3">Browse Restaurants</a></div></td></tr>';
+                }
+            } catch (e) {
+                tbody.innerHTML = `<tr><td colspan="7" class="text-danger text-center py-4">Error: ${e.message}</td></tr>`;
+            }
+        }
+
+        function cancelOrder(orderId) {
+            if (confirm('Are you sure you want to cancel this order?')) {
+                db.ref('orders/' + orderId).update({ status: 'Cancelled', cancelledAt: firebase.database.ServerValue.TIMESTAMP })
+                    .then(() => { alert('Order cancelled successfully'); loadOrders(); })
+                    .catch(e => alert('Error: ' + e.message));
+            }
+        }
+
+
+        loadOrders();
+    </script>
+</body>
+</html>
