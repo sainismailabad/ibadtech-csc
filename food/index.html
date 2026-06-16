@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ibad Foodie - Food Delivery | Order Food Online</title>
+    <meta name="description" content="Order food online from the best restaurants near you. Fast food delivery with Ibad Foodie - like Zomato & Swiggy.">
+    <meta name="keywords" content="food delivery, order food online, restaurants, fast food, Zomato, Swiggy">
+    <meta property="og:title" content="Ibad Foodie - Food Delivery">
+    <meta property="og:description" content="Order food online from best restaurants">
+    <meta property="og:type" content="website">
+    <link rel="canonical" href="https://ibadecomerce.firebaseapp.com">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Zomato-Style Product Cards */
+        .product-item-card {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #f0f0f0;
+            background: white;
+            height: 100%;
+        }
+        .product-item-card:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+        .product-item-card .item-img-wrap {
+            position: relative;
+            overflow: hidden;
+            height: 180px;
+        }
+        .product-item-card .item-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+        .product-item-card:hover .item-img-wrap img {
+            transform: scale(1.05);
+        }
+        .product-item-card .item-img-wrap .veg-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 20px; height: 20px;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            background: white;
+            border: 2px solid #0f8b5a;
+        }
+        .product-item-card .item-img-wrap .veg-badge.non-veg {
+            border-color: #e43b3b;
+        }
+        .product-item-card .item-img-wrap .offer-badge-top {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .product-item-card .item-body {
+            padding: 14px;
+        }
+        .product-item-card .item-body h6 {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 2px;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .product-item-card .item-body .item-desc {
+            color: #666;
+            font-size: 0.8rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            margin-bottom: 8px;
+            min-height: 2.4em;
+        }
+        .product-item-card .item-body .item-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-bottom: 8px;
+        }
+        .product-item-card .item-body .item-meta span {
+            background: #f3f4f6;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            color: #666;
+        }
+        .product-item-card .item-body .price-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .product-item-card .item-body .price-row .price {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+        .category-section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 24px 0 16px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .category-section-title h3 {
+            font-weight: 800;
+            font-size: 1.3rem;
+            margin: 0;
+        }
+        .category-section-title span {
+            background: var(--primary);
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 12px;
+            border-radius: 20px;
+        }
+        @media (max-width: 768px) {
+            .product-item-card .item-img-wrap { height: 140px; }
+        }
+    </style>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"FoodEstablishment","name":"Ibad Foodie","description":"Online food delivery platform"}
+    </script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-utensils"></i> Ibad Foodie</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="restaurant.html"><i class="fas fa-store me-1"></i>Restaurants</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cart.html"><i class="fas fa-shopping-cart me-1"></i>Cart</a></li>
+                    <li class="nav-item" id="nav-orders"><a class="nav-link" href="customer-orders.html">My Orders</a></li>
+                    <li class="nav-item" id="nav-login"><a class="nav-link" href="login.html"><i class="fas fa-user me-1"></i>Login</a></li>
+                    <li class="nav-item" id="nav-register"><a class="nav-link" href="register-customer.html">Register</a></li>
+                    <li class="nav-item" id="nav-profile"><a class="nav-link" href="profile.html"><i class="fas fa-user me-1"></i>Profile</a></li>
+                    <li class="nav-item" id="nav-delivery-profile"><a class="nav-link" href="delivery-profile.html"><i class="fas fa-motorcycle me-1"></i>Delivery Profile</a></li>
+                    <li class="nav-item" id="nav-logout"><a class="nav-link" href="#" onclick="auth.logout()">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero-section">
+        <div class="container text-center">
+            <h1 class="mb-3">Hungry? We've Got You!</h1>
+            <p class="lead mb-4">Order food from the best restaurants near you 🍕</p>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="search-input" placeholder="Search items like pizza, biryani..." oninput="Foodie.searchEverything(this.value)">
+
+            </div>
+            <div id="customer-location-box" class="location-box mt-3">
+                <i class="fas fa-map-marker-alt"></i>
+                <span id="location-status">Tap to enable your delivery location</span>
+                <button class="btn btn-light btn-sm" onclick="getLocation()"><i class="fas fa-location-arrow me-1"></i>Use Current Location</button>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- CATEGORIES -->
+        <div class="category-scroll" id="category-list"></div>
+
+        <!-- OFFER BANNER (Dynamic from Firebase) -->
+        <div class="offer-banner" id="offer-banner" style="display:none;">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h3 id="banner-title">🔥 Today's Special Offers!</h3>
+                    <p id="banner-description">Get up to 50% off on your first order + Free Delivery!</p>
+                </div>
+                <div class="col-md-4 text-md-end">
+                    <span class="badge bg-white text-dark fs-5 p-3 rounded-pill" id="banner-coupon-badge">🍔 FOODIE50</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- RESTAURANT OFFERS STRIP -->
+        <div id="restaurant-offers-strip" class="mb-4" style="display:none;">
+            <h5 class="fw-bold mb-3"><i class="fas fa-tag me-2" style="color:var(--primary);"></i>Restaurant Offers</h5>
+            <div class="row" id="restaurant-offers-cards"></div>
+        </div>
+
+        <!-- Items rendered by Category via JavaScript -->
+        <div id="items-container"></div>
+
+        <!-- PRODUCTS (legacy compat) -->
+        <h2 class="section-title">🍲 All Menu Items (Near By)</h2>
+        <div class="row" id="products-list"></div>
+    </div>
+
+
+    <!-- CART FLOATING -->
+    <div id="cart-floating" class="position-fixed bottom-0 start-0 end-0 p-3" style="display:none;z-index:1050;">
+        <div class="container">
+            <div class="card shadow-lg p-3" style="background:var(--bg-gradient);color:white;border-radius:16px;">
+                <div class="row align-items-center">
+                    <div class="col"><h6 class="mb-0 fw-bold" id="cart-summary">0 items</h6></div>
+                    <div class="col-auto">
+                        <button class="btn btn-light rounded-pill fw-bold px-4" onclick="Foodie.showCart()">View Cart <i class="fas fa-arrow-right ms-1"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CART MODAL -->
+    <div class="modal fade" id="cartModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header"><h5 class="modal-title"><i class="fas fa-shopping-cart me-2"></i>Your Cart</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+                <div class="modal-body" id="cart-items"></div>
+                <div class="modal-footer">
+                    <div class="w-100">
+                        <h5 class="text-end mb-3" id="cart-subtotal">Total: ₹0</h5>
+                        <button class="btn btn-primary w-100 btn-lg" onclick="Foodie.proceedToCheckout()"><i class="fas fa-credit-card me-2"></i>Proceed to Checkout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHECKOUT MODAL -->
+    <div class="modal fade" id="checkoutModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header"><h5 class="modal-title"><i class="fas fa-clipboard-list me-2"></i>Delivery Details</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+                <div class="modal-body">
+                    <form id="checkout-form">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Full Name *</label>
+                                <input type="text" class="form-control" id="checkout-name" placeholder="Your full name" required autocomplete="name">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Mobile Number *</label>
+                                <input type="tel" class="form-control" id="checkout-phone" placeholder="10-digit mobile" pattern="[0-9]{10}" required autocomplete="tel">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="checkout-email" placeholder="your@email.com">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Delivery Address *</label>
+                            <textarea class="form-control" id="checkout-address" rows="2" placeholder="House/Flat No., Street, Landmark" required autocomplete="street-address"></textarea>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">City *</label>
+                                <input type="text" class="form-control" id="checkout-city" placeholder="Your city" required autocomplete="address-level2">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Pincode *</label>
+                                <input type="text" class="form-control" id="checkout-pincode" placeholder="6-digit pincode" pattern="[0-9]{6}" required autocomplete="postal-code">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Delivery Location</label>
+                            <button type="button" class="btn btn-outline-primary w-100" onclick="getLocation()">
+                                <i class="fas fa-map-marker-alt me-2"></i>Get Current Location
+                            </button>
+                            <input type="hidden" id="checkout-lat">
+                            <input type="hidden" id="checkout-lng">
+                            <div id="checkout-location-status" class="mt-2 text-muted small"></div>
+                            <div id="geo-status" class="mt-2 small fw-bold"></div>
+                        </div>
+
+
+                        <div class="mb-3">
+                            <textarea class="form-control" id="checkout-notes" rows="2" placeholder="Any special instructions for the restaurant..."></textarea>
+                        </div>
+                        <div class="coupon-box mb-3">
+                            <label class="form-label fw-bold mb-2"><i class="fas fa-ticket-alt me-1"></i>Coupon Code</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="checkout-coupon" placeholder="Enter coupon code" autocomplete="off" spellcheck="false">
+                                <button class="btn btn-outline-primary" type="button" onclick="Foodie.applyCoupon()">Apply Coupon</button>
+                            </div>
+                            <div id="coupon-message" class="form-text mt-2">Restaurant and platform coupons will be applied here.</div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="w-100">
+                        <div class="d-flex justify-content-between mb-2"><span>Cart Total</span><strong id="cart-total">Total: ₹0</strong></div>
+                        <div class="d-flex justify-content-between mb-2"><span>Delivery Fee</span><strong id="delivery-fee-total">₹0</strong></div>
+                        <div class="d-flex justify-content-between mb-2 text-success" id="coupon-discount-row" style="display:none;"><span>Coupon Discount</span><strong id="coupon-discount">- ₹0</strong></div>
+                        <div class="d-flex justify-content-between mb-2 text-success" id="wallet-discount-row" style="display:none;"><span>Wallet Used</span><strong id="wallet-discount">- ₹0</strong></div>
+                        <div class="d-flex justify-content-between mb-3"><span>Payable Amount</span><strong id="payable-total">₹0</strong></div>
+                        <button id="checkout-submit-btn" class="btn btn-primary w-100 btn-lg" onclick="Foodie.placeOrder()">
+                            <i class="fas fa-check-circle me-2"></i>Place Order
+                        </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="order-success-overlay" class="order-success-overlay" style="display:none;">
+        <div class="order-success-card">
+            <div class="scooter-animation"><i class="fas fa-motorcycle"></i></div>
+            <h2>Order Placed!</h2>
+            <p>Your food is being prepared with love.</p>
+            <div class="success-progress"><span></span></div>
+        </div>
+    </div>
+
+    <!-- Notification Sound (hidden) -->
+    <audio id="notification-sound" preload="auto" src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACAf39/f4B/f3+AgH9/f3+AgH+AgH9/f3+AgH+AgICAgH9/f3+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH9/gH+AgH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f3+AgH+AgH+AgH+AgH+AgH9/f39/gH9/gH+AgH+AgH+AgH+AgH9/f3+AgH9/f39/gH+AgH+AgH9/f39/gH9/gH+AgH+AgH9/f39/gH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH9/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH9/f3+AgH+AgH+AgH+AgH9/f39/gH+AgH9/f3+AgH+AgH9/f3+AgH+AgH+AgH+AgH9/f3+AgH+AgH+AgH+AgH9/f3+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH9/gH+AgH+AgH+AgH+AgH+AgH9/f39/gH9/f39/gH9/gH+AgH9/f39/gH+AgH+AgH+AgH9/f3+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH9/gH+AgH+AgH+AgH+AgH9/f39/gH9/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH9/gH+AgH+AgH9/f3+AgH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH9/f39/gH+AgH+AgH+AgH9/f3+AgH+AgH+AgH9/f3+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH9/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH9/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH9/gH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH9/gH+AgH9/f39/gH+AgH9/f39/gH+AgH+AgH9/f3+AgH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH9/gH+AgH+AgH9/f3+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f3+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH9/gH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH9/f39/gH9/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH9/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH9/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH9/f39/gH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH9/f39/gH9/f39/gH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH9/gH+AgH+AgH+AgH+AgH9/f39/gH9/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH9/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH9/f39/gH+AgH+AgH9/f3+AgH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH9/f39/gH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH9/f39/gH+AgH+AgH9/f3+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH9/f3+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH9/f39/gH9/gH+AgH9/f39/gH+AgH+AgH+AgH9/f3+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH9/gH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH9/f39/gH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH9/gH+AgH9/f39/gH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH9/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH+AgH9/f39/gH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH9/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH9/f39/gH+AgH+AgH9/f39/gH+AgH+AgH9/f39/gH+AgH9/f39/gH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH9/f39/gH+AgH9/f39/gH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH+AgH9/f39/gH+AgH+AgH9/f39/gH+AgH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH+AgH9/f39/gH+AgH9/f39/gH+AgH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f3+AgH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH+AgH9/f39/gH+AgH9/f39/gH+AgH+AgH9/f39/gH+AgH9/f39/gH+AgH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH9/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH9/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f3+AgH+AgH9/f39/gH+AgH9/f39/gH+AgH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH9/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f3+AgH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f3+AgH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH9/gH+AgH9/f39/gH+AgH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH9/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH9/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH9/f39/gH+AgH="></audio>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="auth.js"></script>
+    <script>
+        // Request notification permission on load
+        if (window.auth && auth.requestNotificationPermission) {
+            auth.requestNotificationPermission();
+        }
+    </script>
+    <script src="customer.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+Plan (confirmed from repo reading)
