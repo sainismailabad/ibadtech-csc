@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Cart - Ibad Foodie</title>
+  <meta name="description" content="View and manage your food cart" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html"><i class="fas fa-utensils"></i> Ibad Foodie</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="restaurant.html"><i class="fas fa-store me-1"></i>Restaurants</a></li>
+          <li class="nav-item"><a class="nav-link active" href="cart.html"><i class="fas fa-shopping-cart me-1"></i>Cart</a></li>
+          <li class="nav-item" id="nav-orders"><a class="nav-link" href="customer-orders.html">My Orders</a></li>
+          <li class="nav-item" id="nav-login"><a class="nav-link" href="login.html"><i class="fas fa-user me-1"></i>Login</a></li>
+          <li class="nav-item" id="nav-register"><a class="nav-link" href="register-customer.html">Register</a></li>
+          <li class="nav-item" id="nav-profile"><a class="nav-link" href="profile.html"><i class="fas fa-user me-1"></i>Profile</a></li>
+          <li class="nav-item" id="nav-logout"><a class="nav-link" href="#" onclick="auth.logout()">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" style="padding-top: 100px; padding-bottom: 40px;">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <h2 class="section-title mb-4"><i class="fas fa-shopping-cart me-2"></i>My Cart</h2>
+
+        <div id="cart-empty" class="empty-state d-none" style="padding:60px 20px;">
+          <i class="fas fa-shopping-cart fa-3x text-muted mb-3"></i>
+          <h4>Your cart is empty</h4>
+          <p class="text-muted">Add items from a restaurant to get started</p>
+          <a href="restaurant.html" class="btn btn-primary mt-3">Browse Restaurants</a>
+        </div>
+
+        <div id="cart-content">
+          <div id="cart-items-list"></div>
+
+          <div class="card shadow-sm mt-4" style="border-radius:16px;">
+            <div class="card-body">
+              <h5 class="mb-3">Order Summary</h5>
+              <div class="d-flex justify-content-between mb-2">
+                <span>Item Total</span>
+                <strong id="cart-subtotal">₹0</strong>
+              </div>
+              <div class="d-flex justify-content-between mb-2">
+                <span>Delivery Fee</span>
+                <strong id="delivery-fee-display">₹0</strong>
+              </div>
+              <div class="d-flex justify-content-between mb-2 text-success" id="coupon-discount-row" style="display:none;">
+                <span>Coupon Discount</span>
+                <strong id="coupon-discount">- ₹0</strong>
+              </div>
+              <hr />
+              <div class="d-flex justify-content-between mb-3">
+                <span class="fw-bold">Payable Amount</span>
+                <strong class="fs-5" id="payable-total">₹0</strong>
+              </div>
+              <button class="btn btn-primary w-100 btn-lg" onclick="Foodie.proceedToCheckoutFromCart()">
+                <i class="fas fa-credit-card me-2"></i>Proceed to Checkout
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHECKOUT MODAL -->
+  <div class="modal fade" id="checkoutModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="fas fa-clipboard-list me-2"></i>Delivery Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="checkout-form">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Full Name *</label>
+                <input type="text" class="form-control" id="checkout-name" placeholder="Your full name" required autocomplete="name" />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Mobile Number *</label>
+                <input type="tel" class="form-control" id="checkout-phone" placeholder="10-digit mobile" pattern="[0-9]{10}" required autocomplete="tel" />
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Email Address</label>
+              <input type="email" class="form-control" id="checkout-email" placeholder="your@email.com" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Delivery Address *</label>
+              <textarea class="form-control" id="checkout-address" rows="2" placeholder="House/Flat No., Street, Landmark" required autocomplete="street-address"></textarea>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">City *</label>
+                <input type="text" class="form-control" id="checkout-city" placeholder="Your city" required autocomplete="address-level2" />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Pincode *</label>
+                <input type="text" class="form-control" id="checkout-pincode" placeholder="6-digit pincode" pattern="[0-9]{6}" required autocomplete="postal-code" />
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Delivery Location</label>
+              <div id="service-area-hint" class="alert alert-info py-2 mb-2" style="font-size:0.95rem;">
+                Delivery available only in Ismailabad service area. Please allow location to continue.
+              </div>
+
+              <button type="button" class="btn btn-outline-primary w-100" onclick="Foodie.getCurrentLocationFromCart()">
+                <i class="fas fa-map-marker-alt me-2"></i>Get Current Location
+              </button>
+
+              <input type="hidden" id="checkout-lat" />
+              <input type="hidden" id="checkout-lng" />
+              <div id="location-status" class="mt-2 text-muted small"></div>
+              <div id="geo-status" class="mt-2 small fw-bold"></div>
+            </div>
+
+            <div class="mb-3">
+              <textarea class="form-control" id="checkout-notes" rows="2" placeholder="Any special instructions for the restaurant..."></textarea>
+            </div>
+            <div class="coupon-box mb-3">
+              <label class="form-label fw-bold mb-2"><i class="fas fa-ticket-alt me-1"></i>Coupon Code</label>
+              <div class="input-group">
+                <input type="text" class="form-control" id="checkout-coupon" placeholder="Enter coupon code" autocomplete="off" spellcheck="false" />
+                <button class="btn btn-outline-primary" type="button" onclick="Foodie.applyCoupon()">Apply Coupon</button>
+              </div>
+              <div id="coupon-message" class="form-text mt-2">Restaurant and platform coupons will be applied here.</div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <div class="w-100">
+            <div class="d-flex justify-content-between mb-2"><span>Cart Total</span><strong id="cart-total">Total: ₹0</strong></div>
+            <div class="d-flex justify-content-between mb-2"><span>Delivery Fee</span><strong id="delivery-fee-total">₹0</strong></div>
+            <div class="d-flex justify-content-between mb-2 text-success" id="coupon-discount-row" style="display:none;"><span>Coupon Discount</span><strong id="coupon-discount">- ₹0</strong></div>
+            <div class="d-flex justify-content-between mb-3"><span>Payable Amount</span><strong id="payable-total">₹0</strong></div>
+            <button id="checkout-submit-btn" class="btn btn-primary w-100 btn-lg" onclick="Foodie.placeOrder()" disabled>
+              <i class="fas fa-check-circle me-2"></i>Place Order
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="order-success-overlay" class="order-success-overlay" style="display:none;">
+    <div class="order-success-card">
+      <div class="scooter-animation"><i class="fas fa-motorcycle"></i></div>
+      <h2>Order Placed!</h2>
+      <p>Your food is being prepared with love.</p>
+      <div class="success-progress"><span></span></div>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="auth.js"></script>
+  <script src="customer.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      await auth.init();
+      if (!window.Foodie) return;
+      Foodie.updateNav();
+      Foodie.loadCartFromStorage();
+      await Foodie.syncCartRestaurantContext();
+      Foodie.renderCartPage();
+      Foodie.updateCartUI();
+    });
+  </script>
+</body>
+</html>

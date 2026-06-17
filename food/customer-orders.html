@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders - Ibad Foodie</title>
+    <meta name="description" content="Track your food delivery orders, view order status, cancel orders on Ibad Foodie.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-utensils"></i> Ibad Foodie</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="restaurant.html"><i class="fas fa-store me-1"></i>Restaurants</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cart.html"><i class="fas fa-shopping-cart me-1"></i>Cart</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="customer-orders.html">My Orders</a></li>
+                    <li class="nav-item" id="nav-login"><a class="nav-link" href="login.html"><i class="fas fa-user me-1"></i>Login</a></li>
+                    <li class="nav-item" id="nav-register"><a class="nav-link" href="register-customer.html">Register</a></li>
+                    <li class="nav-item" id="nav-profile"><a class="nav-link" href="profile.html"><i class="fas fa-user me-1"></i>Profile</a></li>
+                    <li class="nav-item" id="nav-logout"><a class="nav-link" href="#" onclick="auth.logout()">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section" style="padding:calc(60px + 40px) 0 50px;">
+        <div class="container">
+            <h1 class="mb-3">🍕 My Orders</h1>
+            <p class="lead mb-0">Track your food delivery & order history</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <div id="auth-required" class="alert alert-warning" style="display:none;">Please <a href="login.html">login</a> to view orders.</div>
+
+        <div id="orders-content">
+            <!-- Summary Cards -->
+            <div class="row mb-4" id="order-summary"></div>
+            
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Order</th>
+                                    <th>Restaurant</th>
+                                    <th>Items</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="customer-orders-table"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delivery Tracking Map Modal -->
+    <div class="modal fade" id="trackingMapModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">📍 Live Delivery Tracking</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="CustomerTracker.stopTracking()"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <div class="d-flex align-items-center gap-3 p-3 rounded" style="background:#f0fdf4;border:1px solid #bbf7d0;">
+                            <div style="font-size:2rem;">🛵</div>
+                            <div>
+                                <strong id="tracking-partner-name">Delivery Partner</strong><br>
+                                <small id="tracking-partner-phone" class="text-muted"></small><br>
+                                <small id="tracking-partner-vehicle" class="text-muted"></small>
+                            </div>
+                            <div class="ms-auto">
+                                <span class="badge bg-success" id="tracking-status-badge">Live</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tracking-map" style="height:450px; border-radius:12px; overflow:hidden;"></div>
+                    <p class="text-muted small mt-2 mb-0"><i class="fas fa-satellite-dish me-1"></i>Location updates every 5 seconds</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script src="firebase-config.js"></script>
+    <script src="auth.js"></script>
+    <script>
+
+        function updateNav() {
+            const hide = (id) => { const el = document.getElementById(id); if (el) el.style.display = 'none'; };
+            const show = (id) => { const el = document.getElementById(id); if (el) el.style.display = 'block'; };
+            if (auth.currentUser) {
+                show('nav-logout');
+                hide('nav-login');
+                hide('nav-register');
+                show('nav-profile');
+            } else {
+                hide('nav-logout');
+                show('nav-login');
+                show('nav-register');
+                hide('nav-profile');
+            }
+        }
+
+        async function loadOrders() {
+            const authState = await auth.init();
+            updateNav();
+            if (!authState.user) {
+                document.getElementById('auth-required').style.display = 'block';
+                document.getElementById('orders-content').style.display = 'none';
+                document.querySelector('.hero-section').style.display = 'none';
+                return;
+            }
+            document.getElementById('nav-logout').style.display = 'block';
+            
+            // Listen for notifications
+            let initialLoad = true;
+            db.ref('notifications').orderByChild('userId').equalTo(authState.user.uid).on('child_added', (snapshot) => {
+                if (!initialLoad) {
+                    const notif = snapshot.val();
+                    if (!notif.read) {
+                        auth.notify(notif.message);
+                        alert(`Notification: ${notif.message}`);
+                        auth.markNotificationRead(snapshot.key);
+                        // Refresh orders to show updated status
+                        loadOrdersOnly(authState.user.uid);
+                    }
+                }
+            });
+            setTimeout(() => initialLoad = false, 3000);
+
+            loadOrdersOnly(authState.user.uid);
+        }
+
+        async function loadOrdersOnly(userId) {
+            const tbody = document.getElementById('customer-orders-table');
+            const summary = document.getElementById('order-summary');
+            tbody.innerHTML = '<tr><td colspan="7" class="text-center py-4"><div class="spinner-border text-primary"></div></td></tr>';
+
+            try {
+                const snap = await db.ref('orders').orderByChild('customerId').equalTo(userId).once('value');
+                tbody.innerHTML = '';
+                let total = 0, pending = 0, delivered = 0, cancelled = 0;
+
+                if (snap.exists()) {
+                    const orders = [];
+                    snap.forEach(child => {
+                        const o = child.val();
+                        orders.push({ id: child.key, ...o });
+                        total += o.totalAmount || 0;
+                        if (o.status === 'Pending' || o.status === 'Preparing' || o.status === 'Shipped') pending++;
+                        else if (o.status === 'Delivered') delivered++;
+                        else if (o.status === 'Cancelled') cancelled++;
+                    });
+                    orders.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+
+                    // Summary
+                    summary.innerHTML = `
+                        <div class="col-md-3 col-6 mb-2"><div class="card p-3 text-center"><h6 class="text-muted">📋 Total Orders</h6><h3 class="fw-bold mb-0">${orders.length}</h3></div></div>
+                        <div class="col-md-3 col-6 mb-2"><div class="card p-3 text-center"><h6 class="text-muted">🕐 Active</h6><h3 class="fw-bold text-warning mb-0">${pending}</h3></div></div>
+                        <div class="col-md-3 col-6 mb-2"><div class="card p-3 text-center"><h6 class="text-muted">✅ Delivered</h6><h3 class="fw-bold text-success mb-0">${delivered}</h3></div></div>
+                        <div class="col-md-3 col-6 mb-2"><div class="card p-3 text-center"><h6 class="text-muted">💰 Total Spent</h6><h3 class="fw-bold text-primary mb-0">₹${total.toFixed(2)}</h3></div></div>
+                    `;
+
+                    for (const o of orders) {
+                        const items = o.items ? o.items.map(i => `<small>${i.name} x${i.qty}</small>`).join('<br>') : 'N/A';
+                        const d = o.timestamp ? new Date(o.timestamp).toLocaleDateString() + ' ' + new Date(o.timestamp).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}) : 'N/A';
+                        const isCancellable = o.status === 'Pending' || o.status === 'Preparing';
+                        const isCancelled = o.status === 'Cancelled';
+
+                        // Get delivery boy details if assigned - show professionally (no phone number)
+                        let deliveryInfo = '';
+                        let partnerName = '', partnerPhone = '', partnerVehicle = '';
+                        if (o.deliveryPartnerId) {
+                            try {
+                                const dpSnap = await db.ref('deliveryPartners/' + o.deliveryPartnerId).once('value');
+                                if (dpSnap.exists()) {
+                                    const dp = dpSnap.val();
+                                    partnerName = dp.name || 'N/A';
+                                    partnerVehicle = dp.vehicleNo || '';
+                                    // Phone only used internally, never shown to customer
+                                    partnerPhone = dp.phone || '';
+                                    
+                                    deliveryInfo = `
+                                        <div class="mt-2 p-2 rounded" style="background:#f0fdf4;border:1px solid #bbf7d0;">
+                                            <small class="text-success fw-bold"><i class="fas fa-motorcycle me-1"></i>Delivery Partner:</small><br>
+                                            <small><strong>${partnerName}</strong></small><br>
+                                            ${partnerVehicle ? `<small>🚗 ${partnerVehicle}</small>` : ''}
+                                        </div>
+                                    `;
+                                }
+                            } catch(e) {}
+                        }
+
+                        // Escape quotes for onclick string (safePhone kept empty so it's never shown)
+                        const safeName = partnerName.replace(/'/g, "\\'");
+                        const safePhone = ''; // phone never shared with customer
+                        const safeVehicle = partnerVehicle.replace(/'/g, "\\'");
+
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td><strong>#${o.id.slice(-6)}</strong></td>
+                            <td>${o.restaurantName || 'N/A'}</td>
+                            <td>${items}</td>
+                            <td><strong>₹${(o.totalAmount || 0).toFixed(2)}</strong></td>
+                            <td><span class="status-badge status-${o.status.toLowerCase()}">${o.status}</span>
+                                ${deliveryInfo}
+                            </td>
+                            <td><small>${d}</small></td>
+                            <td class="text-center">
+                                ${isCancellable ? `<button class="btn btn-sm btn-outline-danger" onclick="cancelOrder('${o.id}')"><i class="fas fa-ban"></i> Cancel</button>` : ''}
+                                ${isCancelled ? `<span class="badge bg-danger">Cancelled</span>` : ''}
+                                ${o.status === 'Delivered' && partnerName ? `<div><span class="badge bg-success mb-1">✅ Delivered</span><br><button class="btn btn-sm btn-outline-info mt-1" onclick="alert('🛵 Delivered by ${safeName}\\n🚗 ${safeVehicle || 'N/A'}')"><i class="fas fa-info-circle"></i> Delivery Details</button></div>` : ''}
+                                ${o.status === 'Delivered' && !partnerName ? `<span class="badge bg-success">✅ Delivered</span>` : ''}
+                                ${(o.status === 'Shipped' || o.status === 'Out for Delivery') && partnerName ? `<button class="btn btn-sm btn-outline-success mt-1" onclick="CustomerTracker.startTracking('${o.id}','${safeName}','${safePhone}','${safeVehicle}')"><i class="fas fa-map-marker-alt"></i> 📍 Live Track</button>` : ''}
+                            </td>
+                        `;
+                        tbody.appendChild(tr);
+                    }
+                }
+
+                if (!snap.exists() || tbody.children.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="7" class="text-center py-5"><div class="empty-state"><i class="fas fa-box-open"></i><h4>No Orders Yet</h4><p class="text-muted">Order your first meal! 🍕</p><a href="index.html" class="btn btn-primary mt-3">Browse Restaurants</a></div></td></tr>';
+                }
+            } catch (e) {
+                tbody.innerHTML = `<tr><td colspan="7" class="text-danger text-center py-4">Error: ${e.message}</td></tr>`;
+            }
+        }
+
+        function cancelOrder(orderId) {
+            if (confirm('Are you sure you want to cancel this order?')) {
+                db.ref('orders/' + orderId).update({ status: 'Cancelled', cancelledAt: firebase.database.ServerValue.TIMESTAMP })
+                    .then(() => { alert('Order cancelled successfully'); loadOrders(); })
+                    .catch(e => alert('Error: ' + e.message));
+            }
+        }
+
+        // ====== CUSTOMER DELIVERY TRACKER (Live delivery boy location on map) ======
+        const CustomerTracker = {
+            trackingRef: null,
+            map: null,
+            marker: null,
+            deliveryBoyMarker: null,
+            trackingListener: null,
+            orderId: null,
+
+            startTracking: function(orderId, partnerName, partnerPhone, partnerVehicle) {
+                this.orderId = orderId;
+                
+                // Show delivery partner info (professional - no phone number shown)
+                document.getElementById('tracking-partner-name').textContent = partnerName || 'Delivery Partner';
+                document.getElementById('tracking-partner-phone').textContent = ''; // phone never shown to customer
+                document.getElementById('tracking-partner-vehicle').textContent = partnerVehicle ? '🚗 ' + partnerVehicle : '';
+                
+                // Show modal
+                const modal = new bootstrap.Modal(document.getElementById('trackingMapModal'));
+                modal.show();
+                
+                // Initialize map after modal is shown
+                const that = this;
+                document.getElementById('trackingMapModal').addEventListener('shown.bs.modal', function() {
+                    that.initMap();
+                    that.listenToDeliveryBoy();
+                }, { once: true });
+            },
+
+            initMap: function() {
+                // Don't create map with a default center - wait for first location
+                // Just create the tile layer reference but don't set view
+                if (!this.map) {
+                    this.map = L.map('tracking-map', {
+                        center: [30.166, 76.717],
+                        zoom: 13,
+                        zoomControl: true
+                    });
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                    }).addTo(this.map);
+                    
+                    // Status badge
+                    document.getElementById('tracking-status-badge').textContent = 'Waiting for location...';
+                    document.getElementById('tracking-status-badge').className = 'badge bg-warning';
+                }
+            },
+
+            listenToDeliveryBoy: function() {
+                if (!this.orderId) return;
+                
+                const that = this;
+                this.trackingRef = db.ref('deliveryTracking/' + this.orderId);
+                
+                // Listen for real-time location updates
+                this.trackingListener = this.trackingRef.on('value', (snap) => {
+                    if (!snap.exists()) {
+                        document.getElementById('tracking-status-badge').textContent = 'Waiting for delivery partner...';
+                        document.getElementById('tracking-status-badge').className = 'badge bg-warning';
+                        return;
+                    }
+                    
+                    const data = snap.val();
+                    
+                    if (data.active === false) {
+                        document.getElementById('tracking-status-badge').textContent = 'Tracking ended';
+                        document.getElementById('tracking-status-badge').className = 'badge bg-secondary';
+                        return;
+                    }
+                    
+                    const lat = data.lat;
+                    const lng = data.lng;
+                    
+                    if (lat && lng) {
+                        if (!that.deliveryBoyMarker) {
+                            // First time - create marker at delivery boy's actual location
+                            that.deliveryBoyMarker = L.marker([lat, lng], {
+                                icon: L.divIcon({
+                                    className: 'delivery-boy-icon',
+                                    html: '<div style="font-size:36px;text-align:center;">🛵</div>',
+                                    iconSize: [40, 40],
+                                    iconAnchor: [20, 20]
+                                })
+                            }).addTo(that.map).bindPopup('📍 Delivery Partner');
+                        } else {
+                            // Move marker to new location
+                            that.deliveryBoyMarker.setLatLng([lat, lng]);
+                        }
+                        
+                        // Always center map on delivery boy's location
+                        that.map.setView([lat, lng], 15);
+                        that.deliveryBoyMarker.openPopup();
+                        
+                        // Update status
+                        document.getElementById('tracking-status-badge').textContent = '🟢 Live';
+                        document.getElementById('tracking-status-badge').className = 'badge bg-success';
+                        
+                        // Show how recent the update is
+                        if (data.lastUpdated) {
+                            const secondsAgo = Math.floor((Date.now() - data.lastUpdated) / 1000);
+                            if (secondsAgo > 30) {
+                                document.getElementById('tracking-status-badge').textContent = '⏳ ' + secondsAgo + 's ago';
+                                document.getElementById('tracking-status-badge').className = 'badge bg-warning';
+                            }
+                        }
+                    } else {
+                        document.getElementById('tracking-status-badge').textContent = 'No location yet...';
+                        document.getElementById('tracking-status-badge').className = 'badge bg-warning';
+                    }
+                });
+            },
+
+            stopTracking: function() {
+                if (this.trackingRef && this.trackingListener) {
+                    this.trackingRef.off('value', this.trackingListener);
+                }
+                this.trackingRef = null;
+                this.trackingListener = null;
+                this.orderId = null;
+                
+                // Clean up map
+                if (this.map) {
+                    this.map.remove();
+                    this.map = null;
+                    this.deliveryBoyMarker = null;
+                }
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', loadOrders);
+    </script>
+</body>
+</html>
