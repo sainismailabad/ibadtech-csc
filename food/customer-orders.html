@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders - Ibad Foodz</title>
+    <meta name="description" content="Track your food delivery orders, view order status, cancel orders on Ibad Foodz.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-utensils"></i> Ibad Foodz</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="restaurant.html"><i class="fas fa-store me-1"></i>Restaurants</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cart.html"><i class="fas fa-shopping-cart me-1"></i>Cart</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="customer-orders.html">My Orders</a></li>
+                    <li class="nav-item" id="nav-login"><a class="nav-link" href="login.html"><i class="fas fa-user me-1"></i>Login</a></li>
+                    <li class="nav-item" id="nav-register"><a class="nav-link" href="register-customer.html">Register</a></li>
+                    <li class="nav-item" id="nav-profile"><a class="nav-link" href="profile.html"><i class="fas fa-user me-1"></i>Profile</a></li>
+                    <li class="nav-item" id="nav-logout"><a class="nav-link" href="#" onclick="auth.logout()">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hidden notification sound -->
+    <audio id="notification-sound" preload="auto"></audio>
+
+    <section class="hero-section" style="padding:calc(60px + 40px) 0 50px;">
+        <div class="container">
+            <h1 class="mb-3">🍕 My Orders</h1>
+            <p class="lead mb-0">Track your food delivery & order history</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <div id="auth-required" class="alert alert-warning" style="display:none;">Please <a href="login.html">login</a> to view orders.</div>
+
+        <div id="orders-content">
+            <!-- Summary Cards -->
+            <div class="row mb-4" id="order-summary"></div>
+            
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Order</th>
+                                    <th>Restaurant</th>
+                                    <th>Items</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="customer-orders-table"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rating Modal - Shows after delivery -->
+    <div class="modal fade" id="ratingModal" tabindex="-1" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="border-radius:20px;overflow:hidden;">
+                <div class="modal-header border-0 pb-0" style="background:linear-gradient(135deg,#fff0eb,#ffe4d6);">
+                    <h5 class="modal-title fw-bold" style="color:#ff6b35;"><i class="fas fa-star me-2"></i>Rate Your Experience</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="RatingModal.close()"></button>
+                </div>
+                <div class="modal-body pt-4" id="rating-modal-body">
+                    <input type="hidden" id="rating-order-id" value="">
+                    
+                    <!-- Delivery Boy Rating -->
+                    <div class="mb-4 p-3 rounded-3" style="background:#f8f9fa;">
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <span style="font-size:1.8rem;">🛵</span>
+                            <div>
+                                <h6 class="fw-bold mb-0">Rate Delivery Partner</h6>
+                                <small class="text-muted" id="rating-delivery-name">Delivery Boy</small>
+                            </div>
+                        </div>
+                        <div class="star-rating" data-target="delivery">
+                            <span class="star" data-val="1" onclick="RatingModal.setStars('delivery',1)">☆</span>
+                            <span class="star" data-val="2" onclick="RatingModal.setStars('delivery',2)">☆</span>
+                            <span class="star" data-val="3" onclick="RatingModal.setStars('delivery',3)">☆</span>
+                            <span class="star" data-val="4" onclick="RatingModal.setStars('delivery',4)">☆</span>
+                            <span class="star" data-val="5" onclick="RatingModal.setStars('delivery',5)">☆</span>
+                        </div>
+                        <textarea class="form-control form-control-sm mt-2" id="rating-delivery-comment" placeholder="Feedback for delivery partner..." rows="2"></textarea>
+                    </div>
+
+                    <!-- Product Ratings -->
+                    <div class="mb-3">
+                        <h6 class="fw-bold mb-2"><i class="fas fa-utensils me-1"></i>Rate Products</h6>
+                        <div id="product-ratings-container"></div>
+                    </div>
+
+                    <!-- Restaurant Rating -->
+                    <div class="mb-3 p-3 rounded-3" style="background:#f0fdf4;">
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <span style="font-size:1.5rem;">🏪</span>
+                            <div>
+                                <h6 class="fw-bold mb-0">Rate Restaurant</h6>
+                                <small class="text-muted" id="rating-restaurant-name">Restaurant</small>
+                            </div>
+                        </div>
+                        <div class="star-rating" data-target="restaurant">
+                            <span class="star" data-val="1" onclick="RatingModal.setStars('restaurant',1)">☆</span>
+                            <span class="star" data-val="2" onclick="RatingModal.setStars('restaurant',2)">☆</span>
+                            <span class="star" data-val="3" onclick="RatingModal.setStars('restaurant',3)">☆</span>
+                            <span class="star" data-val="4" onclick="RatingModal.setStars('restaurant',4)">☆</span>
+                            <span class="star" data-val="5" onclick="RatingModal.setStars('restaurant',5)">☆</span>
+                        </div>
+                        <textarea class="form-control form-control-sm mt-2" id="rating-restaurant-comment" placeholder="Feedback for restaurant..." rows="2"></textarea>
+                    </div>
+
+                    <button class="btn btn-primary w-100 btn-lg mt-2" onclick="RatingModal.submit()">
+                        <i class="fas fa-star me-2"></i>Submit Ratings
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .star-rating { display:flex; gap:4px; font-size:1.8rem; cursor:pointer; }
+        .star-rating .star { color:#ddd; transition:color 0.2s, transform 0.2s; }
+        .star-rating .star.active { color:#ffc107; transform:scale(1.1); }
+        .star-rating .star:hover { color:#ffc107; transform:scale(1.15); }
+        @keyframes starPop { 0% { transform:scale(0); } 50% { transform:scale(1.3); } 100% { transform:scale(1); } }
+        .star-rating .star.active { animation:starPop 0.3s ease; }
+    </style>
+
+    <!-- Customer Order Detail Modal -->
+    <div class="modal fade" id="customerOrderDetailModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content" style="border-radius:20px;overflow:hidden;">
+          <div class="modal-header border-0" style="background:linear-gradient(135deg,#fff0eb,#ffe4d6);">
+            <h5 class="modal-title fw-bold" style="color:#ff6b35;"><i class="fas fa-receipt me-2"></i>Order Details</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body p-4" id="customer-order-detail-body">
+            <div class="text-center py-4 text-muted">Loading...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delivery Tracking Map Modal -->
+    <div class="modal fade" id="trackingMapModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">📍 Live Delivery Tracking</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="CustomerTracker.stopTracking()"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <div class="d-flex align-items-center gap-3 p-3 rounded" style="background:#f0fdf4;border:1px solid #bbf7d0;">
+                            <div style="font-size:2rem;">🛵</div>
+                            <div>
+                                <strong id="tracking-partner-name">Delivery Partner</strong><br>
+                                <small id="tracking-partner-phone" class="text-muted"></small><br>
+                                <small id="tracking-partner-vehicle" class="text-muted"></small>
+                            </div>
+                            <div class="ms-auto">
+                                <span class="badge bg-success" id="tracking-status-badge">Live</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tracking-map" style="height:450px; border-radius:12px; overflow:hidden;"></div>
+                    <div class="d-flex justify-content-between align-items-center mt-2">
+                        <p class="text-muted small mb-0"><i class="fas fa-satellite-dish me-1"></i>Location updates every 5 seconds</p>
+                        <div>
+                            <button id="share-location-toggle" class="btn btn-sm rounded-pill px-3 fw-bold" style="background:#22c55e;color:white;border:none;transition:all 0.3s;" onclick="CustomerTracker.toggleCustomerLocation()">
+                                <i class="fas fa-location-arrow me-1"></i>📍 Share My Location
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Distance & ETA Info Bar -->
+                    <div class="mt-2 p-2 rounded" style="background:#f8fafc;border:1px solid #e2e8f0;display:flex;justify-content:space-around;align-items:center;">
+                        <div class="text-center"><small class="text-muted">📍 Distance</small><br><strong id="tracking-distance" style="color:#2563eb;">--</strong></div>
+                        <div class="text-center"><small class="text-muted">⏱ ETA</small><br><strong id="tracking-eta" style="color:#FF6B35;">--</strong></div>
+                        <div class="text-center"><small class="text-muted">🟢 Status</small><br><strong id="tracking-status-text" style="color:#22c55e;">Waiting...</strong></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script src="firebase-config.js"></script>
+    <script src="auth.js"></script>
+    <script src="invoice.js"></script>
+    <script>
+
+
+        function updateNav() {
+            const hide = (id) => { const el = document.getElementById(id); if (el) el.style.display = 'none'; };
+            const show = (id) => { const el = document.getElementById(id); if (el) el.style.display = 'block'; };
+            if (auth.currentUser) {
+                show('nav-logout');
+                hide('nav-login');
+                hide('nav-register');
+                show('nav-profile');
+            } else {
+                hide('nav-logout');
+                show('nav-login');
+                show('nav-register');
+                hide('nav-profile');
+            }
+        }
+
+        async function loadOrders() {
+            const authState = await auth.init();
+            updateNav();
+            if (!authState.user) {
+                document.getElementById('auth-required').style.display = 'block';
+                document.getElementById('orders-content').style.display = 'none';
+                document.querySelector('.hero-section').style.display = 'none';
+                return;
+            }
+            document.getElementById('nav-logout').style.display = 'block';
+            
+            let initialLoad = true;
+            db.ref('notifications').orderByChild('userId').equalTo(authState.user.uid).on('child_added', (snapshot) => {
+                if (!initialLoad) {
+                    const notif = snapshot.val();
+                    if (!notif.read) {
+                        auth.notify(notif.message);
+                        auth.markNotificationRead(snapshot.key);
+                        loadOrdersOnly(authState.user.uid);
+                    }
+                }
+            });
+            setTimeout(() => initialLoad = false, 3000);
+
+            loadOrdersOnly(authState.user.uid);
+        }
+
+        async function loadOrdersOnly(userId) {
+            const tbody = document.getElementById('customer-orders-table');
+            const summary = document.getElementById('order-summary');
+            tbody.innerHTML = '<tr><td colspan="7" class="text-center py-4"><div class="spinner-border text-primary"></div></td></tr>';
+
+            try {
+                const snap = await db.ref('orders').orderByChild('customerId').equalTo(userId).once('value');
+                tbody.innerHTML = '';
+                let total = 0, pending = 0, delivered = 0, cancelled = 0;
+
+                if (snap.exists()) {
+                    const orders = [];
+                    snap.forEach(child => {
+                        const o = child.val();
+                        orders.push({ id: child.key, ...o });
+                        total += o.totalAmount || 0;
+                        if (o.status === 'Pending' || o.status === 'Preparing' || o.status === 'Shipped') pending++;
+                        else if (o.status === 'Delivered') delivered++;
+                        else if (o.status === 'Cancelled') cancelled++;
+                    });
+                    orders.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+
+                    summary.innerHTML = `
+                        <div class="col-md-3 col-6 mb-2"><div class="card p-3 text-center"><h6 class="text-muted">📋 Total Orders</h6><h3 class="fw-bold mb-0">${orders.length}</h3></div></div>
+                        <div class="col-md-3 col-6 mb-2"><div class="card p-3 text-center"><h6 class="text-muted">🕐 Active</h6><h3 class="fw-bold text-warning mb-0">${pending}</h3></div></div>
+                        <div class="col-md-3 col-6 mb-2"><div class="card p-3 text-center"><h6 class="text-muted">✅ Delivered</h6><h3 class="fw-bold text-success mb-0">${delivered}</h3></div></div>
+                        <div class="col-md-3 col-6 mb-2"><div class="card p-3 text-center"><h6 class="text-muted">💰 Total Spent</h6><h3 class="fw-bold text-primary mb-0">₹${total.toFixed(2)}</h3></div></div>
+                    `;
+
+                    for (const o of orders) {
+                        const items = o.items ? o.items.map(i => `<small>${i.name} x${i.qty}</small>`).join('<br>') : 'N/A';
+                        const d = o.timestamp ? new Date(o.timestamp).toLocaleDateString() + ' ' + new Date(o.timestamp).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}) : 'N/A';
+                        const isCancellable = o.status === 'Pending' || o.status === 'Preparing';
+                        const isCancelled = o.status === 'Cancelled';
+
+                        let deliveryInfo = '';
+                        let partnerName = '', partnerPhone = '', partnerVehicle = '';
+                        if (o.deliveryPartnerId) {
+                            try {
+                                const dpSnap = await db.ref('deliveryPartners/' + o.deliveryPartnerId).once('value');
+                                if (dpSnap.exists()) {
+                                    const dp = dpSnap.val();
+                                    partnerName = dp.name || 'N/A';
+                                    partnerVehicle = dp.vehicleNo || '';
+                                    partnerPhone = dp.phone || '';
+                                    
+                                    const isActive = (o.status === 'Shipped' || o.status === 'Out for Delivery');
+                                    deliveryInfo = `
+                                        <div class="mt-2 p-2 rounded" style="background:#f0fdf4;border:1px solid #bbf7d0;">
+                                            <small class="text-success fw-bold"><i class="fas fa-motorcycle me-1"></i>Delivery Partner:</small><br>
+                                            <small><strong>${partnerName}</strong></small><br>
+                                            ${partnerVehicle ? `<small>🚗 ${partnerVehicle}</small>` : ''}
+                                            ${isActive && partnerPhone ? `<a href="tel:${partnerPhone}" class="btn btn-sm btn-outline-primary mt-1 w-100"><i class="fas fa-phone me-1"></i>Call Delivery Partner</a>` : ''}
+                                        </div>
+                                    `;
+                                }
+                            } catch(e) {}
+                        }
+
+                        const safeName = partnerName.replace(/'/g, "\\'");
+                        const safePhone = partnerPhone.replace(/'/g, "\\'");
+                        const safeVehicle = partnerVehicle.replace(/'/g, "\\'");
+                        const savedLat = parseFloat(o.customerLat) || 0;
+                        const savedLng = parseFloat(o.customerLng) || 0;
+
+                        const tr = document.createElement('tr');
+                        tr.style.cursor = 'pointer';
+                        const orderData = o;
+                        tr.addEventListener('click', (e) => {
+                            // Don't open detail modal if clicking a button
+                            if (e.target.tagName === 'BUTTON' || e.target.tagName === 'A') return;
+                            showCustomerOrderDetail(orderData);
+                        });
+                        tr.innerHTML = `
+                            <td><strong>#${o.id.slice(-6)}</strong></td>
+                            <td>${o.restaurantName || 'N/A'}</td>
+                            <td>${items}</td>
+                            <td><strong>₹${(o.totalAmount || 0).toFixed(2)}</strong></td>
+                            <td><span class="status-badge status-${o.status.toLowerCase()}">${o.status}</span>
+                                ${deliveryInfo}
+                            </td>
+                            <td><small>${d}</small></td>
+                            <td class="text-center">
+                                ${isCancellable ? `<button class="btn btn-sm btn-outline-danger" onclick="cancelOrder('${o.id}')"><i class="fas fa-ban"></i> Cancel</button>` : ''}
+                                ${isCancelled ? `<span class="badge bg-danger">Cancelled</span>` : ''}
+                                ${o.status === 'Delivered' ? `<button class="btn btn-sm btn-outline-primary mt-1" onclick="Invoice.download('${o.id}', 'customer')"><i class="fas fa-file-invoice"></i> Download Invoice</button>` : ''}
+                                ${o.status === 'Delivered' && partnerName ? `<div><span class="badge bg-success mb-1">✅ Delivered</span><br><button class="btn btn-sm btn-outline-info mt-1" onclick="auth.showToast('🛵 Delivered by ${safeName}\\n🚗 ${safeVehicle || 'N/A'}')"><i class="fas fa-info-circle"></i> Delivery Details</button></div>` : ''}
+                                ${o.status === 'Delivered' && !partnerName ? `<span class="badge bg-success">✅ Delivered</span>` : ''}
+                                ${(o.status === 'Shipped' || o.status === 'Out for Delivery') && partnerName ? `<button class="btn btn-sm btn-outline-success mt-1" onclick="CustomerTracker.startTracking('${o.id}','${safeName}','${safePhone}','${safeVehicle}',${savedLat},${savedLng})"><i class="fas fa-map-marker-alt"></i> 📍 Live Track</button>` : ''}
+                            </td>
+                        `;
+                        tbody.appendChild(tr);
+                    }
+                }
+
+                if (!snap.exists() || tbody.children.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="7" class="text-center py-5"><div class="empty-state"><i class="fas fa-box-open"></i><h4>No Orders Yet</h4><p class="text-muted">Order your first meal! 🍕</p><a href="index.html" class="btn btn-primary mt-3">Browse Restaurants</a></div></td></tr>';
+                }
+            } catch (e) {
+                tbody.innerHTML = `<tr><td colspan="7" class="text-danger text-center py-4">Error: ${e.message}</td></tr>`;
+            }
+        }
+
+        function cancelOrder(orderId) {
+            if (confirm('Are you sure you want to cancel this order?')) {
+                db.ref('orders/' + orderId).update({ status: 'Cancelled', cancelledAt: firebase.database.ServerValue.TIMESTAMP })
+                    .then(() => { auth.showToast('Order cancelled successfully'); loadOrders(); })
+                    .catch(e => auth.showToast('Error: ' + e.message));
+            }
+        }
+
+        // ====== CUSTOMER ORDER DETAIL POPUP ======
+        function showCustomerOrderDetail(order) {
+            if (!order) return;
+            const body = document.getElementById('customer-order-detail-body');
+            
+            const orderId = order.id || '';
+            const items = order.items || [];
+            const itemTotal = Number(order.totalAmount || 0);
+            const deliveryFee = Number(order.deliveryFee || 0);
+            const additionalCharges = Number(order.additionalCharges || order.extraCharges || order.taxes || 0);
+            const couponDiscount = Number(order.couponDiscount || 0);
+            const walletDiscount = Number(order.walletDiscount || 0);
+            const finalAmount = Number(order.finalAmount ?? Math.max(0, itemTotal + deliveryFee + additionalCharges - couponDiscount - walletDiscount));
+            const dateStr = order.timestamp ? new Date(order.timestamp).toLocaleString() : 'N/A';
+            const status = order.status || 'N/A';
+            
+            const statusColors = {
+                'Pending': '#f59e0b',
+                'Preparing': '#3b82f6',
+                'Shipped': '#8b5cf6',
+                'Out for Delivery': '#22c55e',
+                'Delivered': '#16a34a',
+                'Cancelled': '#ef4444'
+            };
+            const statusColor = statusColors[status] || '#888';
+            
+            const itemsHtml = items.length > 0 ? items.map(item => `
+                <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f0f0f0;">
+                    <div><span style="font-weight:600;">${item.name || 'Item'}</span><span style="color:#888;margin-left:8px;">x${item.qty || 1}</span></div>
+                    <div style="font-weight:600;">₹${Number(item.price || 0).toFixed(2)}</div>
+                </div>
+            `).join('') : '<div style="color:#888;text-align:center;padding:8px;">No items</div>';
+
+            body.innerHTML = `
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;">
+                    <div>
+                        <div style="font-size:0.8rem;color:#888;">Order ID</div>
+                        <div style="font-size:1.3rem;font-weight:800;">#${orderId.slice(-6).toUpperCase()}</div>
+                    </div>
+                    <div style="text-align:right;">
+                        <span style="background:${statusColor};color:white;padding:4px 14px;border-radius:999px;font-weight:700;font-size:0.8rem;">${status}</span>
+                        <div style="font-size:0.75rem;color:#888;margin-top:4px;">${dateStr}</div>
+                    </div>
+                </div>
+
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+                    <div style="background:#f8f9fa;border-radius:12px;padding:14px;">
+                        <div style="font-size:0.75rem;color:#888;margin-bottom:4px;">👤 Customer</div>
+                        <div style="font-weight:700;">${order.customerName || 'N/A'}</div>
+                        ${order.customerPhone ? `<div style="font-size:0.8rem;color:#555;margin-top:4px;">📞 ${order.customerPhone}</div>` : ''}
+                        ${order.customerEmail ? `<div style="font-size:0.8rem;color:#555;">✉️ ${order.customerEmail}</div>` : ''}
+                    </div>
+                    <div style="background:#f8f9fa;border-radius:12px;padding:14px;">
+                        <div style="font-size:0.75rem;color:#888;margin-bottom:4px;">📍 Delivery Address</div>
+                        <div style="font-weight:700;">${order.deliveryAddress || 'N/A'}</div>
+                        ${order.city ? `<div style="font-size:0.8rem;color:#555;margin-top:2px;">${order.city}${order.pincode ? ' - '+order.pincode : ''}</div>` : ''}
+                    </div>
+                </div>
+
+                <div style="background:#f8f9fa;border-radius:12px;padding:14px;margin-bottom:16px;">
+                    <div style="font-size:0.75rem;color:#888;margin-bottom:6px;">🏪 Restaurant</div>
+                    <div style="font-weight:700;">${order.restaurantName || 'N/A'}</div>
+                    ${order.deliveryPartnerName ? `<div style="font-size:0.8rem;color:#555;margin-top:4px;">🛵 Delivered by: ${order.deliveryPartnerName}</div>` : ''}
+                </div>
+
+                <div style="background:#f8f9fa;border-radius:12px;padding:14px;margin-bottom:16px;">
+                    <div style="font-size:0.75rem;color:#888;margin-bottom:6px;">📋 Items</div>
+                    ${itemsHtml}
+                </div>
+
+                <div style="background:#f8f9fa;border-radius:12px;padding:14px;margin-bottom:16px;">
+                    <div style="font-size:0.75rem;color:#888;margin-bottom:6px;">💰 Payment Breakdown</div>
+                    <div style="display:flex;justify-content:space-between;padding:4px 0;">
+                        <span style="color:#555;">Subtotal</span><span>₹${itemTotal.toFixed(2)}</span>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;padding:4px 0;">
+                        <span style="color:#555;">Delivery Fee</span><span>₹${deliveryFee.toFixed(2)}</span>
+                    </div>
+                    ${additionalCharges > 0 ? `<div style="display:flex;justify-content:space-between;padding:4px 0;"><span style="color:#555;">Additional Charges</span><span>₹${additionalCharges.toFixed(2)}</span></div>` : ''}
+                    ${couponDiscount > 0 ? `<div style="display:flex;justify-content:space-between;padding:4px 0;"><span style="color:#555;">Coupon Discount</span><span style="color:#16a34a;">-₹${couponDiscount.toFixed(2)}</span></div>` : ''}
+                    ${walletDiscount > 0 ? `<div style="display:flex;justify-content:space-between;padding:4px 0;"><span style="color:#555;">Wallet Discount</span><span style="color:#16a34a;">-₹${walletDiscount.toFixed(2)}</span></div>` : ''}
+                    <div style="display:flex;justify-content:space-between;padding:6px 0;margin-top:4px;border-top:2px dashed #ddd;font-weight:800;font-size:1.05rem;">
+                        <span>Total Amount</span>
+                        <span style="color:#16a34a;">₹${finalAmount.toFixed(2)}</span>
+                    </div>
+                </div>
+
+                <div style="text-align:center;margin-top:8px;">
+                    <button class="btn btn-primary" data-bs-dismiss="modal" style="border-radius:12px;padding:10px 32px;font-weight:700;">
+                        <i class="fas fa-check me-1"></i> Close
+                    </button>
+                </div>
+            `;
+            
+            new bootstrap.Modal(document.getElementById('customerOrderDetailModal')).show();
+        }
+
+        // ====== PROFESSIONAL LIVE DELIVERY TRACKING (Zomato/Swiggy-style) ======
+        const CustomerTracker = {
+            trackingRef: null,
+            map: null,
+            deliveryBoyMarker: null,
+            customerMarker: null,
+            polyline: null,
+            trackingListener: null,
+            orderId: null,
+            autoShowModalShown: false,
+            customerLat: null,
+            customerLng: null,
+            _savedLat: null,
+            _savedLng: null,
+            _locationSharingActive: false,
+            customerLiveInterval: null,
+            customerLiveRef: null,
+            _deliveryBoyLat: null,
+            _deliveryBoyLng: null,
+            _routeLine: null,
+
+            // ===== INFO BAR UPDATER - Shows distance, ETA, status =====
+            _refreshInfoBar: function() {
+                const distanceEl = document.getElementById('tracking-distance');
+                const etaEl = document.getElementById('tracking-eta');
+                const statusTextEl = document.getElementById('tracking-status-text');
+
+                if (this.customerLat && this.customerLng && this._deliveryBoyLat && this._deliveryBoyLng) {
+                    const dist = this._calculateDistance(this.customerLat, this.customerLng, this._deliveryBoyLat, this._deliveryBoyLng);
+                    const etaMinutes = Math.max(1, Math.round(dist / 0.03));
+                    
+                    distanceEl.innerHTML = dist < 1 ? (dist*1000).toFixed(0) + ' m' : dist.toFixed(2) + ' km';
+                    etaEl.innerHTML = etaMinutes + ' min';
+                    statusTextEl.innerHTML = '🟢 On the way';
+                    statusTextEl.style.color = '#22c55e';
+                } else if (this._deliveryBoyLat && this._deliveryBoyLng) {
+                    distanceEl.innerHTML = '--';
+                    etaEl.innerHTML = '--';
+                    statusTextEl.innerHTML = '📍 Sharing location';
+                    statusTextEl.style.color = '#2563eb';
+                } else {
+                    distanceEl.innerHTML = '--';
+                    etaEl.innerHTML = '--';
+                    statusTextEl.innerHTML = '⏳ Waiting...';
+                    statusTextEl.style.color = '#f59e0b';
+                }
+
+                // Also update the partner info header
+                if (this._deliveryBoyLat && this._deliveryBoyLng && this.customerLat && this.customerLng) {
+                    const dist = this._calculateDistance(this.customerLat, this.customerLng, this._deliveryBoyLat, this._deliveryBoyLng);
+                    const etaMinutes = Math.max(1, Math.round(dist / 0.03));
+                    document.getElementById('tracking-partner-name').innerHTML = 
+                        `🛵 Delivery Partner <span style="color:#FF6B35;">${dist < 1 ? (dist*1000).toFixed(0)+'m' : dist.toFixed(1)+'km'} away</span>`;
+                    document.getElementById('tracking-partner-vehicle').innerHTML = 
+                        `<span style="font-weight:700;color:#2563eb;">⏱ ETA: ${etaMinutes} min</span>`;
+                    
+                    // Update route line
+                    this._drawRouteLine();
+                }
+            },
+
+            _drawRouteLine: function() {
+                if (!this.map || !this.customerLat || !this.customerLng || !this._deliveryBoyLat || !this._deliveryBoyLng) return;
+                if (this._routeLine) this.map.removeLayer(this._routeLine);
+                this._routeLine = L.polyline([
+                    [this._deliveryBoyLat, this._deliveryBoyLng],
+                    [this.customerLat, this.customerLng]
+                ], {
+                    color: '#FF6B35',
+                    weight: 3,
+                    opacity: 0.8,
+                    dashArray: '10, 10'
+                }).addTo(this.map);
+            },
+
+            // ===== LOCATION & MAP SETUP =====
+            requestLocationPermission: function() {
+                return new Promise((resolve) => {
+                    if (!navigator.geolocation) { resolve(false); return; }
+                    navigator.geolocation.getCurrentPosition(
+                        (pos) => { resolve(true); },
+                        (err) => { resolve(false); },
+                        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+                    );
+                });
+            },
+
+            showEnableLocationDialog: function() {
+                return new Promise((resolve) => {
+                    const existing = document.getElementById('customer-location-dialog');
+                    if (existing) existing.remove();
+                    
+                    const overlay = document.createElement('div');
+                    overlay.id = 'customer-location-dialog';
+                    overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:10000;display:flex;align-items:center;justify-content:center;animation:fadeIn 0.3s ease;';
+                    
+                    const dialog = document.createElement('div');
+                    dialog.style.cssText = 'background:white;border-radius:20px;padding:30px;max-width:400px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3);';
+                    dialog.innerHTML = `
+                        <div style="font-size:3rem;margin-bottom:15px;">📍</div>
+                        <h4 style="margin-bottom:10px;font-weight:700;">Share Your Location</h4>
+                        <p style="color:#666;margin-bottom:20px;">To show both you and your delivery partner on the map, please allow location access.</p>
+                        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+                            <button id="cust-loc-allow-btn" style="background:#ff6b35;color:white;border:none;padding:12px 28px;border-radius:12px;font-weight:700;cursor:pointer;font-size:1rem;">✅ Enable Location</button>
+                            <button id="cust-loc-skip-btn" style="background:#f1f1f1;color:#666;border:none;padding:12px 28px;border-radius:12px;font-weight:600;cursor:pointer;font-size:1rem;">Skip</button>
+                        </div>
+                    `;
+                    overlay.appendChild(dialog);
+                    document.body.appendChild(overlay);
+                    
+                    document.getElementById('cust-loc-allow-btn').onclick = () => {
+                        overlay.remove();
+                        this.requestLocationPermission().then(resolve);
+                        navigator.geolocation.getCurrentPosition(() => {}, () => {});
+                    };
+                    document.getElementById('cust-loc-skip-btn').onclick = () => {
+                        overlay.remove();
+                        resolve(false);
+                    };
+                });
+            },
+
+            // ===== TOGGLE LIVE LOCATION SHARING =====
+            toggleCustomerLocation: async function() {
+                const btn = document.getElementById('share-location-toggle');
+                if (!btn) return;
+
+                if (this._locationSharingActive) {
+                    this.stopCustomerLiveTracking();
+                    this._locationSharingActive = false;
+                    btn.innerHTML = '<i class="fas fa-location-arrow me-1"></i>📍 Share My Location';
+                    btn.style.background = '#22c55e';
+                    if (this._savedLat && this._savedLng) {
+                        this.customerLat = this._savedLat;
+                        this.customerLng = this._savedLng;
+                        if (this.customerMarker) {
+                            this.customerMarker.setLatLng([this._savedLat, this._savedLng]);
+                            this.customerMarker.setIcon(this._createSavedLocationIcon());
+                            this.customerMarker.setPopupContent('<strong>📍 Your Delivery Location</strong>');
+                        }
+                        this._drawRouteLine();
+                        this._updateMapView();
+                        this._refreshInfoBar();
+                    }
+                    auth.showToast('📍 Location sharing stopped');
+                } else {
+                    const granted = await this.requestLocationPermission();
+                    if (!granted) {
+                        const dialogResult = await this.showEnableLocationDialog();
+                        if (!dialogResult) {
+                            auth.showToast('⚠️ Location sharing requires GPS permission');
+                            return;
+                        }
+                    }
+                    await this.startCustomerLiveTracking(this.orderId);
+                    this._locationSharingActive = true;
+                    btn.innerHTML = '<i class="fas fa-stop-circle me-1"></i>🔴 Stop Sharing Location';
+                    btn.style.background = '#ef4444';
+                    
+                    navigator.geolocation.getCurrentPosition((pos) => {
+                        this.customerLat = pos.coords.latitude;
+                        this.customerLng = pos.coords.longitude;
+                        if (this.map) {
+                            if (this.customerMarker) {
+                                this.customerMarker.setLatLng([this.customerLat, this.customerLng]);
+                                this.customerMarker.setIcon(this._createCustomerIcon());
+                                this.customerMarker.setPopupContent('<strong>📍 Your Location (Live)</strong>');
+                            } else {
+                                this.customerMarker = L.marker([this.customerLat, this.customerLng], {
+                                    icon: this._createCustomerIcon()
+                                }).addTo(this.map).bindPopup('<strong>📍 Your Location (Live)</strong>');
+                            }
+                            this._drawRouteLine();
+                            this._updateMapView();
+                            this._refreshInfoBar();
+                        }
+                    }, () => {}, { enableHighAccuracy: true, timeout: 10000, maximumAge: 5000 });
+                    auth.showToast('📍 Now sharing your live location!');
+                }
+            },
+
+            // ===== CUSTOMER LIVE LOCATION PUBLISHING =====
+            startCustomerLiveTracking: async function(orderId) {
+                try {
+                    if (this.customerLiveInterval) {
+                        clearInterval(this.customerLiveInterval);
+                        this.customerLiveInterval = null;
+                    }
+                    if (this.customerLiveRef) {
+                        await this.customerLiveRef.update({ active: false });
+                        this.customerLiveRef = null;
+                    }
+                    this.customerLiveRef = db.ref('customerTracking/' + orderId);
+                    
+                    this.customerLiveInterval = setInterval(() => {
+                        if (!this.customerLiveRef) return;
+                        navigator.geolocation.getCurrentPosition(
+                            (pos) => {
+                                const now = Date.now();
+                                const lat = pos.coords.latitude;
+                                const lng = pos.coords.longitude;
+                                this.customerLat = lat;
+                                this.customerLng = lng;
+                                this.customerLiveRef.update({
+                                    active: true,
+                                    customerId: auth.currentUser?.uid || null,
+                                    lat: lat, lng: lng, lastUpdated: now
+                                });
+                                if (this.map && this.customerMarker) {
+                                    this.customerMarker.setLatLng([lat, lng]);
+                                    this._drawRouteLine();
+                                    this._updateMapView();
+                                    this._refreshInfoBar();
+                                }
+                            }, () => {},
+                            { enableHighAccuracy: true, timeout: 12000, maximumAge: 5000 }
+                        );
+                    }, 5000);
+
+                    navigator.geolocation.getCurrentPosition(
+                        (pos) => {
+                            const now = Date.now();
+                            const lat = pos.coords.latitude;
+                            const lng = pos.coords.longitude;
+                            this.customerLat = lat;
+                            this.customerLng = lng;
+                            this.customerLiveRef.set({
+                                active: true,
+                                customerId: auth.currentUser?.uid || null,
+                                lat: lat, lng: lng, lastUpdated: now
+                            });
+                        }, () => {},
+                        { enableHighAccuracy: true, timeout: 12000, maximumAge: 5000 }
+                    );
+                } catch (e) {}
+            },
+
+            stopCustomerLiveTracking: function() {
+                try {
+                    if (this.customerLiveInterval) { clearInterval(this.customerLiveInterval); this.customerLiveInterval = null; }
+                    if (this.customerLiveRef) { this.customerLiveRef.update({ active: false }); this.customerLiveRef = null; }
+                } catch (e) {}
+            },
+
+            // ===== ICONS (Zomato/Swiggy-style) =====
+            _createSavedLocationIcon: function() {
+                return L.divIcon({
+                    className: 'customer-saved-location-icon',
+                    html: `<div style="position:relative;width:32px;height:40px;">
+                        <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-top:10px solid #2563eb;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.3));"></div>
+                        <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:22px;height:22px;background:#2563eb;border:3px solid white;border-radius:50%;box-shadow:0 2px 8px rgba(37,99,235,0.5);display:flex;align-items:center;justify-content:center;font-size:11px;">📍</div>
+                        <div style="position:absolute;top:-3px;left:50%;transform:translateX(-50%);width:36px;height:36px;background:rgba(37,99,235,0.1);border-radius:50%;"></div>
+                    </div>`,
+                    iconSize: [32, 40], iconAnchor: [16, 40], popupAnchor: [0, -42]
+                });
+            },
+
+            _createDeliveryBoyIcon: function() {
+                return L.divIcon({
+                    className: 'delivery-boy-icon',
+                    html: `<div style="position:relative;width:44px;height:44px;">
+                        <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#FF6B35,#e85d2c);border:3px solid white;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 12px rgba(255,107,53,0.4);">
+                            <span style="font-size:22px;line-height:1;">🛵</span>
+                        </div>
+                        <div style="position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);width:10px;height:10px;background:white;border-radius:50%;box-shadow:0 1px 3px rgba(0,0,0,0.2);"></div>
+                    </div>`,
+                    iconSize: [44, 48], iconAnchor: [22, 44], popupAnchor: [0, -44]
+                });
+            },
+
+            _createCustomerIcon: function() {
+                return L.divIcon({
+                    className: 'customer-location-icon',
+                    html: `<div style="position:relative;width:30px;height:30px;">
+                        <div style="position:absolute;top:-10px;left:-10px;width:50px;height:50px;border-radius:50%;background:rgba(37,99,235,0.08);animation:zomatoPulse 2s ease-in-out infinite;"></div>
+                        <div style="position:absolute;top:-5px;left:-5px;width:40px;height:40px;border-radius:50%;background:rgba(37,99,235,0.15);animation:zomatoPulse 2s ease-in-out 0.3s infinite;"></div>
+                        <div style="position:absolute;top:3px;left:3px;width:24px;height:24px;background:#2563eb;border:3px solid white;border-radius:50%;box-shadow:0 2px 12px rgba(37,99,235,0.6);">
+                            <div style="width:8px;height:8px;background:rgba(255,255,255,0.5);border-radius:50%;position:absolute;top:4px;left:5px;"></div>
+                        </div>
+                    </div>`,
+                    iconSize: [30, 30], iconAnchor: [15, 15], popupAnchor: [0, -20]
+                });
+            },
+
+            _createCurrentLocationIcon: function() {
+                return L.divIcon({
+                    className: 'customer-current-icon',
+                    html: `<div style="position:relative;width:36px;height:36px;">
+                        <div style="position:absolute;top:-14px;left:-14px;width:64px;height:64px;border-radius:50%;border:2px solid rgba(37,99,235,0.12);animation:zomatoPulse 2s ease-in-out infinite;"></div>
+                        <div style="position:absolute;top:-8px;left:-8px;width:52px;height:52px;border-radius:50%;border:2px solid rgba(37,99,235,0.18);animation:zomatoPulse 2s ease-in-out 0.5s infinite;"></div>
+                        <div style="position:absolute;top:-3px;left:-3px;width:42px;height:42px;border-radius:50%;background:rgba(37,99,235,0.12);filter:blur(2px);"></div>
+                        <div style="position:absolute;top:4px;left:4px;width:28px;height:28px;background:linear-gradient(135deg,#2563eb,#1d4ed8);border:3.5px solid white;border-radius:50%;box-shadow:0 2px 16px rgba(37,99,235,0.6);">
+                            <div style="width:6px;height:6px;background:rgba(255,255,255,0.3);border-radius:50%;position:absolute;top:5px;left:6px;"></div>
+                        </div>
+                        <div style="position:absolute;top:-18px;left:50%;transform:translateX(-50%);white-space:nowrap;background:rgba(0,0,0,0.7);color:white;font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;backdrop-filter:blur(4px);">You</div>
+                    </div>`,
+                    iconSize: [36, 56], iconAnchor: [18, 36], popupAnchor: [0, -40]
+                });
+            },
+
+            // ===== CALCULATIONS =====
+            _calculateDistance: function(lat1, lon1, lat2, lon2) {
+                const R = 6371;
+                const dLat = (lat2 - lat1) * Math.PI / 180;
+                const dLon = (lon2 - lon1) * Math.PI / 180;
+                const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLon/2)**2;
+                return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            },
+
+            _updateMapView: function() {
+                if (!this.map) return;
+                const group = [];
+                if (this.deliveryBoyMarker) group.push(this.deliveryBoyMarker);
+                if (this.customerMarker) group.push(this.customerMarker);
+                if (group.length > 0) {
+                    const bounds = L.featureGroup(group).getBounds();
+                    if (bounds.isValid()) {
+                        this.map.fitBounds(bounds, { padding: [60, 60], maxZoom: 16, animate: true });
+                    }
+                }
+            },
+
+            // ===== START TRACKING - THE MAIN ENTRY POINT =====
+            startTracking: function(orderId, partnerName, partnerPhone, partnerVehicle, savedLat, savedLng) {
+                this.orderId = orderId;
+                this.autoShowModalShown = true;
+                this._savedLat = savedLat;
+                this._savedLng = savedLng;
+                this._deliveryBoyLat = null;
+                this._deliveryBoyLng = null;
+
+                // Reset info bar to waiting state
+                document.getElementById('tracking-partner-name').textContent = `🛵 ${partnerName || 'Delivery Partner'} (loading...)`;
+                document.getElementById('tracking-partner-phone').innerHTML = partnerPhone ? 
+                    `<a href="tel:${partnerPhone}" style="color:#2563eb;font-weight:700;text-decoration:none;"><i class="fas fa-phone me-1"></i>${partnerPhone}</a>` : '';
+                document.getElementById('tracking-partner-vehicle').textContent = partnerVehicle ? '🚗 ' + partnerVehicle : '';
+
+                const modal = new bootstrap.Modal(document.getElementById('trackingMapModal'));
+                modal.show();
+                
+                const that = this;
+                document.getElementById('trackingMapModal').addEventListener('shown.bs.modal', function() {
+                    that.initMap();
+
+                    // Reset share button
+                    const shareBtn = document.getElementById('share-location-toggle');
+                    if (shareBtn) {
+                        shareBtn.innerHTML = '<i class="fas fa-location-arrow me-1"></i>📍 Share My Location';
+                        shareBtn.style.background = '#22c55e';
+                    }
+                    that._locationSharingActive = false;
+
+                    // ===== 1. SHOW CUSTOMER'S LOCATION PIN IMMEDIATELY =====
+                    if (savedLat && savedLng && savedLat !== 0 && savedLng !== 0) {
+                        that.customerLat = savedLat;
+                        that.customerLng = savedLng;
+                        that.customerMarker = L.marker([savedLat, savedLng], {
+                            icon: that._createSavedLocationIcon()
+                        }).addTo(that.map).bindPopup('<strong>📍 Your Delivery Location</strong>').openPopup();
+                    } else {
+                        // Fallback: get GPS
+                        that.requestLocationPermission().then(granted => {
+                            if (granted) {
+                                navigator.geolocation.getCurrentPosition((pos) => {
+                                    that.customerLat = pos.coords.latitude;
+                                    that.customerLng = pos.coords.longitude;
+                                    if (that.map) {
+                                        that.customerMarker = L.marker([that.customerLat, that.customerLng], {
+                                            icon: that._createCurrentLocationIcon()
+                                        }).addTo(that.map).bindPopup('<strong>📍 You Are Here</strong>');
+                                        that._updateMapView();
+                                        that._refreshInfoBar();
+                                    }
+                                }, () => {});
+                            }
+                        });
+                    }
+
+                    // ===== 2. FETCH DELIVERY BOY'S LATEST LOCATION & SHOW IMMEDIATELY =====
+                    // First try to get any existing location data from Firebase
+                    db.ref('deliveryTracking/' + orderId).once('value', (snap) => {
+                        if (snap.exists()) {
+                            const data = snap.val();
+                            if (data.lat && data.lng) {
+                                that._deliveryBoyLat = data.lat;
+                                that._deliveryBoyLng = data.lng;
+                                if (!that.deliveryBoyMarker) {
+                                    that.deliveryBoyMarker = L.marker([data.lat, data.lng], {
+                                        icon: that._createDeliveryBoyIcon()
+                                    }).addTo(that.map).bindPopup('<strong>🛵 Delivery Partner</strong>');
+                                } else {
+                                    that.deliveryBoyMarker.setLatLng([data.lat, data.lng]);
+                                }
+                                // Draw route line and show distance immediately
+                                that._drawRouteLine();
+                                that._updateMapView();
+                                that._refreshInfoBar();
+                                
+                                // Update status badge
+                                document.getElementById('tracking-status-badge').textContent = '🟢 Live';
+                                document.getElementById('tracking-status-badge').className = 'badge bg-success';
+                            }
+                        }
+                    });
+
+                    // ===== 3. START LISTENING FOR LIVE UPDATES =====
+                    that.listenToDeliveryBoy();
+                    
+                }, { once: true });
+            },
+
+            initMap: function() {
+                if (!this.map) {
+                    this.map = L.map('tracking-map', {
+                        center: [30.166, 76.717],
+                        zoom: 13,
+                        zoomControl: true
+                    });
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; OpenStreetMap', maxZoom: 19
+                    }).addTo(this.map);
+                    
+                    document.getElementById('tracking-status-badge').textContent = 'Waiting for delivery partner...';
+                    document.getElementById('tracking-status-badge').className = 'badge bg-warning';
+                    this._refreshInfoBar();
+                }
+            },
+
+            listenToDeliveryBoy: function() {
+                if (!this.orderId) return;
+                const that = this;
+                this.trackingRef = db.ref('deliveryTracking/' + this.orderId);
+                
+                this.trackingListener = this.trackingRef.on('value', (snap) => {
+                    if (!snap.exists()) {
+                        document.getElementById('tracking-status-badge').textContent = 'Waiting for delivery partner...';
+                        document.getElementById('tracking-status-badge').className = 'badge bg-warning';
+                        that._refreshInfoBar();
+                        return;
+                    }
+                    
+                    const data = snap.val();
+                    
+                    if (data.active === false) {
+                        document.getElementById('tracking-status-badge').textContent = '✅ Delivered';
+                        document.getElementById('tracking-status-badge').className = 'badge bg-success';
+                        if (that.deliveryBoyMarker) that.deliveryBoyMarker.setLatLng([data.lat || 0, data.lng || 0]);
+                        return;
+                    }
+                    
+                    const lat = data.lat;
+                    const lng = data.lng;
+                    
+                    if (lat && lng) {
+                        that._deliveryBoyLat = lat;
+                        that._deliveryBoyLng = lng;
+                        
+                        // Create or update delivery boy marker
+                        if (!that.deliveryBoyMarker) {
+                            that.deliveryBoyMarker = L.marker([lat, lng], {
+                                icon: that._createDeliveryBoyIcon()
+                            }).addTo(that.map).bindPopup(`
+                                <div style="text-align:center;">
+                                    <strong>🛵 Delivery Partner</strong><br>
+                                    ${document.getElementById('tracking-partner-phone').textContent || ''}
+                                </div>
+                            `);
+                        } else {
+                            that.deliveryBoyMarker.setLatLng([lat, lng]);
+                        }
+                        
+                        // Draw route line
+                        that._drawRouteLine();
+                        
+                        // Update map view to show both markers
+                        that._updateMapView();
+                        
+                        // Update info bar with distance and ETA
+                        that._refreshInfoBar();
+                        
+                        // Update status badge
+                        document.getElementById('tracking-status-badge').textContent = '🟢 Live';
+                        document.getElementById('tracking-status-badge').className = 'badge bg-success';
+                        
+                        if (data.lastUpdated) {
+                            const secondsAgo = Math.floor((Date.now() - data.lastUpdated) / 1000);
+                            if (secondsAgo > 30) {
+                                document.getElementById('tracking-status-badge').textContent = '⏳ ' + secondsAgo + 's ago';
+                                document.getElementById('tracking-status-badge').className = 'badge bg-warning';
+                            }
+                        }
+                    } else {
+                        document.getElementById('tracking-status-badge').textContent = 'Waiting for location...';
+                        document.getElementById('tracking-status-badge').className = 'badge bg-warning';
+                        that._refreshInfoBar();
+                    }
+                });
+            },
+
+            stopTracking: function() {
+                this.stopCustomerLiveTracking();
+                this._locationSharingActive = false;
+                this._savedLat = null;
+                this._savedLng = null;
+                this._deliveryBoyLat = null;
+                this._deliveryBoyLng = null;
+                const shareBtn = document.getElementById('share-location-toggle');
+                if (shareBtn) {
+                    shareBtn.innerHTML = '<i class="fas fa-location-arrow me-1"></i>📍 Share My Location';
+                    shareBtn.style.background = '#22c55e';
+                }
+                if (this.trackingRef && this.trackingListener) {
+                    this.trackingRef.off('value', this.trackingListener);
+                }
+                this.trackingRef = null;
+                this.trackingListener = null;
+                this.orderId = null;
+                this.autoShowModalShown = false;
+                this.customerLat = null;
+                this.customerLng = null;
+                if (this.map) {
+                    if (this._routeLine) this.map.removeLayer(this._routeLine);
+                    if (this.polyline) this.map.removeLayer(this.polyline);
+                    this.map.remove();
+                    this.map = null;
+                    this.deliveryBoyMarker = null;
+                    this.customerMarker = null;
+                    this._routeLine = null;
+                    this.polyline = null;
+                }
+            },
+
+            autoShowTracking: function() {
+                if (!auth.currentUser) return;
+                db.ref('orders').orderByChild('customerId').equalTo(auth.currentUser.uid).on('child_changed', (snap) => {
+                    if (!snap.exists()) return;
+                    const o = snap.val();
+                    if ((o.status === 'Shipped' || o.status === 'Out for Delivery') && o.deliveryPartnerId && !this.autoShowModalShown) {
+                        auth.notify('🛵 Your delivery partner is on the way! Track them live.');
+                        try { const nSound = document.getElementById('notification-sound'); if (nSound) { nSound.currentTime = 0; nSound.play().catch(() => {}); } } catch(e) {}
+                        if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
+                        
+                        db.ref('deliveryPartners/' + o.deliveryPartnerId).once('value', (dpSnap) => {
+                            const dp = dpSnap.val() || {};
+                            setTimeout(() => {
+                                this.startTracking(
+                                    snap.key,
+                                    dp.name || o.deliveryPartnerName || 'Delivery Partner',
+                                    dp.phone || o.deliveryPartnerPhone || '',
+                                    dp.vehicleNo || o.deliveryPartnerVehicle || '',
+                                    o.customerLat || 0,
+                                    o.customerLng || 0
+                                );
+                                this.showEnableLocationDialog().then(() => {});
+                            }, 1500);
+                        });
+                    }
+                });
+            }
+        };
+
+        // Add animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.6; } }
+            @keyframes zomatoPulse { 0%,100% { transform:scale(1); opacity:0.6; } 50% { transform:scale(1.3); opacity:0.2; } }
+        `;
+        document.head.appendChild(style);
+
+        // ====== RATING MODAL - After delivery rating for delivery boy, products, restaurant ======
+        const RatingModal = {
+            _deliveryStars: 0,
+            _restaurantStars: 0,
+            _productStars: {},
+            _orderData: null,
+            _rated: false,
+
+            show: async function(orderId) {
+                // Check if already rated
+                const alreadyRated = await db.ref('orderRatings/' + orderId).once('value');
+                if (alreadyRated.exists()) {
+                    auth.showToast('⭐ You have already rated this order!');
+                    return;
+                }
+
+                const snap = await db.ref('orders/' + orderId).once('value');
+                if (!snap.exists()) return;
+                this._orderData = snap.val();
+                if (!this._orderData) return;
+
+                // Reset
+                this._deliveryStars = 0;
+                this._restaurantStars = 0;
+                this._productStars = {};
+                this._rated = false;
+
+                document.getElementById('rating-order-id').value = orderId;
+
+                // Delivery partner name
+                let dpName = 'Delivery Partner';
+                if (this._orderData.deliveryPartnerId) {
+                    const dpSnap = await db.ref('deliveryPartners/' + this._orderData.deliveryPartnerId).once('value');
+                    if (dpSnap.exists()) dpName = dpSnap.val().name || 'Delivery Partner';
+                }
+                document.getElementById('rating-delivery-name').textContent = dpName;
+                document.getElementById('rating-restaurant-name').textContent = this._orderData.restaurantName || 'Restaurant';
+
+                // Reset stars UI
+                document.querySelectorAll('.star-rating .star').forEach(s => s.classList.remove('active'));
+                document.querySelectorAll('.star-rating[data-target="delivery"] .star').forEach(s => s.textContent = '☆');
+                document.querySelectorAll('.star-rating[data-target="restaurant"] .star').forEach(s => s.textContent = '☆');
+                document.getElementById('rating-delivery-comment').value = '';
+                document.getElementById('rating-restaurant-comment').value = '';
+
+                // Build product rating rows
+                const container = document.getElementById('product-ratings-container');
+                container.innerHTML = '';
+                if (this._orderData.items) {
+                    this._orderData.items.forEach((item, idx) => {
+                        const div = document.createElement('div');
+                        div.className = 'mb-2 p-2 rounded-3';
+                        div.style.background = '#f8f9fa';
+                        div.innerHTML = `
+                            <div class="d-flex align-items-center gap-2 mb-1">
+                                <span style="font-size:1.2rem;">🍽️</span>
+                                <small class="fw-bold">${item.name} x${item.qty}</small>
+                            </div>
+                            <div class="star-rating" data-target="product-${idx}" data-product-idx="${idx}">
+                                <span class="star" data-val="1" onclick="RatingModal.setProductStars(${idx},1)">☆</span>
+                                <span class="star" data-val="2" onclick="RatingModal.setProductStars(${idx},2)">☆</span>
+                                <span class="star" data-val="3" onclick="RatingModal.setProductStars(${idx},3)">☆</span>
+                                <span class="star" data-val="4" onclick="RatingModal.setProductStars(${idx},4)">☆</span>
+                                <span class="star" data-val="5" onclick="RatingModal.setProductStars(${idx},5)">☆</span>
+                            </div>
+                            <input type="hidden" class="product-rating-input" data-idx="${idx}" value="${item.productId || ''}">
+                        `;
+                        container.appendChild(div);
+                    });
+                }
+
+                new bootstrap.Modal(document.getElementById('ratingModal')).show();
+            },
+
+            setStars: function(target, val) {
+                const container = document.querySelector(`.star-rating[data-target="${target}"]`);
+                if (!container) return;
+                container.querySelectorAll('.star').forEach(s => {
+                    const starVal = parseInt(s.dataset.val);
+                    s.classList.toggle('active', starVal <= val);
+                    s.textContent = starVal <= val ? '★' : '☆';
+                });
+                if (target === 'delivery') this._deliveryStars = val;
+                if (target === 'restaurant') this._restaurantStars = val;
+            },
+
+            setProductStars: function(idx, val) {
+                const container = document.querySelector(`.star-rating[data-target="product-${idx}"]`);
+                if (!container) return;
+                container.querySelectorAll('.star').forEach(s => {
+                    const starVal = parseInt(s.dataset.val);
+                    s.classList.toggle('active', starVal <= val);
+                    s.textContent = starVal <= val ? '★' : '☆';
+                });
+                this._productStars[idx] = val;
+            },
+
+            close: function() {
+                if (this._rated) return;
+                const modal = bootstrap.Modal.getInstance(document.getElementById('ratingModal'));
+                if (modal) modal.hide();
+            },
+
+            submit: async function() {
+                const orderId = document.getElementById('rating-order-id').value;
+                if (!orderId) { auth.showToast('Error: No order ID'); return; }
+
+                // Validate at least delivery or restaurant stars
+                if (this._deliveryStars === 0 && this._restaurantStars === 0) {
+                    auth.showToast('Please rate at least the delivery partner or restaurant ⭐');
+                    return;
+                }
+
+                try {
+                    const batch = [];
+
+                    // 1. Delivery Boy Rating
+                    if (this._deliveryStars > 0 && this._orderData.deliveryPartnerId) {
+                        const dpRatingRef = db.ref('deliveryBoyRatings/' + this._orderData.deliveryPartnerId).push();
+                        batch.push(dpRatingRef.set({
+                            orderId: orderId,
+                            userId: auth.currentUser?.uid || '',
+                            userName: auth.currentUser?.displayName || 'Customer',
+                            stars: this._deliveryStars,
+                            comment: document.getElementById('rating-delivery-comment').value || '',
+                            createdAt: firebase.database.ServerValue.TIMESTAMP,
+                            status: 'approved'
+                        }));
+                        // Update delivery partner average rating
+                        batch.push(this._updateDeliveryAvgRating(this._orderData.deliveryPartnerId));
+                    }
+
+                    // 2. Restaurant Rating
+                    if (this._restaurantStars > 0 && this._orderData.restaurantId) {
+                        const restRatingRef = db.ref('restaurantRatings/' + this._orderData.restaurantId).push();
+                        batch.push(restRatingRef.set({
+                            orderId: orderId,
+                            userId: auth.currentUser?.uid || '',
+                            userName: auth.currentUser?.displayName || 'Customer',
+                            stars: this._restaurantStars,
+                            comment: document.getElementById('rating-restaurant-comment').value || '',
+                            createdAt: firebase.database.ServerValue.TIMESTAMP,
+                            status: 'approved'
+                        }));
+                    }
+
+                    // 3. Product Ratings
+                    if (this._orderData.items) {
+                        this._orderData.items.forEach((item, idx) => {
+                            const stars = this._productStars[idx] || 0;
+                            if (stars > 0 && item.productId) {
+                                const prodRatingRef = db.ref('productRatings/' + item.productId).push();
+                                batch.push(prodRatingRef.set({
+                                    orderId: orderId,
+                                    userId: auth.currentUser?.uid || '',
+                                    userName: auth.currentUser?.displayName || 'Customer',
+                                    stars: stars,
+                                    comment: '',
+                                    productName: item.name,
+                                    createdAt: firebase.database.ServerValue.TIMESTAMP,
+                                    status: 'approved'
+                                }));
+                            }
+                        });
+                    }
+
+                    // 4. Mark order as rated
+                    batch.push(db.ref('orderRatings/' + orderId).set({
+                        rated: true,
+                        ratedAt: firebase.database.ServerValue.TIMESTAMP
+                    }));
+
+                    await Promise.all(batch);
+                    this._rated = true;
+
+                    auth.showToast('✅ Thank you! Your ratings help us improve ⭐');
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('ratingModal'));
+                    if (modal) modal.hide();
+                    loadOrders();
+                } catch (e) {
+                    auth.showToast('Error submitting rating: ' + e.message);
+                }
+            },
+
+            _updateDeliveryAvgRating: async function(partnerId) {
+                try {
+                    const snap = await db.ref('deliveryBoyRatings/' + partnerId).once('value');
+                    let total = 0, count = 0;
+                    if (snap.exists()) {
+                        snap.forEach(c => {
+                            const r = c.val();
+                            if (r.stars) { total += r.stars; count++; }
+                        });
+                    }
+                    const avg = count > 0 ? (total / count).toFixed(1) : 5.0;
+                    await db.ref('deliveryPartners/' + partnerId).update({ rating: parseFloat(avg) });
+                } catch (e) { console.error(e); }
+            },
+
+            // Listen for notification to auto-show rating popup
+            listenForRatingNotifications: function() {
+                if (!auth.currentUser) return;
+                let initialLoad = true;
+                db.ref('notifications').orderByChild('userId').equalTo(auth.currentUser.uid).on('child_added', (snapshot) => {
+                    if (!initialLoad) {
+                        const notif = snapshot.val();
+                        if (notif && notif.type === 'rating' && notif.message && notif.message.includes('show_rating_popup_')) {
+                            const orderId = notif.message.replace('show_rating_popup_', '');
+                            if (orderId) {
+                                setTimeout(() => {
+                                    this.show(orderId);
+                                    auth.markNotificationRead(snapshot.key);
+                                }, 2000);
+                            }
+                        }
+                    }
+                });
+                setTimeout(() => initialLoad = false, 5000);
+            }
+        };
+
+        // Extend loadOrders to listen for rating notifications
+        const originalLoadOrders = loadOrders;
+        loadOrders = async function() {
+            await originalLoadOrders();
+            setTimeout(() => {
+                if (auth.currentUser) {
+                    RatingModal.listenForRatingNotifications();
+                }
+            }, 1500);
+        };
+
+        // Listen directly for delivered orders - more reliable than notification listener
+        function listenForDeliveredOrders() {
+            if (!auth.currentUser) return;
+            db.ref('orders').orderByChild('customerId').equalTo(auth.currentUser.uid).on('child_changed', (snap) => {
+                if (!snap.exists()) return;
+                const o = snap.val();
+                if (o && o.status === 'Delivered') {
+                    // Check if already rated
+                    db.ref('orderRatings/' + snap.key).once('value', (ratedSnap) => {
+                        if (!ratedSnap.exists()) {
+                            setTimeout(() => {
+                                RatingModal.show(snap.key);
+                            }, 3000);
+                        }
+                    });
+                }
+            });
+        }
+
+        // Check URL for showRating parameter (redirected from another page)
+        function checkRatingFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            const orderId = params.get('showRating');
+            if (orderId && auth.currentUser) {
+                setTimeout(() => {
+                    RatingModal.show(orderId);
+                    // Clean URL without page reload
+                    if (window.history.replaceState) {
+                        window.history.replaceState({}, document.title, window.location.pathname);
+                    }
+                }, 3000);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadOrders();
+            setTimeout(() => {
+                if (auth.currentUser) {
+                    CustomerTracker.autoShowTracking();
+                    RatingModal.listenForRatingNotifications();
+                    checkRatingFromUrl();
+                }
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

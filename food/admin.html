@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ibad Foodz - Admin Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* ===== PROFESSIONAL ADMIN THEME ===== */
+        :root {
+            --admin-sidebar: #1a1d23;
+            --admin-sidebar-hover: #2a2d35;
+            --admin-sidebar-active: #ff6b35;
+            --admin-bg: #f5f6fa;
+            --admin-card-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            --admin-radius: 14px;
+        }
+        body {
+            background: var(--admin-bg);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+        /* Mobile top bar */
+        .admin-mobile-top {
+            background: var(--admin-sidebar);
+            color: white;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1040;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+        }
+        .admin-mobile-top h5 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #ff6b35;
+        }
+        .admin-mobile-top h5 i {
+            margin-right: 8px;
+        }
+        .admin-mobile-top .btn-outline-light {
+            border-color: rgba(255,255,255,0.2);
+            color: white;
+        }
+        .admin-mobile-top .btn-outline-light:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        /* Sidebar - Desktop */
+        .admin-sidebar {
+            background: var(--admin-sidebar);
+            min-height: 100vh;
+            padding: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            z-index: 1030;
+            overflow-y: auto;
+            transition: transform 0.3s ease;
+        }
+        .admin-sidebar .sidebar-header {
+            padding: 24px 20px 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .admin-sidebar .sidebar-header h4 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #ff6b35;
+            margin: 0;
+        }
+        .admin-sidebar .sidebar-header h4 i {
+            margin-right: 10px;
+        }
+        .admin-sidebar .sidebar-header p {
+            color: rgba(255,255,255,0.4);
+            font-size: 0.75rem;
+            margin: 4px 0 0 0;
+            word-break: break-all;
+        }
+        .admin-sidebar .nav {
+            padding: 12px 0;
+        }
+        .admin-sidebar .nav-link {
+            color: rgba(255,255,255,0.6);
+            padding: 11px 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border-left: 3px solid transparent;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .admin-sidebar .nav-link:hover {
+            color: white;
+            background: var(--admin-sidebar-hover);
+            border-left-color: rgba(255,107,53,0.3);
+        }
+        .admin-sidebar .nav-link.active {
+            color: white;
+            background: var(--admin-sidebar-hover);
+            border-left-color: var(--admin-sidebar-active);
+        }
+        .admin-sidebar .nav-link i {
+            width: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        .admin-sidebar .nav-link.mt-auto {
+            margin-top: auto !important;
+        }
+        .admin-sidebar .nav-item:last-child {
+            margin-top: auto;
+        }
+        .sidebar-divider {
+            height: 1px;
+            background: rgba(255,255,255,0.06);
+            margin: 8px 20px;
+        }
+        /* Offcanvas (mobile sidebar) */
+        .offcanvas.admin-sidebar-offcanvas {
+            background: var(--admin-sidebar);
+            width: 280px !important;
+        }
+        .offcanvas.admin-sidebar-offcanvas .offcanvas-header {
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            padding: 16px 20px;
+        }
+        .offcanvas.admin-sidebar-offcanvas .offcanvas-title {
+            color: #ff6b35;
+            font-weight: 800;
+        }
+        .offcanvas.admin-sidebar-offcanvas .btn-close {
+            filter: invert(1) brightness(0.8);
+        }
+        /* Main content */
+        .admin-main {
+            margin-left: 250px;
+            padding: 24px;
+            min-height: 100vh;
+            padding-top: 24px;
+        }
+        @media (max-width: 767.98px) {
+            .admin-main {
+                margin-left: 0;
+                padding: 16px;
+                padding-top: 70px;
+            }
+            .admin-sidebar {
+                display: none;
+            }
+        }
+        @media (min-width: 768px) {
+            .admin-mobile-top {
+                display: none !important;
+            }
+        }
+        /* Page header */
+        .page-header {
+            margin-bottom: 24px;
+        }
+        .page-header h2 {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: #1a1d23;
+            margin: 0;
+        }
+        .page-header h2 i {
+            color: #ff6b35;
+            margin-right: 10px;
+        }
+        /* Dashboard cards */
+        .dashboard-card {
+            background: white;
+            border: none;
+            border-radius: var(--admin-radius);
+            box-shadow: var(--admin-card-shadow);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: default;
+        }
+        .dashboard-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(0,0,0,0.1);
+        }
+        .dashboard-card .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin: 0 auto 10px;
+        }
+        .dashboard-card h6 {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+        .dashboard-card h3 {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: #1a1d23;
+            margin: 0;
+        }
+        .dashboard-card h3.revenue {
+            color: #16a34a;
+        }
+        /* Status badges */
+        .status-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        .status-badge.status-pending { background: #fef3c7; color: #92400e; }
+        .status-badge.status-accepted { background: #dbeafe; color: #1e40af; }
+        .status-badge.status-preparing { background: #e0e7ff; color: #3730a3; }
+        .status-badge.status-shipped { background: #d1fae5; color: #065f46; }
+        .status-badge.status-out-for-delivery { background: #d1fae5; color: #065f46; }
+        .status-badge.status-delivered { background: #d1fae5; color: #166534; }
+        .status-badge.status-cancelled { background: #fce4ec; color: #b71c1c; }
+        .status-badge.status-active { background: #d1fae5; color: #166534; }
+        .status-badge.status-inactive { background: #f3f4f6; color: #6b7280; }
+        /* Tables */
+        .admin-table-card {
+            background: white;
+            border: none;
+            border-radius: var(--admin-radius);
+            box-shadow: var(--admin-card-shadow);
+            overflow: hidden;
+        }
+        .admin-table-card .card-body {
+            padding: 0;
+        }
+        .admin-table-card .table {
+            margin: 0;
+            font-size: 0.82rem;
+        }
+        .admin-table-card .table thead th {
+            background: #f8f9fb;
+            font-weight: 700;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #6b7280;
+            padding: 12px 16px;
+            border-bottom: 2px solid #e5e7eb;
+            white-space: nowrap;
+        }
+        .admin-table-card .table tbody td {
+            padding: 12px 16px;
+            vertical-align: middle;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        .admin-table-card .table tbody tr:hover {
+            background: #f9fafb;
+        }
+        .admin-table-card .table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        /* Form cards */
+        .admin-form-card {
+            background: white;
+            border: none;
+            border-radius: var(--admin-radius);
+            box-shadow: var(--admin-card-shadow);
+        }
+        .admin-form-card .card-body {
+            padding: 24px;
+        }
+        .admin-form-card h4 {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #1a1d23;
+        }
+        .admin-form-card h4 i {
+            color: #ff6b35;
+            margin-right: 8px;
+        }
+        .admin-form-card p.text-muted {
+            font-size: 0.82rem;
+        }
+        /* Buttons */
+        .admin-main .btn-primary {
+            background: linear-gradient(135deg, #ff6b35, #ff8c42);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            padding: 8px 20px;
+            transition: all 0.2s;
+        }
+        .admin-main .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(255,107,53,0.35);
+        }
+        .admin-main .btn-outline-primary {
+            border-color: #ff6b35;
+            color: #ff6b35;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+        .admin-main .btn-outline-primary:hover {
+            background: #ff6b35;
+            border-color: #ff6b35;
+            color: white;
+        }
+        .admin-main .btn-sm {
+            padding: 4px 12px;
+            font-size: 0.75rem;
+        }
+        /* Form controls */
+        .admin-main .form-control,
+        .admin-main .form-select {
+            border-radius: 8px;
+            border-color: #e5e7eb;
+            font-size: 0.85rem;
+            padding: 8px 12px;
+        }
+        .admin-main .form-control:focus,
+        .admin-main .form-select:focus {
+            border-color: #ff6b35;
+            box-shadow: 0 0 0 3px rgba(255,107,53,0.12);
+        }
+        .admin-main .form-label {
+            font-weight: 600;
+            font-size: 0.82rem;
+            color: #374151;
+            margin-bottom: 4px;
+        }
+        .admin-main .form-check-label {
+            font-size: 0.85rem;
+        }
+        /* Login card (fallback) */
+        .admin-login-card {
+            max-width: 420px;
+            margin: 60px auto;
+        }
+        .admin-login-card .card {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+        }
+        .admin-login-card .card-body {
+            padding: 36px;
+        }
+        .admin-login-card .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #ff6b35;
+            text-decoration: none;
+        }
+        /* Empty state */
+        .empty-state {
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .empty-state i {
+            font-size: 2.5rem;
+            color: #d1d5db;
+            margin-bottom: 12px;
+        }
+        .empty-state h5 {
+            font-weight: 700;
+            color: #6b7280;
+        }
+        .empty-state p {
+            color: #9ca3af;
+            font-size: 0.85rem;
+        }
+        /* Responsive filter bar */
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+        }
+        .filter-bar .form-select,
+        .filter-bar .form-control {
+            min-width: 130px;
+            flex: 1 1 auto;
+        }
+        @media (max-width: 576px) {
+            .filter-bar .form-select,
+            .filter-bar .form-control {
+                min-width: 100%;
+                flex: 1 1 100%;
+            }
+        }
+        /* Action buttons in tables */
+        .action-group {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        /* Page loading */
+        .page-loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            color: #9ca3af;
+            gap: 12px;
+        }
+        /* Responsive tables */
+        @media (max-width: 768px) {
+            .admin-table-card .table thead {
+                display: none;
+            }
+            .admin-table-card .table tbody tr {
+                display: block;
+                padding: 16px;
+                border-bottom: 1px solid #e5e7eb;
+            }
+            .admin-table-card .table tbody td {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 6px 0;
+                border: none;
+                font-size: 0.8rem;
+            }
+            .admin-table-card .table tbody td::before {
+                content: attr(data-label);
+                font-weight: 700;
+                font-size: 0.72rem;
+                text-transform: uppercase;
+                color: #6b7280;
+                margin-right: 12px;
+                flex-shrink: 0;
+            }
+            .admin-table-card .table tbody td:last-child {
+                border-bottom: none;
+            }
+        }
+        /* Alert styling */
+        .admin-main .alert {
+            border-radius: 10px;
+            font-size: 0.85rem;
+            border: none;
+        }
+        .admin-main .alert-success { background: #d1fae5; color: #065f46; }
+        .admin-main .alert-danger { background: #fce4ec; color: #b71c1c; }
+        .admin-main .alert-warning { background: #fef3c7; color: #92400e; }
+        .admin-main .alert-info { background: #dbeafe; color: #1e40af; }
+        /* Toast */
+        .admin-toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 99999;
+            background: white;
+            border-radius: 12px;
+            padding: 14px 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            font-weight: 600;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            max-width: 360px;
+            animation: slideInRight 0.3s ease;
+        }
+        @keyframes slideInRight {
+            from { transform: translateX(120%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Top Bar -->
+    <div class="admin-mobile-top d-md-none">
+        <h5 class="mb-0"><i class="fas fa-utensils"></i> Ibad Foodz</h5>
+        <button class="btn btn-outline-light btn-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#adminSidebar">
+            <i class="fas fa-bars"></i> Menu
+        </button>
+    </div>
+
+    <div class="container-fluid p-0">
+        <div class="row g-0">
+            <!-- Sidebar Desktop -->
+            <nav class="admin-sidebar d-none d-md-flex flex-column" id="adminSidebarDesktop">
+                <div class="sidebar-header">
+                    <h4><i class="fas fa-utensils"></i> Ibad Foodz</h4>
+                    <p id="admin-email"></p>
+                </div>
+                <ul class="nav flex-column flex-grow-1">
+                    <li class="nav-item"><a class="nav-link active" href="#" data-page="dashboard" onclick="Admin.showPage('dashboard')"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-page="restaurants" onclick="Admin.showPage('restaurants')"><i class="fas fa-store"></i> Restaurants</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-page="delivery" onclick="Admin.showPage('delivery')"><i class="fas fa-motorcycle"></i> Delivery Boys</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-page="activity" onclick="Admin.showPage('activity')"><i class="fas fa-chart-pie"></i> Activity</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-page="customers" onclick="Admin.showPage('customers')"><i class="fas fa-users"></i> Customers</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-page="orders" onclick="Admin.showPage('orders')"><i class="fas fa-shopping-bag"></i> Orders</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-page="offers" onclick="Admin.showPage('offers')"><i class="fas fa-tag"></i> Offers & Banners</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-page="ratings" onclick="Admin.showPage('ratings')"><i class="fas fa-star"></i> Ratings & Reviews</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-page="delivery-ratings" onclick="Admin.showPage('delivery-ratings')"><i class="fas fa-motorcycle"></i> Delivery Ratings</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-page="portal-settings" onclick="Admin.showPage('portal-settings')"><i class="fas fa-cog"></i> Portal Settings</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-page="register" onclick="Admin.showPage('register')"><i class="fas fa-user-plus"></i> Register</a></li>
+                    <li class="sidebar-divider"></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-globe"></i> View Site</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="auth.logout()"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                </ul>
+            </nav>
+
+            <!-- Offcanvas Sidebar (Mobile) -->
+            <nav class="offcanvas offcanvas-start admin-sidebar-offcanvas" tabindex="-1" id="adminSidebar">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title fw-bold"><i class="fas fa-utensils"></i> Ibad Foodz</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+                </div>
+                <div class="offcanvas-body p-0">
+                    <p class="text-white-50 small px-3 mb-3" id="admin-email-mobile"></p>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a class="nav-link active" href="#" data-page="dashboard" onclick="Admin.showPage('dashboard'); bootstrap.Offcanvas.getInstance(document.getElementById('adminSidebar'))?.hide();"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" data-page="restaurants" onclick="Admin.showPage('restaurants'); bootstrap.Offcanvas.getInstance(document.getElementById('adminSidebar'))?.hide();"><i class="fas fa-store"></i> Restaurants</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" data-page="delivery" onclick="Admin.showPage('delivery'); bootstrap.Offcanvas.getInstance(document.getElementById('adminSidebar'))?.hide();"><i class="fas fa-motorcycle"></i> Delivery Boys</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" data-page="activity" onclick="Admin.showPage('activity'); bootstrap.Offcanvas.getInstance(document.getElementById('adminSidebar'))?.hide();"><i class="fas fa-chart-pie"></i> Activity</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" data-page="customers" onclick="Admin.showPage('customers'); bootstrap.Offcanvas.getInstance(document.getElementById('adminSidebar'))?.hide();"><i class="fas fa-users"></i> Customers</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" data-page="orders" onclick="Admin.showPage('orders'); bootstrap.Offcanvas.getInstance(document.getElementById('adminSidebar'))?.hide();"><i class="fas fa-shopping-bag"></i> Orders</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" data-page="offers" onclick="Admin.showPage('offers'); bootstrap.Offcanvas.getInstance(document.getElementById('adminSidebar'))?.hide();"><i class="fas fa-tag"></i> Offers & Banners</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" data-page="ratings" onclick="Admin.showPage('ratings'); bootstrap.Offcanvas.getInstance(document.getElementById('adminSidebar'))?.hide();"><i class="fas fa-star"></i> Ratings & Reviews</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" data-page="delivery-ratings" onclick="Admin.showPage('delivery-ratings'); bootstrap.Offcanvas.getInstance(document.getElementById('adminSidebar'))?.hide();"><i class="fas fa-motorcycle"></i> Delivery Ratings</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" data-page="portal-settings" onclick="Admin.showPage('portal-settings'); bootstrap.Offcanvas.getInstance(document.getElementById('adminSidebar'))?.hide();"><i class="fas fa-cog"></i> Portal Settings</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" data-page="register" onclick="Admin.showPage('register'); bootstrap.Offcanvas.getInstance(document.getElementById('adminSidebar'))?.hide();"><i class="fas fa-user-plus"></i> Register</a></li>
+                        <li class="sidebar-divider"></li>
+                        <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-globe"></i> View Site</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" onclick="auth.logout()"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <main class="admin-main" id="admin-main-content" style="display:none;">
+                <div id="auth-required" class="alert alert-warning" style="display:none;">Please <a href="login.html">login</a> as admin.</div>
+
+                <!-- Dashboard -->
+                <div id="dashboard-page">
+                    <div class="page-header">
+                        <h2><i class="fas fa-chart-line"></i> Platform Dashboard</h2>
+                    </div>
+                    <div class="row g-3 mb-4">
+                        <div class="col-lg-3 col-md-4 col-6">
+                            <div class="dashboard-card card p-3 text-center">
+                                <div class="card-icon" style="background:#fef3c7;color:#d97706;"><i class="fas fa-shopping-bag"></i></div>
+                                <h6>Total Orders</h6>
+                                <h3 id="admin-total-orders">0</h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-6">
+                            <div class="dashboard-card card p-3 text-center">
+                                <div class="card-icon" style="background:#dbeafe;color:#2563eb;"><i class="fas fa-store"></i></div>
+                                <h6>Restaurants</h6>
+                                <h3 id="admin-total-restaurants">0</h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-6">
+                            <div class="dashboard-card card p-3 text-center">
+                                <div class="card-icon" style="background:#e0e7ff;color:#4f46e5;"><i class="fas fa-users"></i></div>
+                                <h6>Sellers</h6>
+                                <h3 id="admin-total-sellers">0</h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-6">
+                            <div class="dashboard-card card p-3 text-center">
+                                <div class="card-icon" style="background:#fce4ec;color:#e11d48;"><i class="fas fa-hamburger"></i></div>
+                                <h6>Menu Items</h6>
+                                <h3 id="admin-total-menu">0</h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-6">
+                            <div class="dashboard-card card p-3 text-center">
+                                <div class="card-icon" style="background:#d1fae5;color:#059669;"><i class="fas fa-user-friends"></i></div>
+                                <h6>Customers</h6>
+                                <h3 id="admin-total-customers">0</h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-6">
+                            <div class="dashboard-card card p-3 text-center">
+                                <div class="card-icon" style="background:#fef3c7;color:#d97706;"><i class="fas fa-motorcycle"></i></div>
+                                <h6>Delivery Boys</h6>
+                                <h3 id="admin-total-delivery">0</h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-6">
+                            <div class="dashboard-card card p-3 text-center">
+                                <div class="card-icon" style="background:#d1fae5;color:#16a34a;"><i class="fas fa-rupee-sign"></i></div>
+                                <h6>Revenue</h6>
+                                <h3 class="revenue" id="admin-total-revenue">₹0</h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-6">
+                            <div class="dashboard-card card p-3 text-center">
+                                <div class="card-icon" style="background:#e0e7ff;color:#4f46e5;"><i class="fas fa-wallet"></i></div>
+                                <h6>Delivery Earnings</h6>
+                                <h3 id="admin-total-delivery-earnings">₹0</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-3 col-6">
+                            <div class="card p-3 text-center border-0 shadow-sm" style="border-radius:12px;background:linear-gradient(135deg,#fef3c7,#fde68a);">
+                                <h6 class="fw-bold mb-1" style="color:#92400e;">🕐 Pending</h6>
+                                <h3 class="fw-bold mb-0" style="color:#92400e;" id="stat-pending">0</h3>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <div class="card p-3 text-center border-0 shadow-sm" style="border-radius:12px;background:linear-gradient(135deg,#dbeafe,#bfdbfe);">
+                                <h6 class="fw-bold mb-1" style="color:#1e40af;">👨‍🍳 Preparing</h6>
+                                <h3 class="fw-bold mb-0" style="color:#1e40af;" id="stat-preparing">0</h3>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <div class="card p-3 text-center border-0 shadow-sm" style="border-radius:12px;background:linear-gradient(135deg,#d1fae5,#a7f3d0);">
+                                <h6 class="fw-bold mb-1" style="color:#166534;">✅ Delivered</h6>
+                                <h3 class="fw-bold mb-0" style="color:#166534;" id="stat-delivered">0</h3>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <div class="card p-3 text-center border-0 shadow-sm" style="border-radius:12px;background:linear-gradient(135deg,#fce4ec,#fbc4d5);">
+                                <h6 class="fw-bold mb-1" style="color:#b71c1c;">❌ Cancelled</h6>
+                                <h3 class="fw-bold mb-0" style="color:#b71c1c;" id="stat-cancelled">0</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Restaurants -->
+                <div id="restaurants-page" style="display:none;">
+                    <div class="page-header"><h2><i class="fas fa-store"></i> Restaurants</h2></div>
+                    <div class="admin-table-card card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead><tr><th>Restaurant</th><th>Cuisine</th><th>⏱ Delivery</th><th>📦 Orders</th><th>💰 Revenue</th><th>Status</th><th class="text-center">Action</th></tr></thead>
+                                    <tbody id="restaurants-table"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Delivery Boys -->
+                <div id="delivery-page" style="display:none;">
+                    <div class="page-header"><h2><i class="fas fa-motorcycle"></i> Delivery Boys</h2></div>
+                    <div class="admin-table-card card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Vehicle</th><th>Area</th><th>Status</th><th>Orders</th><th>Earnings</th><th>Action</th></tr></thead>
+                                    <tbody id="delivery-table"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity -->
+                <div id="activity-page" style="display:none;">
+                    <div class="page-header"><h2><i class="fas fa-chart-pie"></i> Live Activity</h2></div>
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="admin-form-card card h-100">
+                                <div class="card-body">
+                                    <h4 class="fw-bold mb-3"><i class="fas fa-store"></i> Restaurant Activity</h4>
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-hover">
+                                            <thead><tr><th>Restaurant</th><th>Active</th><th>Pending</th><th>Revenue</th><th>Action</th></tr></thead>
+                                            <tbody id="restaurant-activity-table"></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="admin-form-card card h-100">
+                                <div class="card-body">
+                                    <h4 class="fw-bold mb-3"><i class="fas fa-motorcycle"></i> Delivery Boy Activity</h4>
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-hover">
+                                            <thead><tr><th>Delivery Boy</th><th>Status</th><th>Assigned</th><th>Delivered</th><th>Action</th></tr></thead>
+                                            <tbody id="delivery-activity-table"></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Customers -->
+                <div id="customers-page" style="display:none;">
+                    <div class="page-header"><h2><i class="fas fa-users"></i> Customers</h2></div>
+                    <div class="admin-table-card card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Orders</th><th>City</th></tr></thead>
+                                    <tbody id="customers-table"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Orders -->
+                <div id="orders-page" style="display:none;">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-3">
+                        <div class="page-header mb-0"><h2><i class="fas fa-shopping-bag"></i> All Orders</h2></div>
+                        <div class="filter-bar">
+                            <select class="form-select form-select-sm" id="filter-seller" onchange="Admin.filterOrders()">
+                                <option value="">All Restaurants</option>
+                            </select>
+                            <select class="form-select form-select-sm" id="filter-delivery" onchange="Admin.filterOrders()">
+                                <option value="">All Delivery Boys</option>
+                            </select>
+                            <select class="form-select form-select-sm" id="filter-status" onchange="Admin.filterOrders()">
+                                <option value="">All Status</option>
+                                <option>Pending</option><option>Accepted</option><option>Preparing</option><option>Shipped</option><option>Out for Delivery</option><option>Delivered</option><option>Cancelled</option>
+                            </select>
+                            <input type="date" class="form-control form-control-sm" id="filter-date" onchange="Admin.filterOrders()" style="max-width:150px;">
+                        </div>
+                    </div>
+                    <div class="admin-table-card card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead><tr><th>Customer</th><th>Phone</th><th>Restaurant</th><th>Delivery Boy</th><th>Items</th><th>Amount</th><th>Status</th><th>Date</th><th class="text-center">Actions</th></tr></thead>
+                                    <tbody id="admin-orders-table"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ratings & Reviews -->
+                <div id="ratings-page" style="display:none;">
+                    <div class="page-header"><h2><i class="fas fa-star"></i> Ratings & Reviews Moderation</h2></div>
+                    <div class="row g-4">
+                        <div class="col-lg-6">
+                            <div class="admin-form-card card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                                        <h4 class="mb-0"><i class="fas fa-store"></i> Restaurant Ratings</h4>
+                                        <select class="form-select form-select-sm" id="filter-restaurant-rating-status" onchange="Admin.filterRestaurantRatings()" style="width:160px;">
+                                            <option value="">All</option>
+                                            <option value="pending">Pending</option>
+                                            <option value="approved">Approved</option>
+                                            <option value="hidden">Hidden</option>
+                                        </select>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-sm">
+                                            <thead><tr><th>User</th><th>Stars</th><th>Comment</th><th>Date</th><th>Status</th><th class="text-center">Action</th></tr></thead>
+                                            <tbody id="restaurant-ratings-table"></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="admin-form-card card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                                        <h4 class="mb-0"><i class="fas fa-hamburger"></i> Product Ratings</h4>
+                                        <select class="form-select form-select-sm" id="filter-product-rating-status" onchange="Admin.filterProductRatings()" style="width:160px;">
+                                            <option value="">All</option>
+                                            <option value="pending">Pending</option>
+                                            <option value="approved">Approved</option>
+                                            <option value="hidden">Hidden</option>
+                                        </select>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-sm">
+                                            <thead><tr><th>User</th><th>Stars</th><th>Comment</th><th>Date</th><th>Status</th><th class="text-center">Action</th></tr></thead>
+                                            <tbody id="product-ratings-table"></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Delivery Boy Ratings -->
+                <div id="delivery-ratings-page" style="display:none;">
+                    <div class="page-header"><h2><i class="fas fa-star"></i> Delivery Boy Ratings</h2></div>
+                    <div class="admin-table-card card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-sm">
+                                    <thead><tr><th>Delivery Boy</th><th>Stars</th><th>Comment</th><th>Date</th><th>Action</th></tr></thead>
+                                    <tbody id="delivery-boy-ratings-table"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Offers & Banners -->
+                <div id="offers-page" style="display:none;">
+                    <div class="page-header"><h2><i class="fas fa-tag"></i> Offers & Banners Management</h2></div>
+                    <div class="row g-4">
+                        <div class="col-lg-6">
+                            <div class="admin-form-card card h-100">
+                                <div class="card-body">
+                                    <h4><i class="fas fa-globe"></i> Platform-Wide Banner</h4>
+                                    <p class="text-muted">This banner appears on the homepage hero section.</p>
+                                    <form id="platform-banner-form">
+                                        <input type="hidden" id="banner-id">
+                                        <div class="mb-3">
+                                            <label class="form-label">Banner Title *</label>
+                                            <input type="text" class="form-control" id="banner-title" placeholder="Today's Special Offers!" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Banner Description *</label>
+                                            <textarea class="form-control" id="banner-description" rows="2" placeholder="Get up to 50% off on your first order + Free Delivery!" required></textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Coupon Code (optional)</label>
+                                            <input type="text" class="form-control" id="banner-coupon" placeholder="FOODZ50">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Banner Image URL</label>
+                                                <input type="url" class="form-control" id="banner-image" placeholder="https://example.com/banner.jpg">
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Background Color</label>
+                                                <input type="color" class="form-control form-control-color" id="banner-bg-color" value="#ff6b6b">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Expiry Date</label>
+                                                <input type="date" class="form-control" id="banner-expiry">
+                                            </div>
+                                            <div class="col-md-6 mb-3 d-flex align-items-end">
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" type="checkbox" id="banner-active" checked>
+                                                    <label class="form-check-label">Active</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary w-100">Save Banner</button>
+                                    </form>
+                                    <div id="banner-message" class="alert mt-3 d-none"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="admin-form-card card h-100">
+                                <div class="card-body">
+                                    <h4><i class="fas fa-store"></i> Restaurant Offers</h4>
+                                    <p class="text-muted">Create or manage offers for specific restaurants.</p>
+                                    <form id="restaurant-offer-form">
+                                        <input type="hidden" id="roff-id">
+                                        <div class="mb-3">
+                                            <label class="form-label">Select Restaurant *</label>
+                                            <select class="form-select" id="roff-restaurant" required>
+                                                <option value="">Choose restaurant...</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Offer Title *</label>
+                                            <input type="text" class="form-control" id="roff-title" placeholder="50% OFF on Biryani" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Offer Description</label>
+                                            <textarea class="form-control" id="roff-description" rows="2" placeholder="Get flat 50% off on orders above ₹199"></textarea>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Discount Type</label>
+                                                <select class="form-select" id="roff-discount-type">
+                                                    <option value="percent">Percentage (%)</option>
+                                                    <option value="fixed">Fixed (₹)</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Discount Value</label>
+                                                <input type="number" step="0.01" class="form-control" id="roff-discount-value" placeholder="50">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Min Order (₹)</label>
+                                                <input type="number" step="0.01" class="form-control" id="roff-min-order" value="0">
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Coupon Code</label>
+                                                <input type="text" class="form-control" id="roff-coupon" placeholder="BIRYANI50">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Expiry Date</label>
+                                                <input type="date" class="form-control" id="roff-expiry">
+                                            </div>
+                                            <div class="col-md-6 mb-3 d-flex align-items-end">
+                                                <div class="form-check mb-3">
+                                                    <input class="form-check-input" type="checkbox" id="roff-active" checked>
+                                                    <label class="form-check-label">Active</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary w-100">Save Restaurant Offer</button>
+                                    </form>
+                                    <div id="roff-message" class="alert mt-3 d-none"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="admin-table-card card mt-4">
+                        <div class="card-body">
+                            <h5 class="fw-bold mb-3"><i class="fas fa-list me-2"></i> All Active Offers & Banners</h5>
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead><tr><th>Type</th><th>Title</th><th>Restaurant</th><th>Discount</th><th>Coupon</th><th>Expiry</th><th>Status</th><th class="text-center">Action</th></tr></thead>
+                                    <tbody id="offers-table"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portal Settings -->
+                <div id="portal-settings-page" style="display:none;">
+                    <div class="page-header"><h2><i class="fas fa-cog"></i> Portal Settings</h2></div>
+                    <div class="row g-4">
+                        <div class="col-lg-6">
+                            <div class="admin-form-card card h-100">
+                                <div class="card-body">
+                                    <h4><i class="fas fa-palette"></i> Branding & Theme</h4>
+                                    <form id="portal-branding-form">
+                                        <div class="mb-3">
+                                            <label class="form-label">Portal Name</label>
+                                            <input type="text" class="form-control" id="portal-name" placeholder="Ibad Foodz">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Tagline</label>
+                                            <input type="text" class="form-control" id="portal-tagline" placeholder="Order food from best restaurants near you">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Primary Color</label>
+                                                <input type="color" class="form-control form-control-color" id="portal-primary-color" value="#ff6b35">
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Secondary Color</label>
+                                                <input type="color" class="form-control form-control-color" id="portal-secondary-color" value="#ffb347">
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Hero Background Image URL</label>
+                                            <input type="url" class="form-control" id="portal-hero-image" placeholder="https://example.com/hero.jpg">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary w-100">Save Branding</button>
+                                    </form>
+                                    <div id="portal-branding-message" class="alert mt-3 d-none"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="admin-form-card card h-100">
+                                <div class="card-body">
+                                    <h4><i class="fas fa-map-marked-alt"></i> Delivery Zone</h4>
+                                    <p class="text-muted">Manage delivery area polygon coordinates.</p>
+                                    <div class="mb-3">
+                                        <label class="form-label">Delivery Radius (km)</label>
+                                        <input type="number" step="0.5" class="form-control" id="portal-delivery-radius" placeholder="4" value="4">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Max Delivery Distance (km)</label>
+                                        <input type="number" step="0.5" class="form-control" id="portal-max-distance" placeholder="10" value="10">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Delivery Zone Coordinates</label>
+                                        <textarea class="form-control" id="portal-polygon" rows="4" placeholder="[lng, lat] pairs for polygon"></textarea>
+                                    </div>
+                                    <div class="d-flex gap-2 mb-3">
+                                        <button class="btn btn-outline-primary btn-sm" onclick="Admin.loadDefaultPolygon()"><i class="fas fa-redo me-1"></i> Reset to Default</button>
+                                    </div>
+                                    <button class="btn btn-primary w-100" onclick="Admin.saveDeliveryZone()">Save Delivery Zone</button>
+                                    <div id="delivery-zone-message" class="alert mt-2 d-none"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="admin-form-card card h-100">
+                                <div class="card-body">
+                                    <h4><i class="fas fa-envelope"></i> Email Configuration</h4>
+                                    <p class="text-muted">EmailJS settings for order notifications.</p>
+                                    <form id="portal-email-form">
+                                        <div class="mb-3">
+                                            <label class="form-label">EmailJS Service ID</label>
+                                            <input type="text" class="form-control" id="portal-emailjs-service" placeholder="service_pjls8b6">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">EmailJS Template ID</label>
+                                            <input type="text" class="form-control" id="portal-emailjs-template" placeholder="template_qcn6ohq">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">EmailJS User ID</label>
+                                            <input type="text" class="form-control" id="portal-emailjs-user" placeholder="QRaJoZctuaPFHGD54">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary w-100">Save Email Settings</button>
+                                    </form>
+                                    <div id="portal-email-message" class="alert mt-3 d-none"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="admin-form-card card h-100">
+                                <div class="card-body">
+                                    <h4><i class="fas fa-phone-alt"></i> Contact & Support</h4>
+                                    <form id="portal-contact-form">
+                                        <div class="mb-3">
+                                            <label class="form-label">Contact Email</label>
+                                            <input type="email" class="form-control" id="portal-contact-email" placeholder="support@ibadfoodz.com">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Contact Phone</label>
+                                            <input type="tel" class="form-control" id="portal-contact-phone" placeholder="+91 98765 43210">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">WhatsApp Number</label>
+                                            <input type="tel" class="form-control" id="portal-whatsapp" placeholder="919876543210">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary w-100">Save Contact Info</button>
+                                    </form>
+                                    <div id="portal-contact-message" class="alert mt-3 d-none"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Register -->
+                <div id="register-page" style="display:none;">
+                    <div class="page-header"><h2><i class="fas fa-user-plus"></i> Register Restaurants & Delivery Boys</h2></div>
+                    <div class="row g-4">
+                        <div class="col-lg-6">
+                            <div class="admin-form-card card h-100">
+                                <div class="card-body">
+                                    <h4><i class="fas fa-store"></i> Register Restaurant</h4>
+                                    <form id="restaurant-register-form">
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3"><label class="form-label">Owner Email *</label><input type="email" class="form-control" id="rest-owner-email" required></div>
+                                            <div class="col-md-6 mb-3"><label class="form-label">Password *</label><input type="password" class="form-control" id="rest-owner-password" minlength="6" required></div>
+                                        </div>
+                                        <div class="mb-3"><label class="form-label">Restaurant Name *</label><input type="text" class="form-control" id="rest-name" required></div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3"><label class="form-label">Cuisine *</label><select class="form-select" id="rest-cuisine" required><option>Multi-Cuisine</option><option>Pizza</option><option>Burger</option><option>Biryani</option><option>Chinese</option><option>South Indian</option><option>North Indian</option><option>Desserts</option><option>Beverages</option></select></div>
+                                            <div class="col-md-6 mb-3"><label class="form-label">Delivery Time (min) *</label><input type="number" class="form-control" id="rest-delivery-time" value="30" min="5" required></div>
+                                            <div class="col-md-6 mb-3"><label class="form-label">Delivery Fee (₹)</label><input type="number" step="0.01" class="form-control" id="rest-delivery-fee" value="30"></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3"><label class="form-label">Rating</label><input type="number" step="0.1" min="1" max="5" class="form-control" id="rest-rating" value="4.0"></div>
+                                            <div class="col-md-6 mb-3"><label class="form-label">Phone</label><input type="tel" class="form-control" id="rest-phone" placeholder="10-digit mobile"></div>
+                                        </div>
+                                        <div class="mb-3"><label class="form-label">Address</label><textarea class="form-control" id="rest-address" rows="2"></textarea></div>
+                                        <div class="mb-3"><label class="form-label">Logo URL</label><input type="url" class="form-control" id="rest-logo" placeholder="https://example.com/logo.jpg"></div>
+                                        <div class="mb-3"><label class="form-label">Banner URL</label><input type="url" class="form-control" id="rest-banner" placeholder="https://example.com/banner.jpg"></div>
+                                        <button type="submit" class="btn btn-primary w-100">Create Restaurant Account</button>
+                                    </form>
+                                    <div id="restaurant-register-message" class="alert mt-3 d-none"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="admin-form-card card h-100">
+                                <div class="card-body">
+                                    <h4><i class="fas fa-motorcycle"></i> Register Delivery Boy</h4>
+                                    <form id="delivery-register-form">
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3"><label class="form-label">Email *</label><input type="email" class="form-control" id="delivery-email" required></div>
+                                            <div class="col-md-6 mb-3"><label class="form-label">Password *</label><input type="password" class="form-control" id="delivery-password" minlength="6" required></div>
+                                        </div>
+                                        <div class="mb-3"><label class="form-label">Full Name *</label><input type="text" class="form-control" id="delivery-name" required></div>
+                                        <div class="mb-3"><label class="form-label">Phone *</label><input type="tel" class="form-control" id="delivery-phone" placeholder="10-digit mobile" required></div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3"><label class="form-label">Vehicle Number *</label><input type="text" class="form-control" id="delivery-vehicle" required></div>
+                                            <div class="col-md-6 mb-3"><label class="form-label">Area/City *</label><input type="text" class="form-control" id="delivery-area" required></div>
+                                        </div>
+                                        <div class="mb-3"><label class="form-label">ID Proof Number</label><input type="text" class="form-control" id="delivery-id-proof" placeholder="Aadhaar / License"></div>
+                                        <button type="submit" class="btn btn-primary w-100">Create Delivery Account</button>
+                                    </form>
+                                    <div id="delivery-register-message" class="alert mt-3 d-none"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Login Card (fallback when not logged in) -->
+            <div id="admin-login-card" class="container admin-login-card" style="display:none;">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <div class="text-center mb-4">
+                            <a href="index.html" class="navbar-brand"><i class="fas fa-utensils"></i> Ibad Foodz</a>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="text-center mb-4">
+                                    <div style="font-size:3rem;">🔐</div>
+                                    <h3 class="card-title fw-bold mt-2">Admin Login</h3>
+                                    <p class="text-muted">Sign in to manage restaurants, orders, and delivery boys</p>
+                                </div>
+                                <form id="admin-login-form">
+                                    <div class="mb-3">
+                                        <label class="form-label">Admin Email</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                            <input type="email" class="form-control" id="admin-login-email" placeholder="admin@example.com" required>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Password</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                            <input type="password" class="form-control" id="admin-login-password" placeholder="Enter password" required>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary w-100 btn-lg">Sign In as Admin</button>
+                                </form>
+                                <div id="admin-login-message" class="alert mt-3 d-none"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Map Modal -->
+    <div class="modal fade" id="adminMapModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header"><h5 class="modal-title">📍 Delivery Location</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+                <div class="modal-body"><div id="admin-order-map" style="height:400px;"></div></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="auth.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>
