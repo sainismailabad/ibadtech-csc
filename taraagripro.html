@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Tara Agri Pro - Smart Search</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; -webkit-tap-highlight-color: transparent; }
+        .hindi-text { font-family: 'Noto Sans Devanagari', sans-serif; }
+        
+        .glass-header {
+            background: rgba(21, 128, 61, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .search-container {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.1);
+        }
+        .search-container:focus-within {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(22, 163, 74, 0.2);
+            border-color: #16a34a;
+        }
+
+        .pro-card {
+            background: #ffffff;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s ease-in-out;
+            position: relative;
+            cursor: pointer;
+            touch-action: manipulation;
+        }
+        @media (hover: hover) {
+            .pro-card:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.12);
+                border-color: #86efac;
+            }
+        }
+        .pro-card:active {
+            transform: scale(0.98);
+        }
+        
+        .badge { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.95) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .modal-animate { animation: modalFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+        /* Custom Scrollbar for better mobile/desktop hybrid feel */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        
+        input[type="text"] { font-size: 16px; } /* Prevents iOS auto-zoom */
+    </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col overscroll-none">
+
+    <!-- Header (Responsive) -->
+    <header class="glass-header text-white sticky top-0 z-40 shadow-md">
+        <div class="max-w-6xl mx-auto px-4 py-3 sm:py-4 flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-4">
+            <div class="flex items-center justify-between w-full sm:w-auto">
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <div class="bg-white text-green-700 p-1.5 sm:p-2 rounded-lg shadow-sm">
+                        <i class="fa-solid fa-leaf text-xl sm:text-2xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl sm:text-2xl font-bold tracking-tight leading-none">TARA AGRIPRO</h1>
+                        <p class="text-green-100 text-[10px] sm:text-xs font-medium opacity-90 uppercase tracking-widest mt-0.5">Crop Protection</p>
+                    </div>
+                </div>
+                <!-- Mobile ISO Badge -->
+                <div class="sm:hidden bg-green-800/80 px-2 py-1 rounded text-[10px] font-bold border border-green-600/50">
+                    ISO 9001:2015
+                </div>
+            </div>
+            
+            <div class="hidden sm:flex items-center gap-6 text-sm">
+                <div class="flex flex-col text-right">
+                    <span class="text-green-100"><i class="fa-solid fa-location-dot mr-1"></i> Ismailabad, Kurukshetra</span>
+                    <span class="font-bold tracking-wide"><i class="fa-solid fa-phone mr-1"></i> +91 7357100008</span>
+                </div>
+                <div class="flex items-center gap-2 bg-green-800/50 px-3 py-1.5 rounded-md border border-green-600/50">
+                    <i class="fa-solid fa-award text-yellow-400"></i>
+                    <span class="font-semibold text-xs tracking-wide">ISO 9001:2015</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-6xl mx-auto px-4 py-6 sm:py-8 w-full">
+        
+        <!-- Mobile Contact Bar (Visible only on small screens) -->
+        <div class="sm:hidden flex items-center justify-center gap-2 bg-green-50 text-green-800 py-2 px-4 rounded-lg mb-6 border border-green-200 text-sm font-semibold">
+            <i class="fa-solid fa-phone"></i> Helpline: +91 7357100008
+        </div>
+
+        <!-- Hero Search Section -->
+        <div class="mb-8 sm:mb-10 text-center max-w-3xl mx-auto">
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-800 mb-2 sm:mb-3">Smart Medicine Finder</h2>
+            <p class="text-sm sm:text-base text-slate-500 mb-6 sm:mb-8 px-2">Tap any product card to see full details in Hindi.</p>
+            
+            <div class="relative search-container bg-white rounded-xl sm:rounded-2xl border-2 border-slate-200 flex items-center p-0.5 sm:p-1 mx-1 sm:mx-0">
+                <div class="pl-3 sm:pl-4 pr-2 sm:pr-3 text-slate-400">
+                    <i class="fa-solid fa-magnifying-glass text-lg sm:text-xl"></i>
+                </div>
+                <input type="text" id="searchInput" 
+                    class="w-full py-3 sm:py-4 bg-transparent outline-none text-base sm:text-lg text-slate-700 placeholder-slate-400" 
+                    placeholder="Search crop, disease, or medicine..." 
+                    autocomplete="off">
+                
+                <button onclick="document.getElementById('searchInput').value=''; handleSearch();" id="clearBtn" class="hidden pr-3 sm:pr-4 py-2 text-slate-400 hover:text-red-500 transition-colors">
+                    <i class="fa-solid fa-times-circle text-lg sm:text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Quick Filter Tags -->
+            <div class="mt-4 sm:mt-5 flex flex-wrap justify-center gap-2 text-sm px-2">
+                <button onclick="setSearch('Dhan')" class="px-3 sm:px-4 py-1.5 sm:py-2 bg-white border border-slate-200 rounded-full active:bg-green-100 hover:bg-green-50 hover:border-green-300 text-slate-600 transition-colors whitespace-nowrap"><i class="fa-solid fa-seedling mr-1 text-green-600"></i> Dhan</button>
+                <button onclick="setSearch('Tela')" class="px-3 sm:px-4 py-1.5 sm:py-2 bg-white border border-slate-200 rounded-full active:bg-green-100 hover:bg-green-50 hover:border-green-300 text-slate-600 transition-colors whitespace-nowrap"><i class="fa-solid fa-bug mr-1 text-orange-500"></i> Tela</button>
+                <button onclick="setSearch('Sundi')" class="px-3 sm:px-4 py-1.5 sm:py-2 bg-white border border-slate-200 rounded-full active:bg-green-100 hover:bg-green-50 hover:border-green-300 text-slate-600 transition-colors whitespace-nowrap"><i class="fa-solid fa-worm mr-1 text-red-500"></i> Sundi</button>
+                <button onclick="setSearch('Kharpatwar')" class="px-3 sm:px-4 py-1.5 sm:py-2 bg-white border border-slate-200 rounded-full active:bg-green-100 hover:bg-green-50 hover:border-green-300 text-slate-600 transition-colors whitespace-nowrap"><i class="fa-solid fa-plant-wilt mr-1 text-yellow-600"></i> Kharpatwar</button>
+            </div>
+        </div>
+
+        <div class="flex items-center justify-between mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-slate-200">
+            <h3 class="text-base sm:text-lg font-bold text-slate-800 flex items-center">
+                Found Products <span id="resultCount" class="ml-2 bg-green-100 text-green-700 py-0.5 px-2 rounded-full text-xs sm:text-sm">33</span>
+            </h3>
+        </div>
+
+        <!-- Results Grid -->
+        <div id="resultsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 pb-10">
+            <!-- Cards injected via JS -->
+        </div>
+
+        <!-- No Results -->
+        <div id="noResults" class="hidden flex-col items-center justify-center py-12 sm:py-16 bg-white rounded-xl border border-slate-200 border-dashed mx-2 sm:mx-0">
+            <div class="bg-slate-50 w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center mb-4">
+                <i class="fa-solid fa-magnifying-glass-minus text-2xl sm:text-3xl text-slate-300"></i>
+            </div>
+            <h4 class="text-lg sm:text-xl font-bold text-slate-700 mb-2">No products found</h4>
+            <button onclick="document.getElementById('searchInput').value=''; handleSearch();" class="mt-4 px-6 py-2.5 bg-green-600 hover:bg-green-700 active:bg-green-800 text-white rounded-lg font-medium transition-colors">Clear Search</button>
+        </div>
+    </main>
+
+    <!-- MODAL FOR HINDI DETAILS -->
+    <div id="medicineModal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm p-3 sm:p-4 overscroll-contain flex items-end sm:items-center justify-center transition-opacity">
+        <div class="bg-white rounded-t-2xl sm:rounded-2xl shadow-2xl w-full max-w-2xl max-h-[85vh] sm:max-h-[90vh] flex flex-col modal-animate relative">
+            
+            <!-- Modal Header -->
+            <div class="shrink-0 bg-white border-b border-slate-100 px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center rounded-t-2xl z-10">
+                <div class="pr-4">
+                    <h2 id="modalName" class="text-xl sm:text-2xl font-bold text-green-800 leading-tight">Medicine Name</h2>
+                    <p id="modalTechnical" class="text-[10px] sm:text-xs font-mono text-slate-500 mt-1 line-clamp-1">Technical Name</p>
+                </div>
+                <button onclick="closeModal()" class="w-10 h-10 shrink-0 rounded-full bg-slate-100 active:bg-slate-200 text-slate-500 flex items-center justify-center touch-action-manipulation">
+                    <i class="fa-solid fa-xmark text-lg sm:text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Modal Body (Scrollable) -->
+            <div class="p-4 sm:p-6 space-y-5 sm:space-y-6 overflow-y-auto hindi-text overscroll-contain">
+                <div class="bg-green-50 rounded-xl p-4 sm:p-5 border border-green-100">
+                    <h4 class="text-green-800 font-bold mb-1.5 sm:mb-2 flex items-center gap-2 text-base sm:text-lg">
+                        <i class="fa-solid fa-circle-info"></i> यह दवा क्या काम करती है?
+                    </h4>
+                    <p id="modalUse" class="text-slate-700 leading-relaxed font-medium text-sm sm:text-[15px]"></p>
+                </div>
+
+                <div class="flex gap-3 sm:gap-4 items-start">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-red-100 text-red-600 flex items-center justify-center shrink-0 text-lg sm:text-xl mt-1">
+                        <i class="fa-solid fa-virus"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-800 text-base sm:text-lg mb-1">बीमारी / कीट (Pests)</h4>
+                        <p id="modalDiseases" class="text-slate-600 text-sm sm:text-base leading-relaxed"></p>
+                    </div>
+                </div>
+
+                <div class="flex gap-3 sm:gap-4 items-start">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center shrink-0 text-lg sm:text-xl mt-1">
+                        <i class="fa-solid fa-wheat-awn"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-800 text-base sm:text-lg mb-1">फसलें (Crops)</h4>
+                        <p id="modalCrops" class="text-slate-600 text-sm sm:text-base leading-relaxed"></p>
+                    </div>
+                </div>
+
+                <div class="flex gap-3 sm:gap-4 items-start bg-slate-50 p-3 sm:p-4 rounded-xl border border-slate-200">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center shrink-0 text-lg sm:text-xl mt-1">
+                        <i class="fa-solid fa-prescription-bottle-medical"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-800 text-base sm:text-lg mb-1">खुराक (Dose & Usage)</h4>
+                        <p id="modalDose" class="text-slate-700 font-semibold text-sm sm:text-[15px]"></p>
+                    </div>
+                </div>
+                <!-- Extra padding at bottom for mobile scrolling -->
+                <div class="h-4 sm:hidden"></div>
+            </div>
+            
+            <!-- Modal Footer -->
+            <div class="shrink-0 p-3 sm:p-4 border-t border-slate-100 bg-slate-50 rounded-b-none sm:rounded-b-2xl flex justify-end pb-safe">
+                <button onclick="closeModal()" class="w-full sm:w-auto px-6 py-3 sm:py-2.5 bg-slate-800 active:bg-slate-900 text-white font-medium rounded-xl sm:rounded-lg text-base sm:text-sm">
+                    Close (बंद करें)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Data & Script -->
+    <script>
+        const catalog = [
+            { 
+                id: 1, name: "Aura", technical: "Fulvic Acid & Potassium Humic Acid 40%", 
+                search_tags: "Sufed jadon ki kami, Pilapan, Sookha/Tanaav Dhan, Gehu, Ganna, Makka",
+                diseases_hi: "सफेद जड़ों की कमी, पोषक तत्वों का अवशोषण न होना व फसल में पीलापन।", 
+                crops_hi: "धान, गेहूँ, गन्ना, मक्का, कपास, मिर्च, टमाटर व समस्त फलदार पौधे।", 
+                dose_hi: "500 ML से 1 LTR प्रति एकड़ (छिड़काव, ड्रिप अथवा सिंचाई जल के साथ)।", 
+                use_hi: "यह एक उत्कृष्ट मृदा जैविक गुण सुधारक है जो जड़ों का अति तीव्र फैलाव करता है। यह पौधों को सूखा व तनाव सहन करने में सक्षम बनाता है।",
+                type: "Tonic", category: "Bio-Stimulant", bg: "bg-emerald-50", text: "text-emerald-700", icon: "fa-seedling" 
+            },
+            { 
+                id: 2, name: "Azofi Pro", technical: "Azoxystrobin 18.2% + Difenoconazole 11.4% SC", 
+                search_tags: "Sheath Blight, Downy Mildew, Anthracnose, Leaf Spot Dhan, Mirch, Tamatar",
+                diseases_hi: "शीथ ब्लाइट (Sheath Blight), डाउनी मिल्ड्यू, एंथ्रेक्नोज, पर्पल ब्लोच व पत्ती धब्बा रोग।", 
+                crops_hi: "धान, मिर्च, टमाटर, मक्का, कपास, सेब, अंगूर व प्याज।", 
+                dose_hi: "200 ML प्रति एकड़ (150-200 LTR पानी में मिलाकर छिड़कें)।", 
+                use_hi: "यह एक एडवांस सिस्टमिक फफूंदनाशक है। इसके दोहरे अणु कवक की कोशिका भित्ति को नष्ट करते हैं और पौधों में हरापन बढ़ाते हैं।",
+                type: "Liquid Fungicide", category: "Systemic Fungicide", bg: "bg-blue-50", text: "text-blue-700", icon: "fa-virus-slash" 
+            },
+            { 
+                id: 3, name: "Azoton", technical: "Azoxystrobin 11% + Tebuconazole 18.3% SC", 
+                search_tags: "Haldi Rog (False Smut), Rust, Fruit Rot, Sheath Blight Dhan, Gehu",
+                diseases_hi: "हल्दी रोग (False Smut), रस्ट (Rust), फ्रूट रोट, शीथ ब्लाइट व झुलसा रोग।", 
+                crops_hi: "धान, गेहूँ, मिर्च, प्याज, सोयाबीन, मूंगफली व टमाटर।", 
+                dose_hi: "250 ML - 300 ML प्रति एकड़ छिड़काव करें।", 
+                use_hi: "यह डबल एक्शन प्रिवेंटिव व क्युरेटिव फफूंदनाशक है। यह फसल को रोगों से सुरक्षित रखता है और दानों को एक बेहतरीन दानेदार चमक देता है।",
+                type: "Liquid Fungicide", category: "Broad-Spectrum", bg: "bg-blue-50", text: "text-blue-700", icon: "fa-leaf" 
+            },
+            { 
+                id: 4, name: "Atra Pro", technical: "Atrazine 50% WP", 
+                search_tags: "Chaudi patti kharpatwar, Mousami Ghas Makka, Ganna",
+                diseases_hi: "चौड़ी पत्ती वाले खरपतवार (बथुआ, सांटी) व मौसमी घास का शुरुआती खात्मा।", 
+                crops_hi: "मक्का (Maize) एवं गन्ना (Sugarcane)।", 
+                dose_hi: "500 GM प्रति एकड़ (बुआई के 1-2 दिन के भीतर मिट्टी में नमी होने पर प्रयोग करें)।", 
+                use_hi: "यह एक चयनात्मक प्री-इमर्जेंस हर्बीसाइड है। बुआई के तुरंत बाद इसका प्रयोग करने से यह खरपतवार के बीजों को उगने से रोक देता है।",
+                type: "Herbicide", category: "Pre-Emergence", bg: "bg-yellow-50", text: "text-yellow-700", icon: "fa-plant-wilt" 
+            },
+            { 
+                id: 5, name: "Bifco Pro", technical: "Bifenthrin 10% EC", 
+                search_tags: "Safed Makkhi, Deemak, Illi, Tana Chhedak, Fadka Kapas, Dhan",
+                diseases_hi: "सफेद मक्खी, दीमक, इल्ली (Caterpillar), तना छेदक व फड़का।", 
+                crops_hi: "कपास, धान, गन्ना, आम, सेब, मिर्च व सब्जियां।", 
+                dose_hi: "250-300 ML प्रति एकड़ (150-200 LTR पानी में मिलाकर स्प्रे करें)।", 
+                use_hi: "यह एक ब्रॉड स्पेक्ट्रम सिंथेटिक पायरेथ्रॉइड है। यह संपर्क व पेट की क्रिया द्वारा कीटों पर तुरंत नॉकडाउन असर करता है।",
+                type: "Liquid Insecticide", category: "Broad-Spectrum", bg: "bg-red-50", text: "text-red-700", icon: "fa-bug" 
+            },
+            { 
+                id: 6, name: "Carnival Gold", technical: "Mycorrhizal Bio-Fertilizer Granules", 
+                search_tags: "Kamzor jadein, Phosphorus ki kami Dhan, Gehu, Makka",
+                diseases_hi: "कमज़ोर जड़ें, फास्फोरस अवशोषण की समस्या एवं कम पैदावार।", 
+                crops_hi: "धान, गेहूँ, मक्का, गन्ना, दलहन, तिलहन व समस्त बागवानी फसलें।", 
+                dose_hi: "4 KG प्रति एकड़ (यूरिया खाद अथवा मिट्टी में मिलाकर डालें)।", 
+                use_hi: "यह एक उच्च गुणवत्ता वाला जैविक माइकोराइजा है। यह मिट्टी में मौजूद अघुलनशील फास्फोरस व जिंक को घोलकर सीधे पौधे की जड़ों तक पहुँचाता है।",
+                type: "Granular", category: "Bio-Fertilizer", bg: "bg-emerald-50", text: "text-emerald-700", icon: "fa-sack-dollar" 
+            },
+            { 
+                id: 7, name: "Camron Pro", technical: "Carbendazim 12% + Mancozeb 63% WP", 
+                search_tags: "Ageti/Pacheti Jhulsa, Tikka Rog, Blast Dhan, Moongfali",
+                diseases_hi: "अगेती व पछेती झुलसा, टिक्का रोग, ब्लास्ट, जड़-तना सड़न व पत्ती धब्बा रोग।", 
+                crops_hi: "धान, मूंगफली, आलू, सेब, अंगूर, मिर्च व सब्जियां।", 
+                dose_hi: "250-300 GM प्रति एकड़ समान रूप से छिड़काव करें।", 
+                use_hi: "यह सिस्टमैटिक (आंतरिक बचाव) व कॉन्टैक्ट (बाहरी सुरक्षा) फफूंदनाशक का बेहद असरदार कॉम्बिनेशन है जो कवक के खिलाफ दोहरी ढाल बनाता है।",
+                type: "Powder Fungicide", category: "Contact + Systemic", bg: "bg-blue-50", text: "text-blue-700", icon: "fa-virus" 
+            },
+            { 
+                id: 8, name: "Carbco", technical: "Carbendazim 50% WP", 
+                search_tags: "Uktha (Wilt), Jad Sadan (Root Rot), Powdery Mildew Gehu, Dhan",
+                diseases_hi: "उकठा (Wilt), जड़ सड़न (Root Rot), पाउडरी मिल्ड्यू व एंथ्रेक्नोज।", 
+                crops_hi: "गेहूँ, धान, कपास, चना, सरसों, मटर व सब्जियां।", 
+                dose_hi: "200-250 GM प्रति एकड़ अथवा 2 GM/KG बीज उपचार हेतु।", 
+                use_hi: "यह एक ब्रॉड-स्पेक्ट्रम सिस्टमिक फफूंदनाशक है। यह खड़ी फसल पर छिड़काव तथा बीजों के उपचार (Seed Dressing) दोनों में श्रेष्ठ परिणाम देता है।",
+                type: "Powder", category: "Seed Treatment / Fungicide", bg: "bg-blue-50", text: "text-blue-700", icon: "fa-shield-virus" 
+            },
+            { 
+                id: 9, name: "Crypto 505", technical: "Chlorpyriphos 50% + Cypermethrin 5% EC", 
+                search_tags: "Tana Chhedak, American Illi, Ghun, Mahu Dhan, Ganna",
+                diseases_hi: "तना छेदक, अमेरिकन इल्ली, घुन, तना मक्खी, माहू, चेपा व फड़का।", 
+                crops_hi: "धान, गन्ना, कपास, चना, सरसों, बैंगन व फलदार वृक्ष।", 
+                dose_hi: "350-400 ML प्रति एकड़ (पर्याप्त पानी के साथ स्प्रे करें)।", 
+                use_hi: "यह दोहरी ताकत वाला नॉकडाउन व वाष्प (Vapour) क्रिया पर आधारित कीटनाशक है। वाष्प के प्रभाव से यह तने और पत्तों के बीच छुपे कीड़ों का भी खात्मा करता है।",
+                type: "Liquid Insecticide", category: "Dual Action", bg: "bg-red-50", text: "text-red-700", icon: "fa-spray-can" 
+            },
+            { 
+                id: 10, name: "Cartap Pro 4G", technical: "Cartap Hydrochloride 4% GR", 
+                search_tags: "Pata lapat, Leaf Folder, Tana Chhedak Dhan, Ganna",
+                diseases_hi: "तना छेदक (Stem Borer), पत्ती मोड़क (Leaf Folder) व कैटरपिलर सूंडी।", 
+                crops_hi: "धान (Paddy) एवं गन्ना (Sugarcane)।", 
+                dose_hi: "5 KG प्रति एकड़ (यूरिया या बालू के साथ मिलाकर छिड़कें)।", 
+                use_hi: "यह एक प्रणालीगत (Systemic) दानेदार कीटनाशक है। यह जड़ों द्वारा अवशोषित होकर पूरे पौधे में फैल जाता है और तने व पत्तियों को लंबे समय तक सुरक्षित रखता है।",
+                type: "Granular", category: "Systemic Soil Insecticide", bg: "bg-red-50", text: "text-red-700", icon: "fa-seedling" 
+            },
+            { 
+                id: 11, name: "Dinozone", technical: "Dinotefuran 15% + Pymetrozine 45% WG", 
+                search_tags: "Kala/Bhura Tela (BPH), Hara Tela, Safed Makkhi Dhan, Mirch",
+                diseases_hi: "धान का भूरा तेला (BPH), हरा तेला, मोगरा, सफेद मक्खी व थ्रिप्स।", 
+                crops_hi: "धान, मिर्च, कपास, बैंगन, टमाटर व सब्जियां।", 
+                dose_hi: "133.2 GM से 333 GM प्रति एकड़ (कीटों के प्रकोप के अनुसार)।", 
+                use_hi: "रसचूसक कीटों के लिए एडवांस जापानी तकनीक। यह कीटों के खाने की प्रणाली को तुरंत लकवाग्रस्त कर देता है जिससे फसल सूखने (Hopper Burn) से बच जाती है।",
+                type: "WG Form", category: "Sucking Pest Specialist", bg: "bg-orange-50", text: "text-orange-700", icon: "fa-bug" 
+            },
+            { 
+                id: 12, name: "Dainese", technical: "Deltamethrin 2.8% EC", 
+                search_tags: "Chittidar Illi (Bollworm), Fadka, Cutworms Kapas, Dhan",
+                diseases_hi: "चित्तीदार इल्ली (Bollworm), फड़का, कटवर्म व फल छेदक मक्खी।", 
+                crops_hi: "कपास, धान, चाय, सरसों, टमाटर, भिंडी व सब्जियां।", 
+                dose_hi: "200-250 ML प्रति एकड़ (साफ पानी में घोल बनाकर स्प्रे करें)।", 
+                use_hi: "यह एक त्वरित असरदार नॉकडाउन सिंथेटिक पायरेथ्रॉइड है। यह कीड़ों को स्पर्श करते ही तुरंत नीचे गिरा देता है और कम खर्च में बढ़िया परिणाम देता है।",
+                type: "Liquid Insecticide", category: "Knockdown Pyrethroid", bg: "bg-red-50", text: "text-red-700", icon: "fa-spider" 
+            },
+            { 
+                id: 13, name: "Endeco", technical: "Emamectin Benzoate 5% SG", 
+                search_tags: "Phal Chhedak, Fall Armyworm, DBM, Hari Sundi Kapas, Mirch",
+                diseases_hi: "फल छेदक (Fruit Borer), फॉल आर्मीवर्म, डीबीएम, हरी सूंडी व सेमीलूपर।", 
+                crops_hi: "कपास, मिर्च, चना, टमाटर, गोभी, अंगूर व धान।", 
+                dose_hi: "80-100 GM प्रति एकड़ छिड़काव करें।", 
+                use_hi: "यह जैविक (Bio-origin) आधार पर बना सुरक्षित दवा है। इसकी ट्रांसलामिनर क्रिया के कारण यह पत्ती के निचले हिस्से में छिपी इल्ली का भी खात्मा कर देता है।",
+                type: "SG Form", category: "Bio-origin Larvicide", bg: "bg-red-50", text: "text-red-700", icon: "fa-worm" 
+            },
+            { 
+                id: 14, name: "Fenco", technical: "Thiamethoxam 12.6% + Lambda-Cyhalothrin 9.5% ZC", 
+                search_tags: "Safed Makkhi, Chepa, Thrips, Tana Makkhi Kapas, Makka",
+                diseases_hi: "सफेद मक्खी, चेपा, थ्रिप्स, तना मक्खी, इल्ली, फड़का व बीटल।", 
+                crops_hi: "कपास, मक्का, टमाटर, मूंगफली, सोयाबीन व सब्जियां।", 
+                dose_hi: "80-100 ML प्रति एकड़ छिड़काव करें।", 
+                use_hi: "यह ZC टेक्नोलॉजी (Capsule + Suspension) से बना है। यह सिस्टमिक व संपर्क दोनों क्रियाओं से रसचूसक और चबाने वाले कीटों पर लंबे समय तक नियंत्रण रखता है।",
+                type: "Liquid ZC", category: "Combination Insecticide", bg: "bg-red-50", text: "text-red-700", icon: "fa-bug" 
+            },
+            { 
+                id: 15, name: "Fi Pro 6", technical: "Fipronil 0.6% w/w GR", 
+                search_tags: "Deemak (Termite), Safed Lat (Root Grub), Kansua Dhan, Ganna",
+                diseases_hi: "दीमक (Termite), रूट ग्रब (सफेद लट), कंसुआ व तना छेदक।", 
+                crops_hi: "धान, गन्ना, गेहूँ, मूंगफली, मक्का व आलू।", 
+                dose_hi: "4 KG प्रति एकड़ (मिट्टी या यूरिया में मिलाकर डालें)।", 
+                use_hi: "यह एक शक्तिशाली दानेदार भू-कीटनाशक (Soil Insecticide) है। यह मिट्टी में छिपे कीड़ों के नर्वस सिस्टम पर हमला करता है और पौधों में कल्ले/शाखाएँ बढ़ाने में मदद करता है।",
+                type: "Granular", category: "Soil & Root Insecticide", bg: "bg-red-50", text: "text-red-700", icon: "fa-bugs" 
+            },
+            { 
+                id: 16, name: "Fura Pro", technical: "Carbofuran 3% CG (Encapsulated)", 
+                search_tags: "Jad ki Sundi, Nematode, Bhond, Deemak Dhan, Ganna",
+                diseases_hi: "जड़ की सूंडी, निमाटोड (Nematode), भोंड व दीमक।", 
+                crops_hi: "धान, गन्ना, सरसों, जूट, मक्का व सब्जियां।", 
+                dose_hi: "5 KG प्रति एकड़ (बुआई के समय या खड़ी फसल में डालें)।", 
+                use_hi: "यह सुरक्षित कैप्सुलेटेड दानेदार कीटनाशक व निमाटोडनाशक है। यह धीरे-धीरे घुलकर लंबे समय तक जड़ों व तने को सुरक्षित रखता है।",
+                type: "Encapsulated", category: "Insecticide / Nematicide", bg: "bg-red-50", text: "text-red-700", icon: "fa-shield-halved" 
+            },
+            { 
+                id: 17, name: "Ferico Pro", technical: "Chlorantraniliprole 0.4% GR", 
+                search_tags: "Tana Chhedak, Top Borer, Jad Chhedak Sundi Dhan, Ganna",
+                diseases_hi: "तना छेदक (Stem Borer), चोटी छेदक (Top Borer) व जड़ छेदक।", 
+                crops_hi: "धान (Paddy) एवं गन्ना (Sugarcane)।", 
+                dose_hi: "4 KG प्रति एकड़ (यूरिया अथवा बालू में मिलाकर प्रयोग करें)।", 
+                use_hi: "यह एक नेक्स्ट-जनरेशन अणु (Coragen का granular form) है। इसे खाद में डालने से यह 30 से 40 दिनों तक तना छेदक एवं सुंडियों से फसल को अटूट सुरक्षा प्रदान करता है।",
+                type: "Granular", category: "Long Lasting Borer Specialist", bg: "bg-red-50", text: "text-red-700", icon: "fa-seedling" 
+            },
+            { 
+                id: 18, name: "Gabbar", technical: "Indoxacarb 14.5% + Acetamiprid 7.7% SC", 
+                search_tags: "Sundi Phal Chhedak Ras-choosak Kide Safed Makkhi Mirch, Kapas",
+                diseases_hi: "फल छेदक इल्ली, थ्रिप्स, सफेद मक्खी, चेपा, हरा मच्छर व सुंडी।", 
+                crops_hi: "मिर्च, कपास, टमाटर, बैंगन, अमरूद, सेब व सब्जी।", 
+                dose_hi: "200-250 ML प्रति एकड़ (150 LTR पानी में मिलाकर छिड़कें)।", 
+                use_hi: "यह इल्ली व रसचूसक कीटों दोनों का एक साथ खात्मा करने वाला एक बेहद शक्तिशाली डुअल-एक्शन संयोजन है।",
+                type: "Liquid", category: "Dual Fighter (Sucking + Borer)", bg: "bg-red-50", text: "text-red-700", icon: "fa-spider" 
+            },
+            { 
+                id: 19, name: "Grando Power", technical: "Emamectin Benzoate 1.9% EC", 
+                search_tags: "Pata lapat, Hari Illi, Fall Armyworm, Sundi Dhan, Sabji",
+                diseases_hi: "हरी इल्ली, फल व तना छेदक, फॉल आर्मीवर्म, कैटरपिलर व पत्ती मोड़क (Pata Lapat)।", 
+                crops_hi: "धान, सब्जी वर्गीय फसलें, चना, सरसों व सोयाबीन।", 
+                dose_hi: "250-300 ML प्रति एकड़ छिड़काव करें।", 
+                use_hi: "यह तरल (Liquid) फॉर्मूलेशन में आने वाला शक्तिशाली लैरविसाइड है। यह पत्तियों के टिश्यू में तेज़ी से प्रवेश कर छिपी हुई सुंडियों (पत्ता लपेट) का तुरंत खात्मा कर देता है।",
+                type: "Liquid", category: "Liquid Larvicide Specialist", bg: "bg-red-50", text: "text-red-700", icon: "fa-spray-can" 
+            },
+            { 
+                id: 20, name: "Lampro", technical: "Lambda Cyhalothrin 4.9% CS", 
+                search_tags: "Fadka, Bhundi, Caterpillar, Hoppers Kapas, Dhan",
+                diseases_hi: "फड़का, भुंडी (Beetles), कैटरपिलर, हॉपर्स, थ्रिप्स व दीमक।", 
+                crops_hi: "कपास, धान, सरसों, चना, मूंगफली, मक्का व फल।", 
+                dose_hi: "250-300 ML प्रति एकड़ छिड़काव करें।", 
+                use_hi: "यह कैप्सूल सस्पेंशन (CS) इको-फ्रेंडली तकनीक पर आधारित है। यह पत्तियों पर चिपककर धूप व बारिश में भी कीटों के खिलाफ लंबे समय तक काम करता है।",
+                type: "Capsule Suspension", category: "Contact Insecticide", bg: "bg-red-50", text: "text-red-700", icon: "fa-bug" 
+            },
+            { 
+                id: 21, name: "Lanco", technical: "Thiamethoxam 30% FS", 
+                search_tags: "Deemak, Ras Choosak, Uktha Gehu, Kapas",
+                diseases_hi: "दीमक, शुरुआती रस चूसक कीट, उकठा व जड़ सड़न कवक।", 
+                crops_hi: "गेहूँ, कपास, मक्का, सोयाबीन, मूंगफली, सरसों व चना।", 
+                dose_hi: "10 ML प्रति KG बीज (बीज उपचार हेतु प्रयोग करें)।", 
+                use_hi: "यह प्रीमियम बीज उपचार (Seed Treatment) दवा है। यह बीज पर एक सुरक्षा कवच बना देती है जिससे फसल को शुरुआती 30 दिनों तक कीटों से सुरक्षा मिलती है।",
+                type: "Liquid", category: "Systemic Seed Treatment", bg: "bg-indigo-50", text: "text-indigo-700", icon: "fa-shield" 
+            },
+            { 
+                id: 22, name: "Lancus", technical: "Thiamethoxam 25% WG", 
+                search_tags: "Safed Makkhi, Mahu (Aphids), Jassids Dhan, Kapas",
+                diseases_hi: "माहू (Aphid), तेला (Jassid), सफेद मक्खी, थ्रिप्स, मच्छर व चोंगा।", 
+                crops_hi: "धान, कपास, सरसों, आम, चाय, टमाटर व सब्जियां।", 
+                dose_hi: "80-100 GM प्रति एकड़ छिड़काव करें।", 
+                use_hi: "यह एक सिस्टमैटिक रस चूसक कीटनाशक है। कीटों को मारने के साथ-साथ यह पौधों में नई शाखाओं, हरी पत्तियों व वानस्पतिक वृद्धि (Tonic effect) में भी बहुत सहायक है।",
+                type: "WG Form", category: "Sucking Pest + Tonic", bg: "bg-orange-50", text: "text-orange-700", icon: "fa-droplet" 
+            },
+            { 
+                id: 23, name: "Mala Pro", technical: "Malathion 50% EC", 
+                search_tags: "Bhoonga, Lal keeda, Beetle, Ghun, Sundi Godown Dhan",
+                diseases_hi: "भूनगा, लाल कीड़ा, बीटल, धुन, मक्खी, सूंडी व सुंडियां।", 
+                crops_hi: "धान, सब्जियाँ, फल, अनाज भण्डारण (Godowns) व खेत।", 
+                dose_hi: "300-400 ML प्रति एकड़ अथवा गोदाम में छिड़काव करें।", 
+                use_hi: "यह एक मल्टी-क्रॉप संपर्क कीटनाशक है। यह खड़ी फसलों के साथ-साथ गोदामों में भण्डारित अनाज को कीड़ों से बचाने के लिए एक सुरक्षित उपाय है।",
+                type: "Liquid", category: "Multi-Crop & Storage", bg: "bg-red-50", text: "text-red-700", icon: "fa-warehouse" 
+            },
+            { 
+                id: 24, name: "Metri Pro", technical: "Metribuzin 70% WP", 
+                search_tags: "Gulli Danda, Bathua, Gajar Ghas Gehu, Aalu, Kharpatwar",
+                diseases_hi: "गुल्ली डंडा (Phalaris Minor), बथुआ, गाजर घास, जंगली पालक व मकोय।", 
+                crops_hi: "गेहूँ, आलू, गन्ना, टमाटर व सोयाबीन।", 
+                dose_hi: "100 GM प्रति एकड़ (समान रूप से फ्लैट फैन नोजल से स्प्रे करें)।", 
+                use_hi: "यह एक चयनात्मक प्री व पोस्ट-इमर्जेंस हर्बीसाइड है। यह खरपतवारों की प्रकाश संश्लेषण क्रिया को रोककर उन्हें जड़ से सुखा देता है।",
+                type: "Powder Herbicide", category: "Selective Herbicide", bg: "bg-yellow-50", text: "text-yellow-700", icon: "fa-plant-wilt" 
+            },
+            { 
+                id: 25, name: "Marvel M45", technical: "Mancozeb 75% WP", 
+                search_tags: "Ageti/Pacheti Jhulsa, Downy Mildew Aalu, Tamatar",
+                diseases_hi: "अगेती व पछेती झुलसा, डाउनी मिल्ड्यू, रस्ट, एंथ्रेक्नोज।", 
+                crops_hi: "आलू, टमाटर, धान, मिर्च, मूंगफली, सेब व अंगूर।", 
+                dose_hi: "500-600 GM प्रति एकड़ पानी में मिलाकर छिड़कें।", 
+                use_hi: "यह एक बहुत ही भरोसेमंद सुरक्षात्मक फफूंदनाशक है। फफूंद को रोकने के साथ-साथ यह फसल को मैंगनीज व जिंक जैसे पोषक तत्व भी प्रदान करता है।",
+                type: "Powder", category: "Protective Contact Fungicide", bg: "bg-blue-50", text: "text-blue-700", icon: "fa-shield-virus" 
+            },
+            { 
+                id: 26, name: "Pretico Plus", technical: "Pretilachlor 37% EW", 
+                search_tags: "Sanwa Ghas, Motha Kharpatwar Dhan Ropai",
+                diseases_hi: "सांवा घास, मोथा (Sedge), चौड़ी व संकरी पत्ती के जलीय खरपतवार।", 
+                crops_hi: "धान की रोपाई (Transplanted Paddy Crop)।", 
+                dose_hi: "600 ML प्रति एकड़ (रोपाई के 0 से 4 दिन के भीतर प्रयोग करें)।", 
+                use_hi: "यह पानी आधारित एडवांस EW हर्बीसाइड है। धान की रोपाई के तुरंत बाद इसका प्रयोग करने से यह खेत में खरपतवारों को उगने ही नहीं देता।",
+                type: "Liquid EW", category: "Paddy Herbicide", bg: "bg-yellow-50", text: "text-yellow-700", icon: "fa-water" 
+            },
+            { 
+                id: 27, name: "Pypro", technical: "Pymetrozine 50% WG", 
+                search_tags: "Hopper Burn, Kala/Bhura Tela (BPH), Safed Peeth Dhan",
+                diseases_hi: "धान का भूरा तेला (BPH/काला तेला), सफेद पीठ वाला तेला (WBPH)।", 
+                crops_hi: "धान (Paddy Crop Special)।", 
+                dose_hi: "120-150 GM प्रति एकड़ (150-200 LTR पानी में स्प्रे करें)।", 
+                use_hi: "इसकी एंटी-फीटेंट क्रिया तेले/हॉपर की सूंड को तुरंत लकवाग्रस्त कर देती है, जिससे वह रस नहीं चूस पाता और फसल को सूखने (Hopper Burn) से 100% बचाता है।",
+                type: "WG Form", category: "Hopper Burn Blocker", bg: "bg-orange-50", text: "text-orange-700", icon: "fa-shield-halved" 
+            },
+            { 
+                id: 28, name: "Sulco", technical: "Sulphur 80% WDG", 
+                search_tags: "Powdery Mildew, Lal/Peeli Makdi Gehu, Sarso",
+                diseases_hi: "पाउडरी मिल्ड्यू, लाल व पीली मकड़ी (Mites), सल्फर की कमी।", 
+                crops_hi: "गेहूँ, सरसों, मिर्च, अंगूर, आम, मूंगफली व दलहन।", 
+                dose_hi: "3 KG प्रति एकड़ (छिड़काव अथवा यूरिया में मिलाकर प्रयोग करें)।", 
+                use_hi: "यह ट्रिपल एक्शन फॉर्मूला है: (1) फफूंदनाशक, (2) लाल मकड़ी रोधी, (3) सल्फर पोषक तत्व जो तिलहन फसलों में तेल व प्रोटीन की मात्रा बढ़ाता है।",
+                type: "WDG Form", category: "Fungicide / Nutrient", bg: "bg-teal-50", text: "text-teal-700", icon: "fa-sun" 
+            },
+            { 
+                id: 29, name: "Silpro", technical: "Silicone-based Surfactant / Sticker", 
+                search_tags: "Sticker Spray Adjuvant Chipku",
+                diseases_hi: "दवा की बर्बादी रोकना, भारी बारिश से धुलने से बचाना, स्प्रे का 2X असर करना।", 
+                crops_hi: "सभी प्रकार की फसलों व कीटनाशक/फफूंदनाशक स्प्रे के साथ।", 
+                dose_hi: "5 ML प्रति 15 LTR पानी (प्रति पंप टंकी में मिलाएँ)।", 
+                use_hi: "यह 100% ऑर्गेनो-सिलिकॉन स्प्रेडर (Sticker) है। यह पानी के पृष्ठ तनाव को कम करके दवा को पत्तियों की दोनों सतहों पर तेज़ी से फैलाता, चिपकाता व भिगोता है।",
+                type: "Adjuvant", category: "Spreader & Sticker", bg: "bg-slate-100", text: "text-slate-700", icon: "fa-droplet" 
+            },
+            { 
+                id: 30, name: "Tara Pretila", technical: "Pretilachlor 50% EC", 
+                search_tags: "Sanwa Ghas, Motha Kharpatwar Dhan Ropai",
+                diseases_hi: "धान की सांवा घास, मोथा (Sedge) व अन्य जलीय खरपतवार।", 
+                crops_hi: "धान की रोपाई (Paddy Crop)।", 
+                dose_hi: "500 ML प्रति एकड़ (बालू या यूरिया में मिलाकर छिड़कें)।", 
+                use_hi: "यह एक भरोसेमंद प्री-इमर्जेंस धान खरपतवारनाशक है। धान रोपाई के तुरंत बाद खेत में इसका प्रयोग करने से यह खरपतवारों के बीजों का अंकुरण रोक देता है।",
+                type: "Liquid EC", category: "Pre-Emergence Herbicide", bg: "bg-yellow-50", text: "text-yellow-700", icon: "fa-plant-wilt" 
+            },
+            { 
+                id: 31, name: "Telcon", technical: "Tebuconazole 10% + Sulphur 65% WG", 
+                search_tags: "Sheath Blight, Tikka Rog, Powdery Mildew Dhan, Mirch",
+                diseases_hi: "शीथ ब्लाइट, टिक्का रोग, पाउडरी मिल्ड्यू, पत्ती धब्बा व रस्ट।", 
+                crops_hi: "धान, मिर्च, मूंगफली, सोयाबीन, गेहूँ व चाय।", 
+                dose_hi: "500 GM प्रति एकड़ छिड़काव करें।", 
+                use_hi: "यह डबल-एक्शन सिस्टमिक व कॉन्टैक्ट फफूंदनाशक है। यह फफूंद वाली बीमारियों का जड़ से खात्मा कर फसल को सल्फर का पोषण देता है जिससे पत्तियाँ हरी-भरी रहती हैं।",
+                type: "WG Form", category: "Fungicide & Nutrition", bg: "bg-blue-50", text: "text-blue-700", icon: "fa-leaf" 
+            },
+            { 
+                id: 32, name: "Velar Pro", technical: "Gibberellic Acid 0.001% L", 
+                search_tags: "Phool-phal jhadna, Phal ka aakar Tonic Dhan, Kapas",
+                diseases_hi: "फूल व फल का गिरना, फल का छोटा आकार, कम वजन व चमक की कमी।", 
+                crops_hi: "धान, कपास, अंगूर, गन्ना, टमाटर, आलू व फल।", 
+                dose_hi: "250-300 ML प्रति एकड़ स्प्रे करें।", 
+                use_hi: "यह एक शक्तिशाली प्लांट ग्रोथ रेगुलेटर (PGR/Tonic) है। यह पौधों में कोशिका विभाजन व बढ़वार को तेज करता है और फूल-फल झड़ने से रोककर पैदावार बढ़ाता है।",
+                type: "Liquid", category: "Plant Growth Regulator", bg: "bg-emerald-50", text: "text-emerald-700", icon: "fa-arrow-up-right-dots" 
+            },
+            { 
+                id: 33, name: "2,4-D Pro", technical: "2,4-D Amine Salt 58% SL", 
+                search_tags: "Chaudi patti kharpatwar Bathua Gehu, Makka",
+                diseases_hi: "बथुआ, हिरणखुरी, कासनी, जंगली पालक, खरतुआ, सांटी व मकोय।", 
+                crops_hi: "गेहूँ, मक्का, गन्ना व गैर-फसली क्षेत्र।", 
+                dose_hi: "400 ML प्रति एकड़ (45-50 लिटर पानी में मिलाकर छिड़कें)।", 
+                use_hi: "यह एक सिस्टमिक सेलेक्टिव हर्बीसाइड है। यह फसल को बिना नुकसान पहुंचाए चौड़ी पत्ती वाले जिद्दी खरपतवारों को जड़ों सहित सुखा देता है।",
+                type: "Liquid SL", category: "Broadleaf Herbicide", bg: "bg-yellow-50", text: "text-yellow-700", icon: "fa-plant-wilt" 
+            }
+        ];
+
+        const searchInput = document.getElementById('searchInput');
+        const clearBtn = document.getElementById('clearBtn');
+        const resultsGrid = document.getElementById('resultsGrid');
+        const noResults = document.getElementById('noResults');
+        const resultCount = document.getElementById('resultCount');
+        const modal = document.getElementById('medicineModal');
+
+        function renderCards(data) {
+            resultsGrid.innerHTML = '';
+            resultCount.innerText = data.length;
+            
+            if (data.length === 0) {
+                resultsGrid.classList.add('hidden');
+                noResults.classList.remove('hidden');
+                noResults.classList.add('flex');
+                return;
+            }
+            
+            resultsGrid.classList.remove('hidden');
+            noResults.classList.add('hidden');
+            noResults.classList.remove('flex');
+
+            data.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'pro-card p-4 sm:p-5 flex flex-col h-full';
+                card.onclick = () => openModal(item.id);
+                
+                card.innerHTML = `
+                    <div class="flex justify-between items-start mb-3 sm:mb-4">
+                        <div class="flex items-center gap-2 sm:gap-3">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shrink-0 ${item.bg} ${item.text}">
+                                <i class="fa-solid ${item.icon} text-lg sm:text-xl"></i>
+                            </div>
+                            <div class="overflow-hidden">
+                                <h3 class="text-base sm:text-lg font-bold text-slate-800 leading-tight truncate pr-1">${item.name}</h3>
+                                <span class="badge ${item.text}">${item.category}</span>
+                            </div>
+                        </div>
+                        <div class="text-slate-300 mt-1 shrink-0">
+                            <i class="fa-solid fa-arrow-up-right-from-square text-sm sm:text-base"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3 sm:mb-4">
+                        <p class="text-[10px] sm:text-xs font-mono text-slate-500 bg-slate-50 p-2 rounded border border-slate-100 truncate">
+                            <i class="fa-solid fa-flask mr-1"></i> ${item.technical}
+                        </p>
+                    </div>
+                    
+                    <div class="mt-auto pt-3 border-t border-slate-100 flex items-center justify-between">
+                        <div class="text-[10px] sm:text-xs text-slate-400 font-semibold uppercase tracking-wider">
+                            Tap for Details
+                        </div>
+                        <div class="text-[10px] sm:text-xs font-bold text-slate-500 bg-slate-100 px-2 py-1 rounded">
+                            ${item.type}
+                        </div>
+                    </div>
+                `;
+                resultsGrid.appendChild(card);
+            });
+        }
+
+        function handleSearch() {
+            const query = searchInput.value.toLowerCase().trim();
+            
+            if (query.length > 0) {
+                clearBtn.classList.remove('hidden');
+            } else {
+                clearBtn.classList.add('hidden');
+            }
+
+            if (!query) {
+                renderCards(catalog);
+                return;
+            }
+
+            const keywords = query.split(/\s+/);
+
+            const filteredData = catalog.filter(item => {
+                const searchString = `${item.name} ${item.technical} ${item.search_tags} ${item.diseases_hi} ${item.crops_hi} ${item.category}`.toLowerCase();
+                return keywords.every(kw => searchString.includes(kw));
+            });
+            
+            renderCards(filteredData);
+        }
+
+        window.setSearch = function(text) {
+            searchInput.value = text;
+            searchInput.focus();
+            handleSearch();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function openModal(id) {
+            const item = catalog.find(m => m.id === id);
+            if (!item) return;
+
+            document.getElementById('modalName').innerText = item.name;
+            document.getElementById('modalTechnical').innerText = item.technical;
+            document.getElementById('modalUse').innerText = item.use_hi;
+            document.getElementById('modalDiseases').innerText = item.diseases_hi;
+            document.getElementById('modalCrops').innerText = item.crops_hi;
+            document.getElementById('modalDose').innerText = item.dose_hi;
+
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeModal() {
+            modal.classList.add('hidden');
+            document.body.style.overflow = ''; 
+        }
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        searchInput.addEventListener('input', handleSearch);
+        renderCards(catalog);
+    </script>
+</body>
+</html>
