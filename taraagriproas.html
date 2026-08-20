@@ -34,7 +34,6 @@
             box-shadow: 0 0 60px rgba(0,0,0,0.3);
         }
 
-        /* ----- HEADER ----- */
         .chat-header {
             background: linear-gradient(135deg, #065f46 0%, #047857 100%);
             padding: 0.9rem 1.2rem;
@@ -60,7 +59,6 @@
             50% { opacity: 0.5; transform: scale(0.8); }
         }
 
-        /* ----- CHAT AREA ----- */
         .chat-messages {
             flex: 1;
             overflow-y: auto;
@@ -73,7 +71,6 @@
         .chat-messages::-webkit-scrollbar { width: 4px; }
         .chat-messages::-webkit-scrollbar-thumb { background: #a7f3d0; border-radius: 10px; }
 
-        /* ----- MESSAGES ----- */
         .message {
             display: flex;
             margin-bottom: 1.2rem;
@@ -149,7 +146,6 @@
             box-shadow: 0 4px 15px rgba(4, 120, 87, 0.25);
         }
 
-        /* ----- TYPING INDICATOR ----- */
         .typing-indicator {
             display: flex;
             gap: 6px;
@@ -169,7 +165,6 @@
             40% { transform: scale(1); }
         }
 
-        /* ----- PRODUCT CARD ----- */
         .product-card {
             background: #ffffff;
             border: 1px solid #e2e8f0;
@@ -210,7 +205,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ----- QUICK CHIPS ----- */
         .quick-chip {
             background: #ffffff;
             color: #065f46;
@@ -236,7 +230,6 @@
         }
         .quick-chip i { font-size: 0.75rem; }
 
-        /* ----- INPUT AREA ----- */
         .chat-input-area {
             background: #ffffff;
             border-top: 1px solid #e2e8f0;
@@ -323,7 +316,6 @@
         }
         .btn-send:active { background: #1e40af; }
 
-        /* ----- LISTENING OVERLAY ----- */
         .listening-overlay {
             position: absolute;
             top: -48px;
@@ -347,7 +339,6 @@
         }
         .listening-overlay.show { opacity: 1; }
 
-        /* ----- TOGGLE ----- */
         .toggle-switch {
             position: relative;
             display: inline-block;
@@ -381,12 +372,6 @@
         input:checked + .slider { background: #047857; }
         input:checked + .slider:before { transform: translateX(18px); }
 
-        /* ----- SCROLLBAR ----- */
-        .chat-messages::-webkit-scrollbar { width: 4px; }
-        .chat-messages::-webkit-scrollbar-track { background: transparent; }
-        .chat-messages::-webkit-scrollbar-thumb { background: #a7f3d0; border-radius: 10px; }
-
-        /* ----- SPELL SUGGESTION CHIP ----- */
         .suggestion-chip {
             background: #fef3c7;
             color: #92400e;
@@ -408,6 +393,20 @@
             color: #78350f;
         }
         .suggestion-chip i { font-size: 0.7rem; }
+
+        /* ===== DISEASE / CROP MATCH BADGE ===== */
+        .match-badge {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1e40af;
+            font-size: 9px;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 12px;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+            margin-left: 6px;
+        }
     </style>
 </head>
 <body>
@@ -440,15 +439,14 @@
 
     <!-- CHAT MESSAGES -->
     <main id="chatArea" class="chat-messages hindi-text">
-        <!-- Initial Greeting -->
         <div class="message bot-message" id="initialGreeting">
-            <div class="avatar bot-avatar" onclick="speakText('नमस्ते! मैं तारा एग्री प्रो का प्रोफेशनल AI असिस्टेंट हूँ। मैं आपकी फसल, दवाई और खेती की हर समस्या का समाधान बताऊंगा।')">
+            <div class="avatar bot-avatar" onclick="speakText('नमस्ते! मैं तारा एग्री प्रो का प्रोफेशनल AI असिस्टेंट हूँ। मैं आपकी फसल, दवाई और खेती की हर समस्या का सटीक समाधान बताऊंगा।')">
                 <i class="fa-solid fa-robot"></i>
             </div>
             <div class="bubble bot-bubble">
                 <p class="text-base font-semibold text-emerald-700">🙏 नमस्ते!</p>
                 <p class="text-[15px] text-slate-700 mt-1">मैं <strong>Tara Agri Pro</strong> का प्रोफेशनल AI कृषि सलाहकार हूँ।</p>
-                <p class="text-[14px] text-slate-600 mt-2">मुझसे आप <strong>हिंदी</strong> में बात कर सकते हैं — चाहे टाइप करें या माइक से बोलें।</p>
+                <p class="text-[14px] text-slate-600 mt-2">मुझसे <strong>हिंदी</strong> में पूछें — चाहे टाइप करें या माइक से बोलें।</p>
 
                 <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 mt-3 text-[13px] text-slate-700">
                     <p class="font-semibold text-emerald-800 mb-2"><i class="fa-solid fa-lightbulb text-yellow-500 mr-1"></i> मैं ये सब बता सकता हूँ:</p>
@@ -496,11 +494,9 @@
                 <textarea id="userInput" rows="1" placeholder="यहाँ लिखें या 🎤 माइक दबाकर बोलें..." oninput="handleInputChange(this)" onkeypress="handleEnter(event)"></textarea>
             </div>
             <div class="btn-group">
-                <!-- MIC BUTTON - Always visible -->
                 <button type="button" id="micBtn" class="action-btn btn-mic" onclick="toggleMic()" title="बोलें (माइक)">
                     <i class="fa-solid fa-microphone pointer-events-none"></i>
                 </button>
-                <!-- SEND BUTTON - Always visible -->
                 <button type="button" id="sendBtn" class="action-btn btn-send" onclick="processUserInput()" title="भेजें">
                     <i class="fa-solid fa-paper-plane pointer-events-none"></i>
                 </button>
@@ -512,7 +508,7 @@
 <script>
     // ============================================================
     //  TARA AGRI PRO — PROFESSIONAL AI ASSISTANT
-    //  FULL FEATURED: VOICE + TEXT + PRODUCT DB + NLP
+    //  ACCURATE MEDICINE DATABASE WITH FULL DETAILS
     // ============================================================
 
     const documentHeight = () => {
@@ -522,49 +518,480 @@
     documentHeight();
 
     // ============================================================
-    //  1. PRODUCT DATABASE (33 Medicines)
+    //  1. COMPLETE PRODUCT DATABASE (33 Medicines with Full Details)
+    //  Each product has: name, technical, tags, diseases_hi, crops_hi,
+    //  dose_hi, use_hi, how_to_use_hi (step by step), type, bg, icon
     // ============================================================
     const catalog = [
-        { id: 1, name: "Aura", technical: "Fulvic Acid & Potassium Humic Acid 40%", tags: "root, growth, tonic, jad, पीलापन, सूखा", diseases_hi: "सफेद जड़ों की कमी, पोषक तत्वों का अवशोषण न होना, पीलापन", crops_hi: "धान, गेहूँ, गन्ना, मक्का, कपास, मिर्च, आलू, सरसों, सूरजमुखी, टमाटर", dose_hi: "500 ML - 1 LTR / एकड़", use_hi: "यह मृदा सुधारक है जो जड़ों का तीव्र फैलाव करता है, पौधों को सूखा सहन करने में सक्षम बनाता है और पैदावार बढ़ाता है।", type: "टॉनिक", bg: "bg-emerald-50", icon: "fa-seedling" },
-        { id: 2, name: "Azofi Pro", technical: "Azoxystrobin 18.2% + Difenoconazole 11.4% SC", tags: "fungicide, sheath blight, mildew, faphund", diseases_hi: "शीथ ब्लाइट, डाउनी मिल्ड्यू, एंथ्रेक्नोज, पत्ती धब्बा", crops_hi: "धान, मिर्च, टमाटर, मक्का, कपास, सेब, आलू, अंगूर", dose_hi: "200 ML / एकड़", use_hi: "एडवांस सिस्टमिक फफूंदनाशक जो कवक की कोशिका भित्ति को नष्ट करता है और फसल में हरापन बढ़ाता है।", type: "फफूंदनाशक", bg: "bg-blue-50", icon: "fa-virus-slash" },
-        { id: 3, name: "Azoton", technical: "Azoxystrobin 11% + Tebuconazole 18.3% SC", tags: "fungicide, false smut, rust, sheath blight", diseases_hi: "हल्दी रोग (False Smut), रस्ट, फ्रूट रोट, शीथ ब्लाइट, झुलसा", crops_hi: "धान, गेहूँ, आलू, मिर्च, प्याज, सोयाबीन, मूंगफली, टमाटर", dose_hi: "250-300 ML / एकड़", use_hi: "डबल एक्शन प्रिवेंटिव व क्युरेटिव फफूंदनाशक, दानों को चमक देता है।", type: "फफूंदनाशक", bg: "bg-blue-50", icon: "fa-leaf" },
-        { id: 4, name: "Atra Pro", technical: "Atrazine 50% WP", tags: "herbicide, weed, kharpatwar, ghas", diseases_hi: "चौड़ी पत्ती वाले खरपतवार (बथुआ, सांटी) व मौसमी घास", crops_hi: "मक्का, गन्ना", dose_hi: "500 GM / एकड़", use_hi: "प्री-इमर्जेंस हर्बीसाइड, बुआई के बाद खरपतवार के बीजों को उगने से रोकता है।", type: "खरपतवारनाशक", bg: "bg-amber-50", icon: "fa-plant-wilt" },
-        { id: 5, name: "Bifco Pro", technical: "Bifenthrin 10% EC", tags: "insecticide, whitefly, termite, deemak, safed makkhi", diseases_hi: "सफेद मक्खी, दीमक, इल्ली, तना छेदक, फड़का", crops_hi: "कपास, धान, सरसों, गन्ना, आम, सेब, मिर्च", dose_hi: "250-300 ML / एकड़", use_hi: "ब्रॉड स्पेक्ट्रम पायरेथ्रॉइड, संपर्क व पेट की क्रिया से कीटों पर नॉकडाउन असर करता है।", type: "कीटनाशक", bg: "bg-red-50", icon: "fa-bug" },
-        { id: 6, name: "Carnival Gold", technical: "Mycorrhizal Bio-Fertilizer Granules", tags: "fertilizer, root, phosphorus, khad", diseases_hi: "कमज़ोर जड़ें, फास्फोरस अवशोषण की समस्या, कम पैदावार", crops_hi: "धान, गेहूँ, आलू, सरसों, मक्का, गन्ना, दलहन, तिलहन", dose_hi: "4 KG / एकड़", use_hi: "जैविक माइकोराइजा जो अघुलनशील फास्फोरस को घोलकर जड़ों तक पहुँचाता है।", type: "जैविक खाद", bg: "bg-emerald-50", icon: "fa-sack-dollar" },
-        { id: 7, name: "Camron Pro", technical: "Carbendazim 12% + Mancozeb 63% WP", tags: "fungicide, blight, jhulsa, tikka", diseases_hi: "अगेती व पछेती झुलसा, टिक्का रोग, ब्लास्ट, जड़-तना सड़न", crops_hi: "आलू, धान, मूंगफली, सेब, अंगूर, मिर्च", dose_hi: "250-300 GM / एकड़", use_hi: "सिस्टमैटिक व कॉन्टैक्ट फफूंदनाशक का कॉम्बिनेशन, आलू के झुलसा में कारगर।", type: "फफूंदनाशक", bg: "bg-blue-50", icon: "fa-virus" },
-        { id: 8, name: "Carbco", technical: "Carbendazim 50% WP", tags: "fungicide, wilt, root rot, uktha", diseases_hi: "उकठा (Wilt), जड़ सड़न, पाउडरी मिल्ड्यू, एंथ्रेक्नोज", crops_hi: "गेहूँ, धान, सरसों, आलू, कपास, चना, मटर", dose_hi: "200-250 GM/एकड़ या बीज उपचार", use_hi: "ब्रॉड-स्पेक्ट्रम सिस्टमिक फफूंदनाशक, खड़ी फसल और बीज उपचार दोनों में कारगर।", type: "फफूंदनाशक", bg: "bg-blue-50", icon: "fa-shield-virus" },
-        { id: 9, name: "Crypto 505", technical: "Chlorpyriphos 50% + Cypermethrin 5% EC", tags: "insecticide, stem borer, american bollworm", diseases_hi: "तना छेदक, अमेरिकन इल्ली, घुन, माहू, चेपा, फड़का", crops_hi: "सूरजमुखी, धान, सरसों, गन्ना, कपास, चना, बैंगन", dose_hi: "350-400 ML / एकड़", use_hi: "दोहरी ताकत वाला नॉकडाउन व वाष्प क्रिया वाली दवा।", type: "कीटनाशक", bg: "bg-red-50", icon: "fa-spray-can" },
-        { id: 10, name: "Cartap Pro 4G", technical: "Cartap Hydrochloride 4% GR", tags: "insecticide, leaf folder, pata lapat, stem borer", diseases_hi: "तना छेदक, पत्ती मोड़क (पत्ता लपेट), सूंडी", crops_hi: "धान, गन्ना", dose_hi: "5 KG / एकड़", use_hi: "प्रणालीगत दानेदार कीटनाशक, खाद या रेती में मिलाकर डालें।", type: "कीटनाशक (दानेदार)", bg: "bg-red-50", icon: "fa-seedling" },
-        { id: 11, name: "Dinozone", technical: "Dinotefuran 15% + Pymetrozine 45% WG", tags: "insecticide, bph, hopper, tela, whitefly", diseases_hi: "धान का भूरा तेला, हरा तेला, सफेद मक्खी, थ्रिप्स", crops_hi: "धान, सरसों, मिर्च, कपास, सूरजमुखी, बैंगन", dose_hi: "133-333 GM / एकड़", use_hi: "रसचूसक कीटों के लिए एडवांस तकनीक, कीटों के खाने की प्रणाली को लकवाग्रस्त करता है।", type: "कीटनाशक", bg: "bg-orange-50", icon: "fa-bug" },
-        { id: 12, name: "Dainese", technical: "Deltamethrin 2.8% EC", tags: "insecticide, bollworm, fadka, cutworm", diseases_hi: "चित्तीदार इल्ली (Bollworm), फड़का, कटवर्म, फल छेदक", crops_hi: "कपास, धान, चाय, सरसों, टमाटर, भिंडी", dose_hi: "200-250 ML / एकड़", use_hi: "त्वरित असरदार नॉकडाउन सिंथेटिक पायरेथ्रॉइड।", type: "कीटनाशक", bg: "bg-red-50", icon: "fa-spider" },
-        { id: 13, name: "Endeco", technical: "Emamectin Benzoate 5% SG", tags: "larvicide, fall armyworm, sundi, illi", diseases_hi: "फल छेदक, फॉल आर्मीवर्म, डीबीएम, हरी सूंडी, सेमीलूपर", crops_hi: "कपास, मिर्च, चना, टमाटर, सूरजमुखी, गोभी, धान", dose_hi: "80-100 GM / एकड़", use_hi: "जैविक सुंडीमार दवा, ट्रांसलामिनर क्रिया से पत्ती के नीचे छिपी सुंडी को भी मारती है।", type: "लार्विसाइड", bg: "bg-red-50", icon: "fa-worm" },
-        { id: 14, name: "Fenco", technical: "Thiamethoxam 12.6% + Lambda-Cyhalothrin 9.5% ZC", tags: "insecticide, whitefly, thrips, chepa", diseases_hi: "सफेद मक्खी, चेपा, थ्रिप्स, तना मक्खी, इल्ली, फड़का", crops_hi: "कपास, मक्का, टमाटर, सरसों, सोयाबीन", dose_hi: "80-100 ML / एकड़", use_hi: "ZC टेक्नोलॉजी से बना, सिस्टमिक व संपर्क दोनों क्रियाओं वाला कीटनाशक।", type: "कीटनाशक", bg: "bg-purple-50", icon: "fa-bug" },
-        { id: 15, name: "Fi Pro 6", technical: "Fipronil 0.6% w/w GR", tags: "insecticide, termite, deemak, white grub, fipro", diseases_hi: "दीमक, रूट ग्रब (सफेद लट), कंसुआ, तना छेदक", crops_hi: "धान, गन्ना, गेहूँ, मूंगफली, मक्का, आलू", dose_hi: "4 KG / एकड़", use_hi: "शक्तिशाली दानेदार भू-कीटनाशक, मिट्टी में छिपे कीड़ों के नर्वस सिस्टम पर हमला करता है और कल्ले बढ़ाता है।", type: "कीटनाशक (भूमि)", bg: "bg-red-50", icon: "fa-bugs" },
-        { id: 16, name: "Fura Pro", technical: "Carbofuran 3% CG (Encapsulated)", tags: "nematicide, nematode, root grub, deemak", diseases_hi: "जड़ की सूंडी, निमाटोड, भोंड, दीमक", crops_hi: "धान, सरसों, गन्ना, जूट, मक्का", dose_hi: "5 KG / एकड़", use_hi: "सुरक्षित कैप्सुलेटेड दानेदार निमाटोडनाशक, लंबे समय तक जड़ों को सुरक्षित रखता है।", type: "निमाटोडनाशक", bg: "bg-red-50", icon: "fa-shield-halved" },
-        { id: 17, name: "Ferico Pro", technical: "Chlorantraniliprole 0.4% GR", tags: "insecticide, stem borer, coragen, sundi", diseases_hi: "तना छेदक, चोटी छेदक, जड़ छेदक", crops_hi: "धान, गन्ना", dose_hi: "4 KG / एकड़", use_hi: "Coragen का दानेदार रूप, यूरिया में मिलाकर डालने से 30-40 दिनों तक तना छेदक से सुरक्षा।", type: "कीटनाशक (दानेदार)", bg: "bg-red-50", icon: "fa-seedling" },
-        { id: 18, name: "Gabbar", technical: "Indoxacarb 14.5% + Acetamiprid 7.7% SC", tags: "insecticide, bollworm, thrips, whitefly", diseases_hi: "फल छेदक इल्ली, थ्रिप्स, सफेद मक्खी, चेपा, हरा मच्छर", crops_hi: "मिर्च, कपास, सूरजमुखी, बैंगन, आलू, सेब", dose_hi: "200-250 ML / एकड़", use_hi: "इल्ली और रसचूसक दोनों का एक साथ खात्मा करने वाला डुअल-एक्शन कीटनाशक।", type: "कीटनाशक", bg: "bg-red-50", icon: "fa-spider" },
-        { id: 19, name: "Grando Power", technical: "Emamectin Benzoate 1.9% EC", tags: "larvicide, leaf folder, pata lapat, armyworm", diseases_hi: "हरी इल्ली, फल व तना छेदक, फॉल आर्मीवर्म, पत्ती मोड़क", crops_hi: "धान, सरसों, सूरजमुखी, सब्जी, चना, सोयाबीन", dose_hi: "250-300 ML / एकड़", use_hi: "तरल लैरविसाइड, पत्तियों में तेज़ी से प्रवेश कर छिपी सुंडियों का खात्मा करता है।", type: "लार्विसाइड", bg: "bg-red-50", icon: "fa-spray-can" },
-        { id: 20, name: "Lampro", technical: "Lambda Cyhalothrin 4.9% CS", tags: "insecticide, fadka, bhundi, caterpillar, hopper", diseases_hi: "फड़का, भुंडी, कैटरपिलर, हॉपर्स, थ्रिप्स, दीमक", crops_hi: "कपास, धान, सरसों, चना, मूंगफली, मक्का", dose_hi: "250-300 ML / एकड़", use_hi: "कैप्सूल सस्पेंशन (CS) तकनीक, धूप व बारिश में भी लंबे समय तक काम करती है।", type: "कीटनाशक", bg: "bg-red-50", icon: "fa-bug" },
-        { id: 21, name: "Lanco", technical: "Thiamethoxam 30% FS", tags: "seed treatment, termite, deemak, beej upchar", diseases_hi: "दीमक, शुरुआती रसचूसक कीट, उकठा, जड़ सड़न", crops_hi: "गेहूँ, सरसों, आलू, कपास, मक्का, सोयाबीन, चना", dose_hi: "10 ML / KG बीज", use_hi: "प्रीमियम बीज उपचार दवा, बीज पर सुरक्षा कवच बनाकर 30 दिनों तक सुरक्षा देती है।", type: "बीज उपचार", bg: "bg-indigo-50", icon: "fa-shield" },
-        { id: 22, name: "Lancus", technical: "Thiamethoxam 25% WG", tags: "insecticide, whitefly, mahu, jassid, aphid", diseases_hi: "माहू (चेपा), तेला, सफेद मक्खी, थ्रिप्स, मच्छर", crops_hi: "सरसों, धान, आलू, कपास, सूरजमुखी", dose_hi: "80-100 GM / एकड़", use_hi: "सिस्टमैटिक रसचूसक कीटनाशक, पौधों में हरापन व वृद्धि में सहायक।", type: "कीटनाशक", bg: "bg-orange-50", icon: "fa-droplet" },
-        { id: 23, name: "Mala Pro", technical: "Malathion 50% EC", tags: "insecticide, godown, storage, bhoonga", diseases_hi: "भूनगा, लाल कीड़ा, बीटल, धुन, मक्खी, सूंडी", crops_hi: "गेहूँ, धान, अनाज भण्डारण व खेत", dose_hi: "300-400 ML/एकड़", use_hi: "मल्टी-क्रॉप संपर्क कीटनाशक, गोदामों में भण्डारित अनाज को कीड़ों से बचाता है।", type: "कीटनाशक", bg: "bg-red-50", icon: "fa-warehouse" },
-        { id: 24, name: "Metri Pro", technical: "Metribuzin 70% WP", tags: "herbicide, weed, bathua, ghas", diseases_hi: "गुल्ली डंडा, बथुआ, गाजर घास, जंगली पालक, मकोय", crops_hi: "आलू, गेहूँ, गन्ना, टमाटर, सोयाबीन", dose_hi: "100 GM / एकड़", use_hi: "प्री व पोस्ट-इमर्जेंस हर्बीसाइड, खरपतवारों की प्रकाश संश्लेषण क्रिया रोककर जड़ से सुखाता है।", type: "खरपतवारनाशक", bg: "bg-amber-50", icon: "fa-plant-wilt" },
-        { id: 25, name: "Marvel M45", technical: "Mancozeb 75% WP", tags: "fungicide, blight, jhulsa, downy mildew", diseases_hi: "अगेती व पछेती झुलसा, डाउनी मिल्ड्यू, रस्ट, एंथ्रेक्नोज", crops_hi: "आलू, सरसों, टमाटर, धान, मिर्च, सेब, अंगूर", dose_hi: "500-600 GM / एकड़", use_hi: "सुरक्षात्मक फफूंदनाशक, मैंगनीज व जिंक जैसे पोषक तत्व भी प्रदान करता है।", type: "फफूंदनाशक", bg: "bg-blue-50", icon: "fa-shield-virus" },
-        { id: 26, name: "Pretico Plus", technical: "Pretilachlor 37% EW", tags: "herbicide, paddy, sanwa ghas, motha", diseases_hi: "सांवा घास, मोथा, चौड़ी व संकरी पत्ती के जलीय खरपतवार", crops_hi: "धान की रोपाई", dose_hi: "600 ML / एकड़", use_hi: "पानी आधारित EW हर्बीसाइड, रोपाई के बाद खरपतवारों को उगने नहीं देता।", type: "खरपतवारनाशक", bg: "bg-amber-50", icon: "fa-water" },
-        { id: 27, name: "Pypro", technical: "Pymetrozine 50% WG", tags: "insecticide, bph, hopper burn, tela", diseases_hi: "धान का भूरा तेला (BPH), सफेद पीठ वाला तेला", crops_hi: "धान", dose_hi: "120-150 GM / एकड़", use_hi: "एंटी-फीटेंट क्रिया से तेले की सूंड को लकवाग्रस्त करता है, फसल को Hopper Burn से बचाता है।", type: "कीटनाशक", bg: "bg-orange-50", icon: "fa-shield-halved" },
-        { id: 28, name: "Sulco", technical: "Sulphur 80% WDG", tags: "fungicide, powdery mildew, mites, sulphur", diseases_hi: "पाउडरी मिल्ड्यू, लाल व पीली मकड़ी, सल्फर की कमी", crops_hi: "सरसों, गेहूँ, आलू, मिर्च, आम, मूंगफली, दलहन", dose_hi: "3 KG / एकड़", use_hi: "ट्रिपल एक्शन: फफूंदनाशक, लाल मकड़ी रोधी, सल्फर पोषक तत्व।", type: "फफूंदनाशक/पोषक", bg: "bg-teal-50", icon: "fa-sun" },
-        { id: 29, name: "Silpro", technical: "Silicone-based Surfactant / Sticker", tags: "sticker, spreader, chipku, spray", diseases_hi: "दवा की बर्बादी रोकना, बारिश से धुलने से बचाना", crops_hi: "सभी फसलों के साथ", dose_hi: "5 ML / 15 LTR पंप", use_hi: "100% ऑर्गेनो-सिलिकॉन स्प्रेडर (Sticker), पानी के पृष्ठ तनाव को कम कर दवा को फैलाता और चिपकाता है।", type: "स्टिकर/एडजुवेंट", bg: "bg-slate-100", icon: "fa-droplet" },
-        { id: 30, name: "Tara Pretila", technical: "Pretilachlor 50% EC", tags: "herbicide, paddy, sanwa ghas, motha", diseases_hi: "धान की सांवा घास, मोथा व अन्य जलीय खरपतवार", crops_hi: "धान की रोपाई", dose_hi: "500 ML / एकड़", use_hi: "प्री-इमर्जेंस धान खरपतवारनाशक, बालू/यूरिया में मिलाकर डालें।", type: "खरपतवारनाशक", bg: "bg-amber-50", icon: "fa-plant-wilt" },
-        { id: 31, name: "Telcon", technical: "Tebuconazole 10% + Sulphur 65% WG", tags: "fungicide, sheath blight, rust, tikka", diseases_hi: "शीथ ब्लाइट, टिक्का रोग, पाउडरी मिल्ड्यू, पत्ती धब्बा, रस्ट", crops_hi: "धान, सरसों, आलू, मिर्च, सोयाबीन, गेहूँ, चाय", dose_hi: "500 GM / एकड़", use_hi: "डबल-एक्शन सिस्टमिक व कॉन्टैक्ट फफूंदनाशक, सल्फर का पोषण देता है।", type: "फफूंदनाशक", bg: "bg-blue-50", icon: "fa-leaf" },
-        { id: 32, name: "Velar Pro", technical: "Gibberellic Acid 0.001% L", tags: "tonic, pgr, growth, phool, phal", diseases_hi: "फूल व फल का गिरना, छोटा आकार, कम वजन, चमक की कमी", crops_hi: "धान, आलू, सरसों, कपास, अंगूर, टमाटर, फल", dose_hi: "250-300 ML / एकड़", use_hi: "शक्तिशाली प्लांट ग्रोथ रेगुलेटर (PGR), कोशिका विभाजन तेज करता है, फूल झड़ने से रोकता है।", type: "टॉनिक/PGR", bg: "bg-emerald-50", icon: "fa-arrow-up-right-dots" },
-        { id: 33, name: "2,4-D Pro", technical: "2,4-D Amine Salt 58% SL", tags: "herbicide, broadleaf, bathua, hirankhuri", diseases_hi: "बथुआ, हिरणखुरी, कासनी, जंगली पालक, खरतुआ, सांटी, मकोय", crops_hi: "गेहूँ, मक्का, गन्ना", dose_hi: "400 ML / एकड़", use_hi: "सिस्टमिक सेलेक्टिव हर्बीसाइड, फसल को नुकसान पहुँचाए बिना चौड़ी पत्ती वाले खरपतवारों को जड़ से सुखाता है।", type: "खरपतवारनाशक", bg: "bg-amber-50", icon: "fa-plant-wilt" }
+        { 
+            id: 1, 
+            name: "Aura", 
+            technical: "Fulvic Acid & Potassium Humic Acid 40%", 
+            tags: "root, growth, tonic, jad, पीलापन, सूखा, जड़", 
+            diseases_hi: "सफेद जड़ों की कमी, पोषक तत्वों का अवशोषण न होना, फसल में पीलापन, सूखा तनाव", 
+            crops_hi: "धान, गेहूँ, गन्ना, मक्का, कपास, मिर्च, आलू, सरसों, सूरजमुखी, टमाटर, सभी फलदार पौधे", 
+            dose_hi: "500 ML - 1 LTR प्रति एकड़", 
+            use_hi: "यह मृदा सुधारक है जो जड़ों का तीव्र फैलाव करता है। पौधों को सूखा व तनाव सहन करने में सक्षम बनाता है। पैदावार बढ़ाने के लिए सबसे बेहतरीन टॉनिक है।",
+            how_to_use_hi: "1. छिड़काव के लिए: 500 ML को 200 लीटर पानी में मिलाकर एक एकड़ में छिड़कें।\n2. ड्रिप सिंचाई के लिए: 1 LTR को ड्रिप टैंक में मिलाकर धीरे-धीरे डालें।\n3. सिंचाई के साथ: 1 LTR को सिंचाई के पानी के साथ खेत में डालें।\n4. सबसे अच्छा समय: सुबह या शाम के समय उपयोग करें।",
+            type: "टॉनिक", 
+            bg: "bg-emerald-50", 
+            icon: "fa-seedling" 
+        },
+        { 
+            id: 2, 
+            name: "Azofi Pro", 
+            technical: "Azoxystrobin 18.2% + Difenoconazole 11.4% SC", 
+            tags: "fungicide, sheath blight, mildew, faphund, कवक, फफूंद", 
+            diseases_hi: "शीथ ब्लाइट (धान की बड़ी बीमारी), डाउनी मिल्ड्यू, एंथ्रेक्नोज, पत्ती धब्बा, पर्पल ब्लोच", 
+            crops_hi: "धान (मुख्य), मिर्च, टमाटर, मक्का, कपास, सेब, आलू, अंगूर, प्याज", 
+            dose_hi: "200 ML प्रति एकड़", 
+            use_hi: "एडवांस सिस्टमिक फफूंदनाशक। दोहरे अणु कवक की कोशिका भित्ति को नष्ट करते हैं और फसल में हरापन बढ़ाते हैं। धान की शीथ ब्लाइट में बहुत कारगर।",
+            how_to_use_hi: "1. 200 ML दवा को 200 लीटर पानी में मिलाएं।\n2. सुबह के समय छिड़काव करें।\n3. छिड़काव से पहले दवा को अच्छी तरह हिलाएं।\n4. बारिश से पहले या बाद में न करें।\n5. 15 दिन के अंतराल पर दोबारा करें यदि आवश्यक हो।",
+            type: "फफूंदनाशक", 
+            bg: "bg-blue-50", 
+            icon: "fa-virus-slash" 
+        },
+        { 
+            id: 3, 
+            name: "Azoton", 
+            technical: "Azoxystrobin 11% + Tebuconazole 18.3% SC", 
+            tags: "fungicide, false smut, rust, sheath blight, कवक", 
+            diseases_hi: "हल्दी रोग (False Smut - धान की बड़ी बीमारी), रस्ट, फ्रूट रोट, शीथ ब्लाइट, झुलसा रोग", 
+            crops_hi: "धान (मुख्य), गेहूँ, आलू, मिर्च, प्याज, सोयाबीन, मूंगफली, टमाटर", 
+            dose_hi: "250-300 ML प्रति एकड़", 
+            use_hi: "डबल एक्शन प्रिवेंटिव व क्युरेटिव फफूंदनाशक। यह फसल को सुरक्षित रखकर दानों को बेहतरीन चमक देता है। धान की हल्दी रोग में बहुत असरदार।",
+            how_to_use_hi: "1. 250 ML दवा को 200-250 लीटर पानी में मिलाएं।\n2. रोग के शुरुआती लक्षण दिखने पर तुरंत उपयोग करें।\n3. बारिश के बाद उपयोग न करें।\n4. 10-15 दिन के अंतराल पर दोहराएं।\n5. फसल के फूल आने से पहले उपयोग करें।",
+            type: "फफूंदनाशक", 
+            bg: "bg-blue-50", 
+            icon: "fa-leaf" 
+        },
+        { 
+            id: 4, 
+            name: "Atra Pro", 
+            technical: "Atrazine 50% WP", 
+            tags: "herbicide, weed, kharpatwar, ghas, खरपतवार, घास", 
+            diseases_hi: "चौड़ी पत्ती वाले खरपतवार (बथुआ, सांटी), मौसमी घास, जंगली खरपतवार", 
+            crops_hi: "मक्का, गन्ना", 
+            dose_hi: "500 GM प्रति एकड़", 
+            use_hi: "प्री-इमर्जेंस हर्बीसाइड है। बुआई के तुरंत बाद प्रयोग करने से यह खरपतवार के बीजों को उगने से पहले ही रोक देता है। मक्का और गन्ना के लिए सबसे अच्छा।",
+            how_to_use_hi: "1. 500 GM दवा को 200-250 लीटर पानी में मिलाएं।\n2. बुआई के 2-3 दिनों के अंदर छिड़काव करें।\n3. खेत में नमी होनी चाहिए।\n4. एक ही दिशा में छिड़काव करें।\n5. अगली बुआई से 3 महीने पहले उपयोग करें।",
+            type: "खरपतवारनाशक", 
+            bg: "bg-amber-50", 
+            icon: "fa-plant-wilt" 
+        },
+        { 
+            id: 5, 
+            name: "Bifco Pro", 
+            technical: "Bifenthrin 10% EC", 
+            tags: "insecticide, whitefly, termite, deemak, safed makkhi, कीटनाशक", 
+            diseases_hi: "सफेद मक्खी, दीमक, इल्ली, तना छेदक, फड़का, थ्रिप्स", 
+            crops_hi: "कपास (मुख्य), धान, सरसों, गन्ना, आम, सेब, मिर्च, सब्जियां", 
+            dose_hi: "250-300 ML प्रति एकड़", 
+            use_hi: "ब्रॉड स्पेक्ट्रम सिंथेटिक पायरेथ्रॉइड कीटनाशक। संपर्क व पेट की क्रिया द्वारा कीटों पर तुरंत नॉकडाउन असर करता है और उन्हें तुरंत मार गिराता है।",
+            how_to_use_hi: "1. 250 ML दवा को 200 लीटर पानी में मिलाएं।\n2. सुबह या शाम के समय छिड़काव करें।\n3. कीट दिखने पर तुरंत उपयोग करें।\n4. बारिश से 4 घंटे पहले न करें।\n5. 10-12 दिन के अंतराल पर दोहराएं।",
+            type: "कीटनाशक", 
+            bg: "bg-red-50", 
+            icon: "fa-bug" 
+        },
+        { 
+            id: 6, 
+            name: "Carnival Gold", 
+            technical: "Mycorrhizal Bio-Fertilizer Granules", 
+            tags: "fertilizer, root, phosphorus, khad, जैविक, खाद", 
+            diseases_hi: "कमज़ोर जड़ें, फास्फोरस अवशोषण की समस्या, कम पैदावार, मिट्टी की उर्वरता कम", 
+            crops_hi: "धान, गेहूँ, आलू, सरसों, मक्का, गन्ना, दलहन, तिलहन, बागवानी, सब्जियां", 
+            dose_hi: "4 KG प्रति एकड़ (खाद/मिट्टी में मिलाकर)", 
+            use_hi: "यह एक जैविक माइकोराइजा खाद है। यह मिट्टी में मौजूद अघुलनशील फास्फोरस व जिंक को घोलकर सीधे पौधे की जड़ों तक पहुँचाता है, जिससे जड़ों का भारी विकास होता है और पैदावार बढ़ती है।",
+            how_to_use_hi: "1. 4 KG Carnival Gold को 50 KG यूरिया या मिट्टी में अच्छी तरह मिलाएं।\n2. बुआई के समय या रोपाई के 7 दिन बाद डालें।\n3. खेत में नमी होनी चाहिए।\n4. धूप से बचाकर रखें।\n5. एक बार डालने से पूरी फसल में फायदा होता है।",
+            type: "जैविक खाद", 
+            bg: "bg-emerald-50", 
+            icon: "fa-sack-dollar" 
+        },
+        { 
+            id: 7, 
+            name: "Camron Pro", 
+            technical: "Carbendazim 12% + Mancozeb 63% WP", 
+            tags: "fungicide, blight, jhulsa, tikka, कवक, फफूंद", 
+            diseases_hi: "अगेती व पछेती झुलसा (आलू की सबसे बड़ी बीमारी), टिक्का रोग, ब्लास्ट, जड़-तना सड़न, झुलसा रोग", 
+            crops_hi: "आलू (मुख्य), धान, मूंगफली, सेब, अंगूर, मिर्च, टमाटर, सब्जियां", 
+            dose_hi: "250-300 GM प्रति एकड़", 
+            use_hi: "यह सिस्टमैटिक व कॉन्टैक्ट फफूंदनाशक का बहुत असरदार कॉम्बिनेशन है। पौधों को अंदर और बाहर दोनों तरफ से फफूंदी के खिलाफ सुरक्षा देता है। आलू के झुलसा रोग में अत्यंत कारगर।",
+            how_to_use_hi: "1. 250 GM दवा को 200 लीटर पानी में मिलाएं।\n2. रोग के लक्षण दिखने पर तुरंत छिड़काव करें।\n3. सुबह के समय उपयोग करें।\n4. 10-12 दिन के अंतराल पर दोहराएं।\n5. बारिश से 2 घंटे पहले न करें।",
+            type: "फफूंदनाशक", 
+            bg: "bg-blue-50", 
+            icon: "fa-virus" 
+        },
+        { 
+            id: 8, 
+            name: "Carbco", 
+            technical: "Carbendazim 50% WP", 
+            tags: "fungicide, wilt, root rot, uktha, बीज उपचार", 
+            diseases_hi: "उकठा (Wilt), जड़ सड़न (Root Rot), पाउडरी मिल्ड्यू, एंथ्रेक्नोज, बीज जनित रोग", 
+            crops_hi: "गेहूँ, धान, सरसों, आलू, कपास, चना, मटर, सब्जियां", 
+            dose_hi: "200-250 GM/एकड़ या 2-3 GM/KG बीज", 
+            use_hi: "ब्रॉड-स्पेक्ट्रम सिस्टमिक फफूंदनाशक है। खड़ी फसल और बीज उपचार (Seed Treatment) दोनों में श्रेष्ठ परिणाम देता है। बीज को बीमारियों से बचाता है।",
+            how_to_use_hi: "1. खड़ी फसल के लिए: 200 GM को 200 लीटर पानी में मिलाकर छिड़कें।\n2. बीज उपचार के लिए: 2-3 GM प्रति KG बीज के हिसाब से मिलाएं।\n3. बीज को दवा के साथ अच्छी तरह लपेटें।\n4. 30 मिनट सुखाकर बोएं।\n5. रोग दिखने पर तुरंत उपयोग करें।",
+            type: "फफूंदनाशक", 
+            bg: "bg-blue-50", 
+            icon: "fa-shield-virus" 
+        },
+        { 
+            id: 9, 
+            name: "Crypto 505", 
+            technical: "Chlorpyriphos 50% + Cypermethrin 5% EC", 
+            tags: "insecticide, stem borer, american bollworm, कीटनाशक", 
+            diseases_hi: "तना छेदक, अमेरिकन इल्ली (American Bollworm), घुन, तना मक्खी, माहू, चेपा, फड़का", 
+            crops_hi: "सूरजमुखी, धान, सरसों, गन्ना, कपास, चना, बैंगन", 
+            dose_hi: "350-400 ML प्रति एकड़", 
+            use_hi: "दोहरी ताकत वाला नॉकडाउन व वाष्प (Vapour) क्रिया वाली दवा है। वाष्प के प्रभाव से यह तने और पत्तों के अंदर छिपे कीड़ों का भी खात्मा कर देती है।",
+            how_to_use_hi: "1. 350 ML दवा को 200 लीटर पानी में मिलाएं।\n2. शाम के समय छिड़काव करें।\n3. कीटों की संख्या अधिक होने पर 400 ML तक बढ़ाएं।\n4. 12-15 दिन के अंतराल पर दोहराएं।\n5. फसल की कटाई से 30 दिन पहले उपयोग बंद करें।",
+            type: "कीटनाशक", 
+            bg: "bg-red-50", 
+            icon: "fa-spray-can" 
+        },
+        { 
+            id: 10, 
+            name: "Cartap Pro 4G", 
+            technical: "Cartap Hydrochloride 4% GR", 
+            tags: "insecticide, leaf folder, pata lapat, stem borer, दानेदार", 
+            diseases_hi: "तना छेदक, पत्ती मोड़क (पत्ता लपेट - धान की बड़ी बीमारी), सूंडी, कैटरपिलर", 
+            crops_hi: "धान (मुख्य), गन्ना", 
+            dose_hi: "5 KG प्रति एकड़ (यूरिया/बालू में मिलाकर)", 
+            use_hi: "यह प्रणालीगत (Systemic) दानेदार कीटनाशक है। इसे खाद या रेती में मिलाकर डाला जाता है। यह जड़ों द्वारा अवशोषित होकर तने व पत्तियों को लंबे समय तक सुरक्षित रखता है। पत्ता लपेट रोग में बहुत कारगर।",
+            how_to_use_hi: "1. 5 KG Cartap Pro को 50 KG यूरिया या बालू के साथ अच्छी तरह मिलाएं।\n2. धान की रोपाई के 15-20 दिन बाद खेत में डालें।\n3. खेत में 2-3 इंच पानी होना चाहिए।\n4. सुबह के समय डालें।\n5. 30 दिन बाद आवश्यकतानुसार दोहराएं।",
+            type: "कीटनाशक (दानेदार)", 
+            bg: "bg-red-50", 
+            icon: "fa-seedling" 
+        },
+        { 
+            id: 11, 
+            name: "Dinozone", 
+            technical: "Dinotefuran 15% + Pymetrozine 45% WG", 
+            tags: "insecticide, bph, hopper, tela, whitefly, रसचूसक", 
+            diseases_hi: "धान का भूरा तेला (BPH - सबसे खतरनाक), हरा तेला, सफेद मक्खी, थ्रिप्स, रसचूसक कीट", 
+            crops_hi: "धान (मुख्य), सरसों, मिर्च, कपास, सूरजमुखी, बैंगन, सब्जियां", 
+            dose_hi: "133-333 GM प्रति एकड़", 
+            use_hi: "रसचूसक कीटों के लिए यह एडवांस जापानी तकनीक वाली दवा है। यह कीटों के खाने की प्रणाली को तुरंत लकवाग्रस्त (Paralyze) कर देता है जिससे फसल सुरक्षित रहती है। धान के तेले के लिए बहुत अच्छी।",
+            how_to_use_hi: "1. 133 GM दवा को 200 लीटर पानी में मिलाएं।\n2. तेले की संख्या अधिक होने पर 300 GM तक बढ़ाएं।\n3. सुबह या शाम के समय छिड़काव करें।\n4. 10-12 दिन के अंतराल पर दोहराएं।\n5. बारिश से 3 घंटे पहले न करें।",
+            type: "कीटनाशक", 
+            bg: "bg-orange-50", 
+            icon: "fa-bug" 
+        },
+        { 
+            id: 12, 
+            name: "Dainese", 
+            technical: "Deltamethrin 2.8% EC", 
+            tags: "insecticide, bollworm, fadka, cutworm, कीटनाशक", 
+            diseases_hi: "चित्तीदार इल्ली (Bollworm), फड़का, कटवर्म (Cutworm), फल छेदक, तना छेदक", 
+            crops_hi: "कपास, धान, चाय, सरसों, टमाटर, भिंडी, सब्जियां", 
+            dose_hi: "200-250 ML प्रति एकड़", 
+            use_hi: "त्वरित असरदार नॉकडाउन सिंथेटिक पायरेथ्रॉइड है। यह कीड़ों को स्पर्श करते ही तुरंत नीचे गिरा कर मार देता है। बहुत तेज़ असर वाली दवा है।",
+            how_to_use_hi: "1. 200 ML दवा को 200 लीटर पानी में मिलाएं।\n2. शाम के समय छिड़काव करें।\n3. कीट दिखने पर तुरंत उपयोग करें।\n4. 10-12 दिन के अंतराल पर दोहराएं।\n5. फसल की कटाई से 25 दिन पहले उपयोग बंद करें।",
+            type: "कीटनाशक", 
+            bg: "bg-red-50", 
+            icon: "fa-spider" 
+        },
+        { 
+            id: 13, 
+            name: "Endeco", 
+            technical: "Emamectin Benzoate 5% SG", 
+            tags: "larvicide, fall armyworm, sundi, illi, लार्विसाइड", 
+            diseases_hi: "फल छेदक, फॉल आर्मीवर्म (Fall Armyworm - नई खतरनाक बीमारी), डीबीएम, हरी सूंडी, सेमीलूपर, इल्ली", 
+            crops_hi: "कपास, मिर्च, चना, टमाटर, सूरजमुखी, गोभी, धान, मक्का", 
+            dose_hi: "80-100 GM प्रति एकड़", 
+            use_hi: "यह जैविक (Bio-origin) सुंडीमार दवा है। इसकी ट्रांसलामिनर क्रिया के कारण यह पत्ती के निचले हिस्से में छिपी इल्ली और सुंडी का भी खात्मा कर देता है। फॉल आर्मीवर्म में बहुत कारगर।",
+            how_to_use_hi: "1. 80 GM दवा को 200 लीटर पानी में मिलाएं।\n2. सुबह या शाम के समय छिड़काव करें।\n3. इल्लियाँ छोटी हों तब उपयोग करें।\n4. 8-10 दिन के अंतराल पर दोहराएं।\n5. बारिश से 4 घंटे पहले न करें।",
+            type: "लार्विसाइड", 
+            bg: "bg-red-50", 
+            icon: "fa-worm" 
+        },
+        { 
+            id: 14, 
+            name: "Fenco", 
+            technical: "Thiamethoxam 12.6% + Lambda-Cyhalothrin 9.5% ZC", 
+            tags: "insecticide, whitefly, thrips, chepa, कीटनाशक", 
+            diseases_hi: "सफेद मक्खी, चेपा (Aphids), थ्रिप्स, तना मक्खी, इल्ली, फड़का, बीटल", 
+            crops_hi: "कपास, मक्का, टमाटर, सरसों, सोयाबीन, सब्जियां", 
+            dose_hi: "80-100 ML प्रति एकड़", 
+            use_hi: "यह ZC टेक्नोलॉजी से बना एडवांस कीटनाशक है। यह सिस्टमिक व संपर्क दोनों क्रियाओं से रसचूसक और चबाने वाले कीटों पर बेहतरीन नियंत्रण करता है।",
+            how_to_use_hi: "1. 80 ML दवा को 200 लीटर पानी में मिलाएं।\n2. सुबह के समय छिड़काव करें।\n3. कीट दिखने पर तुरंत उपयोग करें।\n4. 12-14 दिन के अंतराल पर दोहराएं।\n5. फसल की कटाई से 30 दिन पहले उपयोग बंद करें।",
+            type: "कीटनाशक", 
+            bg: "bg-purple-50", 
+            icon: "fa-bug" 
+        },
+        { 
+            id: 15, 
+            name: "Fi Pro 6", 
+            technical: "Fipronil 0.6% w/w GR", 
+            tags: "insecticide, termite, deemak, white grub, fipro, दीमक", 
+            diseases_hi: "दीमक (सबसे खतरनाक भूमि कीट), रूट ग्रब (सफेद लट), कंसुआ, तना छेदक, भूमि कीट", 
+            crops_hi: "धान (मुख्य), गन्ना, गेहूँ, मूंगफली, मक्का, आलू", 
+            dose_hi: "4 KG प्रति एकड़", 
+            use_hi: "यह शक्तिशाली दानेदार भू-कीटनाशक (Fipronil 0.6%) है। यह मिट्टी में छिपे कीड़ों के नर्वस सिस्टम पर हमला करता है और साथ ही पौधे में कल्ले (Tillering) बढ़ाता है। दीमक और सफेद लट के लिए अत्यंत उत्तम और सुरक्षित।",
+            how_to_use_hi: "1. 4 KG Fi Pro 6 को 50 KG यूरिया या बालू के साथ अच्छी तरह मिलाएं।\n2. खेत की रोपाई से पहले या बाद में डालें।\n3. खेत में 2-3 इंच पानी होना चाहिए।\n4. सुबह के समय डालें।\n5. 30-40 दिन बाद आवश्यकतानुसार दोहराएं।",
+            type: "कीटनाशक (भूमि)", 
+            bg: "bg-red-50", 
+            icon: "fa-bugs" 
+        },
+        { 
+            id: 16, 
+            name: "Fura Pro", 
+            technical: "Carbofuran 3% CG (Encapsulated)", 
+            tags: "nematicide, nematode, root grub, deemak, निमाटोड", 
+            diseases_hi: "जड़ की सूंडी, निमाटोड (सूक्ष्म कीट), भोंड, दीमक, जड़ ग्रब", 
+            crops_hi: "धान, सरसों, गन्ना, जूट, मक्का, सब्जियां", 
+            dose_hi: "5 KG प्रति एकड़", 
+            use_hi: "सुरक्षित कैप्सुलेटेड दानेदार कीटनाशक व निमाटोडनाशक है। यह धीरे-धीरे घुलकर लंबे समय तक जड़ों को कीड़ों से सुरक्षित रखता है।",
+            how_to_use_hi: "1. 5 KG Fura Pro को 50 KG यूरिया या बालू के साथ मिलाएं।\n2. बुआई से 2-3 दिन पहले खेत में डालें।\n3. खेत में नमी होनी चाहिए।\n4. सुबह या शाम के समय डालें।\n5. 40-50 दिन बाद आवश्यकतानुसार दोहराएं।",
+            type: "निमाटोडनाशक", 
+            bg: "bg-red-50", 
+            icon: "fa-shield-halved" 
+        },
+        { 
+            id: 17, 
+            name: "Ferico Pro", 
+            technical: "Chlorantraniliprole 0.4% GR", 
+            tags: "insecticide, stem borer, coragen, sundi, दानेदार", 
+            diseases_hi: "तना छेदक (धान की मुख्य बीमारी), चोटी छेदक, जड़ छेदक, कोराजन कीट", 
+            crops_hi: "धान (मुख्य), गन्ना", 
+            dose_hi: "4 KG प्रति एकड़", 
+            use_hi: "यह नेक्स्ट-जनरेशन अणु (Coragen का दानेदार रूप) है। इसे यूरिया में मिलाकर डालने से यह 30 से 40 दिनों तक तना छेदक एवं सुंडियों से अटूट सुरक्षा देता है।",
+            how_to_use_hi: "1. 4 KG Ferico Pro को 50 KG यूरिया के साथ अच्छी तरह मिलाएं।\n2. धान की रोपाई के 10-15 दिन बाद डालें।\n3. खेत में 2-3 इंच पानी होना चाहिए।\n4. सुबह के समय डालें।\n5. 30 दिन बाद आवश्यकतानुसार दोहराएं।",
+            type: "कीटनाशक (दानेदार)", 
+            bg: "bg-red-50", 
+            icon: "fa-seedling" 
+        },
+        { 
+            id: 18, 
+            name: "Gabbar", 
+            technical: "Indoxacarb 14.5% + Acetamiprid 7.7% SC", 
+            tags: "insecticide, bollworm, thrips, whitefly, कीटनाशक", 
+            diseases_hi: "फल छेदक इल्ली, थ्रिप्स, सफेद मक्खी, चेपा, हरा मच्छर, सुंडी, इल्ली", 
+            crops_hi: "मिर्च, कपास, सूरजमुखी, बैंगन, आलू, सेब, सब्जियां", 
+            dose_hi: "200-250 ML प्रति एकड़", 
+            use_hi: "यह इल्ली (सुंडी) और रसचूसक (सफेद मक्खी, थ्रिप्स) कीटों दोनों का एक साथ खात्मा करने वाला शक्तिशाली डुअल-एक्शन कीटनाशक है।",
+            how_to_use_hi: "1. 200 ML दवा को 200 लीटर पानी में मिलाएं।\n2. शाम के समय छिड़काव करें।\n3. कीट दिखने पर तुरंत उपयोग करें।\n4. 10-12 दिन के अंतराल पर दोहराएं।\n5. फसल की कटाई से 25 दिन पहले उपयोग बंद करें।",
+            type: "कीटनाशक", 
+            bg: "bg-red-50", 
+            icon: "fa-spider" 
+        },
+        { 
+            id: 19, 
+            name: "Grando Power", 
+            technical: "Emamectin Benzoate 1.9% EC", 
+            tags: "larvicide, leaf folder, pata lapat, armyworm, लार्विसाइड", 
+            diseases_hi: "हरी इल्ली, फल व तना छेदक, फॉल आर्मीवर्म, पत्ती मोड़क (पत्ता लपेट), सुंडी", 
+            crops_hi: "धान (मुख्य), सरसों, सूरजमुखी, सब्जी, चना, सोयाबीन", 
+            dose_hi: "250-300 ML प्रति एकड़", 
+            use_hi: "यह तरल (Liquid) फॉर्म में बेहतरीन लैरविसाइड है। यह पत्तियों के टिश्यू में तेज़ी से प्रवेश कर छिपी हुई सुंडियों (जैसे पत्ता लपेट) का तुरंत खात्मा कर देता है।",
+            how_to_use_hi: "1. 250 ML दवा को 200 लीटर पानी में मिलाएं।\n2. सुबह या शाम के समय छिड़काव करें।\n3. इल्लियाँ छोटी हों तब उपयोग करें।\n4. 8-10 दिन के अंतराल पर दोहराएं।\n5. बारिश से 3 घंटे पहले न करें।",
+            type: "लार्विसाइड", 
+            bg: "bg-red-50", 
+            icon: "fa-spray-can" 
+        },
+        { 
+            id: 20, 
+            name: "Lampro", 
+            technical: "Lambda Cyhalothrin 4.9% CS", 
+            tags: "insecticide, fadka, bhundi, caterpillar, hopper, कीटनाशक", 
+            diseases_hi: "फड़का, भुंडी, कैटरपिलर, हॉपर्स, थ्रिप्स, दीमक, इल्ली", 
+            crops_hi: "कपास, धान, सरसों, चना, मूंगफली, मक्का, फल", 
+            dose_hi: "250-300 ML प्रति एकड़", 
+            use_hi: "यह कैप्सूल सस्पेंशन (CS) इको-फ्रेंडली तकनीक है। यह दवा पत्तियों पर चिपककर धूप व बारिश में भी लंबे समय तक काम करती है।",
+            how_to_use_hi: "1. 250 ML दवा को 200 लीटर पानी में मिलाएं।\n2. सुबह या शाम के समय छिड़काव करें।\n3. कीट दिखने पर तुरंत उपयोग करें।\n4. 10-12 दिन के अंतराल पर दोहराएं।\n5. बारिश से 4 घंटे पहले न करें।",
+            type: "कीटनाशक", 
+            bg: "bg-red-50", 
+            icon: "fa-bug" 
+        },
+        { 
+            id: 21, 
+            name: "Lanco", 
+            technical: "Thiamethoxam 30% FS", 
+            tags: "seed treatment, termite, deemak, beej upchar, बीज उपचार", 
+            diseases_hi: "दीमक, शुरुआती रसचूसक कीट, उकठा (Wilt), जड़ सड़न कवक, बीज जनित रोग", 
+            crops_hi: "गेहूँ, सरसों, आलू, कपास, मक्का, सोयाबीन, चना", 
+            dose_hi: "10 ML प्रति KG बीज", 
+            use_hi: "यह प्रीमियम बीज उपचार (Seed Treatment) दवा है। यह बीज पर सुरक्षा कवच बनाकर फसल को शुरुआती 30 दिनों तक मिट्टी के कीड़ों और दीमक से सुरक्षा देती है।",
+            how_to_use_hi: "1. 10 ML Lanco को 1 KG बीज के साथ अच्छी तरह मिलाएं।\n2. बीज को 10-15 मिनट तक दवा में भिगोएँ।\n3. फिर बीज को छाँव में सुखाएं।\n4. सूखने के बाद बोएं।\n5. बोने से 24 घंटे पहले उपचार करें।",
+            type: "बीज उपचार", 
+            bg: "bg-indigo-50", 
+            icon: "fa-shield" 
+        },
+        { 
+            id: 22, 
+            name: "Lancus", 
+            technical: "Thiamethoxam 25% WG", 
+            tags: "insecticide, whitefly, mahu, jassid, aphid, रसचूसक", 
+            diseases_hi: "माहू (चेपा - सरसों की मुख्य बीमारी), तेला, सफेद मक्खी, थ्रिप्स, मच्छर, चोंगा", 
+            crops_hi: "सरसों (मुख्य), धान, आलू, कपास, सूरजमुखी, सब्जियां", 
+            dose_hi: "80-100 GM प्रति एकड़", 
+            use_hi: "यह एक सिस्टमैटिक रस चूसक कीटनाशक है। कीटों को मारने के साथ-साथ यह पौधों में हरापन व वृद्धि में भी बहुत सहायक है। सरसों के चेपा के लिए उत्कृष्ट।",
+            how_to_use_hi: "1. 80 GM दवा को 200 लीटर पानी में मिलाएं।\n2. सुबह के समय छिड़काव करें।\n3. कीट दिखने पर तुरंत उपयोग करें।\n4. 10-12 दिन के अंतराल पर दोहराएं।\n5. फसल की कटाई से 25 दिन पहले उपयोग बंद करें।",
+            type: "कीटनाशक", 
+            bg: "bg-orange-50", 
+            icon: "fa-droplet" 
+        },
+        { 
+            id: 23, 
+            name: "Mala Pro", 
+            technical: "Malathion 50% EC", 
+            tags: "insecticide, godown, storage, bhoonga, भण्डारण", 
+            diseases_hi: "भूनगा, लाल कीड़ा, बीटल, धुन, मक्खी, सूंडी, अनाज कीट", 
+            crops_hi: "गेहूँ, धान, अनाज भण्डारण (गोदाम), खेत की फसल", 
+            dose_hi: "300-400 ML प्रति एकड़ (खेत) / 10 ML प्रति 10 KG अनाज (भण्डारण)", 
+            use_hi: "यह एक मल्टी-क्रॉप संपर्क कीटनाशक है। यह खड़ी फसलों के साथ-साथ गोदामों में भण्डारित अनाज को कीड़ों से बचाने के लिए बहुत उपयोगी है।",
+            how_to_use_hi: "1. खेत के लिए: 300 ML को 200 लीटर पानी में मिलाकर छिड़कें।\n2. भण्डारण के लिए: 10 ML को 10 KG अनाज पर छिड़कें।\n3. भण्डारण के लिए 2-3 बार दोहराएं।\n4. खेत में 10-12 दिन के अंतराल पर दोहराएं।\n5. फसल की कटाई से 30 दिन पहले उपयोग बंद करें।",
+            type: "कीटनाशक", 
+            bg: "bg-red-50", 
+            icon: "fa-warehouse" 
+        },
+        { 
+            id: 24, 
+            name: "Metri Pro", 
+            technical: "Metribuzin 70% WP", 
+            tags: "herbicide, weed, bathua, ghas, खरपतवार", 
+            diseases_hi: "गुल्ली डंडा, बथुआ, गाजर घास, जंगली पालक, मकोय, चौड़ी पत्ती खरपतवार", 
+            crops_hi: "आलू, गेहूँ, गन्ना, टमाटर, सोयाबीन", 
+            dose_hi: "100 GM प्रति एकड़", 
+            use_hi: "यह चयनात्मक प्री व पोस्ट-इमर्जेंस हर्बीसाइड (घास मार दवा) है। यह खरपतवारों की प्रकाश संश्लेषण क्रिया को रोककर जड़ से सुखा देता है।",
+            how_to_use_hi: "1. 100 GM दवा को 200 लीटर पानी में मिलाएं।\n2. बुआई से पहले या बाद में छिड़काव करें।\n3. खेत में नमी होनी चाहिए।\n4. सुबह के समय छिड़काव करें।\n5. अगली बुआई से 2 महीने पहले उपयोग करें।",
+            type: "खरपतवारनाशक", 
+            bg: "bg-amber-50", 
+            icon: "fa-plant-wilt" 
+        },
+        { 
+            id: 25, 
+            name: "Marvel M45", 
+            technical: "Mancozeb 75% WP", 
+            tags: "fungicide, blight, jhulsa, downy mildew, कवक", 
+            diseases_hi: "अगेती व पछेती झुलसा (आलू की मुख्य बीमारी), डाउनी मिल्ड्यू, रस्ट, एंथ्रेक्नोज, पत्ती धब्बा", 
+            crops_hi: "आलू (मुख्य), सरसों, टमाटर, धान, मिर्च, सेब, अंगूर", 
+            dose_hi: "500-600 GM प्रति एकड़", 
+            use_hi: "यह एक सुरक्षात्मक फफूंदनाशक है। फफूंद को रोकने के साथ यह फसल को मैंगनीज व जिंक जैसे पोषक तत्व भी प्रदान करता है। आलू के झुलसा रोग में बेहतरीन।",
+            how_to_use_hi: "1. 500 GM दवा को 200 लीटर पानी में मिलाएं।\n2. रोग के लक्षण दिखने से पहले उपयोग करें।\n3. सुबह के समय छिड़काव करें।\n4. 7-10 दिन के अंतराल पर दोहराएं।\n5. बारिश से 3 घंटे पहले न करें।",
+            type: "फफूंदनाशक", 
+            bg: "bg-blue-50", 
+            icon: "fa-shield-virus" 
+        },
+        { 
+            id: 26, 
+            name: "Pretico Plus", 
+            technical: "Pretilachlor 37% EW", 
+            tags: "herbicide, paddy, sanwa ghas, motha, धान", 
+            diseases_hi: "सांवा घास, मोथा (Sedge), चौड़ी व संकरी पत्ती के जलीय खरपतवार, धान के खरपतवार", 
+            crops_hi: "धान की रोपाई (मुख्य)", 
+            dose_hi: "600 ML प्रति एकड़", 
+            use_hi: "यह पानी आधारित एडवांस EW हर्बीसाइड है। धान की रोपाई के तुरंत बाद प्रयोग करने से यह खरपतवारों को उगने ही नहीं देता।",
+            how_to_use_hi: "1. 600 ML दवा को 200 लीटर पानी में मिलाएं।\n2. धान की रोपाई के 2-3 दिनों के अंदर छिड़काव करें।\n3. खेत में 2-3 इंच पानी होना चाहिए।\n4. सुबह या शाम के समय छिड़काव करें।\n5. 30 दिन बाद आवश्यकतानुसार दोहराएं।",
+            type: "खरपतवारनाशक", 
+            bg: "bg-amber-50", 
+            icon: "fa-water" 
+        },
+        { 
+            id: 27, 
+            name: "Pypro", 
+            technical: "Pymetrozine 50% WG", 
+            tags: "insecticide, bph, hopper burn, tela, कीटनाशक", 
+            diseases_hi: "धान का भूरा तेला (BPH - धान की सबसे खतरनाक बीमारी), सफेद पीठ वाला तेला (WBPH), हॉपर बर्न", 
+            crops_hi: "धान (मुख्य)", 
+            dose_hi: "120-150 GM प्रति एकड़", 
+            use_hi: "इसकी एंटी-फीटेंट क्रिया तेले/हॉपर की सूंड को तुरंत लकवाग्रस्त कर देती है, जिससे फसल सूखने (Hopper Burn) से 100% बचती है। धान की बचाव के लिए सबसे अच्छी दवा।",
+            how_to_use_hi: "1. 120 GM दवा को 200 लीटर पानी में मिलाएं।\n2. तेला दिखने पर तुरंत छिड़काव करें।\n3. सुबह या शाम के समय छिड़काव करें।\n4. 8-10 दिन के अंतराल पर दोहराएं।\n5. बारिश से 3 घंटे पहले न करें।",
+            type: "कीटनाशक", 
+            bg: "bg-orange-50", 
+            icon: "fa-shield-halved" 
+        },
+        { 
+            id: 28, 
+            name: "Sulco", 
+            technical: "Sulphur 80% WDG", 
+            tags: "fungicide, powdery mildew, mites, sulphur, कवक, मकड़ी", 
+            diseases_hi: "पाउडरी मिल्ड्यू (चूर्णिल फफूंदी), लाल व पीली मकड़ी, सल्फर की कमी, फफूंदी", 
+            crops_hi: "सरसों (मुख्य), गेहूँ, आलू, मिर्च, आम, मूंगफली, दलहन", 
+            dose_hi: "3 KG प्रति एकड़", 
+            use_hi: "यह ट्रिपल एक्शन दवा है: (1) फफूंदनाशक, (2) लाल मकड़ी रोधी, (3) सल्फर पोषक तत्व जो सरसों और अन्य फसलों में तेल व प्रोटीन बढ़ाता है।",
+            how_to_use_hi: "1. 3 KG दवा को 200-250 लीटर पानी में मिलाएं।\n2. सुबह या शाम के समय छिड़काव करें।\n3. रोग दिखने पर तुरंत उपयोग करें।\n4. 10-12 दिन के अंतराल पर दोहराएं।\n5. धूप में न करें।",
+            type: "फफूंदनाशक/पोषक", 
+            bg: "bg-teal-50", 
+            icon: "fa-sun" 
+        },
+        { 
+            id: 29, 
+            name: "Silpro", 
+            technical: "Silicone-based Surfactant / Sticker", 
+            tags: "sticker, spreader, chipku, spray, चिपकू", 
+            diseases_hi: "दवा की बर्बादी रोकना, भारी बारिश से दवा को धुलने से बचाना, दवा को फैलाना", 
+            crops_hi: "सभी प्रकार की फसलों व स्प्रे के साथ", 
+            dose_hi: "5 ML प्रति 15 LTR पंप", 
+            use_hi: "यह 100% ऑर्गेनो-सिलिकॉन स्प्रेडर (Sticker) है। यह पानी के पृष्ठ तनाव को कम करके दवा को पत्तियों की दोनों सतहों पर तेज़ी से फैलाता और चिपकाता है।",
+            how_to_use_hi: "1. 5 ML Silpro को 15 लीटर पानी में मिलाएं।\n2. दवा के साथ मिलाकर उपयोग करें।\n3. छिड़काव से पहले अच्छी तरह हिलाएं।\n4. किसी भी दवा के साथ उपयोग कर सकते हैं।\n5. दवा की प्रभावशीलता बढ़ाता है।",
+            type: "स्टिकर/एडजुवेंट", 
+            bg: "bg-slate-100", 
+            icon: "fa-droplet" 
+        },
+        { 
+            id: 30, 
+            name: "Tara Pretila", 
+            technical: "Pretilachlor 50% EC", 
+            tags: "herbicide, paddy, sanwa ghas, motha, धान, खरपतवार", 
+            diseases_hi: "धान की सांवा घास, मोथा व अन्य जलीय खरपतवार, चौड़ी पत्ती खरपतवार", 
+            crops_hi: "धान की रोपाई (मुख्य)", 
+            dose_hi: "500 ML प्रति एकड़", 
+            use_hi: "यह एक भरोसेमंद प्री-इमर्जेंस धान खरपतवारनाशक है। रोपाई के तुरंत बाद बालू/यूरिया में मिलाकर डालने से खरपतवारों का अंकुरण रुक जाता है।",
+            how_to_use_hi: "1. 500 ML दवा को 200 लीटर पानी में मिलाएं।\n2. धान की रोपाई के 2-3 दिनों के अंदर छिड़काव करें।\n3. खेत में 2-3 इंच पानी होना चाहिए।\n4. सुबह या शाम के समय छिड़काव करें।\n5. 30 दिन बाद आवश्यकतानुसार दोहराएं।",
+            type: "खरपतवारनाशक", 
+            bg: "bg-amber-50", 
+            icon: "fa-plant-wilt" 
+        },
+        { 
+            id: 31, 
+            name: "Telcon", 
+            technical: "Tebuconazole 10% + Sulphur 65% WG", 
+            tags: "fungicide, sheath blight, rust, tikka, कवक", 
+            diseases_hi: "शीथ ब्लाइट (धान की बड़ी बीमारी), टिक्का रोग, पाउडरी मिल्ड्यू, पत्ती धब्बा, रस्ट, फफूंदी", 
+            crops_hi: "धान (मुख्य), सरसों, आलू, मिर्च, सोयाबीन, गेहूँ, चाय", 
+            dose_hi: "500 GM प्रति एकड़", 
+            use_hi: "डबल-एक्शन सिस्टमिक व कॉन्टैक्ट फफूंदनाशक। बीमारियों का खात्मा कर सल्फर का पोषण देता है जिससे पत्तियाँ हरी-भरी रहती हैं।",
+            how_to_use_hi: "1. 500 GM दवा को 200 लीटर पानी में मिलाएं।\n2. सुबह के समय छिड़काव करें।\n3. रोग दिखने पर तुरंत उपयोग करें।\n4. 10-12 दिन के अंतराल पर दोहराएं।\n5. बारिश से 3 घंटे पहले न करें।",
+            type: "फफूंदनाशक", 
+            bg: "bg-blue-50", 
+            icon: "fa-leaf" 
+        },
+        { 
+            id: 32, 
+            name: "Velar Pro", 
+            technical: "Gibberellic Acid 0.001% L", 
+            tags: "tonic, pgr, growth, phool, phal, टॉनिक", 
+            diseases_hi: "फूल व फल का गिरना, छोटा आकार, कम वजन, चमक की कमी, विकास रुकना", 
+            crops_hi: "धान, आलू, सरसों, कपास, अंगूर, टमाटर, फलदार पौधे, सब्जियां", 
+            dose_hi: "250-300 ML प्रति एकड़", 
+            use_hi: "शक्तिशाली प्लांट ग्रोथ रेगुलेटर (PGR/Tonic)। यह कोशिका विभाजन तेज करता है, फूल झड़ने से रोकता है और पैदावार बढ़ाता है।",
+            how_to_use_hi: "1. 250 ML दवा को 200 लीटर पानी में मिलाएं।\n2. फूल आने के समय या फल बनने के समय उपयोग करें।\n3. सुबह या शाम के समय छिड़काव करें।\n4. 15 दिन के अंतराल पर दोहराएं।\n5. बारिश से 4 घंटे पहले न करें।",
+            type: "टॉनिक/PGR", 
+            bg: "bg-emerald-50", 
+            icon: "fa-arrow-up-right-dots" 
+        },
+        { 
+            id: 33, 
+            name: "2,4-D Pro", 
+            technical: "2,4-D Amine Salt 58% SL", 
+            tags: "herbicide, broadleaf, bathua, hirankhuri, खरपतवार", 
+            diseases_hi: "बथुआ, हिरणखुरी, कासनी, जंगली पालक, खरतुआ, सांटी, मकोय, चौड़ी पत्ती खरपतवार", 
+            crops_hi: "गेहूँ (मुख्य), मक्का, गन्ना, गैर-फसली क्षेत्र", 
+            dose_hi: "400 ML प्रति एकड़", 
+            use_hi: "यह एक सिस्टमिक सेलेक्टिव हर्बीसाइड है। फसल को बिना नुकसान पहुंचाए चौड़ी पत्ती वाले जिद्दी खरपतवारों को जड़ों सहित सुखा देता है।",
+            how_to_use_hi: "1. 400 ML दवा को 200 लीटर पानी में मिलाएं।\n2. बुआई के 30-35 दिन बाद छिड़काव करें।\n3. खरपतवार छोटी हों तब उपयोग करें।\n4. सुबह के समय छिड़काव करें।\n5. अगली बुआई से 2 महीने पहले उपयोग करें।",
+            type: "खरपतवारनाशक", 
+            bg: "bg-amber-50", 
+            icon: "fa-plant-wilt" 
+        }
     ];
 
     // ============================================================
     //  2. FERTILIZER DATABASE
     // ============================================================
     const fertilizers = [
-        { name: "यूरिया (Urea 46% N)", use: "पौधों में हरापन लाने और तेज़ी से वानस्पतिक वृद्धि के लिए सबसे ज़रूरी है। यह नाइट्रोजन की पूर्ति करता है।" },
+        { name: "यूरिया (Urea 46% N)", use: "पौधों में हरापन लाने और तेज़ी से वानस्पतिक वृद्धि के लिए सबसे ज़रूरी है। यह नाइट्रोजन की पूर्ति करता है। फसल को हरा-भरा बनाता है।" },
         { name: "डीएपी (DAP 18:46:0)", use: "18% नाइट्रोजन और 46% फास्फोरस। जड़ों के मज़बूत विकास और बीज बनने में मदद करता है। बुआई के समय मिट्टी में मिलाएँ।" },
         { name: "पोटाश (MOP 60%)", use: "दानों में चमक, वज़न बढ़ाने और पौधे को बीमारियों व मौसम से लड़ने की ताकत देता है।" },
         { name: "NPK (20:20:13)", use: "20% नाइट्रोजन, 20% फास्फोरस, 13% सल्फर। तिलहन और दलहन फसलों के लिए संतुलित विकास।" },
@@ -575,20 +1002,21 @@
     //  3. HINDI WORD MAP & STOPWORDS
     // ============================================================
     const hindiWordMap = {
-        "धान": "dhan", "पैडी": "dhan", "paddy": "dhan", "जीरी": "dhan",
+        "धान": "dhan", "पैडी": "dhan", "paddy": "dhan", "जीरी": "dhan", "चावल": "dhan",
         "गेहूं": "gehu", "गेहूँ": "gehu", "wheat": "gehu", "कनक": "gehu",
-        "कपास": "kapas", "cotton": "kapas", "नरमा": "kapas",
-        "सरसों": "sarso", "mustard": "sarso",
-        "आलू": "aalu", "potato": "aalu",
-        "गन्ना": "ganna", "sugarcane": "ganna",
-        "मक्का": "makka", "maize": "makka",
-        "सूरजमुखी": "surajmukhi", "sunflower": "surajmukhi",
+        "कपास": "kapas", "cotton": "kapas", "नरमा": "kapas", "सूत": "kapas",
+        "सरसों": "sarso", "mustard": "sarso", "सरसो": "sarso",
+        "आलू": "aalu", "potato": "aalu", "अलू": "aalu",
+        "गन्ना": "ganna", "sugarcane": "ganna", "ईख": "ganna",
+        "मक्का": "makka", "maize": "makka", "भुट्टा": "makka",
+        "सूरजमुखी": "surajmukhi", "sunflower": "surajmukhi", "सुरजमुखी": "surajmukhi",
         "मिर्च": "mirch", "टमाटर": "tamatar", "सोयाबीन": "soybean",
         "मूंगफली": "moongfali", "चना": "chana", "मटर": "matar",
         "प्याज": "pyaaz", "बैंगन": "baingan", "गोभी": "gobhi",
         "भिंडी": "bhindi", "सेब": "seb", "अंगूर": "angoor",
         "आम": "aam", "बागवानी": "bagwani", "सब्जी": "sabji",
-        "फल": "phal", "चाय": "chai",
+        "फल": "phal", "चाय": "chai", "अमरूद": "amrood",
+        // Diseases
         "झुलसा": "jhulsa", "ब्लास्ट": "blast", "अगेती": "ageti", "पछेती": "pacheti",
         "सड़न": "sadan", "पीला": "pilapan", "पीलापन": "pilapan", "सूखा": "sookha",
         "फफूंद": "faphund", "फफूंदी": "faphund", "कवक": "faphund",
@@ -599,10 +1027,13 @@
         "चूसक": "choosak", "तेला": "tela", "माहू": "mahu", "चेपा": "chepa",
         "घुन": "ghun", "फड़का": "fadka", "भोंड": "bhond", "हॉपर": "hopper",
         "थ्रिप्स": "thrips", "निमाटोड": "nematode", "कीड़ा": "keeda", "मकड़ी": "makdi",
+        "हॉपर": "hopper", "बीपीएच": "bph", "बीपीएच": "bph",
+        // Weeds
         "खरपतवार": "kharpatwar", "घास": "ghas", "चौड़ी": "chaudi", "पत्ती": "patti",
         "बथुआ": "bathua", "सांवा": "sanwa", "मोथा": "motha", "हिरणखुरी": "hirankhuri",
+        // Product names
         "फिप्रो": "fipro", "fipro": "fipro", "fipronil": "fipro",
-        "कोरागेन": "coragen", "coragen": "coragen",
+        "कोरागेन": "coragen", "coragen": "coragen", "कोरजन": "coragen",
         "aura": "aura", "azofi": "azofi", "azoton": "azoton", "atra": "atra",
         "bifco": "bifco", "camron": "camron", "carbco": "carbco", "crypto": "crypto",
         "cartap": "cartap", "dinozone": "dinozone", "dainese": "dainese",
@@ -611,10 +1042,11 @@
         "lanco": "lanco", "lancus": "lancus", "mala": "mala", "metri": "metri",
         "marvel": "marvel", "pretico": "pretico", "pypro": "pypro",
         "sulco": "sulco", "silpro": "silpro", "telcon": "telcon", "velar": "velar",
-        "sticker": "sticker", "chipku": "sticker", "चिपकू": "sticker"
+        "sticker": "sticker", "chipku": "sticker", "चिपकू": "sticker",
+        "2,4-D": "2,4-d", "2-4-D": "2,4-d"
     };
 
-    const stopWords = ['ki', 'ka', 'ke', 'hai', 'mein', 'me', 'ko', 'se', 'batao', 'dawa', 'dawai', 'kya', 'kaun', 'si', 'lagau', 'kare', 'karti', 'kaam', 'aur', 'karna', 'kese', 'chahie', 'chahiye', 'karo', 'dikhao', 'list', 'hai?', 'है', 'की', 'दवा', 'दवाई', 'क्या', 'बताओ', 'लगाऊं', 'लगाएं', 'करती', 'काम', 'कैसे', 'करे', 'डालें', 'डालू', 'कौन', 'सी', 'लिए', 'लगाए', 'लगाना', 'मारने', 'खत्म', 'दे', 'दो', 'मुझे', 'आप', 'तुम्हारा', 'बताइये', 'बताओ', 'हो', 'गया', 'गई', 'गए', 'रहा', 'रही', 'रहे', 'हूँ', 'हों', 'था', 'थी', 'थे', 'ना', 'नहीं', 'करो', 'करें'];
+    const stopWords = ['ki', 'ka', 'ke', 'hai', 'mein', 'me', 'ko', 'se', 'batao', 'dawa', 'dawai', 'kya', 'kaun', 'si', 'lagau', 'kare', 'karti', 'kaam', 'aur', 'karna', 'kese', 'chahie', 'chahiye', 'karo', 'dikhao', 'list', 'hai?', 'है', 'की', 'दवा', 'दवाई', 'क्या', 'बताओ', 'लगाऊं', 'लगाएं', 'करती', 'काम', 'कैसे', 'करे', 'डालें', 'डालू', 'कौन', 'सी', 'लिए', 'लगाए', 'लगाना', 'मारने', 'खत्म', 'दे', 'दो', 'मुझे', 'आप', 'तुम्हारा', 'बताइये', 'बताओ', 'हो', 'गया', 'गई', 'गए', 'रहा', 'रही', 'रहे', 'हूँ', 'हों', 'था', 'थी', 'थे', 'ना', 'नहीं', 'करो', 'करें', 'बतायें', 'बताएं'];
 
     // ============================================================
     //  4. VOICE / SPEECH RECOGNITION
@@ -649,7 +1081,6 @@
             const text = final || interim;
             document.getElementById('userInput').value = text;
             autoResize(document.getElementById('userInput'));
-            // SEND button is always visible, so we just keep it enabled
         };
 
         recognition.onerror = (e) => {
@@ -661,7 +1092,6 @@
             stopListening();
             const val = document.getElementById('userInput').value.trim();
             if (val !== '') {
-                // Auto-send after voice input
                 processUserInput();
             }
         };
@@ -727,12 +1157,8 @@
     const sendBtn = document.getElementById('sendBtn');
     const micBtn = document.getElementById('micBtn');
 
-    // Both buttons are always visible
-    // No toggle needed — mic and send are both shown
-
     function handleInputChange(textarea) {
         autoResize(textarea);
-        // Optional: show spelling suggestions if needed
     }
 
     function autoResize(textarea) {
@@ -836,7 +1262,7 @@
 
         // Fertilizers
         if (q.includes('urea') || q.includes('यूरिया') || q.includes('dap') || q.includes('डीएपी') ||
-            q.includes('potash') || q.includes('पोटाश') || q.includes('npk') || q.includes('खाद') || q.includes('khad')) {
+            q.includes('potash') || q.includes('पोटाश') || q.includes('npk') || q.includes('खाद') || q.includes('khad') || q.includes('fertilizer')) {
             let html = `<p class="mb-3 font-semibold text-[14px]">🌾 खादों (Fertilizers) की जानकारी:</p><div class="space-y-2.5">`;
             let found = false;
             fertilizers.forEach(f => {
@@ -878,7 +1304,7 @@
         }
 
         // Animals
-        if (q.includes('nilgai') || q.includes('roj') || q.includes('awara') || q.includes('नीलगाय') || q.includes('सुअर') || q.includes('जानवर')) {
+        if (q.includes('nilgai') || q.includes('roj') || q.includes('awara') || q.includes('नीलगाय') || q.includes('सुअर') || q.includes('जानवर') || q.includes('animal')) {
             return {
                 html: `<p class="text-[14px]">🐄 आवारा पशुओं (नीलगाय, जंगली सुअर) के लिए कोई रासायनिक दवा नहीं है। बचाव: खेत की जाली (Fencing) या सोलर फेंसिंग लगवाएँ।</p>`,
                 voice: "आवारा पशुओं के लिए कोई दवा नहीं है। जाली या सोलर फेंसिंग करवाएँ।"
@@ -897,12 +1323,11 @@
     }
 
     // ============================================================
-    //  7. MAIN AI ENGINE
+    //  7. MAIN AI ENGINE — ACCURATE MEDICINE RECOMMENDATIONS
     // ============================================================
     function processUserInput() {
         const text = userInput.value.trim();
         if (!text) {
-            // If empty, show a gentle reminder
             const txt = "कृपया कुछ लिखें या माइक से बोलें। मैं आपकी मदद के लिए तैयार हूँ! 🙏";
             appendBotMessage(`<p class="text-[15px]">${txt}</p>`, txt);
             return;
@@ -956,7 +1381,7 @@
         }
 
         // ----- SHOW ALL -----
-        if (query.includes('sabhi') || query.includes('all') || query.includes('list') || query.includes('सभी') || query.includes('पूरी') || query.includes('दिखाओ')) {
+        if (query.includes('sabhi') || query.includes('all') || query.includes('list') || query.includes('सभी') || query.includes('पूरी') || query.includes('दिखाओ') || query.includes('सारी')) {
             let html = `<p class="mb-3 font-semibold text-[14px]">📋 हमारे पास <b>33</b> बेहतरीन दवाइयाँ हैं:</p><div class="grid grid-cols-2 gap-2 text-[12px]">`;
             catalog.forEach(item => {
                 html += `<div class="bg-white p-2.5 rounded-lg border border-slate-200 shadow-sm cursor-pointer hover:border-emerald-400 hover:shadow-md transition-all" onclick="sendQuickMessage('${item.name} क्या काम करती है?')">
@@ -979,73 +1404,88 @@
         let keywords = rawWords.filter(kw => !stopWords.includes(kw) && kw.length > 1);
         if (keywords.length === 0) keywords = rawWords.filter(kw => kw.length > 1);
 
-        // ----- SCORING ENGINE -----
+        // ----- SCORING ENGINE (ACCURATE) -----
         let maxNameScore = 0;
         let specificProduct = null;
 
         const scoredItems = catalog.map(item => {
             let score = 0;
             const searchStr = `${item.name} ${item.technical} ${item.tags} ${item.diseases_hi} ${item.crops_hi} ${item.type}`.toLowerCase();
-            let cropMatch = false, diseaseMatch = false;
+            let cropMatch = false, diseaseMatch = false, nameMatch = false;
 
             keywords.forEach(kw => {
-                if (item.name.toLowerCase() === kw) { score += 100; if (score > maxNameScore) { maxNameScore = score; specificProduct = item; } }
-                else if (item.name.toLowerCase().includes(kw)) { score += 50; if (score > maxNameScore) { maxNameScore = score; specificProduct = item; } }
-                else if (item.technical.toLowerCase().includes(kw)) score += 30;
+                // Exact name match
+                if (item.name.toLowerCase() === kw) { score += 100; nameMatch = true; if (score > maxNameScore) { maxNameScore = score; specificProduct = item; } }
+                else if (item.name.toLowerCase().includes(kw)) { score += 60; nameMatch = true; if (score > maxNameScore) { maxNameScore = score; specificProduct = item; } }
+                else if (item.technical.toLowerCase().includes(kw)) { score += 35; }
                 else if (item.tags.includes(kw)) {
-                    score += 15;
-                    if (['dhan', 'gehu', 'ganna', 'makka', 'kapas', 'aalu', 'sarso', 'surajmukhi'].includes(kw)) cropMatch = true;
-                    if (['blast', 'jhulsa', 'sundi', 'tela', 'makkhi', 'deemak', 'kharpatwar', 'ghas', 'lapat'].includes(kw)) diseaseMatch = true;
+                    score += 20;
+                    if (['dhan', 'gehu', 'ganna', 'makka', 'kapas', 'aalu', 'sarso', 'surajmukhi', 'paddy', 'wheat', 'cotton', 'mustard', 'potato', 'sugarcane'].includes(kw)) cropMatch = true;
+                    if (['blast', 'jhulsa', 'sundi', 'tela', 'makkhi', 'deemak', 'kharpatwar', 'ghas', 'lapat', 'blight', 'rust', 'mildew', 'bph', 'hopper', 'termite', 'whitefly'].includes(kw)) diseaseMatch = true;
                 } else if (searchStr.includes(kw)) {
-                    score += 5;
+                    score += 8;
                     if (item.crops_hi.toLowerCase().includes(kw)) cropMatch = true;
                     if (item.diseases_hi.toLowerCase().includes(kw)) diseaseMatch = true;
                 }
 
-                // Fuzzy
-                const itemKeywords = item.name.toLowerCase().split(' ').concat(item.tags.split(', '));
-                itemKeywords.forEach(ikw => {
+                // Fuzzy search for misspelled names
+                const itemNameWords = item.name.toLowerCase().split(' ');
+                itemNameWords.forEach(ikw => {
                     if (kw.length > 3 && ikw.length > 3) {
                         const dist = getEditDistance(kw, ikw);
-                        if (dist === 1) score += 10;
-                        else if (dist === 2) score += 4;
+                        if (dist === 1) { score += 25; nameMatch = true; }
+                        else if (dist === 2) { score += 10; }
                     }
                 });
             });
 
-            if (cropMatch && diseaseMatch) score += 60;
-            if (query.includes('coragen') && item.name === 'Ferico Pro') score += 100;
-            if ((query.includes('ghas') || query.includes('weed') || query.includes('घास') || query.includes('kharpatwar')) && item.type.includes('खरपतवार')) score += 20;
+            // BOOST: If both crop and disease match, it's highly relevant
+            if (cropMatch && diseaseMatch) score += 80;
+            // BOOST: If name matches partially
+            if (nameMatch) score += 30;
+            
+            // Manual overrides for known products
+            if (query.includes('coragen') || query.includes('कोरागेन') && item.name === 'Ferico Pro') score += 100;
+            if ((query.includes('ghas') || query.includes('weed') || query.includes('घास') || query.includes('kharpatwar')) && item.type.includes('खरपतवार')) score += 25;
             if ((query.includes('chipku') || query.includes('chupku') || query.includes('sticker') || query.includes('चिपकू')) && item.name === 'Silpro') score += 100;
             if ((query.includes('fipro') || query.includes('fipronil') || query.includes('फिप्रो')) && item.name === 'Fi Pro 6') { score += 100; maxNameScore = 100; specificProduct = item; }
+            // For 2,4-D
+            if ((query.includes('2,4-d') || query.includes('2,4-D') || query.includes('2-4-D')) && item.name === '2,4-D Pro') { score += 100; maxNameScore = 100; specificProduct = item; }
+            // For Aura tonic
+            if ((query.includes('tonic') || query.includes('टॉनिक') || query.includes('growth') || query.includes('ग्रोथ')) && item.name === 'Aura') score += 30;
 
-            return { ...item, score };
+            return { ...item, score, cropMatch, diseaseMatch };
         });
 
         // ----- INTENT DETECTION -----
         const isInfoIntent = query.includes('kya') || query.includes('kaam') || query.includes('karti') || query.includes('batao') ||
             query.includes('क्या') || query.includes('काम') || query.includes('detail') || query.includes('jankari') ||
             query.includes('hai') || query.includes('use') || query.includes('kaise') || query.includes('इस्तेमाल') ||
-            query.includes('उपयोग') || query.includes('फायदे') || query.includes('कैसे');
+            query.includes('उपयोग') || query.includes('फायदे') || query.includes('कैसे') || query.includes('बताएं') || query.includes('बताइये');
 
-        // ----- SPECIFIC PRODUCT DETAIL -----
+        // ----- SPECIFIC PRODUCT DETAIL (ACCURATE) -----
         if (specificProduct && maxNameScore >= 50 && isInfoIntent) {
             const voice = `${specificProduct.name} एक ${specificProduct.type} है। ${specificProduct.use_hi} इसकी डोज़ ${specificProduct.dose_hi} है।`;
-            const html = `
+            let html = `
                 <p class="mb-3 font-semibold text-[14px]">✅ <b>${specificProduct.name}</b> की पूरी जानकारी:</p>
                 <div class="product-card">
                     <div class="flex items-center justify-between mb-2">
                         <div class="flex items-center gap-2.5">
                             <div class="w-10 h-10 rounded-full ${specificProduct.bg} flex items-center justify-center border border-slate-200 shadow-sm text-emerald-700"><i class="fa-solid ${specificProduct.icon} text-lg"></i></div>
                             <h3 class="font-bold text-slate-800 text-[16px]">${specificProduct.name}</h3>
+                            <span class="match-badge">सटीक मिलान</span>
                         </div>
                         <span class="text-[10px] bg-slate-100 text-slate-600 font-bold px-2.5 py-1 rounded-full">${specificProduct.type}</span>
                     </div>
                     <p class="text-[11px] font-mono text-slate-500 mb-2.5 border-b border-slate-100 pb-2">${specificProduct.technical}</p>
                     <div class="space-y-2 text-[13px] text-slate-700">
                         <div class="bg-emerald-50 p-3 rounded-lg border border-emerald-200">
-                            <span class="font-bold text-emerald-800 block mb-1"><i class="fa-solid fa-circle-info"></i> उपयोग:</span>
+                            <span class="font-bold text-emerald-800 block mb-1"><i class="fa-solid fa-circle-info"></i> दवा का उपयोग (कैसे काम करती है):</span>
                             ${specificProduct.use_hi}
+                        </div>
+                        <div class="bg-blue-50 p-3 rounded-lg border border-blue-200">
+                            <span class="font-bold text-blue-800 block mb-1"><i class="fa-solid fa-list-check"></i> इस्तेमाल करने का तरीका (Step by Step):</span>
+                            <p class="whitespace-pre-line text-[13px]">${specificProduct.how_to_use_hi || "1. खुराक के अनुसार पानी में मिलाएं।\n2. अच्छी तरह हिलाएं।\n3. सुबह या शाम के समय छिड़काव करें।\n4. बारिश से बचाकर उपयोग करें।"}</p>
                         </div>
                         <p><i class="fa-solid fa-virus text-red-400 mr-2"></i><span class="font-semibold">बीमारी:</span> ${specificProduct.diseases_hi}</p>
                         <p><i class="fa-solid fa-wheat-awn text-amber-500 mr-2"></i><span class="font-semibold">फसल:</span> ${specificProduct.crops_hi}</p>
@@ -1061,28 +1501,28 @@
         }
 
         // ----- RECOMMENDATIONS (MULTIPLE PRODUCTS) -----
-        let matches = scoredItems.filter(item => item.score > 5).sort((a, b) => b.score - a.score);
+        let matches = scoredItems.filter(item => item.score > 8).sort((a, b) => b.score - a.score);
 
         if (matches.length === 0) {
-            // SPELL CHECK / SUGGESTIONS — User-Friendly
+            // SPELL CHECK / SUGGESTIONS
             const suggestions = new Set();
             const allWords = query.replace(/[.,!?]/g, '').split(/\s+/);
             const dictWords = [];
             for (const key in hindiWordMap) { dictWords.push(key); dictWords.push(hindiWordMap[key]); }
-            catalog.forEach(item => dictWords.push(item.name.toLowerCase()));
+            catalog.forEach(item => { dictWords.push(item.name.toLowerCase()); dictWords.push(item.name); });
 
             allWords.forEach(w => {
                 if (w.length > 2) {
                     dictWords.forEach(d => {
-                        if (getEditDistance(w, d) <= 2 && w !== d) suggestions.add(d);
+                        if (getEditDistance(w, d) <= 2 && w !== d && d.length > 2) suggestions.add(d);
                     });
                 }
             });
 
-            const sugArray = Array.from(suggestions);
+            const sugArray = Array.from(suggestions).slice(0, 6);
             if (sugArray.length > 0) {
                 let msg = `<p class="mb-2 text-slate-700 text-[14px]">🤔 मुझे आपकी बात से जुड़ी कोई दवा नहीं मिली। क्या आपका मतलब इनमें से किसी से था?</p><div class="flex flex-wrap gap-2 mt-2">`;
-                sugArray.slice(0, 6).forEach(sug => {
+                sugArray.forEach(sug => {
                     msg += `<button onclick="sendQuickMessage('${sug}')" class="suggestion-chip"><i class="fa-solid fa-wand-magic-sparkles"></i> ${sug}</button>`;
                 });
                 msg += `</div>`;
@@ -1094,7 +1534,7 @@
             return;
         }
 
-        // Top 3 matches
+        // Top matches (show up to 3, but if score is high, show more detail)
         const topMatches = matches.slice(0, 3);
         let voice = `हाँ बिल्कुल! सबसे अच्छी दवा ${topMatches[0].name} है।`;
         if (topMatches.length > 1) voice += ` इसके अलावा ${topMatches[1].name} भी इस्तेमाल कर सकते हैं।`;
@@ -1103,12 +1543,14 @@
 
         topMatches.forEach(item => {
             const uid = 'det-' + item.id + '-' + Date.now();
+            const matchTag = (item.cropMatch && item.diseaseMatch) ? ' <span class="match-badge">सटीक मिलान</span>' : 
+                            (item.score > 50) ? ' <span class="match-badge">बहुत अच्छा</span>' : '';
             html += `
                 <div class="product-card text-[13px]">
                     <div class="flex items-center justify-between mb-2">
                         <div class="flex items-center gap-2.5">
                             <div class="w-9 h-9 rounded-full ${item.bg} flex items-center justify-center border border-slate-200 shadow-sm text-emerald-700"><i class="fa-solid ${item.icon}"></i></div>
-                            <h3 class="font-bold text-slate-800 text-[15px]">${item.name}</h3>
+                            <h3 class="font-bold text-slate-800 text-[15px]">${item.name}${matchTag}</h3>
                         </div>
                         <span class="text-[10px] bg-slate-100 text-slate-600 font-bold px-2.5 py-0.5 rounded-full">${item.type}</span>
                     </div>
@@ -1122,12 +1564,18 @@
                         <span>${item.dose_hi}</span>
                     </div>
                     <button onclick="toggleDetails('${uid}', this)" class="w-full bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 font-semibold py-2 px-3 rounded-lg text-[11px] flex justify-between items-center transition-colors mt-2.5">
-                        <span><i class="fa-solid fa-circle-info text-emerald-600 mr-1.5"></i> दवा कैसे काम करती है?</span>
+                        <span><i class="fa-solid fa-circle-info text-emerald-600 mr-1.5"></i> पूरी जानकारी (उपयोग + तरीका)</span>
                         <i class="fa-solid fa-chevron-down transition-transform duration-300"></i>
                     </button>
                     <div id="${uid}" class="details-content text-slate-600 text-[13px] leading-relaxed">
-                        <span class="font-bold text-emerald-700 block mb-1">उपयोग:</span>
-                        <p>${item.use_hi}</p>
+                        <div class="bg-green-50 p-2.5 rounded-lg border border-green-200 mb-2">
+                            <span class="font-bold text-green-700 block mb-1">दवा कैसे काम करती है:</span>
+                            <p>${item.use_hi}</p>
+                        </div>
+                        <div class="bg-blue-50 p-2.5 rounded-lg border border-blue-200">
+                            <span class="font-bold text-blue-700 block mb-1">उपयोग का तरीका (Step by Step):</span>
+                            <p class="whitespace-pre-line text-[13px]">${item.how_to_use_hi || "1. खुराक के अनुसार पानी में मिलाएं।\n2. अच्छी तरह हिलाएं।\n3. सुबह या शाम के समय छिड़काव करें।\n4. बारिश से बचाकर उपयोग करें।"}</p>
+                        </div>
                     </div>
                 </div>
             `;
@@ -1155,8 +1603,6 @@
     //  9. INIT
     // ============================================================
     window.onload = function() {
-        // Both buttons are always visible
-        // Pre-fetch voices
         if ('speechSynthesis' in window) {
             speechSynthesis.getVoices();
         }
