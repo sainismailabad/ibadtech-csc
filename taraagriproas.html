@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Tara Agri Pro - Premium AI Chatbot</title>
+    <title>Tara Agri Pro - Live AI Assistant</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -20,10 +20,10 @@
         .chat-header { background: linear-gradient(135deg, #16a34a 0%, #15803d 100%); padding: 1rem 1.2rem; display: flex; align-items: center; justify-content: space-between; z-index: 30; color: white; box-shadow: 0 4px 15px rgba(22, 163, 74, 0.2); flex-shrink: 0; padding-top: max(1rem, env(safe-area-inset-top)); }
         
         /* Chat Area */
-        .chat-messages { flex-grow: 1; overflow-y: auto; overflow-x: hidden; padding: 1.5rem 1rem; scroll-behavior: smooth; background-color: #f8fafc; background-image: url('data:image/svg+xml,%3Csvg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%2316a34a" fill-opacity="0.03" fill-rule="evenodd"%3E%3Ccircle cx="3" cy="3" r="3"/%3E%3Ccircle cx="13" cy="13" r="3"/%3E%3C/g%3E%3C/svg%3E'); -webkit-overflow-scrolling: touch; }
+        .chat-messages { flex-grow: 1; overflow-y: auto; overflow-x: hidden; padding: 1.5rem 1rem; scroll-behavior: smooth; background-color: #f8fafc; background-image: url('data:image/svg+xml,%3Csvg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%2316a34a" fill-opacity="0.03" fill-rule="evenodd"%3E%3Ccircle cx="3" cy="3" r="3"/%3E%3Ccircle cx="13" cy="13" r="3"/%3E%3C/g%3E%3C/svg%3E'); -webkit-overflow-scrolling: touch; padding-bottom: 2rem; }
         
         /* Input Area */
-        .chat-input-area { background: #ffffff; border-top: 1px solid #e2e8f0; padding: 0.75rem 1rem; padding-bottom: max(1rem, env(safe-area-inset-bottom)); z-index: 30; flex-shrink: 0; position: relative; box-shadow: 0 -4px 20px rgba(0,0,0,0.03); }
+        .chat-input-area { background: #ffffff; border-top: 1px solid #e2e8f0; padding: 0.75rem 1rem; padding-bottom: max(1rem, env(safe-area-inset-bottom)); z-index: 30; flex-shrink: 0; position: relative; box-shadow: 0 -4px 20px rgba(0,0,0,0.05); }
 
         /* Bubbles & Animations */
         .message { display: flex; margin-bottom: 1.5rem; opacity: 0; animation: slideUpFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; width: 100%; }
@@ -47,24 +47,19 @@
         /* Premium Product Card */
         .ai-product-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 1.25rem; margin-top: 0.75rem; transition: all 0.2s; width: 100%; box-shadow: 0 4px 15px rgba(0,0,0,0.03); position: relative; overflow: hidden; }
         .ai-product-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: #16a34a; }
-        
-        .card-detail-box { background: #f8fafc; border: 1px solid #f1f5f9; border-radius: 8px; padding: 10px; margin-top: 8px; }
-        .card-highlight { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 10px; margin-top: 8px; color: #166534; }
 
-        /* Voice & Mic Controls */
-        .input-wrapper { display: flex; align-items: center; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 24px; padding: 6px 6px 6px 16px; transition: all 0.2s; flex-grow: 1;}
+        /* Input Controls */
+        .input-wrapper { display: flex; align-items: center; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 24px; padding: 4px 6px 4px 16px; transition: all 0.2s; flex-grow: 1;}
         .input-wrapper:focus-within { border-color: #16a34a; background: #ffffff; box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.1); }
         
-        textarea { width: 100%; border: none; background: transparent; resize: none; outline: none; max-height: 120px; padding: 8px 0; font-family: inherit; font-size: 16px; color: #1e293b; }
+        textarea { width: 100%; border: none; background: transparent; resize: none; outline: none; max-height: 100px; padding: 10px 0; font-family: inherit; font-size: 16px; color: #1e293b; line-height: 1.4; }
         
-        .send-btn { background: #16a34a; color: white; border: none; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: transform 0.1s; flex-shrink: 0; margin-left: 8px;}
-        .send-btn:active { transform: scale(0.9); }
-        .send-btn.disabled { background: #94a3b8; pointer-events: none; }
-
-        .mic-btn-main { background: #ef4444; color: white; border: none; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; flex-shrink: 0; margin-left: 8px; font-size: 1.2rem; box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);}
-        .mic-btn-main:active { transform: scale(0.95); }
-        .mic-btn-main.listening { animation: pulse-red 1.5s infinite; background: #dc2626; }
-        .mic-btn-main i { pointer-events: none; }
+        .btn-container { position: relative; width: 44px; height: 44px; margin-left: 8px; flex-shrink: 0; }
+        .action-btn { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 50%; border: none; color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.15); font-size: 1.1rem; }
+        .btn-mic { background: #16a34a; }
+        .btn-mic.listening { background: #ef4444; animation: pulse-red 1.5s infinite; }
+        .btn-send { background: #2563eb; } /* Blue to stand out */
+        .action-btn:active { transform: scale(0.92); }
 
         /* Chips & Extras */
         .quick-chip { background: #ffffff; color: #15803d; border: 1px solid #bbf7d0; padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px; font-weight: 600; margin: 4px 4px 0 0; white-space: nowrap; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
@@ -75,20 +70,28 @@
         @keyframes pulse-red { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6); } 70% { box-shadow: 0 0 0 12px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }
         @keyframes pulse-speak { 0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); } 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); } }
         
-        /* Typing Dots */
         .typing-indicator { display: flex; gap: 5px; padding: 6px 8px; }
         .dot { width: 7px; height: 7px; background: #94a3b8; border-radius: 50%; animation: bounce 1.4s infinite ease-in-out both; }
         .dot:nth-child(1) { animation-delay: -0.32s; }
         .dot:nth-child(2) { animation-delay: -0.16s; }
         @keyframes bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
         
-        /* Warning Banner */
+        .details-content { display: none; margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px dashed #e2e8f0; }
+        .details-content.show { display: block; animation: fadeIn 0.3s forwards; }
+
+        /* Switch */
+        .toggle-switch { position: relative; display: inline-block; width: 40px; height: 22px; }
+        .toggle-switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #cbd5e1; transition: .4s; border-radius: 24px; }
+        .slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: #16a34a; }
+        input:checked + .slider:before { transform: translateX(18px); }
+        
+        .listening-overlay { position: absolute; top: -45px; left: 50%; transform: translateX(-50%); background: #ef4444; color: white; padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: bold; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 100; box-shadow: 0 4px 15px rgba(239,68,68,0.4); display: flex; align-items: center; gap: 8px;}
+        .listening-overlay.show { opacity: 1; }
+        
         .warning-banner { background: #fef2f2; color: #991b1b; padding: 10px; text-align: center; font-size: 12px; border-bottom: 1px solid #fecaca; display: none; }
         .warning-banner.show { display: block; }
-        
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
     </style>
 </head>
 <body>
@@ -97,10 +100,10 @@
         
         <!-- Local File Warning Banner -->
         <div id="fileWarning" class="warning-banner hindi-text font-medium">
-            <i class="fa-solid fa-triangle-exclamation"></i> माइक का उपयोग करने के लिए कृपया इस फ़ाइल को इंटरनेट (HTTPS) या लोकल सर्वर पर चलाएं।
+            <i class="fa-solid fa-triangle-exclamation"></i> माइक का उपयोग करने के लिए कृपया इस फ़ाइल को इंटरनेट (HTTPS) पर चलाएं।
         </div>
 
-        <!-- Premium Header -->
+        <!-- Header -->
         <header class="chat-header">
             <div class="flex items-center gap-3">
                 <div class="w-11 h-11 rounded-full bg-white flex items-center justify-center text-green-700 shadow-lg shrink-0">
@@ -109,7 +112,7 @@
                 <div class="overflow-hidden">
                     <h1 class="text-lg sm:text-xl font-bold leading-tight truncate tracking-wide">Tara Agri Pro AI</h1>
                     <p id="aiStatusText" class="text-[11px] sm:text-xs text-green-100 font-medium flex items-center gap-1.5 mt-0.5">
-                        <span class="w-2 h-2 rounded-full bg-green-300 animate-pulse"></span> Expert Agronomist
+                        <span class="w-2 h-2 rounded-full bg-green-300 animate-pulse"></span> लाइव एक्सपर्ट
                     </p>
                 </div>
             </div>
@@ -126,25 +129,25 @@
         <!-- Chat Area -->
         <main id="chatArea" class="chat-messages hindi-text">
             <div class="message bot-message" id="initialGreeting">
-                <div class="avatar bot-avatar" onclick="speakText('नमस्ते! मैं तारा एग्री प्रो का एआई असिस्टेंट हूँ। आप मुझसे किसी भी दवा के इस्तेमाल, काम, और फसलों की बीमारियों के बारे में पूछ सकते हैं।')">
+                <div class="avatar bot-avatar" onclick="speakText('नमस्ते! मैं तारा एग्री प्रो का स्मार्ट एआई असिस्टेंट हूँ। आप मुझसे किसी भी दवा, फसल या बीमारी के बारे में लिखकर या बोलकर पूछ सकते हैं।')">
                     <i class="fa-solid fa-robot"></i>
                 </div>
                 <div class="bubble bot-bubble w-full sm:max-w-[85%]">
                     <p class="mb-2 text-[15px]">नमस्ते! 🙏 मैं <strong>Tara Agri Pro</strong> का स्मार्ट AI असिस्टेंट हूँ।</p>
-                    <p class="text-[14px] text-slate-600 mb-4">आप मुझसे <strong>दवाइयों के उपयोग</strong>, फसल (जैसे <b>धान, गेहूं, आलू, सरसों</b>), बीमारियों, खाद (यूरिया/DAP) या खेती से जुड़ी किसी भी समस्या के बारे में पूछ सकते हैं।</p>
+                    <p class="text-[14px] text-slate-600 mb-4">आप मुझसे <strong>दवाइयों के उपयोग</strong>, किसी भी फसल (जैसे <b>धान, गेहूं, आलू, सरसों, सूरजमुखी</b>), बीमारियों, या खेती से जुड़ी किसी भी समस्या के बारे में पूछ सकते हैं।</p>
                     
                     <div class="bg-blue-50 border border-blue-100 rounded-xl p-3 text-[13px] text-slate-700 mb-4 shadow-sm">
-                        <span class="font-bold text-blue-800 block mb-2"><i class="fa-solid fa-circle-question mr-1"></i> ऐसे सवाल पूछ कर देखें:</span>
+                        <span class="font-bold text-blue-800 block mb-2"><i class="fa-solid fa-microphone text-green-600 mr-1"></i> ऐसे सवाल बोलकर या लिखकर पूछें:</span>
                         <ul class="space-y-2">
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-500 mt-1"></i> <span>"फिप्रो 6 (Fipro) क्या काम करती है?"</span></li>
                             <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-500 mt-1"></i> <span>"धान में झुलसा है, कौन सी दवा लगाऊं?"</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-500 mt-1"></i> <span>"फिप्रो (Fipro) क्या काम करती है?"</span></li>
                             <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-500 mt-1"></i> <span>"गेहूँ में दीमक लग गई है"</span></li>
-                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-500 mt-1"></i> <span>"NPK 20:20:13 और यूरिया खाद की जानकारी दें"</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-green-500 mt-1"></i> <span>"यूरिया और DAP खाद की जानकारी दें"</span></li>
                         </ul>
                     </div>
 
                     <div class="flex flex-wrap gap-2">
-                        <button class="quick-chip" onclick="sendQuickMessage('फिप्रो (Fi Pro) कैसे यूज़ करें और क्या काम है?')"><i class="fa-solid fa-flask"></i> Fipro क्या काम करती है?</button>
+                        <button class="quick-chip" onclick="sendQuickMessage('फिप्रो (Fi Pro) कैसे यूज़ करें और क्या काम है?')"><i class="fa-solid fa-flask"></i> Fipro क्या है?</button>
                         <button class="quick-chip" onclick="sendQuickMessage('धान में झुलसा और पत्ता लपेट की दवा')"><i class="fa-solid fa-bug"></i> धान में बीमारी</button>
                         <button class="quick-chip" onclick="sendQuickMessage('यूरिया, डीएपी और पोटाश खाद')"><i class="fa-solid fa-sack-dollar"></i> खाद की जानकारी</button>
                         <button class="quick-chip" onclick="sendQuickMessage('सभी दवाइयां दिखाओ')"><i class="fa-solid fa-list-ul"></i> पूरी लिस्ट</button>
@@ -155,29 +158,32 @@
 
         <!-- Input Area -->
         <footer class="chat-input-area">
-            <!-- Listening Status Indicator -->
-            <div id="listenStatus" class="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-lg opacity-0 transition-opacity duration-300 flex items-center gap-2 pointer-events-none">
-                <i class="fa-solid fa-microphone-lines animate-pulse"></i> सुन रहा हूँ, बोलिए...
+            <div id="listenStatus" class="listening-overlay"><i class="fa-solid fa-microphone-lines animate-pulse"></i> सुन रहा हूँ, बोलिए...</div>
+            
+            <div class="flex justify-between items-center mb-2 px-2">
+                <div class="text-[11px] font-medium text-slate-500 flex items-center gap-2">
+                    <i class="fa-solid fa-phone"></i> Helpline: +91 7357100008
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-[11px] font-medium text-slate-500">Auto Voice</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="voiceReplyToggle" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
             </div>
             
-            <div class="flex items-end">
+            <div class="flex items-end mt-1">
                 <div class="input-wrapper">
-                    <textarea id="userInput" rows="1" placeholder="लिखें या माइक 🎤 दबाकर बोलें..." oninput="autoResize(this)" onkeypress="handleEnter(event)"></textarea>
-                    <button type="button" id="sendBtn" class="send-btn hidden" onclick="processUserInput()" title="Send">
-                        <i class="fa-solid fa-paper-plane text-sm"></i>
+                    <textarea id="userInput" rows="1" placeholder="यहाँ टाइप करें या माइक दबाएं..." oninput="autoResize(this)" onkeypress="handleEnter(event)"></textarea>
+                </div>
+                <div class="btn-container">
+                    <button type="button" id="micBtn" class="action-btn btn-mic" onclick="toggleMic()" title="बोल कर टाइप करें">
+                        <i class="fa-solid fa-microphone pointer-events-none"></i>
                     </button>
-                </div>
-                <button type="button" id="micBtn" class="mic-btn-main" onclick="toggleMic()" title="बोल कर टाइप करें">
-                    <i class="fa-solid fa-microphone"></i>
-                </button>
-            </div>
-            
-            <div class="flex justify-between items-center mt-3 px-2">
-                <div class="text-[10px] sm:text-[11px] font-semibold text-slate-400 flex items-center gap-1.5">
-                    <i class="fa-solid fa-headset"></i> Helpline: +91 7357100008
-                </div>
-                <div class="text-[10px] sm:text-[11px] font-semibold text-slate-400">
-                    Tara Agri Pro Pvt. Ltd.
+                    <button type="button" id="sendBtn" class="action-btn btn-send" style="display: none;" onclick="processUserInput()" title="भेजें">
+                        <i class="fa-solid fa-paper-plane pointer-events-none"></i>
+                    </button>
                 </div>
             </div>
         </footer>
@@ -185,7 +191,6 @@
 
     <!-- MAIN JAVASCRIPT LOGIC -->
     <script>
-        // ------------------------- SYSTEM & UI SETUP -------------------------
         const documentHeight = () => { document.documentElement.style.setProperty('--app-height', `${window.innerHeight}px`); }
         window.addEventListener('resize', documentHeight); documentHeight();
 
@@ -273,8 +278,7 @@
             "lanko": "lanco", "lankus": "lancus", "pretiko": "pretico", "khatam": "weed", "marna": "weed", "prayog": "use", "istemal": "use", "chupku": "sticker", "chipku": "sticker"
         };
         
-        // Comprehensive Stopwords
-        const stopWords = ['ki', 'ka', 'ke', 'hai', 'mein', 'me', 'ko', 'se', 'batao', 'dawa', 'dawai', 'kya', 'kaun', 'si', 'lagau', 'kare', 'karti', 'kaam', 'aur', 'karna', 'kese', 'chahie', 'chahiye', 'karo', 'dikhao', 'list', 'hai?', 'है', 'की', 'दवा', 'दवाई', 'क्या', 'बताओ', 'लगाऊं', 'लगाएं', 'करती', 'काम', 'कैसे', 'करे', 'डालें', 'डालू', 'कौन', 'सी', 'लिए', 'लगाए', 'लगाना', 'मारने', 'खत्म', 'दे', 'दो', 'मुझे', 'आप', 'तुम्हारा'];
+        const stopWords = ['ki', 'ka', 'ke', 'hai', 'mein', 'me', 'ko', 'se', 'batao', 'dawa', 'dawai', 'kya', 'kaun', 'si', 'lagau', 'kare', 'karti', 'kaam', 'aur', 'karna', 'kese', 'chahie', 'chahiye', 'karo', 'dikhao', 'list', 'hai?', 'है', 'की', 'दवा', 'दवाई', 'क्या', 'बताओ', 'लगाऊं', 'लगाएं', 'करती', 'काम', 'कैसे', 'करे', 'डालें', 'डालू', 'कौन', 'सी', 'लिए', 'लगाए', 'लगाना', 'मारने', 'खत्म', 'दे', 'दो', 'मुझे', 'आप', 'तुम्हारा', 'बताइये'];
 
         // ------------------------- VOICE & MIC LOGIC -------------------------
         
@@ -292,7 +296,7 @@
 
             recognition.onstart = function() {
                 isListening = true;
-                document.getElementById('micBtn').classList.add('mic-btn-active');
+                document.getElementById('micBtn').classList.add('listening');
                 document.getElementById('listenStatus').classList.add('show');
                 document.getElementById('userInput').placeholder = "सुन रहा हूँ... बोलिए";
                 window.speechSynthesis.cancel();
@@ -328,7 +332,7 @@
 
         function stopListening() {
             isListening = false;
-            document.getElementById('micBtn').classList.remove('mic-btn-active');
+            document.getElementById('micBtn').classList.remove('listening');
             document.getElementById('listenStatus').classList.remove('show');
             document.getElementById('userInput').placeholder = "लिखें या माइक 🎤 दबाकर बोलें...";
             toggleSendMicButtons();
@@ -384,11 +388,11 @@
 
         function toggleSendMicButtons() {
             if(userInput.value.trim() !== '') {
-                micBtn.classList.add('hidden');
-                sendBtn.classList.remove('hidden');
+                micBtn.style.display = 'none';
+                sendBtn.style.display = 'flex';
             } else {
-                micBtn.classList.remove('hidden');
-                sendBtn.classList.add('hidden');
+                micBtn.style.display = 'flex';
+                sendBtn.style.display = 'none';
             }
         }
 
@@ -566,7 +570,7 @@
         function generateAIResponse(query) {
             
             // 1. General Chit-Chat (Intent Handling)
-            if(query.includes('hi') || query === 'hello' || query === 'namaste' || query === 'नमस्ते' || query === 'hello' || query.includes('kaise ho')) {
+            if(query.includes('hi') || query === 'hello' || query === 'namaste' || query === 'नमस्ते' || query === 'hello' || query.includes('kaise ho') || query.includes('kese ho') || query.includes('kese h')) {
                 let txt = "नमस्ते जी! मैं बिल्कुल ठीक हूँ। बताइये, आपके खेत में कौन सी फसल है और क्या समस्या आ रही है?";
                 appendBotMessage(`<p>${txt}</p>`, txt);
                 return;
@@ -735,6 +739,7 @@
                 let sugArray = Array.from(suggestions);
                 if(sugArray.length > 0) {
                     let msg = `<p class="mb-2 text-slate-700 text-[14px]">माफ़ कीजिए, मुझे आपकी बात से जुड़ी कोई दवा नहीं मिली। 🤔 क्या आपका मतलब इनमें से किसी से था?</p><div class="mt-2 flex flex-wrap">`;
+                    // Max 5 suggestions
                     sugArray.slice(0, 4).forEach(sug => { msg += `<button onclick="sendQuickMessage('${sug}')" class="quick-chip"><i class="fa-solid fa-wand-magic-sparkles text-yellow-500"></i> ${sug}</button>`; });
                     msg += `</div>`;
                     appendBotMessage(msg, "माफ़ कीजिए, मुझे समझ नहीं आया। क्या आपका मतलब इनमें से किसी से था?");
