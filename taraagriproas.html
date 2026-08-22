@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-    <title>Tara Agri Pro - Ai Doctor </title>
+    <title>Tara Agri Pro - प्रोफेशनल AI असिस्टेंट</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -124,7 +124,7 @@
             max-width: 88%;
             padding: 12px 16px;
             border-radius: 18px;
-            line-height: 1.6;
+            line-height: 1.7;
             font-size: 0.95rem;
             word-wrap: break-word;
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
@@ -420,13 +420,27 @@
             list-style-type: decimal;
         }
 
-        .chat-messages .bubble ul {
-            padding-left: 1.5rem;
-            margin: 0.5rem 0;
+        .shop-card {
+            background: #fef3c7;
+            border: 2px solid #f59e0b;
+            border-radius: 16px;
+            padding: 1rem;
+            margin: 0.75rem 0;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.15);
         }
-        .chat-messages .bubble ul li {
-            list-style-type: disc;
-            margin-bottom: 0.2rem;
+        .shop-card .shop-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #92400e;
+        }
+        .shop-card .shop-detail {
+            color: #78350f;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+        .shop-card i {
+            color: #d97706;
+            width: 20px;
         }
     </style>
 </head>
@@ -461,21 +475,22 @@
     <!-- CHAT MESSAGES -->
     <main id="chatArea" class="chat-messages hindi-text">
         <div class="message bot-message" id="initialGreeting">
-            <div class="avatar bot-avatar" onclick="speakText('नमस्ते! मैं तारा एग्री प्रो का प्रोफेशनल AI असिस्टेंट हूँ। मैं आपकी फसल, दवाई और खेती की हर समस्या का सटीक समाधान बताऊंगा।')">
+            <div class="avatar bot-avatar" onclick="speakText('नमस्ते। मैं तारा एग्री प्रो का प्रोफेशनल एआई असिस्टेंट हूँ। मैं आपकी फसल, दवाई और खेती की हर समस्या का सटीक समाधान बताऊंगा।')">
                 <i class="fa-solid fa-robot"></i>
             </div>
             <div class="bubble bot-bubble">
-                <p class="text-base font-semibold text-emerald-700">🙏 नमस्ते!</p>
-                <p class="text-[15px] text-slate-700 mt-1">मैं <strong>Tara Agri Pro</strong> का प्रोफेशनल AI कृषि सलाहकार हूँ।</p>
-                <p class="text-[14px] text-slate-600 mt-2">मुझसे <strong>हिंदी</strong> में बात करें — चाहे टाइप करें या माइक से बोलें।</p>
+                <p class="text-base font-semibold text-emerald-700">नमस्ते।</p>
+                <p class="text-[15px] text-slate-700 mt-1">मैं <strong>Tara Agri Pro</strong> का प्रोफेशनल एआई कृषि सलाहकार हूँ।</p>
+                <p class="text-[14px] text-slate-600 mt-2">मुझसे हिंदी में बात करें — चाहे टाइप करें या माइक से बोलें।</p>
 
                 <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 mt-3 text-[13px] text-slate-700">
-                    <p class="font-semibold text-emerald-800 mb-2"><i class="fa-solid fa-lightbulb text-yellow-500 mr-1"></i> मैं ये सब बता सकता हूँ:</p>
+                    <p class="font-semibold text-emerald-800 mb-2">मैं ये सब बता सकता हूँ:</p>
                     <ul>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> <span>किसी भी <b>दवा</b> का उपयोग, खुराक और फायदा</span></li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> <span><b>फसल</b> (धान, गेहूँ, आलू, सरसों, सूरजमुखी, कपास, गन्ना, मक्का)</span></li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> <span>किसी भी <b>बीमारी</b> का सटीक इलाज</span></li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> <span><b>खाद</b> (यूरिया, DAP, पोटाश, NPK) की जानकारी</span></li>
+                        <li class="flex items-start gap-2"><span class="text-emerald-500 mt-1">•</span> <span>किसी भी <b>दवा</b> का उपयोग, खुराक और फायदा</span></li>
+                        <li class="flex items-start gap-2"><span class="text-emerald-500 mt-1">•</span> <span><b>फसल</b> (धान, गेहूँ, आलू, सरसों, सूरजमुखी, कपास, गन्ना, मक्का)</span></li>
+                        <li class="flex items-start gap-2"><span class="text-emerald-500 mt-1">•</span> <span>किसी भी <b>बीमारी</b> का सटीक इलाज</span></li>
+                        <li class="flex items-start gap-2"><span class="text-emerald-500 mt-1">•</span> <span><b>खाद</b> (यूरिया, डीएपी, पोटाश, एनपीके) की जानकारी</span></li>
+                        <li class="flex items-start gap-2"><span class="text-emerald-500 mt-1">•</span> <span><b>दवा कहाँ से लें</b> — हमारी दुकान का पता</span></li>
                     </ul>
                 </div>
 
@@ -484,9 +499,11 @@
                     <button class="quick-chip" onclick="sendQuickMessage('धान में झुलसा और पत्ता लपेट की दवा बताओ')"><i class="fa-solid fa-bug"></i> धान बीमारी</button>
                     <button class="quick-chip" onclick="sendQuickMessage('यूरिया, DAP और पोटाश खाद की जानकारी दें')"><i class="fa-solid fa-sack-dollar"></i> खाद</button>
                     <button class="quick-chip" onclick="sendQuickMessage('सभी दवाइयाँ दिखाओ')"><i class="fa-solid fa-list"></i> सभी दवाएँ</button>
+                    <button class="quick-chip" onclick="sendQuickMessage('सभी बीमारियाँ दिखाओ')"><i class="fa-solid fa-disease"></i> सभी बीमारियाँ</button>
+                    <button class="quick-chip" onclick="sendQuickMessage('दवा कहाँ से लें?')"><i class="fa-solid fa-shop"></i> दुकान का पता</button>
                 </div>
 
-                <p class="text-[11px] text-slate-400 mt-3 italic">💡 <b>माइक बटन 🎤</b> दबाकर बोलें — AI आपको समझेगा। <b>भेजें बटन 📤</b> से टाइप किया हुआ भेजें।</p>
+                <p class="text-[11px] text-slate-400 mt-3">माइक बटन दबाकर बोलें — एआई आपको समझेगा। भेजें बटन से टाइप किया हुआ भेजें।</p>
             </div>
         </div>
     </main>
@@ -502,7 +519,7 @@
                 <i class="fa-solid fa-phone"></i> सहायता: +91 7357100008
             </span>
             <div class="flex items-center gap-2">
-                <span class="text-[10px] font-medium text-slate-400">🔊 आवाज़</span>
+                <span class="text-[10px] font-medium text-slate-400">आवाज़</span>
                 <label class="toggle-switch">
                     <input type="checkbox" id="voiceReplyToggle" checked />
                     <span class="slider"></span>
@@ -512,7 +529,7 @@
 
         <div class="flex items-end gap-2">
             <div class="input-wrapper">
-                <textarea id="userInput" rows="1" placeholder="यहाँ लिखें या 🎤 माइक दबाकर बोलें..." oninput="handleInputChange(this)" onkeypress="handleEnter(event)"></textarea>
+                <textarea id="userInput" rows="1" placeholder="यहाँ लिखें या माइक दबाकर बोलें..." oninput="handleInputChange(this)" onkeypress="handleEnter(event)"></textarea>
             </div>
             <div class="btn-group">
                 <button type="button" id="micBtn" class="action-btn btn-mic" onclick="toggleMic()" title="बोलें (माइक)">
@@ -528,8 +545,9 @@
 
 <script>
     // ============================================================
-    //  TARA AGRI PRO — COMPLETE AI ASSISTANT
-    //  FULL MEDICINE DATABASE WITH DETAILS, DESI LANGUAGE SUPPORT
+    //  TARA AGRI PRO — PROFESSIONAL AI ASSISTANT
+    //  COMPLETE MEDICINE + DISEASE DATABASE + SHOP DETAILS
+    //  NO EMOJIS IN VOICE RESPONSE, CLEAN HINDI TEXT
     // ============================================================
 
     const documentHeight = () => {
@@ -1051,17 +1069,29 @@
     ];
 
     // ============================================================
-    //  3. DESI LANGUAGE WORD MAP (HINDI + LOCAL DIALECT)
+    //  3. SHOP DETAILS
+    // ============================================================
+    const shopDetails = {
+        name: "तारा चंद धर्म चंद",
+        shopNumber: "164",
+        market: "न्यू अनाज मंडी",
+        city: "इस्माइलाबाद",
+        phone: "+91 7357100008",
+        fullAddress: "दुकान नंबर 164, न्यू अनाज मंडी, इस्माइलाबाद"
+    };
+
+    // ============================================================
+    //  4. DESI LANGUAGE WORD MAP
     // ============================================================
     const hindiWordMap = {
         // Crops
-        "धान": "dhan", "पैडी": "dhan", "paddy": "dhan", "जीरी": "dhan", "चावल": "dhan", "धानी": "dhan",
-        "गेहूं": "gehu", "गेहूँ": "gehu", "wheat": "gehu", "कनक": "gehu", "गंधम": "gehu",
+        "धान": "dhan", "पैडी": "dhan", "paddy": "dhan", "जीरी": "dhan", "चावल": "dhan", "धानी": "dhan", "धान का": "dhan",
+        "गेहूं": "gehu", "गेहूँ": "gehu", "wheat": "gehu", "कनक": "gehu", "गंधम": "gehu", "गेहूं की": "gehu",
         "कपास": "kapas", "cotton": "kapas", "नरमा": "kapas", "सूत": "kapas", "कपासी": "kapas",
-        "सरसों": "sarso", "mustard": "sarso", "सरसो": "sarso", "राई": "sarso",
-        "आलू": "aalu", "potato": "aalu", "अलू": "aalu", "आलु": "aalu",
-        "गन्ना": "ganna", "sugarcane": "ganna", "ईख": "ganna", "गन्ने": "ganna",
-        "मक्का": "makka", "maize": "makka", "भुट्टा": "makka", "मकई": "makka",
+        "सरसों": "sarso", "mustard": "sarso", "सरसो": "sarso", "राई": "sarso", "सरसों का": "sarso",
+        "आलू": "aalu", "potato": "aalu", "अलू": "aalu", "आलु": "aalu", "आलू की": "aalu",
+        "गन्ना": "ganna", "sugarcane": "ganna", "ईख": "ganna", "गन्ने": "ganna", "गन्ना का": "ganna",
+        "मक्का": "makka", "maize": "makka", "भुट्टा": "makka", "मकई": "makka", "मक्का का": "makka",
         "सूरजमुखी": "surajmukhi", "sunflower": "surajmukhi", "सुरजमुखी": "surajmukhi",
         "मिर्च": "mirch", "टमाटर": "tamatar", "सोयाबीन": "soybean",
         "मूंगफली": "moongfali", "चना": "chana", "मटर": "matar",
@@ -1069,14 +1099,17 @@
         "भिंडी": "bhindi", "सेब": "seb", "अंगूर": "angoor",
         "आम": "aam", "बागवानी": "bagwani", "सब्जी": "sabji", "फल": "phal",
         "चाय": "chai", "अमरूद": "amrood", "नींबू": "nimbu", "संतरा": "santara",
-        "किसान": "kisan", "खेत": "khet", "फसल": "fasal",
-        // Diseases - Desi terms
+        "किसान": "kisan", "खेत": "khet", "फसल": "fasal", "फसलों": "fasal",
+        // Diseases
         "झुलसा": "jhulsa", "ब्लास्ट": "blast", "अगेती": "ageti", "पछेती": "pacheti",
         "सड़न": "sadan", "पीला": "pilapan", "पीलापन": "pilapan", "सूखा": "sookha",
         "फफूंद": "faphund", "फफूंदी": "faphund", "कवक": "faphund", "उकठा": "wilt",
         "मिल्ड्यू": "mildew", "रस्ट": "rust", "ब्लाइट": "blight", "धब्बा": "spot",
         "टिक्का": "tikka", "हल्दी": "false smut", "हल्दी रोग": "false smut",
-        // Pests - Desi terms
+        "शीथ ब्लाइट": "sheath blight", "पत्ती धब्बा": "leaf spot",
+        "डाउनी मिल्ड्यू": "downy mildew", "एंथ्रेक्नोज": "anthracnose", "फ्रूट रोट": "fruit rot",
+        "पाउडरी मिल्ड्यू": "powdery mildew", "चूर्णिल फफूंदी": "powdery mildew",
+        // Pests
         "दीमक": "deemak", "इल्ली": "illi", "सुंडी": "sundi", "मक्खी": "makkhi",
         "सफेद": "safed", "तना": "tana", "जड़": "jad", "चूसक": "choosak",
         "तेला": "tela", "माहू": "mahu", "चेपा": "chepa", "घुन": "ghun",
@@ -1084,15 +1117,21 @@
         "निमाटोड": "nematode", "कीड़ा": "keeda", "मकड़ी": "makdi", "बीपीएच": "bph",
         "पत्ता लपेट": "leaf folder", "पत्ता मोड़क": "leaf folder", "तना छेदक": "stem borer",
         "फल छेदक": "fruit borer", "चित्तीदार": "spotted", "अमेरिकन": "american",
+        "सफेद मक्खी": "whitefly", "लाल मकड़ी": "red mite", "पीली मकड़ी": "yellow mite",
+        "कटवर्म": "cutworm", "भुंडी": "bhundi", "कैटरपिलर": "caterpillar", "बीटल": "beetle",
+        "हरा मच्छर": "green mosquito", "चोंगा": "chonga", "भूनगा": "bhoonga",
         // Weeds
         "खरपतवार": "kharpatwar", "घास": "ghas", "चौड़ी": "chaudi", "पत्ती": "patti",
         "बथुआ": "bathua", "सांवा": "sanwa", "मोथा": "motha", "हिरणखुरी": "hirankhuri",
         "गुल्ली": "gulli", "डंडा": "danda", "मकोय": "makoy", "पालक": "palak",
+        "सांटी": "santi", "गाजर घास": "gajar ghas", "जंगली पालक": "jungli palak",
         // General
         "दवा": "medicine", "दवाई": "medicine", "बीमारी": "disease", "रोग": "disease",
         "खाद": "fertilizer", "कीट": "insect", "कीटनाशक": "insecticide",
-        "फफूंदनाशक": "fungicide", "खरपतवारनाशक": "herbicide",
-        // Products - Desi names
+        "फफूंदनाशक": "fungicide", "खरपतवारनाशक": "herbicide", "टॉनिक": "tonic",
+        "बीज": "seed", "बीज उपचार": "seed treatment", "भंडारण": "storage",
+        "दुकान": "shop", "पता": "address", "कहाँ": "where", "लेना": "take", "मिलेगा": "available",
+        // Products
         "फिप्रो": "fipro", "fipro": "fipro", "fipronil": "fipro", "फिपरोनिल": "fipro",
         "कोरागेन": "coragen", "coragen": "coragen", "कोरजन": "coragen",
         "ऑरा": "aura", "aura": "aura", "एज़ोफी": "azofi", "एज़ोटॉन": "azoton",
@@ -1103,14 +1142,14 @@
         "लैंको": "lanco", "लैंकस": "lancus", "माला": "mala", "मेट्री": "metri",
         "मार्वल": "marvel", "प्रेटिको": "pretico", "पाइप्रो": "pypro",
         "सल्फको": "sulco", "सिलप्रो": "silpro", "टेलकॉन": "telcon", "वेलर": "velar",
-        "चिपकू": "sticker", "sticker": "sticker",
+        "चिपकू": "sticker", "sticker": "sticker", "स्टिकर": "sticker",
         "2,4-D": "2,4-d", "2-4-D": "2,4-d", "2,4डी": "2,4-d"
     };
 
     const stopWords = ['ki', 'ka', 'ke', 'hai', 'mein', 'me', 'ko', 'se', 'batao', 'dawa', 'dawai', 'kya', 'kaun', 'si', 'lagau', 'kare', 'karti', 'kaam', 'aur', 'karna', 'kese', 'chahie', 'chahiye', 'karo', 'dikhao', 'list', 'hai?', 'है', 'की', 'दवा', 'दवाई', 'क्या', 'बताओ', 'लगाऊं', 'लगाएं', 'करती', 'काम', 'कैसे', 'करे', 'डालें', 'डालू', 'कौन', 'सी', 'लिए', 'लगाए', 'लगाना', 'मारने', 'खत्म', 'दे', 'दो', 'मुझे', 'आप', 'तुम्हारा', 'बताइये', 'बताओ', 'हो', 'गया', 'गई', 'गए', 'रहा', 'रही', 'रहे', 'हूँ', 'हों', 'था', 'थी', 'थे', 'ना', 'नहीं', 'करो', 'करें', 'बतायें', 'बताएं', 'जी', 'हाँ', 'हां', 'नमस्ते', 'प्रणाम', 'नमस्कार'];
 
     // ============================================================
-    //  4. VOICE / SPEECH RECOGNITION
+    //  5. VOICE / SPEECH RECOGNITION
     // ============================================================
     let isSpeakerOn = true;
     let isListening = false;
@@ -1128,7 +1167,7 @@
             isListening = true;
             document.getElementById('micBtn').classList.add('listening');
             document.getElementById('listenStatus').classList.add('show');
-            document.getElementById('userInput').placeholder = '🎤 सुन रहा हूँ... बोलिए';
+            document.getElementById('userInput').placeholder = 'सुन रहा हूँ... बोलिए';
             window.speechSynthesis.cancel();
         };
 
@@ -1159,7 +1198,7 @@
     }
 
     function toggleMic() {
-        if (!recognition) return alert('⚠️ आपके ब्राउज़र में माइक सपोर्ट नहीं है। कृपया Google Chrome का उपयोग करें।');
+        if (!recognition) return alert('आपके ब्राउज़र में माइक सपोर्ट नहीं है। कृपया Google Chrome का उपयोग करें।');
         if (isListening) recognition.stop();
         else { document.getElementById('userInput').value = ''; recognition.start(); }
     }
@@ -1168,7 +1207,7 @@
         isListening = false;
         document.getElementById('micBtn').classList.remove('listening');
         document.getElementById('listenStatus').classList.remove('show');
-        document.getElementById('userInput').placeholder = 'यहाँ लिखें या 🎤 माइक दबाकर बोलें...';
+        document.getElementById('userInput').placeholder = 'यहाँ लिखें या माइक दबाकर बोलें...';
     }
 
     function toggleSpeaker() {
@@ -1198,11 +1237,12 @@
         const voiceToggle = document.getElementById('voiceReplyToggle');
         if (!voiceToggle.checked || !('speechSynthesis' in window) || !isSpeakerOn) return;
         window.speechSynthesis.cancel();
-        const clean = text.replace(/<[^>]*>?/gm, '');
+        // Remove any emoji or special characters for clean voice
+        const clean = text.replace(/[^\w\s.,!?;:()\-]/g, '').trim();
         currentUtterance = new SpeechSynthesisUtterance(clean);
         currentUtterance.lang = 'hi-IN';
-        currentUtterance.rate = 1.0;
-        currentUtterance.pitch = 1.1;
+        currentUtterance.rate = 0.95;
+        currentUtterance.pitch = 1.0;
         const hv = getHindiVoice();
         if (hv) currentUtterance.voice = hv;
         currentUtterance.onstart = () => { if (avatarElement) avatarElement.classList.add('speaking'); };
@@ -1212,7 +1252,7 @@
     }
 
     // ============================================================
-    //  5. UI CONTROLS
+    //  6. UI CONTROLS
     // ============================================================
     const userInput = document.getElementById('userInput');
     const sendBtn = document.getElementById('sendBtn');
@@ -1316,15 +1356,57 @@
     }
 
     // ============================================================
-    //  6. SPECIAL CASES
+    //  7. SPECIAL CASES (SHOP, DISEASES, FERTILIZERS, ETC)
     // ============================================================
     function handleSpecialCases(query) {
         const q = query.toLowerCase();
 
+        // SHOP ADDRESS
+        if (q.includes('दवा कहाँ') || q.includes('दवा कहा') || q.includes('दुकान') || q.includes('shop') || q.includes('पता') || 
+            q.includes('कहाँ से लें') || q.includes('कहा से लें') || q.includes('मिलेगी') || q.includes('लेनी है') || q.includes('कहां मिलेगी')) {
+            const html = `
+                <div class="shop-card">
+                    <p class="shop-name"><i class="fa-solid fa-store"></i> ${shopDetails.name}</p>
+                    <p class="shop-detail"><i class="fa-solid fa-hashtag"></i> दुकान नंबर: ${shopDetails.shopNumber}</p>
+                    <p class="shop-detail"><i class="fa-solid fa-location-dot"></i> ${shopDetails.market}, ${shopDetails.city}</p>
+                    <p class="shop-detail"><i class="fa-solid fa-phone"></i> फोन: ${shopDetails.phone}</p>
+                    <p class="shop-detail mt-2 font-semibold text-amber-800">पूरा पता: ${shopDetails.fullAddress}</p>
+                </div>
+                <p class="text-[13px] text-slate-600 mt-2">आप ऊपर दिए गए पते पर आकर सभी तरह की कृषि दवाइयाँ और खाद प्राप्त कर सकते हैं।</p>
+            `;
+            appendBotMessage(html, `${shopDetails.name} की दुकान ${shopDetails.fullAddress} पर स्थित है। फोन नंबर ${shopDetails.phone} है।`);
+            return true;
+        }
+
+        // ALL DISEASES
+        if (q.includes('सभी बीमारी') || q.includes('सारी बीमारी') || q.includes('all diseases') || (q.includes('बीमारियाँ') && !q.includes('दवा'))) {
+            const diseaseMap = {};
+            catalog.forEach(item => {
+                const diseases = item.diseases_hi.split(', ');
+                diseases.forEach(d => {
+                    if (!diseaseMap[d]) diseaseMap[d] = [];
+                    diseaseMap[d].push(item.name);
+                });
+            });
+            let html = `<p class="mb-3 font-semibold text-[14px]">सभी बीमारियों की लिस्ट और उनकी दवाइयाँ:</p><div class="space-y-2 max-h-96 overflow-y-auto">`;
+            for (const [disease, medicines] of Object.entries(diseaseMap).sort()) {
+                html += `<div class="bg-white p-2.5 rounded-lg border border-slate-200 text-[12px]">
+                    <span class="font-bold text-red-700"><i class="fa-solid fa-virus mr-1"></i> ${disease}</span>
+                    <div class="mt-1 flex flex-wrap gap-1">`;
+                medicines.forEach(m => {
+                    html += `<span class="bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full text-[10px] font-medium border border-emerald-200">${m}</span>`;
+                });
+                html += `</div></div>`;
+            }
+            html += `</div><p class="mt-2 text-[11px] text-slate-400">किसी भी बीमारी पर क्लिक करके उसकी दवा के बारे में पूछें।</p>`;
+            appendBotMessage(html, "सभी बीमारियों की लिस्ट देखें।");
+            return true;
+        }
+
         // Fertilizers
         if (q.includes('urea') || q.includes('यूरिया') || q.includes('dap') || q.includes('डीएपी') ||
             q.includes('potash') || q.includes('पोटाश') || q.includes('npk') || q.includes('खाद') || q.includes('khad') || q.includes('fertilizer') || q.includes('उर्वरक')) {
-            let html = `<p class="mb-3 font-semibold text-[14px]">🌾 खादों (Fertilizers) की जानकारी:</p><div class="space-y-2.5">`;
+            let html = `<p class="mb-3 font-semibold text-[14px]">खादों (Fertilizers) की जानकारी:</p><div class="space-y-2.5">`;
             let found = false;
             fertilizers.forEach(f => {
                 const key = f.name.toLowerCase().split(' ')[0];
@@ -1345,51 +1427,44 @@
                 });
             }
             html += `</div>`;
-            return { html, voice: "यूरिया हरापन लाता है, डीएपी जड़ों का विकास करता है, पोटाश दानों में चमक और वज़न बढ़ाता है।" };
+            appendBotMessage(html, "यूरिया हरापन लाता है, डीएपी जड़ों का विकास करता है, पोटाश दानों में चमक और वजन बढ़ाता है।");
+            return true;
         }
 
         // Snakes
         if (q.includes('sanp') || q.includes('saap') || q.includes('snake') || q.includes('सांप') || q.includes('साँप')) {
-            return {
-                html: `<p class="text-[14px]">🐍 खेत में सांप होना खतरनाक हो सकता है। <b>Tara Agri Pro</b> के पास सांप मारने की कोई दवा नहीं है। बचाव: रबर के लंबे जूते पहनें, रात में टॉर्च/डंडा साथ रखें। ज़रूरत पड़ने पर सपेरे या वन विभाग को बुलाएँ।</p>`,
-                voice: "सांप के लिए कोई दवा नहीं है। बचाव के लिए रबर के जूते पहनें और डंडा साथ रखें।"
-            };
+            appendBotMessage(`<p class="text-[14px]">खेत में सांप होना खतरनाक हो सकता है। Tara Agri Pro के पास सांप मारने की कोई दवा नहीं है। बचाव के लिए रबर के लंबे जूते पहनें और रात में टॉर्च या डंडा साथ रखें। जरूरत पड़ने पर सपेरे या वन विभाग को बुलाएँ।</p>`, "सांप के लिए कोई दवा नहीं है। बचाव के लिए रबर के जूते पहनें और डंडा साथ रखें।");
+            return true;
         }
 
         // Rats
         if (q.includes('chuha') || q.includes('rat') || q.includes('चूहा') || q.includes('चूहे') || q.includes('मूस')) {
-            return {
-                html: `<p class="text-[14px]">🐀 चूहों से बचाव के लिए <b>जिंक फास्फाइड (Zinc Phosphide)</b> या <b>एल्युमिनियम फास्फाइड</b> का इस्तेमाल करें। अधिक जानकारी के लिए दुकान पर संपर्क करें।</p>`,
-                voice: "चूहों के लिए जिंक फास्फाइड का इस्तेमाल करें। अधिक जानकारी के लिए दुकान पर आएँ।"
-            };
+            appendBotMessage(`<p class="text-[14px]">चूहों से बचाव के लिए जिंक फास्फाइड (Zinc Phosphide) या एल्युमिनियम फास्फाइड का इस्तेमाल करें। अधिक जानकारी के लिए दुकान पर संपर्क करें।</p>`, "चूहों के लिए जिंक फास्फाइड का इस्तेमाल करें। अधिक जानकारी के लिए दुकान पर आएँ।");
+            return true;
         }
 
         // Animals
         if (q.includes('nilgai') || q.includes('roj') || q.includes('awara') || q.includes('नीलगाय') || q.includes('सुअर') || q.includes('जानवर') || q.includes('animal') || q.includes('पशु')) {
-            return {
-                html: `<p class="text-[14px]">🐄 आवारा पशुओं (नीलगाय, जंगली सुअर) के लिए कोई रासायनिक दवा नहीं है। बचाव: खेत की जाली (Fencing) या सोलर फेंसिंग लगवाएँ।</p>`,
-                voice: "आवारा पशुओं के लिए कोई दवा नहीं है। जाली या सोलर फेंसिंग करवाएँ।"
-            };
+            appendBotMessage(`<p class="text-[14px]">आवारा पशुओं (नीलगाय, जंगली सुअर) के लिए कोई रासायनिक दवा नहीं है। बचाव के लिए खेत की जाली (Fencing) या सोलर फेंसिंग लगवाएँ।</p>`, "आवारा पशुओं के लिए कोई दवा नहीं है। जाली या सोलर फेंसिंग करवाएँ।");
+            return true;
         }
 
         // Weather
         if (q.includes('mausam') || q.includes('weather') || q.includes('बारिश') || q.includes('barish') || q.includes('मौसम')) {
-            return {
-                html: `<p class="text-[14px]">🌦️ मैं कृषि AI हूँ, मौसम की लाइव जानकारी नहीं दे सकता। कृपया Google Weather या मौसम विभाग की ऐप चेक करें।</p>`,
-                voice: "मौसम की जानकारी के लिए Google Weather चेक करें।"
-            };
+            appendBotMessage(`<p class="text-[14px]">मैं कृषि एआई हूँ, मौसम की लाइव जानकारी नहीं दे सकता। कृपया Google Weather या मौसम विभाग की ऐप चेक करें।</p>`, "मौसम की जानकारी के लिए Google Weather चेक करें।");
+            return true;
         }
 
-        return null;
+        return false;
     }
 
     // ============================================================
-    //  7. MAIN AI ENGINE
+    //  8. MAIN AI ENGINE
     // ============================================================
     function processUserInput() {
         const text = userInput.value.trim();
         if (!text) {
-            const txt = "कृपया कुछ लिखें या माइक से बोलें। मैं आपकी मदद के लिए तैयार हूँ! 🙏";
+            const txt = "कृपया कुछ लिखें या माइक से बोलें। मैं आपकी मदद के लिए तैयार हूँ।";
             appendBotMessage(`<p class="text-[15px]">${txt}</p>`, txt);
             return;
         }
@@ -1413,62 +1488,58 @@
         // ----- CHIT-CHAT -----
         if (query.includes('hi') || query === 'hello' || query === 'namaste' || query === 'नमस्ते' ||
             query.includes('kaise ho') || query.includes('kese ho') || query.includes('kya haal') || query.includes('क्या हाल')) {
-            const txt = "नमस्ते जी! मैं बिल्कुल ठीक हूँ। बताइए, आपके खेत में कौन सी फसल है और क्या समस्या आ रही है? मैं पूरी मदद करूँगा।";
+            const txt = "नमस्ते जी। मैं बिल्कुल ठीक हूँ। बताइए, आपके खेत में कौन सी फसल है और क्या समस्या आ रही है? मैं पूरी मदद करूँगा।";
             appendBotMessage(`<p class="text-[15px]">${txt}</p>`, txt);
             return;
         }
         if (query.includes('thank') || query.includes('dhanyawad') || query.includes('shukriya') ||
             query.includes('धन्यवाद') || query.includes('शुक्रिया') || query === 'ok' || query === 'ठीक है' || query.includes('अच्छा')) {
-            const txt = "आपका बहुत-बहुत स्वागत है! 😊 खेती से जुड़ी कोई और जानकारी चाहिए तो बेझिझक पूछें। हमेशा आपके साथ!";
+            const txt = "आपका बहुत-बहुत स्वागत है। खेती से जुड़ी कोई और जानकारी चाहिए तो बेझिझक पूछें। हमेशा आपके साथ।";
             appendBotMessage(`<p class="text-[15px]">${txt}</p>`, txt);
             return;
         }
         if (query.includes('kaun') || query.includes('कौन') || query.includes('naam') || query.includes('नाम') || query.includes('who are you') || query.includes('तुम कौन')) {
-            const txt = "मैं Tara Agri Pro का प्रोफेशनल AI कृषि सलाहकार हूँ। मेरा काम आपको सटीक दवा, फसल और खाद की जानकारी देना है। 33 से अधिक दवाओं का डेटाबेस है मेरे पास।";
+            const txt = "मैं Tara Agri Pro का प्रोफेशनल AI कृषि सलाहकार हूँ। मेरा काम आपको सटीक दवा, फसल और खाद की जानकारी देना है। 33 से अधिक दवाओं और सभी बीमारियों का डेटाबेस है मेरे पास।";
             appendBotMessage(`<p class="text-[15px]">${txt}</p>`, txt);
             return;
         }
         if (query.includes('price') || query.includes('kimat') || query.includes('कीमत') || query.includes('rate') || query.includes('रेट') || query.includes('दाम')) {
-            const txt = "दवाइयों की कीमत जानने के लिए कृपया अपने नज़दीकी Tara Agri Pro डीलर या हेल्पलाइन नंबर पर संपर्क करें। मैं उपयोग और खुराक की जानकारी देता हूँ।";
+            const txt = "दवाइयों की कीमत जानने के लिए कृपया अपने नजदीकी Tara Agri Pro डीलर या हेल्पलाइन नंबर पर संपर्क करें। मैं उपयोग और खुराक की जानकारी देता हूँ।";
             appendBotMessage(`<p class="text-[15px]">${txt}</p>`, "दवा की कीमत के लिए डीलर से संपर्क करें।");
             return;
         }
         if (query.includes('help') || query.includes('मदद') || query.includes('सहायता')) {
-            const txt = "मैं आपकी कैसे मदद कर सकता हूँ? आप मुझसे दवा, फसल, बीमारी या खाद के बारे में पूछ सकते हैं। बस टाइप करें या माइक से बोलें!";
+            const txt = "मैं आपकी कैसे मदद कर सकता हूँ? आप मुझसे दवा, फसल, बीमारी या खाद के बारे में पूछ सकते हैं। बस टाइप करें या माइक से बोलें।";
             appendBotMessage(`<p class="text-[15px]">${txt}</p>`, txt);
             return;
         }
 
-        // ----- SPECIAL CASES -----
-        const special = handleSpecialCases(query);
-        if (special) {
-            appendBotMessage(special.html, special.voice);
+        // ----- SPECIAL CASES (SHOP, ALL DISEASES, FERTILIZERS, ETC) -----
+        if (handleSpecialCases(query)) {
             return;
         }
 
         // ----- SHOW ALL -----
         if (query.includes('sabhi') || query.includes('all') || query.includes('list') || query.includes('सभी') || query.includes('पूरी') || query.includes('दिखाओ') || query.includes('सारी') || query.includes('सब')) {
-            let html = `<p class="mb-3 font-semibold text-[14px]">📋 हमारे पास <b>33</b> बेहतरीन दवाइयाँ हैं:</p><div class="grid grid-cols-2 gap-2 text-[12px]">`;
+            let html = `<p class="mb-3 font-semibold text-[14px]">हमारे पास 33 बेहतरीन दवाइयाँ हैं:</p><div class="grid grid-cols-2 gap-2 text-[12px]">`;
             catalog.forEach(item => {
                 html += `<div class="bg-white p-2.5 rounded-lg border border-slate-200 shadow-sm cursor-pointer hover:border-emerald-400 hover:shadow-md transition-all" onclick="sendQuickMessage('${item.name} क्या काम करती है?')">
                     <b class="text-slate-800">${item.name}</b><br>
                     <span class="text-[10px] text-slate-500">${item.type}</span>
                 </div>`;
             });
-            html += `</div><p class="mt-3 text-[11px] text-slate-400"><i class="fa-solid fa-hand-pointer text-emerald-500"></i> किसी भी दवा पर क्लिक करें — पूरी जानकारी मिल जाएगी।</p>`;
+            html += `</div><p class="mt-3 text-[11px] text-slate-400">किसी भी दवा पर क्लिक करें — पूरी जानकारी मिल जाएगी।</p>`;
             appendBotMessage(html, "हमारे पास 33 दवाइयाँ हैं। किसी भी दवा पर क्लिक करके पूरी जानकारी लें।");
             return;
         }
 
-        // ----- PREPROCESSING & MAPPING (WITH DESI LANGUAGE SUPPORT) -----
+        // ----- PREPROCESSING & MAPPING -----
         let mappedQuery = query;
-        // First pass: map Hindi words
         for (const key in hindiWordMap) {
             if (mappedQuery.includes(key)) {
                 mappedQuery += " " + hindiWordMap[key];
             }
         }
-        // Second pass: handle common typos and variations
         const rawWords = mappedQuery.replace(/[.,!?]/g, '').split(/\s+/);
         let keywords = rawWords.filter(kw => !stopWords.includes(kw) && kw.length > 1);
         if (keywords.length === 0) keywords = rawWords.filter(kw => kw.length > 1);
@@ -1483,15 +1554,13 @@
             let cropMatch = false, diseaseMatch = false, nameMatch = false;
 
             keywords.forEach(kw => {
-                // Exact name match
                 if (item.name.toLowerCase() === kw) { score += 100; nameMatch = true; if (score > maxNameScore) { maxNameScore = score; specificProduct = item; } }
                 else if (item.name.toLowerCase().includes(kw)) { score += 60; nameMatch = true; if (score > maxNameScore) { maxNameScore = score; specificProduct = item; } }
                 else if (item.technical.toLowerCase().includes(kw)) { score += 35; }
                 else if (item.tags.includes(kw) || item.desi_tags.includes(kw)) {
                     score += 25;
-                    // Check for crop/disease matches
                     const cropKeywords = ['dhan', 'gehu', 'ganna', 'makka', 'kapas', 'aalu', 'sarso', 'surajmukhi', 'paddy', 'wheat', 'cotton', 'mustard', 'potato', 'sugarcane', 'mirch', 'tamatar', 'soybean', 'chana', 'matar', 'sabji', 'phal'];
-                    const diseaseKeywords = ['blast', 'jhulsa', 'sundi', 'tela', 'makkhi', 'deemak', 'kharpatwar', 'ghas', 'lapat', 'blight', 'rust', 'mildew', 'bph', 'hopper', 'termite', 'whitefly', 'faphund', 'wilt', 'sadan', 'uktha', 'tikka'];
+                    const diseaseKeywords = ['blast', 'jhulsa', 'sundi', 'tela', 'makkhi', 'deemak', 'kharpatwar', 'ghas', 'lapat', 'blight', 'rust', 'mildew', 'bph', 'hopper', 'termite', 'whitefly', 'faphund', 'wilt', 'sadan', 'uktha', 'tikka', 'spot', 'anthracnose', 'rot', 'powdery', 'mite'];
                     if (cropKeywords.includes(kw)) cropMatch = true;
                     if (diseaseKeywords.includes(kw)) diseaseMatch = true;
                 } else if (searchStr.includes(kw)) {
@@ -1500,7 +1569,6 @@
                     if (item.diseases_hi.toLowerCase().includes(kw)) diseaseMatch = true;
                 }
 
-                // Fuzzy search for misspelled names
                 const itemNameWords = item.name.toLowerCase().split(' ');
                 itemNameWords.forEach(ikw => {
                     if (kw.length > 3 && ikw.length > 3) {
@@ -1511,11 +1579,10 @@
                 });
             });
 
-            // BOOST: If both crop and disease match, it's highly relevant
             if (cropMatch && diseaseMatch) score += 100;
             if (nameMatch) score += 30;
             
-            // Manual overrides for known products
+            // Manual overrides
             if ((query.includes('coragen') || query.includes('कोरागेन') || query.includes('कोरजन')) && item.name === 'Ferico Pro') score += 100;
             if ((query.includes('ghas') || query.includes('weed') || query.includes('घास') || query.includes('kharpatwar') || query.includes('खरपतवार')) && item.type.includes('खरपतवार')) score += 30;
             if ((query.includes('chipku') || query.includes('chupku') || query.includes('sticker') || query.includes('चिपकू') || query.includes('स्टिकर')) && item.name === 'Silpro') score += 100;
@@ -1543,7 +1610,7 @@
             let stepsHtml = steps.map(s => `<li>${s}</li>`).join('');
             
             let html = `
-                <p class="mb-3 font-semibold text-[14px]">✅ <b>${specificProduct.name}</b> की पूरी जानकारी:</p>
+                <p class="mb-3 font-semibold text-[14px]">${specificProduct.name} की पूरी जानकारी:</p>
                 <div class="product-card">
                     <div class="flex items-center justify-between mb-2">
                         <div class="flex items-center gap-2.5">
@@ -1556,19 +1623,22 @@
                     <p class="text-[11px] font-mono text-slate-500 mb-2.5 border-b border-slate-100 pb-2">${specificProduct.technical}</p>
                     <div class="space-y-2 text-[13px] text-slate-700">
                         <div class="bg-emerald-50 p-3 rounded-lg border border-emerald-200">
-                            <span class="font-bold text-emerald-800 block mb-1"><i class="fa-solid fa-circle-info"></i> दवा का उपयोग (कैसे काम करती है):</span>
+                            <span class="font-bold text-emerald-800 block mb-1">दवा का उपयोग (कैसे काम करती है):</span>
                             ${specificProduct.use_hi}
                         </div>
                         <div class="bg-blue-50 p-3 rounded-lg border border-blue-200">
-                            <span class="font-bold text-blue-800 block mb-1"><i class="fa-solid fa-list-check"></i> इस्तेमाल करने का तरीका (Step by Step):</span>
+                            <span class="font-bold text-blue-800 block mb-1">इस्तेमाल करने का तरीका (Step by Step):</span>
                             <ul class="step-list">${stepsHtml}</ul>
                         </div>
-                        <p><i class="fa-solid fa-virus text-red-400 mr-2"></i><span class="font-semibold">बीमारी:</span> ${specificProduct.diseases_hi}</p>
-                        <p><i class="fa-solid fa-wheat-awn text-amber-500 mr-2"></i><span class="font-semibold">फसल:</span> ${specificProduct.crops_hi}</p>
+                        <p><span class="font-semibold text-slate-800">बीमारी:</span> ${specificProduct.diseases_hi}</p>
+                        <p><span class="font-semibold text-slate-800">फसल:</span> ${specificProduct.crops_hi}</p>
                     </div>
                     <div class="bg-slate-50 px-3 py-2 rounded-lg text-[13px] flex justify-between items-center border border-slate-200 mt-3">
-                        <span><i class="fa-solid fa-prescription-bottle-medical text-emerald-600 mr-1.5"></i> खुराक:</span>
+                        <span><span class="font-semibold text-slate-700">खुराक:</span></span>
                         <span class="font-bold text-emerald-700">${specificProduct.dose_hi}</span>
+                    </div>
+                    <div class="mt-3 text-[12px] text-slate-500 border-t border-slate-100 pt-2">
+                        <p><i class="fa-solid fa-store text-amber-500 mr-1"></i> यह दवा ${shopDetails.name} की दुकान पर उपलब्ध है।</p>
                     </div>
                 </div>
             `;
@@ -1580,7 +1650,6 @@
         let matches = scoredItems.filter(item => item.score > 8).sort((a, b) => b.score - a.score);
 
         if (matches.length === 0) {
-            // SPELL CHECK / SUGGESTIONS
             const suggestions = new Set();
             const allWords = query.replace(/[.,!?]/g, '').split(/\s+/);
             const dictWords = [];
@@ -1597,25 +1666,24 @@
 
             const sugArray = Array.from(suggestions).slice(0, 6);
             if (sugArray.length > 0) {
-                let msg = `<p class="mb-2 text-slate-700 text-[14px]">🤔 मुझे आपकी बात से जुड़ी कोई दवा नहीं मिली। क्या आपका मतलब इनमें से किसी से था?</p><div class="flex flex-wrap gap-2 mt-2">`;
+                let msg = `<p class="mb-2 text-slate-700 text-[14px]">मुझे आपकी बात से जुड़ी कोई दवा नहीं मिली। क्या आपका मतलब इनमें से किसी से था?</p><div class="flex flex-wrap gap-2 mt-2">`;
                 sugArray.forEach(sug => {
                     msg += `<button onclick="sendQuickMessage('${sug}')" class="suggestion-chip"><i class="fa-solid fa-wand-magic-sparkles"></i> ${sug}</button>`;
                 });
                 msg += `</div>`;
                 appendBotMessage(msg, "मुझे समझ नहीं आया। क्या आपका मतलब इनमें से किसी से था?");
             } else {
-                const txt = "🙏 माफ़ कीजिए, मुझे आपकी बात से जुड़ी कोई दवा नहीं मिली। कृपया बीमारी, फसल या दवा का नाम साफ़-साफ़ लिखें या बोलें। मैं आपकी पूरी मदद करूँगा।";
+                const txt = "माफ़ कीजिए, मुझे आपकी बात से जुड़ी कोई दवा नहीं मिली। कृपया बीमारी, फसल या दवा का नाम साफ़-साफ़ लिखें या बोलें। मैं आपकी पूरी मदद करूँगा।";
                 appendBotMessage(`<p class="text-[15px]">${txt}</p>`, txt);
             }
             return;
         }
 
-        // Top matches (show up to 3)
         const topMatches = matches.slice(0, 3);
-        let voice = `हाँ बिल्कुल! सबसे अच्छी दवा ${topMatches[0].name} है।`;
+        let voice = `हाँ बिल्कुल। सबसे अच्छी दवा ${topMatches[0].name} है।`;
         if (topMatches.length > 1) voice += ` इसके अलावा ${topMatches[1].name} भी इस्तेमाल कर सकते हैं।`;
 
-        let html = `<p class="mb-3 font-semibold text-[14px]">✅ आपकी समस्या के लिए ये दवाइयाँ बेहतरीन हैं:</p>`;
+        let html = `<p class="mb-3 font-semibold text-[14px]">आपकी समस्या के लिए ये दवाइयाँ बेहतरीन हैं:</p>`;
 
         topMatches.forEach(item => {
             const uid = 'det-' + item.id + '-' + Date.now();
@@ -1635,15 +1703,15 @@
                     </div>
                     <p class="text-[10px] font-mono text-slate-500 mb-2 border-b border-slate-100 pb-1.5 truncate" title="${item.technical}">${item.technical}</p>
                     <div class="space-y-1.5 mb-2.5 text-[12px]">
-                        <p><i class="fa-solid fa-virus text-red-400 mr-1.5"></i><span class="font-semibold">बीमारी:</span> ${item.diseases_hi}</p>
-                        <p><i class="fa-solid fa-wheat-awn text-amber-500 mr-1.5"></i><span class="font-semibold">फसल:</span> ${item.crops_hi}</p>
+                        <p><span class="font-semibold text-slate-700">बीमारी:</span> ${item.diseases_hi}</p>
+                        <p><span class="font-semibold text-slate-700">फसल:</span> ${item.crops_hi}</p>
                     </div>
                     <div class="bg-emerald-50 text-emerald-800 font-semibold px-2.5 py-1.5 rounded-lg text-[11px] flex justify-between items-center border border-emerald-100">
-                        <span><i class="fa-solid fa-prescription-bottle-medical opacity-80 mr-1"></i> खुराक:</span>
+                        <span>खुराक:</span>
                         <span>${item.dose_hi}</span>
                     </div>
                     <button onclick="toggleDetails('${uid}', this)" class="w-full bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 font-semibold py-2 px-3 rounded-lg text-[11px] flex justify-between items-center transition-colors mt-2.5">
-                        <span><i class="fa-solid fa-circle-info text-emerald-600 mr-1.5"></i> पूरी जानकारी (उपयोग + तरीका)</span>
+                        <span>पूरी जानकारी (उपयोग + तरीका)</span>
                         <i class="fa-solid fa-chevron-down transition-transform duration-300"></i>
                     </button>
                     <div id="${uid}" class="details-content text-slate-600 text-[13px] leading-relaxed">
@@ -1655,6 +1723,9 @@
                             <span class="font-bold text-blue-700 block mb-1">उपयोग का तरीका (Step by Step):</span>
                             <ul class="step-list">${stepsHtml}</ul>
                         </div>
+                    </div>
+                    <div class="mt-2 text-[11px] text-slate-400 border-t border-slate-100 pt-1.5">
+                        <i class="fa-solid fa-store text-amber-500 mr-1"></i> दुकान: ${shopDetails.fullAddress}
                     </div>
                 </div>
             `;
@@ -1668,7 +1739,7 @@
     }
 
     // ============================================================
-    //  8. CLEAR CHAT
+    //  9. CLEAR CHAT
     // ============================================================
     function clearChat() {
         if (confirm('क्या आप पूरी चैट हटाना चाहते हैं?')) {
@@ -1679,7 +1750,7 @@
     }
 
     // ============================================================
-    //  9. INIT
+    //  10. INIT
     // ============================================================
     window.onload = function() {
         if ('speechSynthesis' in window) {
