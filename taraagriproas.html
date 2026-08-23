@@ -4,13 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <title>Tara Agri Pro - प्रोफेशनल AI असिस्टेंट</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { --app-height: 100vh; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        :root {
+            --app-height: 100vh;
+        }
         body {
             font-family: 'Inter', sans-serif;
             background: #0f172a;
@@ -19,7 +26,9 @@
             height: 100vh;
             height: 100dvh;
         }
-        .hindi-text { font-family: 'Noto Sans Devanagari', sans-serif; }
+        .hindi-text {
+            font-family: 'Noto Sans Devanagari', sans-serif;
+        }
 
         .app-wrapper {
             display: flex;
@@ -31,7 +40,7 @@
             background: #ffffff;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 0 60px rgba(0,0,0,0.3);
+            box-shadow: 0 0 60px rgba(0, 0, 0, 0.3);
         }
 
         .chat-header {
@@ -44,7 +53,7 @@
             color: white;
             flex-shrink: 0;
             padding-top: max(0.9rem, env(safe-area-inset-top));
-            border-bottom: 2px solid rgba(255,255,255,0.1);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
         }
         .status-dot {
             width: 8px;
@@ -55,8 +64,15 @@
             animation: pulse-dot 2s infinite;
         }
         @keyframes pulse-dot {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(0.8); }
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(0.8);
+            }
         }
 
         .chat-messages {
@@ -68,8 +84,13 @@
             background: #f1f5f9;
             background-image: radial-gradient(circle at 10% 20%, rgba(4, 120, 87, 0.03) 0%, transparent 50%);
         }
-        .chat-messages::-webkit-scrollbar { width: 4px; }
-        .chat-messages::-webkit-scrollbar-thumb { background: #a7f3d0; border-radius: 10px; }
+        .chat-messages::-webkit-scrollbar {
+            width: 4px;
+        }
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: #a7f3d0;
+            border-radius: 10px;
+        }
 
         .message {
             display: flex;
@@ -79,11 +100,23 @@
             width: 100%;
         }
         @keyframes slideUpFade {
-            from { opacity: 0; transform: translateY(18px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        .bot-message { justify-content: flex-start; padding-right: 0.5rem; }
-        .user-message { justify-content: flex-end; padding-left: 0.5rem; }
+        .bot-message {
+            justify-content: flex-start;
+            padding-right: 0.5rem;
+        }
+        .user-message {
+            justify-content: flex-end;
+            padding-left: 0.5rem;
+        }
 
         .avatar {
             width: 38px;
@@ -94,7 +127,7 @@
             justify-content: center;
             flex-shrink: 0;
             font-size: 1rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
             transition: all 0.2s;
         }
         .bot-avatar {
@@ -109,9 +142,15 @@
             animation: pulse-ring 1.5s infinite;
         }
         @keyframes pulse-ring {
-            0% { box-shadow: 0 0 0 0 rgba(4, 120, 87, 0.4); }
-            70% { box-shadow: 0 0 0 12px rgba(4, 120, 87, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(4, 120, 87, 0); }
+            0% {
+                box-shadow: 0 0 0 0 rgba(4, 120, 87, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 12px rgba(4, 120, 87, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(4, 120, 87, 0);
+            }
         }
         .user-avatar {
             background: #1e293b;
@@ -127,17 +166,21 @@
             line-height: 1.7;
             font-size: 0.95rem;
             word-wrap: break-word;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
             position: relative;
         }
-        @media (min-width: 640px) { .bubble { max-width: 82%; } }
+        @media (min-width: 640px) {
+            .bubble {
+                max-width: 82%;
+            }
+        }
 
         .bot-bubble {
             background: #ffffff;
             border: 1px solid #e2e8f0;
             color: #0f172a;
             border-top-left-radius: 4px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
         }
         .user-bubble {
             background: linear-gradient(135deg, #047857, #065f46);
@@ -158,11 +201,21 @@
             border-radius: 50%;
             animation: bounce-dot 1.4s infinite ease-in-out both;
         }
-        .dot:nth-child(1) { animation-delay: -0.32s; }
-        .dot:nth-child(2) { animation-delay: -0.16s; }
+        .dot:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+        .dot:nth-child(2) {
+            animation-delay: -0.16s;
+        }
         @keyframes bounce-dot {
-            0%, 80%, 100% { transform: scale(0.4); }
-            40% { transform: scale(1); }
+            0%,
+            80%,
+            100% {
+                transform: scale(0.4);
+            }
+            40% {
+                transform: scale(1);
+            }
         }
 
         .product-card {
@@ -171,7 +224,7 @@
             border-radius: 16px;
             padding: 1rem;
             margin-top: 0.75rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
             position: relative;
             overflow: hidden;
             transition: all 0.2s;
@@ -201,8 +254,14 @@
             animation: fadeIn 0.3s ease;
         }
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-8px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .quick-chip {
@@ -220,7 +279,7 @@
             font-weight: 600;
             margin: 4px 4px 0 0;
             white-space: nowrap;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
         }
         .quick-chip:active {
             transform: scale(0.94);
@@ -228,7 +287,9 @@
             color: white;
             border-color: #047857;
         }
-        .quick-chip i { font-size: 0.75rem; }
+        .quick-chip i {
+            font-size: 0.75rem;
+        }
 
         .chat-input-area {
             background: #ffffff;
@@ -236,7 +297,7 @@
             padding: 0.7rem 1rem;
             padding-bottom: max(0.7rem, env(safe-area-inset-bottom));
             flex-shrink: 0;
-            box-shadow: 0 -4px 25px rgba(0,0,0,0.04);
+            box-shadow: 0 -4px 25px rgba(0, 0, 0, 0.04);
         }
 
         .input-wrapper {
@@ -292,11 +353,13 @@
             justify-content: center;
             cursor: pointer;
             transition: all 0.2s;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
             font-size: 1.1rem;
             flex-shrink: 0;
         }
-        .action-btn:active { transform: scale(0.90); }
+        .action-btn:active {
+            transform: scale(0.90);
+        }
 
         .btn-mic {
             background: linear-gradient(135deg, #047857, #065f46);
@@ -306,15 +369,23 @@
             animation: pulse-red 1.5s infinite;
         }
         @keyframes pulse-red {
-            0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.5); }
-            70% { box-shadow: 0 0 0 14px rgba(220, 38, 38, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+            0% {
+                box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.5);
+            }
+            70% {
+                box-shadow: 0 0 0 14px rgba(220, 38, 38, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(220, 38, 38, 0);
+            }
         }
 
         .btn-send {
             background: linear-gradient(135deg, #2563eb, #1d4ed8);
         }
-        .btn-send:active { background: #1e40af; }
+        .btn-send:active {
+            background: #1e40af;
+        }
 
         .listening-overlay {
             position: absolute;
@@ -337,7 +408,9 @@
             gap: 10px;
             white-space: nowrap;
         }
-        .listening-overlay.show { opacity: 1; }
+        .listening-overlay.show {
+            opacity: 1;
+        }
 
         .toggle-switch {
             position: relative;
@@ -346,7 +419,11 @@
             height: 20px;
             flex-shrink: 0;
         }
-        .toggle-switch input { opacity: 0; width: 0; height: 0; }
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
         .slider {
             position: absolute;
             cursor: pointer;
@@ -369,8 +446,12 @@
             transition: .3s;
             border-radius: 50%;
         }
-        input:checked + .slider { background: #047857; }
-        input:checked + .slider:before { transform: translateX(18px); }
+        input:checked+.slider {
+            background: #047857;
+        }
+        input:checked+.slider:before {
+            transform: translateX(18px);
+        }
 
         .suggestion-chip {
             background: #fef3c7;
@@ -392,7 +473,9 @@
             background: #fbbf24;
             color: #78350f;
         }
-        .suggestion-chip i { font-size: 0.7rem; }
+        .suggestion-chip i {
+            font-size: 0.7rem;
+        }
 
         .match-badge {
             display: inline-block;
@@ -446,870 +529,1054 @@
 </head>
 <body>
 
-<div class="app-wrapper">
+    <div class="app-wrapper">
 
-    <!-- HEADER -->
-    <header class="chat-header">
-        <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-white/20 backdrop-blur flex items-center justify-center text-white shadow-lg shrink-0">
-                <i class="fa-solid fa-leaf text-xl"></i>
-            </div>
-            <div>
-                <h1 class="text-lg font-bold leading-tight tracking-wide">Tara Agri Pro</h1>
-                <p class="text-[10px] text-green-200 font-medium flex items-center gap-2 mt-0.5">
-                    <span class="status-dot"></span>
-                    <span>ऑनलाइन · कृषि विशेषज्ञ</span>
-                </p>
-            </div>
-        </div>
-        <div class="flex gap-2 items-center">
-            <button onclick="toggleSpeaker()" id="speakerToggle" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white flex items-center justify-center" title="आवाज़">
-                <i class="fa-solid fa-volume-high text-sm"></i>
-            </button>
-            <button onclick="clearChat()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-red-500/40 transition-colors text-white flex items-center justify-center" title="चैट साफ़ करें">
-                <i class="fa-solid fa-trash-can text-sm"></i>
-            </button>
-        </div>
-    </header>
-
-    <!-- CHAT MESSAGES -->
-    <main id="chatArea" class="chat-messages hindi-text">
-        <div class="message bot-message" id="initialGreeting">
-            <div class="avatar bot-avatar" onclick="speakText('नमस्ते। मैं तारा एग्री प्रो का प्रोफेशनल एआई असिस्टेंट हूँ। मैं आपकी फसल, दवाई और खेती की हर समस्या का सटीक समाधान बताऊंगा।')">
-                <i class="fa-solid fa-robot"></i>
-            </div>
-            <div class="bubble bot-bubble">
-                <p class="text-base font-semibold text-emerald-700">नमस्ते।</p>
-                <p class="text-[15px] text-slate-700 mt-1">मैं <strong>Tara Agri Pro</strong> का प्रोफेशनल एआई कृषि सलाहकार हूँ।</p>
-                <p class="text-[14px] text-slate-600 mt-2">मुझसे हिंदी में बात करें — चाहे टाइप करें या माइक से बोलें।</p>
-
-                <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 mt-3 text-[13px] text-slate-700">
-                    <p class="font-semibold text-emerald-800 mb-2">मैं ये सब बता सकता हूँ:</p>
-                    <ul>
-                        <li class="flex items-start gap-2"><span class="text-emerald-500 mt-1">•</span> <span>किसी भी <b>दवा</b> का उपयोग, खुराक और फायदा</span></li>
-                        <li class="flex items-start gap-2"><span class="text-emerald-500 mt-1">•</span> <span><b>फसल</b> (धान, गेहूँ, आलू, सरसों, सूरजमुखी, कपास, गन्ना, मक्का)</span></li>
-                        <li class="flex items-start gap-2"><span class="text-emerald-500 mt-1">•</span> <span>किसी भी <b>बीमारी</b> का सटीक इलाज</span></li>
-                        <li class="flex items-start gap-2"><span class="text-emerald-500 mt-1">•</span> <span><b>खाद</b> (यूरिया, डीएपी, पोटाश, एनपीके) की जानकारी</span></li>
-                        <li class="flex items-start gap-2"><span class="text-emerald-500 mt-1">•</span> <span><b>दवा कहाँ से लें</b> — हमारी दुकान का पता</span></li>
-                    </ul>
+        <!-- HEADER -->
+        <header class="chat-header">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-white/20 backdrop-blur flex items-center justify-center text-white shadow-lg shrink-0">
+                    <i class="fa-solid fa-leaf text-xl"></i>
                 </div>
-
-                <div class="flex flex-wrap gap-2 mt-3">
-                    <button class="quick-chip" onclick="sendQuickMessage('फिप्रो (Fi Pro 6) क्या काम करती है?')"><i class="fa-solid fa-flask"></i> Fipro 6</button>
-                    <button class="quick-chip" onclick="sendQuickMessage('धान में झुलसा और पत्ता लपेट की दवा बताओ')"><i class="fa-solid fa-bug"></i> धान बीमारी</button>
-                    <button class="quick-chip" onclick="sendQuickMessage('यूरिया, DAP और पोटाश खाद की जानकारी दें')"><i class="fa-solid fa-sack-dollar"></i> खाद</button>
-                    <button class="quick-chip" onclick="sendQuickMessage('सभी दवाइयाँ दिखाओ')"><i class="fa-solid fa-list"></i> सभी दवाएँ</button>
-                    <button class="quick-chip" onclick="sendQuickMessage('सभी बीमारियाँ दिखाओ')"><i class="fa-solid fa-disease"></i> सभी बीमारियाँ</button>
-                    <button class="quick-chip" onclick="sendQuickMessage('दवा कहाँ से लें?')"><i class="fa-solid fa-shop"></i> दुकान का पता</button>
+                <div>
+                    <h1 class="text-lg font-bold leading-tight tracking-wide">Tara Agri Pro</h1>
+                    <p class="text-[10px] text-green-200 font-medium flex items-center gap-2 mt-0.5">
+                        <span class="status-dot"></span>
+                        <span>ऑनलाइन · कृषि विशेषज्ञ</span>
+                    </p>
                 </div>
-
-                <p class="text-[11px] text-slate-400 mt-3">माइक बटन दबाकर बोलें — एआई आपको समझेगा। भेजें बटन से टाइप किया हुआ भेजें।</p>
             </div>
-        </div>
-    </main>
-
-    <!-- INPUT AREA -->
-    <footer class="chat-input-area">
-        <div id="listenStatus" class="listening-overlay">
-            <i class="fa-solid fa-microphone-lines animate-pulse"></i> सुन रहा हूँ... बोलिए
-        </div>
-
-        <div class="flex justify-between items-center mb-2 px-1">
-            <span class="text-[10px] font-medium text-slate-400 flex items-center gap-2">
-                <i class="fa-solid fa-phone"></i> सहायता: +91 7357100008
-            </span>
-            <div class="flex items-center gap-2">
-                <span class="text-[10px] font-medium text-slate-400">आवाज़</span>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="voiceReplyToggle" checked />
-                    <span class="slider"></span>
-                </label>
-            </div>
-        </div>
-
-        <div class="flex items-end gap-2">
-            <div class="input-wrapper">
-                <textarea id="userInput" rows="1" placeholder="यहाँ लिखें या माइक दबाकर बोलें..." oninput="handleInputChange(this)" onkeypress="handleEnter(event)"></textarea>
-            </div>
-            <div class="btn-group">
-                <button type="button" id="micBtn" class="action-btn btn-mic" onclick="toggleMic()" title="बोलें (माइक)">
-                    <i class="fa-solid fa-microphone pointer-events-none"></i>
+            <div class="flex gap-2 items-center">
+                <button onclick="toggleSpeaker()" id="speakerToggle" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white flex items-center justify-center" title="आवाज़">
+                    <i class="fa-solid fa-volume-high text-sm"></i>
                 </button>
-                <button type="button" id="sendBtn" class="action-btn btn-send" onclick="processUserInput()" title="भेजें">
-                    <i class="fa-solid fa-paper-plane pointer-events-none"></i>
+                <button onclick="clearChat()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-red-500/40 transition-colors text-white flex items-center justify-center" title="चैट साफ़ करें">
+                    <i class="fa-solid fa-trash-can text-sm"></i>
                 </button>
             </div>
-        </div>
-    </footer>
-</div>
+        </header>
 
-<script>
-    // ============================================================
-    //  TARA AGRI PRO — PROFESSIONAL AI ASSISTANT
-    //  COMPLETE MEDICINE + DISEASE DATABASE + SHOP DETAILS
-    //  NO EMOJIS IN VOICE RESPONSE, CLEAN HINDI TEXT
-    // ============================================================
+        <!-- CHAT MESSAGES -->
+        <main id="chatArea" class="chat-messages hindi-text">
+            <div class="message bot-message" id="initialGreeting">
+                <div class="avatar bot-avatar" onclick="speakText('नमस्ते। मैं तारा एग्री प्रो का प्रोफेशनल एआई असिस्टेंट हूँ। मैं आपकी फसल, दवाई और खेती की हर समस्या का सटीक समाधान बताऊंगा।')">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <div class="bubble bot-bubble">
+                    <p class="text-base font-semibold text-emerald-700">नमस्ते।</p>
+                    <p class="text-[15px] text-slate-700 mt-1">मैं <strong>Tara Agri Pro</strong> का प्रोफेशनल एआई कृषि सलाहकार हूँ।</p>
+                    <p class="text-[14px] text-slate-600 mt-2">मुझसे हिंदी में बात करें — चाहे टाइप करें या माइक से बोलें।</p>
 
-    const documentHeight = () => {
-        document.documentElement.style.setProperty('--app-height', `${window.innerHeight}px`);
-    };
-    window.addEventListener('resize', documentHeight);
-    documentHeight();
+                    <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 mt-3 text-[13px] text-slate-700">
+                        <p class="font-semibold text-emerald-800 mb-2">मैं ये सब बता सकता हूँ:</p>
+                        <ul>
+                            <li class="flex items-start gap-2"><span class="text-emerald-500 mt-1">•</span> <span>किसी भी <b>दवा</b> का उपयोग, खुराक और फायदा</span></li>
+                            <li class="flex items-start gap-2"><span class="text-emerald-500 mt-1">•</span> <span><b>फसल</b> (धान, गेहूँ, आलू, सरसों, सूरजमुखी, कपास, गन्ना, मक्का)</span></li>
+                            <li class="flex items-start gap-2"><span class="text-emerald-500 mt-1">•</span> <span>किसी भी <b>बीमारी</b> का सटीक इलाज</span></li>
+                            <li class="flex items-start gap-2"><span class="text-emerald-500 mt-1">•</span> <span><b>खाद</b> (यूरिया, डीएपी, पोटाश, एनपीके) की जानकारी</span></li>
+                            <li class="flex items-start gap-2"><span class="text-emerald-500 mt-1">•</span> <span><b>दवा कहाँ से लें</b> — हमारी दुकान का पता</span></li>
+                        </ul>
+                    </div>
 
-    // ============================================================
-    //  1. COMPLETE PRODUCT DATABASE (33 Medicines with Full Details)
-    // ============================================================
-    const catalog = [
-        { 
-            id: 1, 
-            name: "Aura", 
-            technical: "Fulvic Acid & Potassium Humic Acid 40%", 
+                    <div class="flex flex-wrap gap-2 mt-3">
+                        <button class="quick-chip" onclick="sendQuickMessage('फिप्रो (Fi Pro 6) क्या काम करती है?')"><i class="fa-solid fa-flask"></i> Fipro 6</button>
+                        <button class="quick-chip" onclick="sendQuickMessage('धान में झुलसा और पत्ता लपेट की दवा बताओ')"><i class="fa-solid fa-bug"></i> धान बीमारी</button>
+                        <button class="quick-chip" onclick="sendQuickMessage('यूरिया, DAP और पोटाश खाद की जानकारी दें')"><i class="fa-solid fa-sack-dollar"></i> खाद</button>
+                        <button class="quick-chip" onclick="sendQuickMessage('सभी दवाइयाँ दिखाओ')"><i class="fa-solid fa-list"></i> सभी दवाएँ</button>
+                        <button class="quick-chip" onclick="sendQuickMessage('सभी बीमारियाँ दिखाओ')"><i class="fa-solid fa-disease"></i> सभी बीमारियाँ</button>
+                        <button class="quick-chip" onclick="sendQuickMessage('दवा कहाँ से लें?')"><i class="fa-solid fa-shop"></i> दुकान का पता</button>
+                    </div>
+
+                    <p class="text-[11px] text-slate-400 mt-3">माइक बटन दबाकर बोलें — एआई आपको समझेगा। भेजें बटन से टाइप किया हुआ भेजें।</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- INPUT AREA -->
+        <footer class="chat-input-area">
+            <div id="listenStatus" class="listening-overlay">
+                <i class="fa-solid fa-microphone-lines animate-pulse"></i> सुन रहा हूँ... बोलिए
+            </div>
+
+            <div class="flex justify-between items-center mb-2 px-1">
+                <span class="text-[10px] font-medium text-slate-400 flex items-center gap-2">
+                    <i class="fa-solid fa-phone"></i> सहायता: +91 9416088603
+                </span>
+                <div class="flex items-center gap-2">
+                    <span class="text-[10px] font-medium text-slate-400">आवाज़</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="voiceReplyToggle" checked />
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="flex items-end gap-2">
+                <div class="input-wrapper">
+                    <textarea id="userInput" rows="1" placeholder="यहाँ लिखें या माइक दबाकर बोलें..." oninput="handleInputChange(this)" onkeypress="handleEnter(event)"></textarea>
+                </div>
+                <div class="btn-group">
+                    <button type="button" id="micBtn" class="action-btn btn-mic" onclick="toggleMic()" title="बोलें (माइक)">
+                        <i class="fa-solid fa-microphone pointer-events-none"></i>
+                    </button>
+                    <button type="button" id="sendBtn" class="action-btn btn-send" onclick="processUserInput()" title="भेजें">
+                        <i class="fa-solid fa-paper-plane pointer-events-none"></i>
+                    </button>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // ============================================================
+        //  TARA AGRI PRO — PROFESSIONAL AI ASSISTANT
+        //  COMPLETE MEDICINE + DISEASE DATABASE + SHOP DETAILS
+        //  UPDATED PHONE: +91 9416088603
+        //  ENHANCED TECHNICAL NAME SUGGESTION SYSTEM (WORD MAPPING)
+        // ============================================================
+
+        const documentHeight = () => {
+            document.documentElement.style.setProperty('--app-height', `${window.innerHeight}px`);
+        };
+        window.addEventListener('resize', documentHeight);
+        documentHeight();
+
+        // ============================================================
+        //  1. COMPLETE PRODUCT DATABASE (33 Medicines with Full Details)
+        // ============================================================
+        const catalog = [{
+            id: 1,
+            name: "Aura",
+            technical: "Fulvic Acid & Potassium Humic Acid 40%",
             tags: "root, growth, tonic, jad, पीलापन, सूखा, जड़, टॉनिक, ग्रोथ",
             desi_tags: "जड़, पीलापन, सूखा, तनाव, बढ़वार, पैदावार",
-            diseases_hi: "सफेद जड़ों की कमी, पोषक तत्वों का अवशोषण न होना, फसल में पीलापन, सूखा तनाव, कम पैदावार", 
-            crops_hi: "धान, गेहूँ, गन्ना, मक्का, कपास, मिर्च, आलू, सरसों, सूरजमुखी, टमाटर, सभी फलदार पौधे, सब्जियां", 
-            dose_hi: "500 ML - 1 LTR प्रति एकड़", 
+            diseases_hi: "सफेद जड़ों की कमी, पोषक तत्वों का अवशोषण न होना, फसल में पीलापन, सूखा तनाव, कम पैदावार",
+            crops_hi: "धान, गेहूँ, गन्ना, मक्का, कपास, मिर्च, आलू, सरसों, सूरजमुखी, टमाटर, सभी फलदार पौधे, सब्जियां",
+            dose_hi: "500 ML - 1 LTR प्रति एकड़",
             use_hi: "यह मृदा सुधारक है जो जड़ों का तीव्र फैलाव करता है। पौधों को सूखा व तनाव सहन करने में सक्षम बनाता है। पैदावार बढ़ाने के लिए सबसे बेहतरीन टॉनिक है।",
             how_to_use_hi: "1. छिड़काव के लिए: 500 ML को 200 लीटर पानी में मिलाकर एक एकड़ में छिड़कें।\n2. ड्रिप सिंचाई के लिए: 1 LTR को ड्रिप टैंक में मिलाकर धीरे-धीरे डालें।\n3. सिंचाई के साथ: 1 LTR को सिंचाई के पानी के साथ खेत में डालें।\n4. सबसे अच्छा समय: सुबह या शाम के समय उपयोग करें।\n5. 15-20 दिन के अंतराल पर दोहराएं।",
-            type: "टॉनिक", 
-            bg: "bg-emerald-50", 
-            icon: "fa-seedling" 
-        },
-        { 
-            id: 2, 
-            name: "Azofi Pro", 
-            technical: "Azoxystrobin 18.2% + Difenoconazole 11.4% SC", 
+            type: "टॉनिक",
+            bg: "bg-emerald-50",
+            icon: "fa-seedling"
+        }, {
+            id: 2,
+            name: "Azofi Pro",
+            technical: "Azoxystrobin 18.2% + Difenoconazole 11.4% SC",
             tags: "fungicide, sheath blight, mildew, faphund, कवक, फफूंद, ब्लाइट",
             desi_tags: "फफूंदी, धान, पत्ती धब्बा, झुलसा, कवक",
-            diseases_hi: "शीथ ब्लाइट (धान की बड़ी बीमारी), डाउनी मिल्ड्यू, एंथ्रेक्नोज, पत्ती धब्बा, पर्पल ब्लोच, झुलसा", 
-            crops_hi: "धान (मुख्य), मिर्च, टमाटर, मक्का, कपास, सेब, आलू, अंगूर, प्याज, सब्जियां", 
-            dose_hi: "200 ML प्रति एकड़", 
+            diseases_hi: "शीथ ब्लाइट (धान की बड़ी बीमारी), डाउनी मिल्ड्यू, एंथ्रेक्नोज, पत्ती धब्बा, पर्पल ब्लोच, झुलसा",
+            crops_hi: "धान (मुख्य), मिर्च, टमाटर, मक्का, कपास, सेब, आलू, अंगूर, प्याज, सब्जियां",
+            dose_hi: "200 ML प्रति एकड़",
             use_hi: "एडवांस सिस्टमिक फफूंदनाशक। दोहरे अणु कवक की कोशिका भित्ति को नष्ट करते हैं और फसल में हरापन बढ़ाते हैं। धान की शीथ ब्लाइट में बहुत कारगर।",
             how_to_use_hi: "1. 200 ML दवा को 200 लीटर पानी में मिलाएं।\n2. सुबह के समय छिड़काव करें।\n3. छिड़काव से पहले दवा को अच्छी तरह हिलाएं।\n4. बारिश से पहले या बाद में न करें।\n5. 15 दिन के अंतराल पर दोबारा करें यदि आवश्यक हो।",
-            type: "फफूंदनाशक", 
-            bg: "bg-blue-50", 
-            icon: "fa-virus-slash" 
-        },
-        { 
-            id: 3, 
-            name: "Azoton", 
-            technical: "Azoxystrobin 11% + Tebuconazole 18.3% SC", 
+            type: "फफूंदनाशक",
+            bg: "bg-blue-50",
+            icon: "fa-virus-slash"
+        }, {
+            id: 3,
+            name: "Azoton",
+            technical: "Azoxystrobin 11% + Tebuconazole 18.3% SC",
             tags: "fungicide, false smut, rust, sheath blight, कवक, फफूंद",
             desi_tags: "हल्दी रोग, धान, रस्ट, फफूंदी",
-            diseases_hi: "हल्दी रोग (False Smut - धान की बड़ी बीमारी), रस्ट, फ्रूट रोट, शीथ ब्लाइट, झुलसा रोग, पत्ती धब्बा", 
-            crops_hi: "धान (मुख्य), गेहूँ, आलू, मिर्च, प्याज, सोयाबीन, मूंगफली, टमाटर, सब्जियां", 
-            dose_hi: "250-300 ML प्रति एकड़", 
+            diseases_hi: "हल्दी रोग (False Smut - धान की बड़ी बीमारी), रस्ट, फ्रूट रोट, शीथ ब्लाइट, झुलसा रोग, पत्ती धब्बा",
+            crops_hi: "धान (मुख्य), गेहूँ, आलू, मिर्च, प्याज, सोयाबीन, मूंगफली, टमाटर, सब्जियां",
+            dose_hi: "250-300 ML प्रति एकड़",
             use_hi: "डबल एक्शन प्रिवेंटिव व क्युरेटिव फफूंदनाशक। यह फसल को सुरक्षित रखकर दानों को बेहतरीन चमक देता है। धान की हल्दी रोग में बहुत असरदार।",
             how_to_use_hi: "1. 250 ML दवा को 200-250 लीटर पानी में मिलाएं।\n2. रोग के शुरुआती लक्षण दिखने पर तुरंत उपयोग करें।\n3. बारिश के बाद उपयोग न करें।\n4. 10-15 दिन के अंतराल पर दोहराएं।\n5. फसल के फूल आने से पहले उपयोग करें।",
-            type: "फफूंदनाशक", 
-            bg: "bg-blue-50", 
-            icon: "fa-leaf" 
-        },
-        { 
-            id: 4, 
-            name: "Atra Pro", 
-            technical: "Atrazine 50% WP", 
+            type: "फफूंदनाशक",
+            bg: "bg-blue-50",
+            icon: "fa-leaf"
+        }, {
+            id: 4,
+            name: "Atra Pro",
+            technical: "Atrazine 50% WP",
             tags: "herbicide, weed, kharpatwar, ghas, खरपतवार, घास",
             desi_tags: "खरपतवार, घास, मक्का, गन्ना, बथुआ",
-            diseases_hi: "चौड़ी पत्ती वाले खरपतवार (बथुआ, सांटी, मकोय), मौसमी घास, जंगली खरपतवार, गुल्ली डंडा", 
-            crops_hi: "मक्का, गन्ना", 
-            dose_hi: "500 GM प्रति एकड़", 
+            diseases_hi: "चौड़ी पत्ती वाले खरपतवार (बथुआ, सांटी, मकोय), मौसमी घास, जंगली खरपतवार, गुल्ली डंडा",
+            crops_hi: "मक्का, गन्ना",
+            dose_hi: "500 GM प्रति एकड़",
             use_hi: "प्री-इमर्जेंस हर्बीसाइड है। बुआई के तुरंत बाद प्रयोग करने से यह खरपतवार के बीजों को उगने से पहले ही रोक देता है। मक्का और गन्ना के लिए सबसे अच्छा।",
             how_to_use_hi: "1. 500 GM दवा को 200-250 लीटर पानी में मिलाएं।\n2. बुआई के 2-3 दिनों के अंदर छिड़काव करें।\n3. खेत में नमी होनी चाहिए।\n4. एक ही दिशा में छिड़काव करें।\n5. अगली बुआई से 3 महीने पहले उपयोग करें।",
-            type: "खरपतवारनाशक", 
-            bg: "bg-amber-50", 
-            icon: "fa-plant-wilt" 
-        },
-        { 
-            id: 5, 
-            name: "Bifco Pro", 
-            technical: "Bifenthrin 10% EC", 
+            type: "खरपतवारनाशक",
+            bg: "bg-amber-50",
+            icon: "fa-plant-wilt"
+        }, {
+            id: 5,
+            name: "Bifco Pro",
+            technical: "Bifenthrin 10% EC",
             tags: "insecticide, whitefly, termite, deemak, safed makkhi, कीटनाशक",
             desi_tags: "सफेद मक्खी, दीमक, इल्ली, फड़का, कीड़ा",
-            diseases_hi: "सफेद मक्खी, दीमक, इल्ली, तना छेदक, फड़का, थ्रिप्स, चेपा", 
-            crops_hi: "कपास (मुख्य), धान, सरसों, गन्ना, आम, सेब, मिर्च, सब्जियां, फल", 
-            dose_hi: "250-300 ML प्रति एकड़", 
+            diseases_hi: "सफेद मक्खी, दीमक, इल्ली, तना छेदक, फड़का, थ्रिप्स, चेपा",
+            crops_hi: "कपास (मुख्य), धान, सरसों, गन्ना, आम, सेब, मिर्च, सब्जियां, फल",
+            dose_hi: "250-300 ML प्रति एकड़",
             use_hi: "ब्रॉड स्पेक्ट्रम सिंथेटिक पायरेथ्रॉइड कीटनाशक। संपर्क व पेट की क्रिया द्वारा कीटों पर तुरंत नॉकडाउन असर करता है और उन्हें तुरंत मार गिराता है।",
             how_to_use_hi: "1. 250 ML दवा को 200 लीटर पानी में मिलाएं।\n2. सुबह या शाम के समय छिड़काव करें।\n3. कीट दिखने पर तुरंत उपयोग करें।\n4. बारिश से 4 घंटे पहले न करें।\n5. 10-12 दिन के अंतराल पर दोहराएं।",
-            type: "कीटनाशक", 
-            bg: "bg-red-50", 
-            icon: "fa-bug" 
-        },
-        { 
-            id: 6, 
-            name: "Carnival Gold", 
-            technical: "Mycorrhizal Bio-Fertilizer Granules", 
+            type: "कीटनाशक",
+            bg: "bg-red-50",
+            icon: "fa-bug"
+        }, {
+            id: 6,
+            name: "Carnival Gold",
+            technical: "Mycorrhizal Bio-Fertilizer Granules",
             tags: "fertilizer, root, phosphorus, khad, जैविक, खाद",
             desi_tags: "जैविक, खाद, जड़, फास्फोरस, उर्वरक",
-            diseases_hi: "कमज़ोर जड़ें, फास्फोरस अवशोषण की समस्या, कम पैदावार, मिट्टी की उर्वरता कम, जड़ का ठीक से विकास न होना", 
-            crops_hi: "धान, गेहूँ, आलू, सरसों, मक्का, गन्ना, दलहन, तिलहन, बागवानी, सब्जियां, सभी फसलें", 
-            dose_hi: "4 KG प्रति एकड़ (खाद/मिट्टी में मिलाकर)", 
+            diseases_hi: "कमज़ोर जड़ें, फास्फोरस अवशोषण की समस्या, कम पैदावार, मिट्टी की उर्वरता कम, जड़ का ठीक से विकास न होना",
+            crops_hi: "धान, गेहूँ, आलू, सरसों, मक्का, गन्ना, दलहन, तिलहन, बागवानी, सब्जियां, सभी फसलें",
+            dose_hi: "4 KG प्रति एकड़ (खाद/मिट्टी में मिलाकर)",
             use_hi: "यह एक जैविक माइकोराइजा खाद है। यह मिट्टी में मौजूद अघुलनशील फास्फोरस व जिंक को घोलकर सीधे पौधे की जड़ों तक पहुँचाता है, जिससे जड़ों का भारी विकास होता है और पैदावार बढ़ती है।",
             how_to_use_hi: "1. 4 KG Carnival Gold को 50 KG यूरिया या मिट्टी में अच्छी तरह मिलाएं।\n2. बुआई के समय या रोपाई के 7 दिन बाद डालें।\n3. खेत में नमी होनी चाहिए।\n4. धूप से बचाकर रखें।\n5. एक बार डालने से पूरी फसल में फायदा होता है।",
-            type: "जैविक खाद", 
-            bg: "bg-emerald-50", 
-            icon: "fa-sack-dollar" 
-        },
-        { 
-            id: 7, 
-            name: "Camron Pro", 
-            technical: "Carbendazim 12% + Mancozeb 63% WP", 
+            type: "जैविक खाद",
+            bg: "bg-emerald-50",
+            icon: "fa-sack-dollar"
+        }, {
+            id: 7,
+            name: "Camron Pro",
+            technical: "Carbendazim 12% + Mancozeb 63% WP",
             tags: "fungicide, blight, jhulsa, tikka, कवक, फफूंद",
             desi_tags: "झुलसा, आलू, टिक्का, फफूंदी, कवक",
-            diseases_hi: "अगेती व पछेती झुलसा (आलू की सबसे बड़ी बीमारी), टिक्का रोग, ब्लास्ट, जड़-तना सड़न, झुलसा रोग, पत्ती धब्बा", 
-            crops_hi: "आलू (मुख्य), धान, मूंगफली, सेब, अंगूर, मिर्च, टमाटर, सब्जियां", 
-            dose_hi: "250-300 GM प्रति एकड़", 
+            diseases_hi: "अगेती व पछेती झुलसा (आलू की सबसे बड़ी बीमारी), टिक्का रोग, ब्लास्ट, जड़-तना सड़न, झुलसा रोग, पत्ती धब्बा",
+            crops_hi: "आलू (मुख्य), धान, मूंगफली, सेब, अंगूर, मिर्च, टमाटर, सब्जियां",
+            dose_hi: "250-300 GM प्रति एकड़",
             use_hi: "यह सिस्टमैटिक व कॉन्टैक्ट फफूंदनाशक का बहुत असरदार कॉम्बिनेशन है। पौधों को अंदर और बाहर दोनों तरफ से फफूंदी के खिलाफ सुरक्षा देता है। आलू के झुलसा रोग में अत्यंत कारगर।",
             how_to_use_hi: "1. 250 GM दवा को 200 लीटर पानी में मिलाएं।\n2. रोग के लक्षण दिखने पर तुरंत छिड़काव करें।\n3. सुबह के समय उपयोग करें।\n4. 10-12 दिन के अंतराल पर दोहराएं।\n5. बारिश से 2 घंटे पहले न करें।",
-            type: "फफूंदनाशक", 
-            bg: "bg-blue-50", 
-            icon: "fa-virus" 
-        },
-        { 
-            id: 8, 
-            name: "Carbco", 
-            technical: "Carbendazim 50% WP", 
+            type: "फफूंदनाशक",
+            bg: "bg-blue-50",
+            icon: "fa-virus"
+        }, {
+            id: 8,
+            name: "Carbco",
+            technical: "Carbendazim 50% WP",
             tags: "fungicide, wilt, root rot, uktha, बीज उपचार",
             desi_tags: "उकठा, जड़ सड़न, बीज, फफूंदी",
-            diseases_hi: "उकठा (Wilt), जड़ सड़न (Root Rot), पाउडरी मिल्ड्यू, एंथ्रेक्नोज, बीज जनित रोग, कवक रोग", 
-            crops_hi: "गेहूँ, धान, सरसों, आलू, कपास, चना, मटर, सब्जियां, दलहन", 
-            dose_hi: "200-250 GM/एकड़ या 2-3 GM/KG बीज", 
+            diseases_hi: "उकठा (Wilt), जड़ सड़न (Root Rot), पाउडरी मिल्ड्यू, एंथ्रेक्नोज, बीज जनित रोग, कवक रोग",
+            crops_hi: "गेहूँ, धान, सरसों, आलू, कपास, चना, मटर, सब्जियां, दलहन",
+            dose_hi: "200-250 GM/एकड़ या 2-3 GM/KG बीज",
             use_hi: "ब्रॉड-स्पेक्ट्रम सिस्टमिक फफूंदनाशक है। खड़ी फसल और बीज उपचार (Seed Treatment) दोनों में श्रेष्ठ परिणाम देता है। बीज को बीमारियों से बचाता है।",
             how_to_use_hi: "1. खड़ी फसल के लिए: 200 GM को 200 लीटर पानी में मिलाकर छिड़कें।\n2. बीज उपचार के लिए: 2-3 GM प्रति KG बीज के हिसाब से मिलाएं।\n3. बीज को दवा के साथ अच्छी तरह लपेटें।\n4. 30 मिनट सुखाकर बोएं।\n5. रोग दिखने पर तुरंत उपयोग करें।",
-            type: "फफूंदनाशक", 
-            bg: "bg-blue-50", 
-            icon: "fa-shield-virus" 
-        },
-        { 
-            id: 9, 
-            name: "Crypto 505", 
-            technical: "Chlorpyriphos 50% + Cypermethrin 5% EC", 
+            type: "फफूंदनाशक",
+            bg: "bg-blue-50",
+            icon: "fa-shield-virus"
+        }, {
+            id: 9,
+            name: "Crypto 505",
+            technical: "Chlorpyriphos 50% + Cypermethrin 5% EC",
             tags: "insecticide, stem borer, american bollworm, कीटनाशक",
             desi_tags: "तना छेदक, इल्ली, अमेरिकन, कीड़ा",
-            diseases_hi: "तना छेदक, अमेरिकन इल्ली (American Bollworm), घुन, तना मक्खी, माहू, चेपा, फड़का, इल्ली", 
-            crops_hi: "सूरजमुखी, धान, सरसों, गन्ना, कपास, चना, बैंगन, सब्जियां", 
-            dose_hi: "350-400 ML प्रति एकड़", 
+            diseases_hi: "तना छेदक, अमेरिकन इल्ली (American Bollworm), घुन, तना मक्खी, माहू, चेपा, फड़का, इल्ली",
+            crops_hi: "सूरजमुखी, धान, सरसों, गन्ना, कपास, चना, बैंगन, सब्जियां",
+            dose_hi: "350-400 ML प्रति एकड़",
             use_hi: "दोहरी ताकत वाला नॉकडाउन व वाष्प (Vapour) क्रिया वाली दवा है। वाष्प के प्रभाव से यह तने और पत्तों के अंदर छिपे कीड़ों का भी खात्मा कर देती है।",
             how_to_use_hi: "1. 350 ML दवा को 200 लीटर पानी में मिलाएं।\n2. शाम के समय छिड़काव करें।\n3. कीटों की संख्या अधिक होने पर 400 ML तक बढ़ाएं।\n4. 12-15 दिन के अंतराल पर दोहराएं।\n5. फसल की कटाई से 30 दिन पहले उपयोग बंद करें।",
-            type: "कीटनाशक", 
-            bg: "bg-red-50", 
-            icon: "fa-spray-can" 
-        },
-        { 
-            id: 10, 
-            name: "Cartap Pro 4G", 
-            technical: "Cartap Hydrochloride 4% GR", 
+            type: "कीटनाशक",
+            bg: "bg-red-50",
+            icon: "fa-spray-can"
+        }, {
+            id: 10,
+            name: "Cartap Pro 4G",
+            technical: "Cartap Hydrochloride 4% GR",
             tags: "insecticide, leaf folder, pata lapat, stem borer, दानेदार",
             desi_tags: "पत्ता लपेट, धान, तना छेदक, दाना",
-            diseases_hi: "तना छेदक, पत्ती मोड़क (पत्ता लपेट - धान की बड़ी बीमारी), सूंडी, कैटरपिलर, पत्ती खाने वाली इल्ली", 
-            crops_hi: "धान (मुख्य), गन्ना", 
-            dose_hi: "5 KG प्रति एकड़ (यूरिया/बालू में मिलाकर)", 
+            diseases_hi: "तना छेदक, पत्ती मोड़क (पत्ता लपेट - धान की बड़ी बीमारी), सूंडी, कैटरपिलर, पत्ती खाने वाली इल्ली",
+            crops_hi: "धान (मुख्य), गन्ना",
+            dose_hi: "5 KG प्रति एकड़ (यूरिया/बालू में मिलाकर)",
             use_hi: "यह प्रणालीगत (Systemic) दानेदार कीटनाशक है। इसे खाद या रेती में मिलाकर डाला जाता है। यह जड़ों द्वारा अवशोषित होकर तने व पत्तियों को लंबे समय तक सुरक्षित रखता है। पत्ता लपेट रोग में बहुत कारगर।",
             how_to_use_hi: "1. 5 KG Cartap Pro को 50 KG यूरिया या बालू के साथ अच्छी तरह मिलाएं।\n2. धान की रोपाई के 15-20 दिन बाद खेत में डालें।\n3. खेत में 2-3 इंच पानी होना चाहिए।\n4. सुबह के समय डालें।\n5. 30 दिन बाद आवश्यकतानुसार दोहराएं।",
-            type: "कीटनाशक (दानेदार)", 
-            bg: "bg-red-50", 
-            icon: "fa-seedling" 
-        },
-        { 
-            id: 11, 
-            name: "Dinozone", 
-            technical: "Dinotefuran 15% + Pymetrozine 45% WG", 
+            type: "कीटनाशक (दानेदार)",
+            bg: "bg-red-50",
+            icon: "fa-seedling"
+        }, {
+            id: 11,
+            name: "Dinozone",
+            technical: "Dinotefuran 15% + Pymetrozine 45% WG",
             tags: "insecticide, bph, hopper, tela, whitefly, रसचूसक",
             desi_tags: "तेला, हॉपर, धान, मक्खी, कीड़ा",
-            diseases_hi: "धान का भूरा तेला (BPH - सबसे खतरनाक), हरा तेला, सफेद मक्खी, थ्रिप्स, रसचूसक कीट, हॉपर बर्न", 
-            crops_hi: "धान (मुख्य), सरसों, मिर्च, कपास, सूरजमुखी, बैंगन, सब्जियां", 
-            dose_hi: "133-333 GM प्रति एकड़", 
+            diseases_hi: "धान का भूरा तेला (BPH - सबसे खतरनाक), हरा तेला, सफेद मक्खी, थ्रिप्स, रसचूसक कीट, हॉपर बर्न",
+            crops_hi: "धान (मुख्य), सरसों, मिर्च, कपास, सूरजमुखी, बैंगन, सब्जियां",
+            dose_hi: "133-333 GM प्रति एकड़",
             use_hi: "रसचूसक कीटों के लिए यह एडवांस जापानी तकनीक वाली दवा है। यह कीटों के खाने की प्रणाली को तुरंत लकवाग्रस्त (Paralyze) कर देता है जिससे फसल सुरक्षित रहती है। धान के तेले के लिए बहुत अच्छी।",
             how_to_use_hi: "1. 133 GM दवा को 200 लीटर पानी में मिलाएं।\n2. तेले की संख्या अधिक होने पर 300 GM तक बढ़ाएं।\n3. सुबह या शाम के समय छिड़काव करें।\n4. 10-12 दिन के अंतराल पर दोहराएं।\n5. बारिश से 3 घंटे पहले न करें।",
-            type: "कीटनाशक", 
-            bg: "bg-orange-50", 
-            icon: "fa-bug" 
-        },
-        { 
-            id: 12, 
-            name: "Dainese", 
-            technical: "Deltamethrin 2.8% EC", 
+            type: "कीटनाशक",
+            bg: "bg-orange-50",
+            icon: "fa-bug"
+        }, {
+            id: 12,
+            name: "Dainese",
+            technical: "Deltamethrin 2.8% EC",
             tags: "insecticide, bollworm, fadka, cutworm, कीटनाशक",
             desi_tags: "इल्ली, फड़का, कीड़ा, कपास",
-            diseases_hi: "चित्तीदार इल्ली (Bollworm), फड़का, कटवर्म (Cutworm), फल छेदक, तना छेदक, सुंडी", 
-            crops_hi: "कपास, धान, चाय, सरसों, टमाटर, भिंडी, सब्जियां, फल", 
-            dose_hi: "200-250 ML प्रति एकड़", 
+            diseases_hi: "चित्तीदार इल्ली (Bollworm), फड़का, कटवर्म (Cutworm), फल छेदक, तना छेदक, सुंडी",
+            crops_hi: "कपास, धान, चाय, सरसों, टमाटर, भिंडी, सब्जियां, फल",
+            dose_hi: "200-250 ML प्रति एकड़",
             use_hi: "त्वरित असरदार नॉकडाउन सिंथेटिक पायरेथ्रॉइड है। यह कीड़ों को स्पर्श करते ही तुरंत नीचे गिरा कर मार देता है। बहुत तेज़ असर वाली दवा है।",
             how_to_use_hi: "1. 200 ML दवा को 200 लीटर पानी में मिलाएं।\n2. शाम के समय छिड़काव करें।\n3. कीट दिखने पर तुरंत उपयोग करें।\n4. 10-12 दिन के अंतराल पर दोहराएं।\n5. फसल की कटाई से 25 दिन पहले उपयोग बंद करें।",
-            type: "कीटनाशक", 
-            bg: "bg-red-50", 
-            icon: "fa-spider" 
-        },
-        { 
-            id: 13, 
-            name: "Endeco", 
-            technical: "Emamectin Benzoate 5% SG", 
+            type: "कीटनाशक",
+            bg: "bg-red-50",
+            icon: "fa-spider"
+        }, {
+            id: 13,
+            name: "Endeco",
+            technical: "Emamectin Benzoate 5% SG",
             tags: "larvicide, fall armyworm, sundi, illi, लार्विसाइड",
             desi_tags: "सुंडी, इल्ली, फॉल आर्मीवर्म, कीड़ा",
-            diseases_hi: "फल छेदक, फॉल आर्मीवर्म (Fall Armyworm - नई खतरनाक बीमारी), डीबीएम, हरी सूंडी, सेमीलूपर, इल्ली, पत्ती खाने वाली सुंडी", 
-            crops_hi: "कपास, मिर्च, चना, टमाटर, सूरजमुखी, गोभी, धान, मक्का, सब्जियां", 
-            dose_hi: "80-100 GM प्रति एकड़", 
+            diseases_hi: "फल छेदक, फॉल आर्मीवर्म (Fall Armyworm - नई खतरनाक बीमारी), डीबीएम, हरी सूंडी, सेमीलूपर, इल्ली, पत्ती खाने वाली सुंडी",
+            crops_hi: "कपास, मिर्च, चना, टमाटर, सूरजमुखी, गोभी, धान, मक्का, सब्जियां",
+            dose_hi: "80-100 GM प्रति एकड़",
             use_hi: "यह जैविक (Bio-origin) सुंडीमार दवा है। इसकी ट्रांसलामिनर क्रिया के कारण यह पत्ती के निचले हिस्से में छिपी इल्ली और सुंडी का भी खात्मा कर देता है। फॉल आर्मीवर्म में बहुत कारगर।",
             how_to_use_hi: "1. 80 GM दवा को 200 लीटर पानी में मिलाएं।\n2. सुबह या शाम के समय छिड़काव करें।\n3. इल्लियाँ छोटी हों तब उपयोग करें।\n4. 8-10 दिन के अंतराल पर दोहराएं।\n5. बारिश से 4 घंटे पहले न करें।",
-            type: "लार्विसाइड", 
-            bg: "bg-red-50", 
-            icon: "fa-worm" 
-        },
-        { 
-            id: 14, 
-            name: "Fenco", 
-            technical: "Thiamethoxam 12.6% + Lambda-Cyhalothrin 9.5% ZC", 
+            type: "लार्विसाइड",
+            bg: "bg-red-50",
+            icon: "fa-worm"
+        }, {
+            id: 14,
+            name: "Fenco",
+            technical: "Thiamethoxam 12.6% + Lambda-Cyhalothrin 9.5% ZC",
             tags: "insecticide, whitefly, thrips, chepa, कीटनाशक",
             desi_tags: "चेपा, माहू, मक्खी, थ्रिप्स, कीड़ा",
-            diseases_hi: "सफेद मक्खी, चेपा (Aphids), थ्रिप्स, तना मक्खी, इल्ली, फड़का, बीटल, रसचूसक कीट", 
-            crops_hi: "कपास, मक्का, टमाटर, सरसों, सोयाबीन, सब्जियां, फल", 
-            dose_hi: "80-100 ML प्रति एकड़", 
+            diseases_hi: "सफेद मक्खी, चेपा (Aphids), थ्रिप्स, तना मक्खी, इल्ली, फड़का, बीटल, रसचूसक कीट",
+            crops_hi: "कपास, मक्का, टमाटर, सरसों, सोयाबीन, सब्जियां, फल",
+            dose_hi: "80-100 ML प्रति एकड़",
             use_hi: "यह ZC टेक्नोलॉजी से बना एडवांस कीटनाशक है। यह सिस्टमिक व संपर्क दोनों क्रियाओं से रसचूसक और चबाने वाले कीटों पर बेहतरीन नियंत्रण करता है।",
             how_to_use_hi: "1. 80 ML दवा को 200 लीटर पानी में मिलाएं।\n2. सुबह के समय छिड़काव करें।\n3. कीट दिखने पर तुरंत उपयोग करें।\n4. 12-14 दिन के अंतराल पर दोहराएं।\n5. फसल की कटाई से 30 दिन पहले उपयोग बंद करें।",
-            type: "कीटनाशक", 
-            bg: "bg-purple-50", 
-            icon: "fa-bug" 
-        },
-        { 
-            id: 15, 
-            name: "Fi Pro 6", 
-            technical: "Fipronil 0.6% w/w GR", 
+            type: "कीटनाशक",
+            bg: "bg-purple-50",
+            icon: "fa-bug"
+        }, {
+            id: 15,
+            name: "Fi Pro 6",
+            technical: "Fipronil 0.6% w/w GR",
             tags: "insecticide, termite, deemak, white grub, fipro, दीमक",
             desi_tags: "दीमक, सफेद लट, मिट्टी, कीड़ा, फिप्रो",
-            diseases_hi: "दीमक (सबसे खतरनाक भूमि कीट), रूट ग्रब (सफेद लट), कंसुआ, तना छेदक, भूमि कीट, जड़ ग्रब", 
-            crops_hi: "धान (मुख्य), गन्ना, गेहूँ, मूंगफली, मक्का, आलू, सब्जियां", 
-            dose_hi: "4 KG प्रति एकड़", 
+            diseases_hi: "दीमक (सबसे खतरनाक भूमि कीट), रूट ग्रब (सफेद लट), कंसुआ, तना छेदक, भूमि कीट, जड़ ग्रब",
+            crops_hi: "धान (मुख्य), गन्ना, गेहूँ, मूंगफली, मक्का, आलू, सब्जियां",
+            dose_hi: "4 KG प्रति एकड़",
             use_hi: "यह शक्तिशाली दानेदार भू-कीटनाशक (Fipronil 0.6%) है। यह मिट्टी में छिपे कीड़ों के नर्वस सिस्टम पर हमला करता है और साथ ही पौधे में कल्ले (Tillering) बढ़ाता है। दीमक और सफेद लट के लिए अत्यंत उत्तम और सुरक्षित।",
             how_to_use_hi: "1. 4 KG Fi Pro 6 को 50 KG यूरिया या बालू के साथ अच्छी तरह मिलाएं।\n2. खेत की रोपाई से पहले या बाद में डालें।\n3. खेत में 2-3 इंच पानी होना चाहिए।\n4. सुबह के समय डालें।\n5. 30-40 दिन बाद आवश्यकतानुसार दोहराएं।",
-            type: "कीटनाशक (भूमि)", 
-            bg: "bg-red-50", 
-            icon: "fa-bugs" 
-        },
-        { 
-            id: 16, 
-            name: "Fura Pro", 
-            technical: "Carbofuran 3% CG (Encapsulated)", 
+            type: "कीटनाशक (भूमि)",
+            bg: "bg-red-50",
+            icon: "fa-bugs"
+        }, {
+            id: 16,
+            name: "Fura Pro",
+            technical: "Carbofuran 3% CG (Encapsulated)",
             tags: "nematicide, nematode, root grub, deemak, निमाटोड",
             desi_tags: "निमाटोड, जड़, सूंडी, कीड़ा, मिट्टी",
-            diseases_hi: "जड़ की सूंडी, निमाटोड (सूक्ष्म कीट), भोंड, दीमक, जड़ ग्रब, मिट्टी में छिपे कीट", 
-            crops_hi: "धान, सरसों, गन्ना, जूट, मक्का, सब्जियां, फल", 
-            dose_hi: "5 KG प्रति एकड़", 
+            diseases_hi: "जड़ की सूंडी, निमाटोड (सूक्ष्म कीट), भोंड, दीमक, जड़ ग्रब, मिट्टी में छिपे कीट",
+            crops_hi: "धान, सरसों, गन्ना, जूट, मक्का, सब्जियां, फल",
+            dose_hi: "5 KG प्रति एकड़",
             use_hi: "सुरक्षित कैप्सुलेटेड दानेदार कीटनाशक व निमाटोडनाशक है। यह धीरे-धीरे घुलकर लंबे समय तक जड़ों को कीड़ों से सुरक्षित रखता है।",
             how_to_use_hi: "1. 5 KG Fura Pro को 50 KG यूरिया या बालू के साथ मिलाएं।\n2. बुआई से 2-3 दिन पहले खेत में डालें।\n3. खेत में नमी होनी चाहिए।\n4. सुबह या शाम के समय डालें।\n5. 40-50 दिन बाद आवश्यकतानुसार दोहराएं।",
-            type: "निमाटोडनाशक", 
-            bg: "bg-red-50", 
-            icon: "fa-shield-halved" 
-        },
-        { 
-            id: 17, 
-            name: "Ferico Pro", 
-            technical: "Chlorantraniliprole 0.4% GR", 
+            type: "निमाटोडनाशक",
+            bg: "bg-red-50",
+            icon: "fa-shield-halved"
+        }, {
+            id: 17,
+            name: "Ferico Pro",
+            technical: "Chlorantraniliprole 0.4% GR",
             tags: "insecticide, stem borer, coragen, sundi, दानेदार",
             desi_tags: "तना छेदक, कोरागेन, धान, सुंडी, दाना",
-            diseases_hi: "तना छेदक (धान की मुख्य बीमारी), चोटी छेदक, जड़ छेदक, कोराजन कीट, सुंडी", 
-            crops_hi: "धान (मुख्य), गन्ना", 
-            dose_hi: "4 KG प्रति एकड़", 
+            diseases_hi: "तना छेदक (धान की मुख्य बीमारी), चोटी छेदक, जड़ छेदक, कोराजन कीट, सुंडी",
+            crops_hi: "धान (मुख्य), गन्ना",
+            dose_hi: "4 KG प्रति एकड़",
             use_hi: "यह नेक्स्ट-जनरेशन अणु (Coragen का दानेदार रूप) है। इसे यूरिया में मिलाकर डालने से यह 30 से 40 दिनों तक तना छेदक एवं सुंडियों से अटूट सुरक्षा देता है।",
             how_to_use_hi: "1. 4 KG Ferico Pro को 50 KG यूरिया के साथ अच्छी तरह मिलाएं।\n2. धान की रोपाई के 10-15 दिन बाद डालें।\n3. खेत में 2-3 इंच पानी होना चाहिए।\n4. सुबह के समय डालें।\n5. 30 दिन बाद आवश्यकतानुसार दोहराएं।",
-            type: "कीटनाशक (दानेदार)", 
-            bg: "bg-red-50", 
-            icon: "fa-seedling" 
-        },
-        { 
-            id: 18, 
-            name: "Gabbar", 
-            technical: "Indoxacarb 14.5% + Acetamiprid 7.7% SC", 
+            type: "कीटनाशक (दानेदार)",
+            bg: "bg-red-50",
+            icon: "fa-seedling"
+        }, {
+            id: 18,
+            name: "Gabbar",
+            technical: "Indoxacarb 14.5% + Acetamiprid 7.7% SC",
             tags: "insecticide, bollworm, thrips, whitefly, कीटनाशक",
             desi_tags: "इल्ली, मक्खी, थ्रिप्स, कीड़ा, गब्बर",
-            diseases_hi: "फल छेदक इल्ली, थ्रिप्स, सफेद मक्खी, चेपा, हरा मच्छर, सुंडी, इल्ली, रसचूसक कीट", 
-            crops_hi: "मिर्च, कपास, सूरजमुखी, बैंगन, आलू, सेब, सब्जियां, फल", 
-            dose_hi: "200-250 ML प्रति एकड़", 
+            diseases_hi: "फल छेदक इल्ली, थ्रिप्स, सफेद मक्खी, चेपा, हरा मच्छर, सुंडी, इल्ली, रसचूसक कीट",
+            crops_hi: "मिर्च, कपास, सूरजमुखी, बैंगन, आलू, सेब, सब्जियां, फल",
+            dose_hi: "200-250 ML प्रति एकड़",
             use_hi: "यह इल्ली (सुंडी) और रसचूसक (सफेद मक्खी, थ्रिप्स) कीटों दोनों का एक साथ खात्मा करने वाला शक्तिशाली डुअल-एक्शन कीटनाशक है।",
             how_to_use_hi: "1. 200 ML दवा को 200 लीटर पानी में मिलाएं।\n2. शाम के समय छिड़काव करें।\n3. कीट दिखने पर तुरंत उपयोग करें।\n4. 10-12 दिन के अंतराल पर दोहराएं।\n5. फसल की कटाई से 25 दिन पहले उपयोग बंद करें।",
-            type: "कीटनाशक", 
-            bg: "bg-red-50", 
-            icon: "fa-spider" 
-        },
-        { 
-            id: 19, 
-            name: "Grando Power", 
-            technical: "Emamectin Benzoate 1.9% EC", 
+            type: "कीटनाशक",
+            bg: "bg-red-50",
+            icon: "fa-spider"
+        }, {
+            id: 19,
+            name: "Grando Power",
+            technical: "Emamectin Benzoate 1.9% EC",
             tags: "larvicide, leaf folder, pata lapat, armyworm, लार्विसाइड",
             desi_tags: "पत्ता लपेट, सुंडी, इल्ली, धान, लार्वा",
-            diseases_hi: "हरी इल्ली, फल व तना छेदक, फॉल आर्मीवर्म, पत्ती मोड़क (पत्ता लपेट), सुंडी, पत्ती खाने वाली इल्ली", 
-            crops_hi: "धान (मुख्य), सरसों, सूरजमुखी, सब्जी, चना, सोयाबीन, सब्जियां", 
-            dose_hi: "250-300 ML प्रति एकड़", 
+            diseases_hi: "हरी इल्ली, फल व तना छेदक, फॉल आर्मीवर्म, पत्ती मोड़क (पत्ता लपेट), सुंडी, पत्ती खाने वाली इल्ली",
+            crops_hi: "धान (मुख्य), सरसों, सूरजमुखी, सब्जी, चना, सोयाबीन, सब्जियां",
+            dose_hi: "250-300 ML प्रति एकड़",
             use_hi: "यह तरल (Liquid) फॉर्म में बेहतरीन लैरविसाइड है। यह पत्तियों के टिश्यू में तेज़ी से प्रवेश कर छिपी हुई सुंडियों (जैसे पत्ता लपेट) का तुरंत खात्मा कर देता है।",
             how_to_use_hi: "1. 250 ML दवा को 200 लीटर पानी में मिलाएं।\n2. सुबह या शाम के समय छिड़काव करें।\n3. इल्लियाँ छोटी हों तब उपयोग करें।\n4. 8-10 दिन के अंतराल पर दोहराएं।\n5. बारिश से 3 घंटे पहले न करें।",
-            type: "लार्विसाइड", 
-            bg: "bg-red-50", 
-            icon: "fa-spray-can" 
-        },
-        { 
-            id: 20, 
-            name: "Lampro", 
-            technical: "Lambda Cyhalothrin 4.9% CS", 
+            type: "लार्विसाइड",
+            bg: "bg-red-50",
+            icon: "fa-spray-can"
+        }, {
+            id: 20,
+            name: "Lampro",
+            technical: "Lambda Cyhalothrin 4.9% CS",
             tags: "insecticide, fadka, bhundi, caterpillar, hopper, कीटनाशक",
             desi_tags: "फड़का, भुंडी, इल्ली, कीड़ा, हॉपर",
-            diseases_hi: "फड़का, भुंडी, कैटरपिलर, हॉपर्स, थ्रिप्स, दीमक, इल्ली, चबाने वाले कीट", 
-            crops_hi: "कपास, धान, सरसों, चना, मूंगफली, मक्का, फल, सब्जियां", 
-            dose_hi: "250-300 ML प्रति एकड़", 
+            diseases_hi: "फड़का, भुंडी, कैटरपिलर, हॉपर्स, थ्रिप्स, दीमक, इल्ली, चबाने वाले कीट",
+            crops_hi: "कपास, धान, सरसों, चना, मूंगफली, मक्का, फल, सब्जियां",
+            dose_hi: "250-300 ML प्रति एकड़",
             use_hi: "यह कैप्सूल सस्पेंशन (CS) इको-फ्रेंडली तकनीक है। यह दवा पत्तियों पर चिपककर धूप व बारिश में भी लंबे समय तक काम करती है।",
             how_to_use_hi: "1. 250 ML दवा को 200 लीटर पानी में मिलाएं।\n2. सुबह या शाम के समय छिड़काव करें।\n3. कीट दिखने पर तुरंत उपयोग करें।\n4. 10-12 दिन के अंतराल पर दोहराएं।\n5. बारिश से 4 घंटे पहले न करें।",
-            type: "कीटनाशक", 
-            bg: "bg-red-50", 
-            icon: "fa-bug" 
-        },
-        { 
-            id: 21, 
-            name: "Lanco", 
-            technical: "Thiamethoxam 30% FS", 
+            type: "कीटनाशक",
+            bg: "bg-red-50",
+            icon: "fa-bug"
+        }, {
+            id: 21,
+            name: "Lanco",
+            technical: "Thiamethoxam 30% FS",
             tags: "seed treatment, termite, deemak, beej upchar, बीज उपचार",
             desi_tags: "बीज, दीमक, उपचार, कीड़ा, सुरक्षा",
-            diseases_hi: "दीमक, शुरुआती रसचूसक कीट, उकठा (Wilt), जड़ सड़न कवक, बीज जनित रोग, कीट", 
-            crops_hi: "गेहूँ, सरसों, आलू, कपास, मक्का, सोयाबीन, चना, दलहन, सब्जियां", 
-            dose_hi: "10 ML प्रति KG बीज", 
+            diseases_hi: "दीमक, शुरुआती रसचूसक कीट, उकठा (Wilt), जड़ सड़न कवक, बीज जनित रोग, कीट",
+            crops_hi: "गेहूँ, सरसों, आलू, कपास, मक्का, सोयाबीन, चना, दलहन, सब्जियां",
+            dose_hi: "10 ML प्रति KG बीज",
             use_hi: "यह प्रीमियम बीज उपचार (Seed Treatment) दवा है। यह बीज पर सुरक्षा कवच बनाकर फसल को शुरुआती 30 दिनों तक मिट्टी के कीड़ों और दीमक से सुरक्षा देती है।",
             how_to_use_hi: "1. 10 ML Lanco को 1 KG बीज के साथ अच्छी तरह मिलाएं।\n2. बीज को 10-15 मिनट तक दवा में भिगोएँ।\n3. फिर बीज को छाँव में सुखाएं।\n4. सूखने के बाद बोएं।\n5. बोने से 24 घंटे पहले उपचार करें।",
-            type: "बीज उपचार", 
-            bg: "bg-indigo-50", 
-            icon: "fa-shield" 
-        },
-        { 
-            id: 22, 
-            name: "Lancus", 
-            technical: "Thiamethoxam 25% WG", 
+            type: "बीज उपचार",
+            bg: "bg-indigo-50",
+            icon: "fa-shield"
+        }, {
+            id: 22,
+            name: "Lancus",
+            technical: "Thiamethoxam 25% WG",
             tags: "insecticide, whitefly, mahu, jassid, aphid, रसचूसक",
             desi_tags: "माहू, चेपा, सरसों, मक्खी, कीड़ा",
-            diseases_hi: "माहू (चेपा - सरसों की मुख्य बीमारी), तेला, सफेद मक्खी, थ्रिप्स, मच्छर, चोंगा, रसचूसक कीट", 
-            crops_hi: "सरसों (मुख्य), धान, आलू, कपास, सूरजमुखी, सब्जियां, दलहन", 
-            dose_hi: "80-100 GM प्रति एकड़", 
+            diseases_hi: "माहू (चेपा - सरसों की मुख्य बीमारी), तेला, सफेद मक्खी, थ्रिप्स, मच्छर, चोंगा, रसचूसक कीट",
+            crops_hi: "सरसों (मुख्य), धान, आलू, कपास, सूरजमुखी, सब्जियां, दलहन",
+            dose_hi: "80-100 GM प्रति एकड़",
             use_hi: "यह एक सिस्टमैटिक रस चूसक कीटनाशक है। कीटों को मारने के साथ-साथ यह पौधों में हरापन व वृद्धि में भी बहुत सहायक है। सरसों के चेपा के लिए उत्कृष्ट।",
             how_to_use_hi: "1. 80 GM दवा को 200 लीटर पानी में मिलाएं।\n2. सुबह के समय छिड़काव करें।\n3. कीट दिखने पर तुरंत उपयोग करें।\n4. 10-12 दिन के अंतराल पर दोहराएं।\n5. फसल की कटाई से 25 दिन पहले उपयोग बंद करें।",
-            type: "कीटनाशक", 
-            bg: "bg-orange-50", 
-            icon: "fa-droplet" 
-        },
-        { 
-            id: 23, 
-            name: "Mala Pro", 
-            technical: "Malathion 50% EC", 
+            type: "कीटनाशक",
+            bg: "bg-orange-50",
+            icon: "fa-droplet"
+        }, {
+            id: 23,
+            name: "Mala Pro",
+            technical: "Malathion 50% EC",
             tags: "insecticide, godown, storage, bhoonga, भण्डारण",
             desi_tags: "भंडारण, अनाज, कीड़ा, गोदाम, भुनगा",
-            diseases_hi: "भूनगा, लाल कीड़ा, बीटल, धुन, मक्खी, सूंडी, अनाज कीट, भंडारण कीट", 
-            crops_hi: "गेहूँ, धान, अनाज भण्डारण (गोदाम), खेत की फसल, सभी अनाज", 
-            dose_hi: "300-400 ML प्रति एकड़ (खेत) / 10 ML प्रति 10 KG अनाज (भण्डारण)", 
+            diseases_hi: "भूनगा, लाल कीड़ा, बीटल, धुन, मक्खी, सूंडी, अनाज कीट, भंडारण कीट",
+            crops_hi: "गेहूँ, धान, अनाज भण्डारण (गोदाम), खेत की फसल, सभी अनाज",
+            dose_hi: "300-400 ML प्रति एकड़ (खेत) / 10 ML प्रति 10 KG अनाज (भण्डारण)",
             use_hi: "यह एक मल्टी-क्रॉप संपर्क कीटनाशक है। यह खड़ी फसलों के साथ-साथ गोदामों में भण्डारित अनाज को कीड़ों से बचाने के लिए बहुत उपयोगी है।",
             how_to_use_hi: "1. खेत के लिए: 300 ML को 200 लीटर पानी में मिलाकर छिड़कें।\n2. भण्डारण के लिए: 10 ML को 10 KG अनाज पर छिड़कें।\n3. भण्डारण के लिए 2-3 बार दोहराएं।\n4. खेत में 10-12 दिन के अंतराल पर दोहराएं।\n5. फसल की कटाई से 30 दिन पहले उपयोग बंद करें।",
-            type: "कीटनाशक", 
-            bg: "bg-red-50", 
-            icon: "fa-warehouse" 
-        },
-        { 
-            id: 24, 
-            name: "Metri Pro", 
-            technical: "Metribuzin 70% WP", 
+            type: "कीटनाशक",
+            bg: "bg-red-50",
+            icon: "fa-warehouse"
+        }, {
+            id: 24,
+            name: "Metri Pro",
+            technical: "Metribuzin 70% WP",
             tags: "herbicide, weed, bathua, ghas, खरपतवार",
             desi_tags: "खरपतवार, बथुआ, घास, आलू, गेहूँ",
-            diseases_hi: "गुल्ली डंडा, बथुआ, गाजर घास, जंगली पालक, मकोय, चौड़ी पत्ती खरपतवार, सभी खरपतवार", 
-            crops_hi: "आलू, गेहूँ, गन्ना, टमाटर, सोयाबीन", 
-            dose_hi: "100 GM प्रति एकड़", 
+            diseases_hi: "गुल्ली डंडा, बथुआ, गाजर घास, जंगली पालक, मकोय, चौड़ी पत्ती खरपतवार, सभी खरपतवार",
+            crops_hi: "आलू, गेहूँ, गन्ना, टमाटर, सोयाबीन",
+            dose_hi: "100 GM प्रति एकड़",
             use_hi: "यह चयनात्मक प्री व पोस्ट-इमर्जेंस हर्बीसाइड (घास मार दवा) है। यह खरपतवारों की प्रकाश संश्लेषण क्रिया को रोककर जड़ से सुखा देता है।",
             how_to_use_hi: "1. 100 GM दवा को 200 लीटर पानी में मिलाएं।\n2. बुआई से पहले या बाद में छिड़काव करें।\n3. खेत में नमी होनी चाहिए।\n4. सुबह के समय छिड़काव करें।\n5. अगली बुआई से 2 महीने पहले उपयोग करें।",
-            type: "खरपतवारनाशक", 
-            bg: "bg-amber-50", 
-            icon: "fa-plant-wilt" 
-        },
-        { 
-            id: 25, 
-            name: "Marvel M45", 
-            technical: "Mancozeb 75% WP", 
+            type: "खरपतवारनाशक",
+            bg: "bg-amber-50",
+            icon: "fa-plant-wilt"
+        }, {
+            id: 25,
+            name: "Marvel M45",
+            technical: "Mancozeb 75% WP",
             tags: "fungicide, blight, jhulsa, downy mildew, कवक",
             desi_tags: "झुलसा, आलू, फफूंदी, कवक, पत्ती",
-            diseases_hi: "अगेती व पछेती झुलसा (आलू की मुख्य बीमारी), डाउनी मिल्ड्यू, रस्ट, एंथ्रेक्नोज, पत्ती धब्बा, फफूंदी", 
-            crops_hi: "आलू (मुख्य), सरसों, टमाटर, धान, मिर्च, सेब, अंगूर, सब्जियां", 
-            dose_hi: "500-600 GM प्रति एकड़", 
+            diseases_hi: "अगेती व पछेती झुलसा (आलू की मुख्य बीमारी), डाउनी मिल्ड्यू, रस्ट, एंथ्रेक्नोज, पत्ती धब्बा, फफूंदी",
+            crops_hi: "आलू (मुख्य), सरसों, टमाटर, धान, मिर्च, सेब, अंगूर, सब्जियां",
+            dose_hi: "500-600 GM प्रति एकड़",
             use_hi: "यह एक सुरक्षात्मक फफूंदनाशक है। फफूंद को रोकने के साथ यह फसल को मैंगनीज व जिंक जैसे पोषक तत्व भी प्रदान करता है। आलू के झुलसा रोग में बेहतरीन।",
             how_to_use_hi: "1. 500 GM दवा को 200 लीटर पानी में मिलाएं।\n2. रोग के लक्षण दिखने से पहले उपयोग करें।\n3. सुबह के समय छिड़काव करें।\n4. 7-10 दिन के अंतराल पर दोहराएं।\n5. बारिश से 3 घंटे पहले न करें।",
-            type: "फफूंदनाशक", 
-            bg: "bg-blue-50", 
-            icon: "fa-shield-virus" 
-        },
-        { 
-            id: 26, 
-            name: "Pretico Plus", 
-            technical: "Pretilachlor 37% EW", 
+            type: "फफूंदनाशक",
+            bg: "bg-blue-50",
+            icon: "fa-shield-virus"
+        }, {
+            id: 26,
+            name: "Pretico Plus",
+            technical: "Pretilachlor 37% EW",
             tags: "herbicide, paddy, sanwa ghas, motha, धान",
             desi_tags: "धान, खरपतवार, सांवा, मोथा, घास",
-            diseases_hi: "सांवा घास, मोथा (Sedge), चौड़ी व संकरी पत्ती के जलीय खरपतवार, धान के खरपतवार, जलीय घास", 
-            crops_hi: "धान की रोपाई (मुख्य)", 
-            dose_hi: "600 ML प्रति एकड़", 
+            diseases_hi: "सांवा घास, मोथा (Sedge), चौड़ी व संकरी पत्ती के जलीय खरपतवार, धान के खरपतवार, जलीय घास",
+            crops_hi: "धान की रोपाई (मुख्य)",
+            dose_hi: "600 ML प्रति एकड़",
             use_hi: "यह पानी आधारित एडवांस EW हर्बीसाइड है। धान की रोपाई के तुरंत बाद प्रयोग करने से यह खरपतवारों को उगने ही नहीं देता।",
             how_to_use_hi: "1. 600 ML दवा को 200 लीटर पानी में मिलाएं।\n2. धान की रोपाई के 2-3 दिनों के अंदर छिड़काव करें।\n3. खेत में 2-3 इंच पानी होना चाहिए।\n4. सुबह या शाम के समय छिड़काव करें।\n5. 30 दिन बाद आवश्यकतानुसार दोहराएं।",
-            type: "खरपतवारनाशक", 
-            bg: "bg-amber-50", 
-            icon: "fa-water" 
-        },
-        { 
-            id: 27, 
-            name: "Pypro", 
-            technical: "Pymetrozine 50% WG", 
+            type: "खरपतवारनाशक",
+            bg: "bg-amber-50",
+            icon: "fa-water"
+        }, {
+            id: 27,
+            name: "Pypro",
+            technical: "Pymetrozine 50% WG",
             tags: "insecticide, bph, hopper burn, tela, कीटनाशक",
             desi_tags: "तेला, हॉपर, धान, कीड़ा, बीपीएच",
-            diseases_hi: "धान का भूरा तेला (BPH - धान की सबसे खतरनाक बीमारी), सफेद पीठ वाला तेला (WBPH), हॉपर बर्न, फसल सूखना", 
-            crops_hi: "धान (मुख्य)", 
-            dose_hi: "120-150 GM प्रति एकड़", 
+            diseases_hi: "धान का भूरा तेला (BPH - धान की सबसे खतरनाक बीमारी), सफेद पीठ वाला तेला (WBPH), हॉपर बर्न, फसल सूखना",
+            crops_hi: "धान (मुख्य)",
+            dose_hi: "120-150 GM प्रति एकड़",
             use_hi: "इसकी एंटी-फीटेंट क्रिया तेले/हॉपर की सूंड को तुरंत लकवाग्रस्त कर देती है, जिससे फसल सूखने (Hopper Burn) से 100% बचती है। धान की बचाव के लिए सबसे अच्छी दवा।",
             how_to_use_hi: "1. 120 GM दवा को 200 लीटर पानी में मिलाएं।\n2. तेला दिखने पर तुरंत छिड़काव करें।\n3. सुबह या शाम के समय छिड़काव करें।\n4. 8-10 दिन के अंतराल पर दोहराएं।\n5. बारिश से 3 घंटे पहले न करें।",
-            type: "कीटनाशक", 
-            bg: "bg-orange-50", 
-            icon: "fa-shield-halved" 
-        },
-        { 
-            id: 28, 
-            name: "Sulco", 
-            technical: "Sulphur 80% WDG", 
+            type: "कीटनाशक",
+            bg: "bg-orange-50",
+            icon: "fa-shield-halved"
+        }, {
+            id: 28,
+            name: "Sulco",
+            technical: "Sulphur 80% WDG",
             tags: "fungicide, powdery mildew, mites, sulphur, कवक, मकड़ी",
             desi_tags: "सल्फर, मकड़ी, सरसों, फफूंदी, पाउडरी",
-            diseases_hi: "पाउडरी मिल्ड्यू (चूर्णिल फफूंदी), लाल व पीली मकड़ी, सल्फर की कमी, फफूंदी, पत्ती धब्बा", 
-            crops_hi: "सरसों (मुख्य), गेहूँ, आलू, मिर्च, आम, मूंगफली, दलहन, सब्जियां", 
-            dose_hi: "3 KG प्रति एकड़", 
+            diseases_hi: "पाउडरी मिल्ड्यू (चूर्णिल फफूंदी), लाल व पीली मकड़ी, सल्फर की कमी, फफूंदी, पत्ती धब्बा",
+            crops_hi: "सरसों (मुख्य), गेहूँ, आलू, मिर्च, आम, मूंगफली, दलहन, सब्जियां",
+            dose_hi: "3 KG प्रति एकड़",
             use_hi: "यह ट्रिपल एक्शन दवा है: (1) फफूंदनाशक, (2) लाल मकड़ी रोधी, (3) सल्फर पोषक तत्व जो सरसों और अन्य फसलों में तेल व प्रोटीन बढ़ाता है।",
             how_to_use_hi: "1. 3 KG दवा को 200-250 लीटर पानी में मिलाएं।\n2. सुबह या शाम के समय छिड़काव करें।\n3. रोग दिखने पर तुरंत उपयोग करें।\n4. 10-12 दिन के अंतराल पर दोहराएं।\n5. धूप में न करें।",
-            type: "फफूंदनाशक/पोषक", 
-            bg: "bg-teal-50", 
-            icon: "fa-sun" 
-        },
-        { 
-            id: 29, 
-            name: "Silpro", 
-            technical: "Silicone-based Surfactant / Sticker", 
+            type: "फफूंदनाशक/पोषक",
+            bg: "bg-teal-50",
+            icon: "fa-sun"
+        }, {
+            id: 29,
+            name: "Silpro",
+            technical: "Silicone-based Surfactant / Sticker",
             tags: "sticker, spreader, chipku, spray, चिपकू",
             desi_tags: "चिपकू, स्टिकर, फैलाव, स्प्रे, दवा",
-            diseases_hi: "दवा की बर्बादी रोकना, भारी बारिश से दवा को धुलने से बचाना, दवा को फैलाना, पत्तियों पर चिपकाना", 
-            crops_hi: "सभी प्रकार की फसलों व स्प्रे के साथ", 
-            dose_hi: "5 ML प्रति 15 LTR पंप", 
+            diseases_hi: "दवा की बर्बादी रोकना, भारी बारिश से दवा को धुलने से बचाना, दवा को फैलाना, पत्तियों पर चिपकाना",
+            crops_hi: "सभी प्रकार की फसलों व स्प्रे के साथ",
+            dose_hi: "5 ML प्रति 15 LTR पंप",
             use_hi: "यह 100% ऑर्गेनो-सिलिकॉन स्प्रेडर (Sticker) है। यह पानी के पृष्ठ तनाव को कम करके दवा को पत्तियों की दोनों सतहों पर तेज़ी से फैलाता और चिपकाता है।",
             how_to_use_hi: "1. 5 ML Silpro को 15 लीटर पानी में मिलाएं।\n2. दवा के साथ मिलाकर उपयोग करें।\n3. छिड़काव से पहले अच्छी तरह हिलाएं।\n4. किसी भी दवा के साथ उपयोग कर सकते हैं।\n5. दवा की प्रभावशीलता बढ़ाता है।",
-            type: "स्टिकर/एडजुवेंट", 
-            bg: "bg-slate-100", 
-            icon: "fa-droplet" 
-        },
-        { 
-            id: 30, 
-            name: "Tara Pretila", 
-            technical: "Pretilachlor 50% EC", 
+            type: "स्टिकर/एडजुवेंट",
+            bg: "bg-slate-100",
+            icon: "fa-droplet"
+        }, {
+            id: 30,
+            name: "Tara Pretila",
+            technical: "Pretilachlor 50% EC",
             tags: "herbicide, paddy, sanwa ghas, motha, धान, खरपतवार",
             desi_tags: "धान, खरपतवार, सांवा, घास, मोथा",
-            diseases_hi: "धान की सांवा घास, मोथा व अन्य जलीय खरपतवार, चौड़ी पत्ती खरपतवार, जलीय घास", 
-            crops_hi: "धान की रोपाई (मुख्य)", 
-            dose_hi: "500 ML प्रति एकड़", 
+            diseases_hi: "धान की सांवा घास, मोथा व अन्य जलीय खरपतवार, चौड़ी पत्ती खरपतवार, जलीय घास",
+            crops_hi: "धान की रोपाई (मुख्य)",
+            dose_hi: "500 ML प्रति एकड़",
             use_hi: "यह एक भरोसेमंद प्री-इमर्जेंस धान खरपतवारनाशक है। रोपाई के तुरंत बाद बालू/यूरिया में मिलाकर डालने से खरपतवारों का अंकुरण रुक जाता है।",
             how_to_use_hi: "1. 500 ML दवा को 200 लीटर पानी में मिलाएं।\n2. धान की रोपाई के 2-3 दिनों के अंदर छिड़काव करें।\n3. खेत में 2-3 इंच पानी होना चाहिए।\n4. सुबह या शाम के समय छिड़काव करें।\n5. 30 दिन बाद आवश्यकतानुसार दोहराएं।",
-            type: "खरपतवारनाशक", 
-            bg: "bg-amber-50", 
-            icon: "fa-plant-wilt" 
-        },
-        { 
-            id: 31, 
-            name: "Telcon", 
-            technical: "Tebuconazole 10% + Sulphur 65% WG", 
+            type: "खरपतवारनाशक",
+            bg: "bg-amber-50",
+            icon: "fa-plant-wilt"
+        }, {
+            id: 31,
+            name: "Telcon",
+            technical: "Tebuconazole 10% + Sulphur 65% WG",
             tags: "fungicide, sheath blight, rust, tikka, कवक",
             desi_tags: "शीथ ब्लाइट, धान, फफूंदी, सल्फर, टिक्का",
-            diseases_hi: "शीथ ब्लाइट (धान की बड़ी बीमारी), टिक्का रोग, पाउडरी मिल्ड्यू, पत्ती धब्बा, रस्ट, फफूंदी, कवक रोग", 
-            crops_hi: "धान (मुख्य), सरसों, आलू, मिर्च, सोयाबीन, गेहूँ, चाय, सब्जियां", 
-            dose_hi: "500 GM प्रति एकड़", 
+            diseases_hi: "शीथ ब्लाइट (धान की बड़ी बीमारी), टिक्का रोग, पाउडरी मिल्ड्यू, पत्ती धब्बा, रस्ट, फफूंदी, कवक रोग",
+            crops_hi: "धान (मुख्य), सरसों, आलू, मिर्च, सोयाबीन, गेहूँ, चाय, सब्जियां",
+            dose_hi: "500 GM प्रति एकड़",
             use_hi: "डबल-एक्शन सिस्टमिक व कॉन्टैक्ट फफूंदनाशक। बीमारियों का खात्मा कर सल्फर का पोषण देता है जिससे पत्तियाँ हरी-भरी रहती हैं।",
             how_to_use_hi: "1. 500 GM दवा को 200 लीटर पानी में मिलाएं।\n2. सुबह के समय छिड़काव करें।\n3. रोग दिखने पर तुरंत उपयोग करें।\n4. 10-12 दिन के अंतराल पर दोहराएं।\n5. बारिश से 3 घंटे पहले न करें।",
-            type: "फफूंदनाशक", 
-            bg: "bg-blue-50", 
-            icon: "fa-leaf" 
-        },
-        { 
-            id: 32, 
-            name: "Velar Pro", 
-            technical: "Gibberellic Acid 0.001% L", 
+            type: "फफूंदनाशक",
+            bg: "bg-blue-50",
+            icon: "fa-leaf"
+        }, {
+            id: 32,
+            name: "Velar Pro",
+            technical: "Gibberellic Acid 0.001% L",
             tags: "tonic, pgr, growth, phool, phal, टॉनिक",
             desi_tags: "टॉनिक, ग्रोथ, फल, फूल, पैदावार",
-            diseases_hi: "फूल व फल का गिरना, छोटा आकार, कम वजन, चमक की कमी, विकास रुकना, कम पैदावार", 
-            crops_hi: "धान, आलू, सरसों, कपास, अंगूर, टमाटर, फलदार पौधे, सब्जियां, बागवानी", 
-            dose_hi: "250-300 ML प्रति एकड़", 
+            diseases_hi: "फूल व फल का गिरना, छोटा आकार, कम वजन, चमक की कमी, विकास रुकना, कम पैदावार",
+            crops_hi: "धान, आलू, सरसों, कपास, अंगूर, टमाटर, फलदार पौधे, सब्जियां, बागवानी",
+            dose_hi: "250-300 ML प्रति एकड़",
             use_hi: "शक्तिशाली प्लांट ग्रोथ रेगुलेटर (PGR/Tonic)। यह कोशिका विभाजन तेज करता है, फूल झड़ने से रोकता है और पैदावार बढ़ाता है।",
             how_to_use_hi: "1. 250 ML दवा को 200 लीटर पानी में मिलाएं।\n2. फूल आने के समय या फल बनने के समय उपयोग करें।\n3. सुबह या शाम के समय छिड़काव करें।\n4. 15 दिन के अंतराल पर दोहराएं।\n5. बारिश से 4 घंटे पहले न करें।",
-            type: "टॉनिक/PGR", 
-            bg: "bg-emerald-50", 
-            icon: "fa-arrow-up-right-dots" 
-        },
-        { 
-            id: 33, 
-            name: "2,4-D Pro", 
-            technical: "2,4-D Amine Salt 58% SL", 
+            type: "टॉनिक/PGR",
+            bg: "bg-emerald-50",
+            icon: "fa-arrow-up-right-dots"
+        }, {
+            id: 33,
+            name: "2,4-D Pro",
+            technical: "2,4-D Amine Salt 58% SL",
             tags: "herbicide, broadleaf, bathua, hirankhuri, खरपतवार",
             desi_tags: "बथुआ, गेहूँ, खरपतवार, घास, चौड़ी पत्ती",
-            diseases_hi: "बथुआ, हिरणखुरी, कासनी, जंगली पालक, खरतुआ, सांटी, मकोय, चौड़ी पत्ती खरपतवार, सभी चौड़ी पत्ती वाले खरपतवार", 
-            crops_hi: "गेहूँ (मुख्य), मक्का, गन्ना, गैर-फसली क्षेत्र", 
-            dose_hi: "400 ML प्रति एकड़", 
+            diseases_hi: "बथुआ, हिरणखुरी, कासनी, जंगली पालक, खरतुआ, सांटी, मकोय, चौड़ी पत्ती खरपतवार, सभी चौड़ी पत्ती वाले खरपतवार",
+            crops_hi: "गेहूँ (मुख्य), मक्का, गन्ना, गैर-फसली क्षेत्र",
+            dose_hi: "400 ML प्रति एकड़",
             use_hi: "यह एक सिस्टमिक सेलेक्टिव हर्बीसाइड है। फसल को बिना नुकसान पहुंचाए चौड़ी पत्ती वाले जिद्दी खरपतवारों को जड़ों सहित सुखा देता है।",
             how_to_use_hi: "1. 400 ML दवा को 200 लीटर पानी में मिलाएं।\n2. बुआई के 30-35 दिन बाद छिड़काव करें।\n3. खरपतवार छोटी हों तब उपयोग करें।\n4. सुबह के समय छिड़काव करें।\n5. अगली बुआई से 2 महीने पहले उपयोग करें।",
-            type: "खरपतवारनाशक", 
-            bg: "bg-amber-50", 
-            icon: "fa-plant-wilt" 
+            type: "खरपतवारनाशक",
+            bg: "bg-amber-50",
+            icon: "fa-plant-wilt"
+        }];
+
+        // ============================================================
+        //  2. FERTILIZER DATABASE
+        // ============================================================
+        const fertilizers = [
+            { name: "यूरिया (Urea 46% N)", use: "पौधों में हरापन लाने और तेज़ी से वानस्पतिक वृद्धि के लिए सबसे ज़रूरी है। यह नाइट्रोजन की पूर्ति करता है। फसल को हरा-भरा बनाता है।" },
+            { name: "डीएपी (DAP 18:46:0)", use: "18% नाइट्रोजन और 46% फास्फोरस। जड़ों के मज़बूत विकास और बीज बनने में मदद करता है। बुआई के समय मिट्टी में मिलाएँ।" },
+            { name: "पोटाश (MOP 60%)", use: "दानों में चमक, वज़न बढ़ाने और पौधे को बीमारियों व मौसम से लड़ने की ताकत देता है।" },
+            { name: "NPK (20:20:13)", use: "20% नाइट्रोजन, 20% फास्फोरस, 13% सल्फर। तिलहन और दलहन फसलों के लिए संतुलित विकास।" },
+            { name: "NPK (16:16:16)", use: "नाइट्रोजन, फास्फोरस और पोटाश तीनों 16-16%। फसल की सम्पूर्ण ग्रोथ और बेहतर पैदावार के लिए संपूर्ण खुराक।" }
+        ];
+
+        // ============================================================
+        //  3. SHOP DETAILS (UPDATED PHONE)
+        // ============================================================
+        const shopDetails = {
+            name: "तारा चंद धर्म चंद",
+            shopNumber: "164",
+            market: "न्यू अनाज मंडी",
+            city: "इस्माइलाबाद",
+            phone: "+91 9416088603",
+            fullAddress: "दुकान नंबर 164, न्यू अनाज मंडी, इस्माइलाबाद"
+        };
+
+        // ============================================================
+        //  4. ENHANCED WORD MAP - TECHNICAL NAME MAPPING
+        //     जब कोई user technical name लिखे तो exact product match हो
+        // ============================================================
+        const technicalWordMap = {
+            // Technical names mapped to product IDs
+            "azoxystrobin": 2,
+            "difenoconazole": 2,
+            "tebuconazole": 3,
+            "atrazine": 4,
+            "bifenthrin": 5,
+            "mycorrhizal": 6,
+            "carbendazim": 8,
+            "mancozeb": 7,
+            "chlorpyriphos": 9,
+            "cypermethrin": 9,
+            "cartap hydrochloride": 10,
+            "dinotefuran": 11,
+            "pymetrozine": 11,
+            "deltamethrin": 12,
+            "emamectin benzoate": 13,
+            "thiamethoxam": 14,
+            "lambda-cyhalothrin": 14,
+            "fipronil": 15,
+            "carbofuran": 16,
+            "chlorantraniliprole": 17,
+            "indoxacarb": 18,
+            "acetamiprid": 18,
+            "sulphur": 28,
+            "pretilachlor": 26,
+            "gibberellic acid": 32,
+            "2,4-d amine salt": 33,
+            "fulvic acid": 1,
+            "potassium humic acid": 1,
+            "malathion": 23,
+            "metribuzin": 24,
+            "pymetrozine": 27,
+            "lambda cyhalothrin": 20,
+            "thiamethoxam": 22,
+            "thiomethoxam": 22,
+            "coragen": 17,
+            "azoxistrobin": 2,
+            "difenoconazole": 2,
+            "emamectin": 13,
+            "chlorpyriphos": 9,
+            "cypermethrin": 9,
+            "bifenthrin": 5,
+            "fipronil": 15,
+            "carbofuran": 16,
+            "indoxacarb": 18,
+            "acetamiprid": 18,
+            "deltamethrin": 12,
+            "mancozeb": 7,
+            "carbendazim": 8,
+            "metribuzin": 24,
+            "pretilachlor": 26,
+            "sulphur": 28,
+            "gibberellic": 32,
+            "malathion": 23,
+            "pymetrozine": 27
+        };
+
+        // ============================================================
+        //  5. HINDI WORD MAP (Desi names)
+        // ============================================================
+        const hindiWordMap = {
+            // Crops
+            "धान": "dhan",
+            "पैडी": "dhan",
+            "paddy": "dhan",
+            "जीरी": "dhan",
+            "चावल": "dhan",
+            "धानी": "dhan",
+            "धान का": "dhan",
+            "गेहूं": "gehu",
+            "गेहूँ": "gehu",
+            "wheat": "gehu",
+            "कनक": "gehu",
+            "गंधम": "gehu",
+            "गेहूं की": "gehu",
+            "कपास": "kapas",
+            "cotton": "kapas",
+            "नरमा": "kapas",
+            "सूत": "kapas",
+            "कपासी": "kapas",
+            "सरसों": "sarso",
+            "mustard": "sarso",
+            "सरसो": "sarso",
+            "राई": "sarso",
+            "सरसों का": "sarso",
+            "आलू": "aalu",
+            "potato": "aalu",
+            "अलू": "aalu",
+            "आलु": "aalu",
+            "आलू की": "aalu",
+            "गन्ना": "ganna",
+            "sugarcane": "ganna",
+            "ईख": "ganna",
+            "गन्ने": "ganna",
+            "गन्ना का": "ganna",
+            "मक्का": "makka",
+            "maize": "makka",
+            "भुट्टा": "makka",
+            "मकई": "makka",
+            "मक्का का": "makka",
+            "सूरजमुखी": "surajmukhi",
+            "sunflower": "surajmukhi",
+            "सुरजमुखी": "surajmukhi",
+            "मिर्च": "mirch",
+            "टमाटर": "tamatar",
+            "सोयाबीन": "soybean",
+            "मूंगफली": "moongfali",
+            "चना": "chana",
+            "मटर": "matar",
+            "प्याज": "pyaaz",
+            "बैंगन": "baingan",
+            "गोभी": "gobhi",
+            "पत्ता गोभी": "gobhi",
+            "भिंडी": "bhindi",
+            "सेब": "seb",
+            "अंगूर": "angoor",
+            "आम": "aam",
+            "बागवानी": "bagwani",
+            "सब्जी": "sabji",
+            "फल": "phal",
+            "चाय": "chai",
+            "अमरूद": "amrood",
+            "नींबू": "nimbu",
+            "संतरा": "santara",
+            "किसान": "kisan",
+            "खेत": "khet",
+            "फसल": "fasal",
+            "फसलों": "fasal",
+            // Diseases
+            "झुलसा": "jhulsa",
+            "ब्लास्ट": "blast",
+            "अगेती": "ageti",
+            "पछेती": "pacheti",
+            "सड़न": "sadan",
+            "पीला": "pilapan",
+            "पीलापन": "pilapan",
+            "सूखा": "sookha",
+            "फफूंद": "faphund",
+            "फफूंदी": "faphund",
+            "कवक": "faphund",
+            "उकठा": "wilt",
+            "मिल्ड्यू": "mildew",
+            "रस्ट": "rust",
+            "ब्लाइट": "blight",
+            "धब्बा": "spot",
+            "टिक्का": "tikka",
+            "हल्दी": "false smut",
+            "हल्दी रोग": "false smut",
+            "शीथ ब्लाइट": "sheath blight",
+            "पत्ती धब्बा": "leaf spot",
+            "डाउनी मिल्ड्यू": "downy mildew",
+            "एंथ्रेक्नोज": "anthracnose",
+            "फ्रूट रोट": "fruit rot",
+            "पाउडरी मिल्ड्यू": "powdery mildew",
+            "चूर्णिल फफूंदी": "powdery mildew",
+            // Pests
+            "दीमक": "deemak",
+            "इल्ली": "illi",
+            "सुंडी": "sundi",
+            "मक्खी": "makkhi",
+            "सफेद": "safed",
+            "तना": "tana",
+            "जड़": "jad",
+            "चूसक": "choosak",
+            "तेला": "tela",
+            "माहू": "mahu",
+            "चेपा": "chepa",
+            "घुन": "ghun",
+            "फड़का": "fadka",
+            "भोंड": "bhond",
+            "हॉपर": "hopper",
+            "थ्रिप्स": "thrips",
+            "निमाटोड": "nematode",
+            "कीड़ा": "keeda",
+            "मकड़ी": "makdi",
+            "बीपीएच": "bph",
+            "पत्ता लपेट": "leaf folder",
+            "पत्ता मोड़क": "leaf folder",
+            "तना छेदक": "stem borer",
+            "फल छेदक": "fruit borer",
+            "चित्तीदार": "spotted",
+            "अमेरिकन": "american",
+            "सफेद मक्खी": "whitefly",
+            "लाल मकड़ी": "red mite",
+            "पीली मकड़ी": "yellow mite",
+            "कटवर्म": "cutworm",
+            "भुंडी": "bhundi",
+            "कैटरपिलर": "caterpillar",
+            "बीटल": "beetle",
+            "हरा मच्छर": "green mosquito",
+            "चोंगा": "chonga",
+            "भूनगा": "bhoonga",
+            // Weeds
+            "खरपतवार": "kharpatwar",
+            "घास": "ghas",
+            "चौड़ी": "chaudi",
+            "पत्ती": "patti",
+            "बथुआ": "bathua",
+            "सांवा": "sanwa",
+            "मोथा": "motha",
+            "हिरणखुरी": "hirankhuri",
+            "गुल्ली": "gulli",
+            "डंडा": "danda",
+            "मकोय": "makoy",
+            "पालक": "palak",
+            "सांटी": "santi",
+            "गाजर घास": "gajar ghas",
+            "जंगली पालक": "jungli palak",
+            // General
+            "दवा": "medicine",
+            "दवाई": "medicine",
+            "बीमारी": "disease",
+            "रोग": "disease",
+            "खाद": "fertilizer",
+            "कीट": "insect",
+            "कीटनाशक": "insecticide",
+            "फफूंदनाशक": "fungicide",
+            "खरपतवारनाशक": "herbicide",
+            "टॉनिक": "tonic",
+            "बीज": "seed",
+            "बीज उपचार": "seed treatment",
+            "भंडारण": "storage",
+            "दुकान": "shop",
+            "पता": "address",
+            "कहाँ": "where",
+            "लेना": "take",
+            "मिलेगा": "available",
+            // Products (Desi)
+            "फिप्रो": "fipro",
+            "fipro": "fipro",
+            "fipronil": "fipro",
+            "फिपरोनिल": "fipro",
+            "कोरागेन": "coragen",
+            "coragen": "coragen",
+            "कोरजन": "coragen",
+            "ऑरा": "aura",
+            "aura": "aura",
+            "एज़ोफी": "azofi",
+            "एज़ोटॉन": "azoton",
+            "एट्रा": "atra",
+            "बिफको": "bifco",
+            "कैमरॉन": "camron",
+            "कार्बको": "carbco",
+            "क्रिप्टो": "crypto",
+            "कार्टाप": "cartap",
+            "डाइनोज़ोन": "dinozone",
+            "डाइनेस": "dainese",
+            "एंडेको": "endeco",
+            "फ़ेंको": "fenco",
+            "फ़ेरिको": "ferico",
+            "गब्बर": "gabbar",
+            "ग्रैंडो": "grando",
+            "लैमप्रो": "lampro",
+            "लैंको": "lanco",
+            "लैंकस": "lancus",
+            "माला": "mala",
+            "मेट्री": "metri",
+            "मार्वल": "marvel",
+            "प्रेटिको": "pretico",
+            "पाइप्रो": "pypro",
+            "सल्फको": "sulco",
+            "सिलप्रो": "silpro",
+            "टेलकॉन": "telcon",
+            "वेलर": "velar",
+            "चिपकू": "sticker",
+            "sticker": "sticker",
+            "स्टिकर": "sticker",
+            "2,4-D": "2,4-d",
+            "2-4-D": "2,4-d",
+            "2,4डी": "2,4-d"
+        };
+
+        const stopWords = ['ki', 'ka', 'ke', 'hai', 'mein', 'me', 'ko', 'se', 'batao', 'dawa', 'dawai', 'kya', 'kaun', 'si',
+            'lagau', 'kare', 'karti', 'kaam', 'aur', 'karna', 'kese', 'chahie', 'chahiye', 'karo', 'dikhao', 'list', 'hai?',
+            'है', 'की', 'दवा', 'दवाई', 'क्या', 'बताओ', 'लगाऊं', 'लगाएं', 'करती', 'काम', 'कैसे', 'करे', 'डालें', 'डालू', 'कौन',
+            'सी', 'लिए', 'लगाए', 'लगाना', 'मारने', 'खत्म', 'दे', 'दो', 'मुझे', 'आप', 'तुम्हारा', 'बताइये', 'बताओ', 'हो',
+            'गया', 'गई', 'गए', 'रहा', 'रही', 'रहे', 'हूँ', 'हों', 'था', 'थी', 'थे', 'ना', 'नहीं', 'करो', 'करें', 'बतायें',
+            'बताएं', 'जी', 'हाँ', 'हां', 'नमस्ते', 'प्रणाम', 'नमस्कार'
+        ];
+
+        // ============================================================
+        //  6. VOICE / SPEECH RECOGNITION
+        // ============================================================
+        let isSpeakerOn = true;
+        let isListening = false;
+        let recognition = null;
+        let currentUtterance = null;
+
+        if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+            const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+            recognition = new SR();
+            recognition.lang = 'hi-IN';
+            recognition.interimResults = true;
+            recognition.continuous = false;
+
+            recognition.onstart = () => {
+                isListening = true;
+                document.getElementById('micBtn').classList.add('listening');
+                document.getElementById('listenStatus').classList.add('show');
+                document.getElementById('userInput').placeholder = 'सुन रहा हूँ... बोलिए';
+                window.speechSynthesis.cancel();
+            };
+
+            recognition.onresult = (event) => {
+                let final = '';
+                let interim = '';
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    if (event.results[i].isFinal) final += event.results[i][0].transcript;
+                    else interim += event.results[i][0].transcript;
+                }
+                const text = final || interim;
+                document.getElementById('userInput').value = text;
+                autoResize(document.getElementById('userInput'));
+            };
+
+            recognition.onerror = (e) => {
+                console.error('Speech Error:', e.error);
+                stopListening();
+            };
+
+            recognition.onend = () => {
+                stopListening();
+                const val = document.getElementById('userInput').value.trim();
+                if (val !== '') {
+                    processUserInput();
+                }
+            };
         }
-    ];
 
-    // ============================================================
-    //  2. FERTILIZER DATABASE
-    // ============================================================
-    const fertilizers = [
-        { name: "यूरिया (Urea 46% N)", use: "पौधों में हरापन लाने और तेज़ी से वानस्पतिक वृद्धि के लिए सबसे ज़रूरी है। यह नाइट्रोजन की पूर्ति करता है। फसल को हरा-भरा बनाता है।" },
-        { name: "डीएपी (DAP 18:46:0)", use: "18% नाइट्रोजन और 46% फास्फोरस। जड़ों के मज़बूत विकास और बीज बनने में मदद करता है। बुआई के समय मिट्टी में मिलाएँ।" },
-        { name: "पोटाश (MOP 60%)", use: "दानों में चमक, वज़न बढ़ाने और पौधे को बीमारियों व मौसम से लड़ने की ताकत देता है।" },
-        { name: "NPK (20:20:13)", use: "20% नाइट्रोजन, 20% फास्फोरस, 13% सल्फर। तिलहन और दलहन फसलों के लिए संतुलित विकास।" },
-        { name: "NPK (16:16:16)", use: "नाइट्रोजन, फास्फोरस और पोटाश तीनों 16-16%। फसल की सम्पूर्ण ग्रोथ और बेहतर पैदावार के लिए संपूर्ण खुराक।" }
-    ];
+        function toggleMic() {
+            if (!recognition) return alert('आपके ब्राउज़र में माइक सपोर्ट नहीं है। कृपया Google Chrome का उपयोग करें।');
+            if (isListening) recognition.stop();
+            else { document.getElementById('userInput').value = '';
+                recognition.start(); }
+        }
 
-    // ============================================================
-    //  3. SHOP DETAILS
-    // ============================================================
-    const shopDetails = {
-        name: "तारा चंद धर्म चंद",
-        shopNumber: "164",
-        market: "न्यू अनाज मंडी",
-        city: "इस्माइलाबाद",
-        phone: "+91 7357100008",
-        fullAddress: "दुकान नंबर 164, न्यू अनाज मंडी, इस्माइलाबाद"
-    };
+        function stopListening() {
+            isListening = false;
+            document.getElementById('micBtn').classList.remove('listening');
+            document.getElementById('listenStatus').classList.remove('show');
+            document.getElementById('userInput').placeholder = 'यहाँ लिखें या माइक दबाकर बोलें...';
+        }
 
-    // ============================================================
-    //  4. DESI LANGUAGE WORD MAP
-    // ============================================================
-    const hindiWordMap = {
-        // Crops
-        "धान": "dhan", "पैडी": "dhan", "paddy": "dhan", "जीरी": "dhan", "चावल": "dhan", "धानी": "dhan", "धान का": "dhan",
-        "गेहूं": "gehu", "गेहूँ": "gehu", "wheat": "gehu", "कनक": "gehu", "गंधम": "gehu", "गेहूं की": "gehu",
-        "कपास": "kapas", "cotton": "kapas", "नरमा": "kapas", "सूत": "kapas", "कपासी": "kapas",
-        "सरसों": "sarso", "mustard": "sarso", "सरसो": "sarso", "राई": "sarso", "सरसों का": "sarso",
-        "आलू": "aalu", "potato": "aalu", "अलू": "aalu", "आलु": "aalu", "आलू की": "aalu",
-        "गन्ना": "ganna", "sugarcane": "ganna", "ईख": "ganna", "गन्ने": "ganna", "गन्ना का": "ganna",
-        "मक्का": "makka", "maize": "makka", "भुट्टा": "makka", "मकई": "makka", "मक्का का": "makka",
-        "सूरजमुखी": "surajmukhi", "sunflower": "surajmukhi", "सुरजमुखी": "surajmukhi",
-        "मिर्च": "mirch", "टमाटर": "tamatar", "सोयाबीन": "soybean",
-        "मूंगफली": "moongfali", "चना": "chana", "मटर": "matar",
-        "प्याज": "pyaaz", "बैंगन": "baingan", "गोभी": "gobhi", "पत्ता गोभी": "gobhi",
-        "भिंडी": "bhindi", "सेब": "seb", "अंगूर": "angoor",
-        "आम": "aam", "बागवानी": "bagwani", "सब्जी": "sabji", "फल": "phal",
-        "चाय": "chai", "अमरूद": "amrood", "नींबू": "nimbu", "संतरा": "santara",
-        "किसान": "kisan", "खेत": "khet", "फसल": "fasal", "फसलों": "fasal",
-        // Diseases
-        "झुलसा": "jhulsa", "ब्लास्ट": "blast", "अगेती": "ageti", "पछेती": "pacheti",
-        "सड़न": "sadan", "पीला": "pilapan", "पीलापन": "pilapan", "सूखा": "sookha",
-        "फफूंद": "faphund", "फफूंदी": "faphund", "कवक": "faphund", "उकठा": "wilt",
-        "मिल्ड्यू": "mildew", "रस्ट": "rust", "ब्लाइट": "blight", "धब्बा": "spot",
-        "टिक्का": "tikka", "हल्दी": "false smut", "हल्दी रोग": "false smut",
-        "शीथ ब्लाइट": "sheath blight", "पत्ती धब्बा": "leaf spot",
-        "डाउनी मिल्ड्यू": "downy mildew", "एंथ्रेक्नोज": "anthracnose", "फ्रूट रोट": "fruit rot",
-        "पाउडरी मिल्ड्यू": "powdery mildew", "चूर्णिल फफूंदी": "powdery mildew",
-        // Pests
-        "दीमक": "deemak", "इल्ली": "illi", "सुंडी": "sundi", "मक्खी": "makkhi",
-        "सफेद": "safed", "तना": "tana", "जड़": "jad", "चूसक": "choosak",
-        "तेला": "tela", "माहू": "mahu", "चेपा": "chepa", "घुन": "ghun",
-        "फड़का": "fadka", "भोंड": "bhond", "हॉपर": "hopper", "थ्रिप्स": "thrips",
-        "निमाटोड": "nematode", "कीड़ा": "keeda", "मकड़ी": "makdi", "बीपीएच": "bph",
-        "पत्ता लपेट": "leaf folder", "पत्ता मोड़क": "leaf folder", "तना छेदक": "stem borer",
-        "फल छेदक": "fruit borer", "चित्तीदार": "spotted", "अमेरिकन": "american",
-        "सफेद मक्खी": "whitefly", "लाल मकड़ी": "red mite", "पीली मकड़ी": "yellow mite",
-        "कटवर्म": "cutworm", "भुंडी": "bhundi", "कैटरपिलर": "caterpillar", "बीटल": "beetle",
-        "हरा मच्छर": "green mosquito", "चोंगा": "chonga", "भूनगा": "bhoonga",
-        // Weeds
-        "खरपतवार": "kharpatwar", "घास": "ghas", "चौड़ी": "chaudi", "पत्ती": "patti",
-        "बथुआ": "bathua", "सांवा": "sanwa", "मोथा": "motha", "हिरणखुरी": "hirankhuri",
-        "गुल्ली": "gulli", "डंडा": "danda", "मकोय": "makoy", "पालक": "palak",
-        "सांटी": "santi", "गाजर घास": "gajar ghas", "जंगली पालक": "jungli palak",
-        // General
-        "दवा": "medicine", "दवाई": "medicine", "बीमारी": "disease", "रोग": "disease",
-        "खाद": "fertilizer", "कीट": "insect", "कीटनाशक": "insecticide",
-        "फफूंदनाशक": "fungicide", "खरपतवारनाशक": "herbicide", "टॉनिक": "tonic",
-        "बीज": "seed", "बीज उपचार": "seed treatment", "भंडारण": "storage",
-        "दुकान": "shop", "पता": "address", "कहाँ": "where", "लेना": "take", "मिलेगा": "available",
-        // Products
-        "फिप्रो": "fipro", "fipro": "fipro", "fipronil": "fipro", "फिपरोनिल": "fipro",
-        "कोरागेन": "coragen", "coragen": "coragen", "कोरजन": "coragen",
-        "ऑरा": "aura", "aura": "aura", "एज़ोफी": "azofi", "एज़ोटॉन": "azoton",
-        "एट्रा": "atra", "बिफको": "bifco", "कैमरॉन": "camron", "कार्बको": "carbco",
-        "क्रिप्टो": "crypto", "कार्टाप": "cartap", "डाइनोज़ोन": "dinozone",
-        "डाइनेस": "dainese", "एंडेको": "endeco", "फ़ेंको": "fenco", "फ़ेरिको": "ferico",
-        "गब्बर": "gabbar", "ग्रैंडो": "grando", "लैमप्रो": "lampro",
-        "लैंको": "lanco", "लैंकस": "lancus", "माला": "mala", "मेट्री": "metri",
-        "मार्वल": "marvel", "प्रेटिको": "pretico", "पाइप्रो": "pypro",
-        "सल्फको": "sulco", "सिलप्रो": "silpro", "टेलकॉन": "telcon", "वेलर": "velar",
-        "चिपकू": "sticker", "sticker": "sticker", "स्टिकर": "sticker",
-        "2,4-D": "2,4-d", "2-4-D": "2,4-d", "2,4डी": "2,4-d"
-    };
-
-    const stopWords = ['ki', 'ka', 'ke', 'hai', 'mein', 'me', 'ko', 'se', 'batao', 'dawa', 'dawai', 'kya', 'kaun', 'si', 'lagau', 'kare', 'karti', 'kaam', 'aur', 'karna', 'kese', 'chahie', 'chahiye', 'karo', 'dikhao', 'list', 'hai?', 'है', 'की', 'दवा', 'दवाई', 'क्या', 'बताओ', 'लगाऊं', 'लगाएं', 'करती', 'काम', 'कैसे', 'करे', 'डालें', 'डालू', 'कौन', 'सी', 'लिए', 'लगाए', 'लगाना', 'मारने', 'खत्म', 'दे', 'दो', 'मुझे', 'आप', 'तुम्हारा', 'बताइये', 'बताओ', 'हो', 'गया', 'गई', 'गए', 'रहा', 'रही', 'रहे', 'हूँ', 'हों', 'था', 'थी', 'थे', 'ना', 'नहीं', 'करो', 'करें', 'बतायें', 'बताएं', 'जी', 'हाँ', 'हां', 'नमस्ते', 'प्रणाम', 'नमस्कार'];
-
-    // ============================================================
-    //  5. VOICE / SPEECH RECOGNITION
-    // ============================================================
-    let isSpeakerOn = true;
-    let isListening = false;
-    let recognition = null;
-    let currentUtterance = null;
-
-    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-        const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-        recognition = new SR();
-        recognition.lang = 'hi-IN';
-        recognition.interimResults = true;
-        recognition.continuous = false;
-
-        recognition.onstart = () => {
-            isListening = true;
-            document.getElementById('micBtn').classList.add('listening');
-            document.getElementById('listenStatus').classList.add('show');
-            document.getElementById('userInput').placeholder = 'सुन रहा हूँ... बोलिए';
-            window.speechSynthesis.cancel();
-        };
-
-        recognition.onresult = (event) => {
-            let final = '';
-            let interim = '';
-            for (let i = event.resultIndex; i < event.results.length; i++) {
-                if (event.results[i].isFinal) final += event.results[i][0].transcript;
-                else interim += event.results[i][0].transcript;
+        function toggleSpeaker() {
+            isSpeakerOn = !isSpeakerOn;
+            const btn = document.getElementById('speakerToggle');
+            if (isSpeakerOn) {
+                btn.innerHTML = '<i class="fa-solid fa-volume-high text-sm"></i>';
+                btn.classList.remove('bg-red-500/40');
+                btn.classList.add('bg-white/10');
+            } else {
+                btn.innerHTML = '<i class="fa-solid fa-volume-xmark text-sm"></i>';
+                btn.classList.remove('bg-white/10');
+                btn.classList.add('bg-red-500/40');
+                window.speechSynthesis.cancel();
             }
-            const text = final || interim;
-            document.getElementById('userInput').value = text;
-            autoResize(document.getElementById('userInput'));
-        };
+        }
 
-        recognition.onerror = (e) => {
-            console.error('Speech Error:', e.error);
-            stopListening();
-        };
+        function getHindiVoice() {
+            const voices = window.speechSynthesis.getVoices();
+            return voices.find(v => v.name.includes('Google हिन्दी')) || voices.find(v => v.lang === 'hi-IN') || null;
+        }
+        if ('speechSynthesis' in window) {
+            speechSynthesis.onvoiceschanged = () => getHindiVoice();
+        }
 
-        recognition.onend = () => {
-            stopListening();
-            const val = document.getElementById('userInput').value.trim();
-            if (val !== '') {
+        function speakText(text, avatarElement) {
+            const voiceToggle = document.getElementById('voiceReplyToggle');
+            if (!voiceToggle.checked || !('speechSynthesis' in window) || !isSpeakerOn) return;
+            window.speechSynthesis.cancel();
+            const clean = text.replace(/[^\w\s.,!?;:()\-]/g, '').trim();
+            currentUtterance = new SpeechSynthesisUtterance(clean);
+            currentUtterance.lang = 'hi-IN';
+            currentUtterance.rate = 0.95;
+            currentUtterance.pitch = 1.0;
+            const hv = getHindiVoice();
+            if (hv) currentUtterance.voice = hv;
+            currentUtterance.onstart = () => { if (avatarElement) avatarElement.classList.add('speaking'); };
+            currentUtterance.onend = () => { if (avatarElement) avatarElement.classList.remove('speaking'); };
+            currentUtterance.onerror = () => { if (avatarElement) avatarElement.classList.remove('speaking'); };
+            window.speechSynthesis.speak(currentUtterance);
+        }
+
+        // ============================================================
+        //  7. UI CONTROLS
+        // ============================================================
+        const userInput = document.getElementById('userInput');
+        const sendBtn = document.getElementById('sendBtn');
+        const micBtn = document.getElementById('micBtn');
+
+        function handleInputChange(textarea) {
+            autoResize(textarea);
+        }
+
+        function autoResize(textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = (textarea.scrollHeight < 120 ? textarea.scrollHeight : 120) + 'px';
+        }
+
+        function handleEnter(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
                 processUserInput();
             }
-        };
-    }
-
-    function toggleMic() {
-        if (!recognition) return alert('आपके ब्राउज़र में माइक सपोर्ट नहीं है। कृपया Google Chrome का उपयोग करें।');
-        if (isListening) recognition.stop();
-        else { document.getElementById('userInput').value = ''; recognition.start(); }
-    }
-
-    function stopListening() {
-        isListening = false;
-        document.getElementById('micBtn').classList.remove('listening');
-        document.getElementById('listenStatus').classList.remove('show');
-        document.getElementById('userInput').placeholder = 'यहाँ लिखें या माइक दबाकर बोलें...';
-    }
-
-    function toggleSpeaker() {
-        isSpeakerOn = !isSpeakerOn;
-        const btn = document.getElementById('speakerToggle');
-        if (isSpeakerOn) {
-            btn.innerHTML = '<i class="fa-solid fa-volume-high text-sm"></i>';
-            btn.classList.remove('bg-red-500/40');
-            btn.classList.add('bg-white/10');
-        } else {
-            btn.innerHTML = '<i class="fa-solid fa-volume-xmark text-sm"></i>';
-            btn.classList.remove('bg-white/10');
-            btn.classList.add('bg-red-500/40');
-            window.speechSynthesis.cancel();
         }
-    }
 
-    function getHindiVoice() {
-        const voices = window.speechSynthesis.getVoices();
-        return voices.find(v => v.name.includes('Google हिन्दी')) || voices.find(v => v.lang === 'hi-IN') || null;
-    }
-    if ('speechSynthesis' in window) {
-        speechSynthesis.onvoiceschanged = () => getHindiVoice();
-    }
-
-    function speakText(text, avatarElement) {
-        const voiceToggle = document.getElementById('voiceReplyToggle');
-        if (!voiceToggle.checked || !('speechSynthesis' in window) || !isSpeakerOn) return;
-        window.speechSynthesis.cancel();
-        // Remove any emoji or special characters for clean voice
-        const clean = text.replace(/[^\w\s.,!?;:()\-]/g, '').trim();
-        currentUtterance = new SpeechSynthesisUtterance(clean);
-        currentUtterance.lang = 'hi-IN';
-        currentUtterance.rate = 0.95;
-        currentUtterance.pitch = 1.0;
-        const hv = getHindiVoice();
-        if (hv) currentUtterance.voice = hv;
-        currentUtterance.onstart = () => { if (avatarElement) avatarElement.classList.add('speaking'); };
-        currentUtterance.onend = () => { if (avatarElement) avatarElement.classList.remove('speaking'); };
-        currentUtterance.onerror = () => { if (avatarElement) avatarElement.classList.remove('speaking'); };
-        window.speechSynthesis.speak(currentUtterance);
-    }
-
-    // ============================================================
-    //  6. UI CONTROLS
-    // ============================================================
-    const userInput = document.getElementById('userInput');
-    const sendBtn = document.getElementById('sendBtn');
-    const micBtn = document.getElementById('micBtn');
-
-    function handleInputChange(textarea) {
-        autoResize(textarea);
-    }
-
-    function autoResize(textarea) {
-        textarea.style.height = 'auto';
-        textarea.style.height = (textarea.scrollHeight < 120 ? textarea.scrollHeight : 120) + 'px';
-    }
-
-    function handleEnter(e) {
-        if (e.key === 'Enter' && !e.shiftKey) {
-            e.preventDefault();
-            processUserInput();
+        function scrollToBottom() {
+            setTimeout(() => {
+                document.getElementById('chatArea').scrollTo({
+                    top: document.getElementById('chatArea').scrollHeight,
+                    behavior: 'smooth'
+                });
+            }, 60);
         }
-    }
 
-    function scrollToBottom() {
-        setTimeout(() => {
-            document.getElementById('chatArea').scrollTo({
-                top: document.getElementById('chatArea').scrollHeight,
-                behavior: 'smooth'
-            });
-        }, 60);
-    }
-
-    function appendUserMessage(text) {
-        const html = `<div class="message user-message">
+        function appendUserMessage(text) {
+            const html = `<div class="message user-message">
             <div class="bubble user-bubble">${text}</div>
             <div class="avatar user-avatar"><i class="fa-solid fa-user text-sm"></i></div>
         </div>`;
-        document.getElementById('chatArea').insertAdjacentHTML('beforeend', html);
-        scrollToBottom();
-    }
+            document.getElementById('chatArea').insertAdjacentHTML('beforeend', html);
+            scrollToBottom();
+        }
 
-    function appendBotMessage(htmlContent, conversationalText) {
-        const uid = 'bot-av-' + Date.now();
-        const html = `<div class="message bot-message">
+        function appendBotMessage(htmlContent, conversationalText) {
+            const uid = 'bot-av-' + Date.now();
+            const html = `<div class="message bot-message">
             <div id="${uid}" class="avatar bot-avatar" onclick="speakText('${conversationalText || ''}', this)">
                 <i class="fa-solid fa-robot"></i>
             </div>
             <div class="bubble bot-bubble">${htmlContent}</div>
         </div>`;
-        document.getElementById('chatArea').insertAdjacentHTML('beforeend', html);
-        scrollToBottom();
-        if (conversationalText) {
-            setTimeout(() => speakText(conversationalText, document.getElementById(uid)), 300);
+            document.getElementById('chatArea').insertAdjacentHTML('beforeend', html);
+            scrollToBottom();
+            if (conversationalText) {
+                setTimeout(() => speakText(conversationalText, document.getElementById(uid)), 300);
+            }
         }
-    }
 
-    function showTypingIndicator() {
-        const id = 'typing-' + Date.now();
-        const html = `<div id="${id}" class="message bot-message">
+        function showTypingIndicator() {
+            const id = 'typing-' + Date.now();
+            const html = `<div id="${id}" class="message bot-message">
             <div class="avatar bot-avatar"><i class="fa-solid fa-robot"></i></div>
             <div class="bubble bot-bubble">
                 <div class="typing-indicator">
@@ -1317,54 +1584,57 @@
                 </div>
             </div>
         </div>`;
-        document.getElementById('chatArea').insertAdjacentHTML('beforeend', html);
-        scrollToBottom();
-        return id;
-    }
+            document.getElementById('chatArea').insertAdjacentHTML('beforeend', html);
+            scrollToBottom();
+            return id;
+        }
 
-    function sendQuickMessage(text) {
-        userInput.value = text;
-        processUserInput();
-    }
+        function sendQuickMessage(text) {
+            userInput.value = text;
+            processUserInput();
+        }
 
-    function getEditDistance(a, b) {
-        if (a.length === 0) return b.length;
-        if (b.length === 0) return a.length;
-        const matrix = [];
-        for (let i = 0; i <= b.length; i++) matrix[i] = [i];
-        for (let j = 0; j <= a.length; j++) matrix[0][j] = j;
-        for (let i = 1; i <= b.length; i++) {
-            for (let j = 1; j <= a.length; j++) {
-                if (b.charAt(i - 1) === a.charAt(j - 1)) matrix[i][j] = matrix[i - 1][j - 1];
-                else matrix[i][j] = Math.min(matrix[i - 1][j - 1] + 1, Math.min(matrix[i][j - 1] + 1, matrix[i - 1][j] + 1));
+        function getEditDistance(a, b) {
+            if (a.length === 0) return b.length;
+            if (b.length === 0) return a.length;
+            const matrix = [];
+            for (let i = 0; i <= b.length; i++) matrix[i] = [i];
+            for (let j = 0; j <= a.length; j++) matrix[0][j] = j;
+            for (let i = 1; i <= b.length; i++) {
+                for (let j = 1; j <= a.length; j++) {
+                    if (b.charAt(i - 1) === a.charAt(j - 1)) matrix[i][j] = matrix[i - 1][j - 1];
+                    else matrix[i][j] = Math.min(matrix[i - 1][j - 1] + 1, Math.min(matrix[i][j - 1] + 1, matrix[i - 1][j] +
+                        1));
+                }
+            }
+            return matrix[b.length][a.length];
+        }
+
+        function toggleDetails(id, btn) {
+            const content = document.getElementById(id);
+            const icon = btn.querySelector('.fa-chevron-down');
+            if (content.classList.contains('show')) {
+                content.classList.remove('show');
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                content.classList.add('show');
+                icon.style.transform = 'rotate(180deg)';
+                setTimeout(scrollToBottom, 100);
             }
         }
-        return matrix[b.length][a.length];
-    }
 
-    function toggleDetails(id, btn) {
-        const content = document.getElementById(id);
-        const icon = btn.querySelector('.fa-chevron-down');
-        if (content.classList.contains('show')) {
-            content.classList.remove('show');
-            icon.style.transform = 'rotate(0deg)';
-        } else {
-            content.classList.add('show');
-            icon.style.transform = 'rotate(180deg)';
-            setTimeout(scrollToBottom, 100);
-        }
-    }
+        // ============================================================
+        //  8. SPECIAL CASES (SHOP, DISEASES, FERTILIZERS, ETC)
+        // ============================================================
+        function handleSpecialCases(query) {
+            const q = query.toLowerCase();
 
-    // ============================================================
-    //  7. SPECIAL CASES (SHOP, DISEASES, FERTILIZERS, ETC)
-    // ============================================================
-    function handleSpecialCases(query) {
-        const q = query.toLowerCase();
-
-        // SHOP ADDRESS
-        if (q.includes('दवा कहाँ') || q.includes('दवा कहा') || q.includes('दुकान') || q.includes('shop') || q.includes('पता') || 
-            q.includes('कहाँ से लें') || q.includes('कहा से लें') || q.includes('मिलेगी') || q.includes('लेनी है') || q.includes('कहां मिलेगी')) {
-            const html = `
+            // SHOP ADDRESS
+            if (q.includes('दवा कहाँ') || q.includes('दवा कहा') || q.includes('दुकान') || q.includes('shop') || q.includes(
+                    'पता') ||
+                q.includes('कहाँ से लें') || q.includes('कहा से लें') || q.includes('मिलेगी') || q.includes('लेनी है') || q
+                .includes('कहां मिलेगी')) {
+                const html = `
                 <div class="shop-card">
                     <p class="shop-name"><i class="fa-solid fa-store"></i> ${shopDetails.name}</p>
                     <p class="shop-detail"><i class="fa-solid fa-hashtag"></i> दुकान नंबर: ${shopDetails.shopNumber}</p>
@@ -1374,242 +1644,366 @@
                 </div>
                 <p class="text-[13px] text-slate-600 mt-2">आप ऊपर दिए गए पते पर आकर सभी तरह की कृषि दवाइयाँ और खाद प्राप्त कर सकते हैं।</p>
             `;
-            appendBotMessage(html, `${shopDetails.name} की दुकान ${shopDetails.fullAddress} पर स्थित है। फोन नंबर ${shopDetails.phone} है।`);
-            return true;
-        }
+                appendBotMessage(html,
+                    `${shopDetails.name} की दुकान ${shopDetails.fullAddress} पर स्थित है। फोन नंबर ${shopDetails.phone} है।`
+                    );
+                return true;
+            }
 
-        // ALL DISEASES
-        if (q.includes('सभी बीमारी') || q.includes('सारी बीमारी') || q.includes('all diseases') || (q.includes('बीमारियाँ') && !q.includes('दवा'))) {
-            const diseaseMap = {};
-            catalog.forEach(item => {
-                const diseases = item.diseases_hi.split(', ');
-                diseases.forEach(d => {
-                    if (!diseaseMap[d]) diseaseMap[d] = [];
-                    diseaseMap[d].push(item.name);
+            // ALL DISEASES
+            if (q.includes('सभी बीमारी') || q.includes('सारी बीमारी') || q.includes('all diseases') || (q.includes(
+                    'बीमारियाँ') && !q.includes('दवा'))) {
+                const diseaseMap = {};
+                catalog.forEach(item => {
+                    const diseases = item.diseases_hi.split(', ');
+                    diseases.forEach(d => {
+                        if (!diseaseMap[d]) diseaseMap[d] = [];
+                        diseaseMap[d].push(item.name);
+                    });
                 });
-            });
-            let html = `<p class="mb-3 font-semibold text-[14px]">सभी बीमारियों की लिस्ट और उनकी दवाइयाँ:</p><div class="space-y-2 max-h-96 overflow-y-auto">`;
-            for (const [disease, medicines] of Object.entries(diseaseMap).sort()) {
-                html += `<div class="bg-white p-2.5 rounded-lg border border-slate-200 text-[12px]">
+                let html =
+                    `<p class="mb-3 font-semibold text-[14px]">सभी बीमारियों की लिस्ट और उनकी दवाइयाँ:</p><div class="space-y-2 max-h-96 overflow-y-auto">`;
+                for (const [disease, medicines] of Object.entries(diseaseMap).sort()) {
+                    html += `<div class="bg-white p-2.5 rounded-lg border border-slate-200 text-[12px]">
                     <span class="font-bold text-red-700"><i class="fa-solid fa-virus mr-1"></i> ${disease}</span>
                     <div class="mt-1 flex flex-wrap gap-1">`;
-                medicines.forEach(m => {
-                    html += `<span class="bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full text-[10px] font-medium border border-emerald-200">${m}</span>`;
-                });
-                html += `</div></div>`;
-            }
-            html += `</div><p class="mt-2 text-[11px] text-slate-400">किसी भी बीमारी पर क्लिक करके उसकी दवा के बारे में पूछें।</p>`;
-            appendBotMessage(html, "सभी बीमारियों की लिस्ट देखें।");
-            return true;
-        }
-
-        // Fertilizers
-        if (q.includes('urea') || q.includes('यूरिया') || q.includes('dap') || q.includes('डीएपी') ||
-            q.includes('potash') || q.includes('पोटाश') || q.includes('npk') || q.includes('खाद') || q.includes('khad') || q.includes('fertilizer') || q.includes('उर्वरक')) {
-            let html = `<p class="mb-3 font-semibold text-[14px]">खादों (Fertilizers) की जानकारी:</p><div class="space-y-2.5">`;
-            let found = false;
-            fertilizers.forEach(f => {
-                const key = f.name.toLowerCase().split(' ')[0];
-                if (q.includes('खाद') || q.includes('khad') || q.includes(key) || (key === 'npk' && (q.includes('16') || q.includes('20')))) {
-                    found = true;
-                    html += `<div class="bg-emerald-50 border border-emerald-200 rounded-lg p-3 text-[13px]">
-                        <span class="font-bold text-emerald-800 block mb-1"><i class="fa-solid fa-sack-dollar text-emerald-600 mr-1.5"></i> ${f.name}</span>
-                        <p class="text-slate-700">${f.use}</p>
-                    </div>`;
+                    medicines.forEach(m => {
+                        html +=
+                            `<span class="bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full text-[10px] font-medium border border-emerald-200">${m}</span>`;
+                    });
+                    html += `</div></div>`;
                 }
-            });
-            if (!found) {
+                html +=
+                    `</div><p class="mt-2 text-[11px] text-slate-400">किसी भी बीमारी पर क्लिक करके उसकी दवा के बारे में पूछें।</p>`;
+                appendBotMessage(html, "सभी बीमारियों की लिस्ट देखें।");
+                return true;
+            }
+
+            // Fertilizers
+            if (q.includes('urea') || q.includes('यूरिया') || q.includes('dap') || q.includes('डीएपी') ||
+                q.includes('potash') || q.includes('पोटाश') || q.includes('npk') || q.includes('खाद') || q.includes(
+                    'khad') || q.includes('fertilizer') || q.includes('उर्वरक')) {
+                let html =
+                    `<p class="mb-3 font-semibold text-[14px]">खादों (Fertilizers) की जानकारी:</p><div class="space-y-2.5">`;
+                let found = false;
                 fertilizers.forEach(f => {
-                    html += `<div class="bg-emerald-50 border border-emerald-200 rounded-lg p-3 text-[13px]">
+                    const key = f.name.toLowerCase().split(' ')[0];
+                    if (q.includes('खाद') || q.includes('khad') || q.includes(key) || (key === 'npk' && (q.includes(
+                            '16') || q.includes('20')))) {
+                        found = true;
+                        html += `<div class="bg-emerald-50 border border-emerald-200 rounded-lg p-3 text-[13px]">
                         <span class="font-bold text-emerald-800 block mb-1"><i class="fa-solid fa-sack-dollar text-emerald-600 mr-1.5"></i> ${f.name}</span>
                         <p class="text-slate-700">${f.use}</p>
                     </div>`;
+                    }
                 });
+                if (!found) {
+                    fertilizers.forEach(f => {
+                        html += `<div class="bg-emerald-50 border border-emerald-200 rounded-lg p-3 text-[13px]">
+                        <span class="font-bold text-emerald-800 block mb-1"><i class="fa-solid fa-sack-dollar text-emerald-600 mr-1.5"></i> ${f.name}</span>
+                        <p class="text-slate-700">${f.use}</p>
+                    </div>`;
+                    });
+                }
+                html += `</div>`;
+                appendBotMessage(html,
+                    "यूरिया हरापन लाता है, डीएपी जड़ों का विकास करता है, पोटाश दानों में चमक और वजन बढ़ाता है।");
+                return true;
             }
-            html += `</div>`;
-            appendBotMessage(html, "यूरिया हरापन लाता है, डीएपी जड़ों का विकास करता है, पोटाश दानों में चमक और वजन बढ़ाता है।");
-            return true;
+
+            // Snakes
+            if (q.includes('sanp') || q.includes('saap') || q.includes('snake') || q.includes('सांप') || q.includes('साँप')) {
+                appendBotMessage(
+                    `<p class="text-[14px]">खेत में सांप होना खतरनाक हो सकता है। Tara Agri Pro के पास सांप मारने की कोई दवा नहीं है। बचाव के लिए रबर के लंबे जूते पहनें और रात में टॉर्च या डंडा साथ रखें। जरूरत पड़ने पर सपेरे या वन विभाग को बुलाएँ।</p>`,
+                    "सांप के लिए कोई दवा नहीं है। बचाव के लिए रबर के जूते पहनें और डंडा साथ रखें।");
+                return true;
+            }
+
+            // Rats
+            if (q.includes('chuha') || q.includes('rat') || q.includes('चूहा') || q.includes('चूहे') || q.includes('मूस')) {
+                appendBotMessage(
+                    `<p class="text-[14px]">चूहों से बचाव के लिए जिंक फास्फाइड (Zinc Phosphide) या एल्युमिनियम फास्फाइड का इस्तेमाल करें। अधिक जानकारी के लिए दुकान पर संपर्क करें।</p>`,
+                    "चूहों के लिए जिंक फास्फाइड का इस्तेमाल करें। अधिक जानकारी के लिए दुकान पर आएँ।");
+                return true;
+            }
+
+            // Animals
+            if (q.includes('nilgai') || q.includes('roj') || q.includes('awara') || q.includes('नीलगाय') || q.includes(
+                    'सुअर') || q.includes('जानवर') || q.includes('animal') || q.includes('पशु')) {
+                appendBotMessage(
+                    `<p class="text-[14px]">आवारा पशुओं (नीलगाय, जंगली सुअर) के लिए कोई रासायनिक दवा नहीं है। बचाव के लिए खेत की जाली (Fencing) या सोलर फेंसिंग लगवाएँ।</p>`,
+                    "आवारा पशुओं के लिए कोई दवा नहीं है। जाली या सोलर फेंसिंग करवाएँ।");
+                return true;
+            }
+
+            // Weather
+            if (q.includes('mausam') || q.includes('weather') || q.includes('बारिश') || q.includes('barish') || q.includes(
+                    'मौसम')) {
+                appendBotMessage(
+                    `<p class="text-[14px]">मैं कृषि एआई हूँ, मौसम की लाइव जानकारी नहीं दे सकता। कृपया Google Weather या मौसम विभाग की ऐप चेक करें।</p>`,
+                    "मौसम की जानकारी के लिए Google Weather चेक करें।");
+                return true;
+            }
+
+            return false;
         }
 
-        // Snakes
-        if (q.includes('sanp') || q.includes('saap') || q.includes('snake') || q.includes('सांप') || q.includes('साँप')) {
-            appendBotMessage(`<p class="text-[14px]">खेत में सांप होना खतरनाक हो सकता है। Tara Agri Pro के पास सांप मारने की कोई दवा नहीं है। बचाव के लिए रबर के लंबे जूते पहनें और रात में टॉर्च या डंडा साथ रखें। जरूरत पड़ने पर सपेरे या वन विभाग को बुलाएँ।</p>`, "सांप के लिए कोई दवा नहीं है। बचाव के लिए रबर के जूते पहनें और डंडा साथ रखें।");
-            return true;
+        // ============================================================
+        //  9. MAIN AI ENGINE with TECHNICAL NAME MAPPING
+        // ============================================================
+        function processUserInput() {
+            const text = userInput.value.trim();
+            if (!text) {
+                const txt = "कृपया कुछ लिखें या माइक से बोलें। मैं आपकी मदद के लिए तैयार हूँ।";
+                appendBotMessage(`<p class="text-[15px]">${txt}</p>`, txt);
+                return;
+            }
+
+            window.speechSynthesis.cancel();
+            userInput.value = '';
+            userInput.style.height = 'auto';
+            userInput.blur();
+
+            appendUserMessage(text);
+            const typingId = showTypingIndicator();
+
+            setTimeout(() => {
+                const el = document.getElementById(typingId);
+                if (el) el.remove();
+                generateAIResponse(text.toLowerCase());
+            }, 500 + Math.random() * 400);
         }
 
-        // Rats
-        if (q.includes('chuha') || q.includes('rat') || q.includes('चूहा') || q.includes('चूहे') || q.includes('मूस')) {
-            appendBotMessage(`<p class="text-[14px]">चूहों से बचाव के लिए जिंक फास्फाइड (Zinc Phosphide) या एल्युमिनियम फास्फाइड का इस्तेमाल करें। अधिक जानकारी के लिए दुकान पर संपर्क करें।</p>`, "चूहों के लिए जिंक फास्फाइड का इस्तेमाल करें। अधिक जानकारी के लिए दुकान पर आएँ।");
-            return true;
-        }
+        function generateAIResponse(query) {
+            // ----- CHIT-CHAT -----
+            if (query.includes('hi') || query === 'hello' || query === 'namaste' || query === 'नमस्ते' ||
+                query.includes('kaise ho') || query.includes('kese ho') || query.includes('kya haal') || query.includes(
+                    'क्या हाल')) {
+                const txt =
+                "नमस्ते जी। मैं बिल्कुल ठीक हूँ। बताइए, आपके खेत में कौन सी फसल है और क्या समस्या आ रही है? मैं पूरी मदद करूँगा।";
+                appendBotMessage(`<p class="text-[15px]">${txt}</p>`, txt);
+                return;
+            }
+            if (query.includes('thank') || query.includes('dhanyawad') || query.includes('shukriya') ||
+                query.includes('धन्यवाद') || query.includes('शुक्रिया') || query === 'ok' || query === 'ठीक है' || query
+                .includes('अच्छा')) {
+                const txt = "आपका बहुत-बहुत स्वागत है। खेती से जुड़ी कोई और जानकारी चाहिए तो बेझिझक पूछें। हमेशा आपके साथ।";
+                appendBotMessage(`<p class="text-[15px]">${txt}</p>`, txt);
+                return;
+            }
+            if (query.includes('kaun') || query.includes('कौन') || query.includes('naam') || query.includes('नाम') || query
+                .includes('who are you') || query.includes('तुम कौन')) {
+                const txt =
+                    "मैं Tara Agri Pro का प्रोफेशनल AI कृषि सलाहकार हूँ। मेरा काम आपको सटीक दवा, फसल और खाद की जानकारी देना है। 33 से अधिक दवाओं और सभी बीमारियों का डेटाबेस है मेरे पास।";
+                appendBotMessage(`<p class="text-[15px]">${txt}</p>`, txt);
+                return;
+            }
+            if (query.includes('price') || query.includes('kimat') || query.includes('कीमत') || query.includes('rate') ||
+                query.includes('रेट') || query.includes('दाम')) {
+                const txt =
+                    "दवाइयों की कीमत जानने के लिए कृपया अपने नजदीकी Tara Agri Pro डीलर या हेल्पलाइन नंबर पर संपर्क करें। मैं उपयोग और खुराक की जानकारी देता हूँ।";
+                appendBotMessage(`<p class="text-[15px]">${txt}</p>`, "दवा की कीमत के लिए डीलर से संपर्क करें।");
+                return;
+            }
+            if (query.includes('help') || query.includes('मदद') || query.includes('सहायता')) {
+                const txt =
+                    "मैं आपकी कैसे मदद कर सकता हूँ? आप मुझसे दवा, फसल, बीमारी या खाद के बारे में पूछ सकते हैं। बस टाइप करें या माइक से बोलें।";
+                appendBotMessage(`<p class="text-[15px]">${txt}</p>`, txt);
+                return;
+            }
 
-        // Animals
-        if (q.includes('nilgai') || q.includes('roj') || q.includes('awara') || q.includes('नीलगाय') || q.includes('सुअर') || q.includes('जानवर') || q.includes('animal') || q.includes('पशु')) {
-            appendBotMessage(`<p class="text-[14px]">आवारा पशुओं (नीलगाय, जंगली सुअर) के लिए कोई रासायनिक दवा नहीं है। बचाव के लिए खेत की जाली (Fencing) या सोलर फेंसिंग लगवाएँ।</p>`, "आवारा पशुओं के लिए कोई दवा नहीं है। जाली या सोलर फेंसिंग करवाएँ।");
-            return true;
-        }
+            // ----- SPECIAL CASES (SHOP, ALL DISEASES, FERTILIZERS, ETC) -----
+            if (handleSpecialCases(query)) {
+                return;
+            }
 
-        // Weather
-        if (q.includes('mausam') || q.includes('weather') || q.includes('बारिश') || q.includes('barish') || q.includes('मौसम')) {
-            appendBotMessage(`<p class="text-[14px]">मैं कृषि एआई हूँ, मौसम की लाइव जानकारी नहीं दे सकता। कृपया Google Weather या मौसम विभाग की ऐप चेक करें।</p>`, "मौसम की जानकारी के लिए Google Weather चेक करें।");
-            return true;
-        }
-
-        return false;
-    }
-
-    // ============================================================
-    //  8. MAIN AI ENGINE
-    // ============================================================
-    function processUserInput() {
-        const text = userInput.value.trim();
-        if (!text) {
-            const txt = "कृपया कुछ लिखें या माइक से बोलें। मैं आपकी मदद के लिए तैयार हूँ।";
-            appendBotMessage(`<p class="text-[15px]">${txt}</p>`, txt);
-            return;
-        }
-
-        window.speechSynthesis.cancel();
-        userInput.value = '';
-        userInput.style.height = 'auto';
-        userInput.blur();
-
-        appendUserMessage(text);
-        const typingId = showTypingIndicator();
-
-        setTimeout(() => {
-            const el = document.getElementById(typingId);
-            if (el) el.remove();
-            generateAIResponse(text.toLowerCase());
-        }, 500 + Math.random() * 400);
-    }
-
-    function generateAIResponse(query) {
-        // ----- CHIT-CHAT -----
-        if (query.includes('hi') || query === 'hello' || query === 'namaste' || query === 'नमस्ते' ||
-            query.includes('kaise ho') || query.includes('kese ho') || query.includes('kya haal') || query.includes('क्या हाल')) {
-            const txt = "नमस्ते जी। मैं बिल्कुल ठीक हूँ। बताइए, आपके खेत में कौन सी फसल है और क्या समस्या आ रही है? मैं पूरी मदद करूँगा।";
-            appendBotMessage(`<p class="text-[15px]">${txt}</p>`, txt);
-            return;
-        }
-        if (query.includes('thank') || query.includes('dhanyawad') || query.includes('shukriya') ||
-            query.includes('धन्यवाद') || query.includes('शुक्रिया') || query === 'ok' || query === 'ठीक है' || query.includes('अच्छा')) {
-            const txt = "आपका बहुत-बहुत स्वागत है। खेती से जुड़ी कोई और जानकारी चाहिए तो बेझिझक पूछें। हमेशा आपके साथ।";
-            appendBotMessage(`<p class="text-[15px]">${txt}</p>`, txt);
-            return;
-        }
-        if (query.includes('kaun') || query.includes('कौन') || query.includes('naam') || query.includes('नाम') || query.includes('who are you') || query.includes('तुम कौन')) {
-            const txt = "मैं Tara Agri Pro का प्रोफेशनल AI कृषि सलाहकार हूँ। मेरा काम आपको सटीक दवा, फसल और खाद की जानकारी देना है। 33 से अधिक दवाओं और सभी बीमारियों का डेटाबेस है मेरे पास।";
-            appendBotMessage(`<p class="text-[15px]">${txt}</p>`, txt);
-            return;
-        }
-        if (query.includes('price') || query.includes('kimat') || query.includes('कीमत') || query.includes('rate') || query.includes('रेट') || query.includes('दाम')) {
-            const txt = "दवाइयों की कीमत जानने के लिए कृपया अपने नजदीकी Tara Agri Pro डीलर या हेल्पलाइन नंबर पर संपर्क करें। मैं उपयोग और खुराक की जानकारी देता हूँ।";
-            appendBotMessage(`<p class="text-[15px]">${txt}</p>`, "दवा की कीमत के लिए डीलर से संपर्क करें।");
-            return;
-        }
-        if (query.includes('help') || query.includes('मदद') || query.includes('सहायता')) {
-            const txt = "मैं आपकी कैसे मदद कर सकता हूँ? आप मुझसे दवा, फसल, बीमारी या खाद के बारे में पूछ सकते हैं। बस टाइप करें या माइक से बोलें।";
-            appendBotMessage(`<p class="text-[15px]">${txt}</p>`, txt);
-            return;
-        }
-
-        // ----- SPECIAL CASES (SHOP, ALL DISEASES, FERTILIZERS, ETC) -----
-        if (handleSpecialCases(query)) {
-            return;
-        }
-
-        // ----- SHOW ALL -----
-        if (query.includes('sabhi') || query.includes('all') || query.includes('list') || query.includes('सभी') || query.includes('पूरी') || query.includes('दिखाओ') || query.includes('सारी') || query.includes('सब')) {
-            let html = `<p class="mb-3 font-semibold text-[14px]">हमारे पास 33 बेहतरीन दवाइयाँ हैं:</p><div class="grid grid-cols-2 gap-2 text-[12px]">`;
-            catalog.forEach(item => {
-                html += `<div class="bg-white p-2.5 rounded-lg border border-slate-200 shadow-sm cursor-pointer hover:border-emerald-400 hover:shadow-md transition-all" onclick="sendQuickMessage('${item.name} क्या काम करती है?')">
+            // ----- SHOW ALL -----
+            if (query.includes('sabhi') || query.includes('all') || query.includes('list') || query.includes('सभी') ||
+                query.includes('पूरी') || query.includes('दिखाओ') || query.includes('सारी') || query.includes('सब')) {
+                let html =
+                    `<p class="mb-3 font-semibold text-[14px]">हमारे पास 33 बेहतरीन दवाइयाँ हैं:</p><div class="grid grid-cols-2 gap-2 text-[12px]">`;
+                catalog.forEach(item => {
+                    html += `<div class="bg-white p-2.5 rounded-lg border border-slate-200 shadow-sm cursor-pointer hover:border-emerald-400 hover:shadow-md transition-all" onclick="sendQuickMessage('${item.name} क्या काम करती है?')">
                     <b class="text-slate-800">${item.name}</b><br>
                     <span class="text-[10px] text-slate-500">${item.type}</span>
                 </div>`;
-            });
-            html += `</div><p class="mt-3 text-[11px] text-slate-400">किसी भी दवा पर क्लिक करें — पूरी जानकारी मिल जाएगी।</p>`;
-            appendBotMessage(html, "हमारे पास 33 दवाइयाँ हैं। किसी भी दवा पर क्लिक करके पूरी जानकारी लें।");
-            return;
-        }
-
-        // ----- PREPROCESSING & MAPPING -----
-        let mappedQuery = query;
-        for (const key in hindiWordMap) {
-            if (mappedQuery.includes(key)) {
-                mappedQuery += " " + hindiWordMap[key];
-            }
-        }
-        const rawWords = mappedQuery.replace(/[.,!?]/g, '').split(/\s+/);
-        let keywords = rawWords.filter(kw => !stopWords.includes(kw) && kw.length > 1);
-        if (keywords.length === 0) keywords = rawWords.filter(kw => kw.length > 1);
-
-        // ----- SCORING ENGINE -----
-        let maxNameScore = 0;
-        let specificProduct = null;
-
-        const scoredItems = catalog.map(item => {
-            let score = 0;
-            const searchStr = `${item.name} ${item.technical} ${item.tags} ${item.desi_tags} ${item.diseases_hi} ${item.crops_hi} ${item.type}`.toLowerCase();
-            let cropMatch = false, diseaseMatch = false, nameMatch = false;
-
-            keywords.forEach(kw => {
-                if (item.name.toLowerCase() === kw) { score += 100; nameMatch = true; if (score > maxNameScore) { maxNameScore = score; specificProduct = item; } }
-                else if (item.name.toLowerCase().includes(kw)) { score += 60; nameMatch = true; if (score > maxNameScore) { maxNameScore = score; specificProduct = item; } }
-                else if (item.technical.toLowerCase().includes(kw)) { score += 35; }
-                else if (item.tags.includes(kw) || item.desi_tags.includes(kw)) {
-                    score += 25;
-                    const cropKeywords = ['dhan', 'gehu', 'ganna', 'makka', 'kapas', 'aalu', 'sarso', 'surajmukhi', 'paddy', 'wheat', 'cotton', 'mustard', 'potato', 'sugarcane', 'mirch', 'tamatar', 'soybean', 'chana', 'matar', 'sabji', 'phal'];
-                    const diseaseKeywords = ['blast', 'jhulsa', 'sundi', 'tela', 'makkhi', 'deemak', 'kharpatwar', 'ghas', 'lapat', 'blight', 'rust', 'mildew', 'bph', 'hopper', 'termite', 'whitefly', 'faphund', 'wilt', 'sadan', 'uktha', 'tikka', 'spot', 'anthracnose', 'rot', 'powdery', 'mite'];
-                    if (cropKeywords.includes(kw)) cropMatch = true;
-                    if (diseaseKeywords.includes(kw)) diseaseMatch = true;
-                } else if (searchStr.includes(kw)) {
-                    score += 10;
-                    if (item.crops_hi.toLowerCase().includes(kw)) cropMatch = true;
-                    if (item.diseases_hi.toLowerCase().includes(kw)) diseaseMatch = true;
-                }
-
-                const itemNameWords = item.name.toLowerCase().split(' ');
-                itemNameWords.forEach(ikw => {
-                    if (kw.length > 3 && ikw.length > 3) {
-                        const dist = getEditDistance(kw, ikw);
-                        if (dist === 1) { score += 30; nameMatch = true; }
-                        else if (dist === 2) { score += 15; }
-                    }
                 });
+                html +=
+                    `</div><p class="mt-3 text-[11px] text-slate-400">किसी भी दवा पर क्लिक करें — पूरी जानकारी मिल जाएगी।</p>`;
+                appendBotMessage(html, "हमारे पास 33 दवाइयाँ हैं। किसी भी दवा पर क्लिक करके पूरी जानकारी लें।");
+                return;
+            }
+
+            // ----- PREPROCESSING & MAPPING -----
+            let mappedQuery = query;
+
+            // Step 1: Check for technical name match (exact or partial)
+            let technicalMatchProduct = null;
+            for (const [techName, productId] of Object.entries(technicalWordMap)) {
+                if (query.includes(techName)) {
+                    technicalMatchProduct = catalog.find(p => p.id === productId);
+                    if (technicalMatchProduct) break;
+                }
+            }
+
+            // If technical name matched, boost its score heavily
+            if (technicalMatchProduct) {
+                // We'll handle it directly with high score
+                const voice =
+                    `${technicalMatchProduct.name} एक ${technicalMatchProduct.type} है। ${technicalMatchProduct.use_hi} इसकी डोज़ ${technicalMatchProduct.dose_hi} है।`;
+                const steps = technicalMatchProduct.how_to_use_hi.split('\n').map(s => s.trim()).filter(s => s);
+                let stepsHtml = steps.map(s => `<li>${s}</li>`).join('');
+
+                let html = `
+                <p class="mb-3 font-semibold text-[14px]">${technicalMatchProduct.name} की पूरी जानकारी (तकनीकी नाम मिलान):</p>
+                <div class="product-card">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-10 h-10 rounded-full ${technicalMatchProduct.bg} flex items-center justify-center border border-slate-200 shadow-sm text-emerald-700"><i class="fa-solid ${technicalMatchProduct.icon} text-lg"></i></div>
+                            <h3 class="font-bold text-slate-800 text-[16px]">${technicalMatchProduct.name}</h3>
+                            <span class="match-badge exact">तकनीकी मिलान</span>
+                        </div>
+                        <span class="text-[10px] bg-slate-100 text-slate-600 font-bold px-2.5 py-1 rounded-full">${technicalMatchProduct.type}</span>
+                    </div>
+                    <p class="text-[11px] font-mono text-slate-500 mb-2.5 border-b border-slate-100 pb-2">${technicalMatchProduct.technical}</p>
+                    <div class="space-y-2 text-[13px] text-slate-700">
+                        <div class="bg-emerald-50 p-3 rounded-lg border border-emerald-200">
+                            <span class="font-bold text-emerald-800 block mb-1">दवा का उपयोग (कैसे काम करती है):</span>
+                            ${technicalMatchProduct.use_hi}
+                        </div>
+                        <div class="bg-blue-50 p-3 rounded-lg border border-blue-200">
+                            <span class="font-bold text-blue-800 block mb-1">इस्तेमाल करने का तरीका (Step by Step):</span>
+                            <ul class="step-list">${stepsHtml}</ul>
+                        </div>
+                        <p><span class="font-semibold text-slate-800">बीमारी:</span> ${technicalMatchProduct.diseases_hi}</p>
+                        <p><span class="font-semibold text-slate-800">फसल:</span> ${technicalMatchProduct.crops_hi}</p>
+                    </div>
+                    <div class="bg-slate-50 px-3 py-2 rounded-lg text-[13px] flex justify-between items-center border border-slate-200 mt-3">
+                        <span><span class="font-semibold text-slate-700">खुराक:</span></span>
+                        <span class="font-bold text-emerald-700">${technicalMatchProduct.dose_hi}</span>
+                    </div>
+                    <div class="mt-3 text-[12px] text-slate-500 border-t border-slate-100 pt-2">
+                        <p><i class="fa-solid fa-store text-amber-500 mr-1"></i> यह दवा ${shopDetails.name} की दुकान पर उपलब्ध है।</p>
+                    </div>
+                </div>
+            `;
+                appendBotMessage(html, voice);
+                return;
+            }
+
+            // Step 2: Map desi words to English keywords
+            for (const key in hindiWordMap) {
+                if (mappedQuery.includes(key)) {
+                    mappedQuery += " " + hindiWordMap[key];
+                }
+            }
+            const rawWords = mappedQuery.replace(/[.,!?]/g, '').split(/\s+/);
+            let keywords = rawWords.filter(kw => !stopWords.includes(kw) && kw.length > 1);
+            if (keywords.length === 0) keywords = rawWords.filter(kw => kw.length > 1);
+
+            // ----- SCORING ENGINE -----
+            let maxNameScore = 0;
+            let specificProduct = null;
+
+            const scoredItems = catalog.map(item => {
+                let score = 0;
+                const searchStr =
+                    `${item.name} ${item.technical} ${item.tags} ${item.desi_tags} ${item.diseases_hi} ${item.crops_hi} ${item.type}`.toLowerCase();
+                let cropMatch = false,
+                    diseaseMatch = false,
+                    nameMatch = false;
+
+                keywords.forEach(kw => {
+                    if (item.name.toLowerCase() === kw) { score += 100;
+                        nameMatch = true; if (score > maxNameScore) { maxNameScore = score;
+                            specificProduct = item; } } else if (item.name.toLowerCase().includes(kw)) {
+                        score += 60;
+                        nameMatch = true;
+                        if (score > maxNameScore) { maxNameScore = score;
+                            specificProduct = item; }
+                    } else if (item.technical.toLowerCase().includes(kw)) { score += 35; } else if (item.tags
+                        .includes(kw) || item.desi_tags.includes(kw)) {
+                        score += 25;
+                        const cropKeywords = ['dhan', 'gehu', 'ganna', 'makka', 'kapas', 'aalu', 'sarso',
+                            'surajmukhi', 'paddy', 'wheat', 'cotton', 'mustard', 'potato', 'sugarcane',
+                            'mirch', 'tamatar', 'soybean', 'chana', 'matar', 'sabji', 'phal'
+                        ];
+                        const diseaseKeywords = ['blast', 'jhulsa', 'sundi', 'tela', 'makkhi', 'deemak',
+                            'kharpatwar', 'ghas', 'lapat', 'blight', 'rust', 'mildew', 'bph', 'hopper',
+                            'termite', 'whitefly', 'faphund', 'wilt', 'sadan', 'uktha', 'tikka', 'spot',
+                            'anthracnose', 'rot', 'powdery', 'mite'
+                        ];
+                        if (cropKeywords.includes(kw)) cropMatch = true;
+                        if (diseaseKeywords.includes(kw)) diseaseMatch = true;
+                    } else if (searchStr.includes(kw)) {
+                        score += 10;
+                        if (item.crops_hi.toLowerCase().includes(kw)) cropMatch = true;
+                        if (item.diseases_hi.toLowerCase().includes(kw)) diseaseMatch = true;
+                    }
+
+                    const itemNameWords = item.name.toLowerCase().split(' ');
+                    itemNameWords.forEach(ikw => {
+                        if (kw.length > 3 && ikw.length > 3) {
+                            const dist = getEditDistance(kw, ikw);
+                            if (dist === 1) { score += 30;
+                                nameMatch = true; } else if (dist === 2) { score += 15; }
+                        }
+                    });
+                });
+
+                if (cropMatch && diseaseMatch) score += 100;
+                if (nameMatch) score += 30;
+
+                // Manual overrides
+                if ((query.includes('coragen') || query.includes('कोरागेन') || query.includes('कोरजन')) && item.name ===
+                    'Ferico Pro') score += 100;
+                if ((query.includes('ghas') || query.includes('weed') || query.includes('घास') || query.includes(
+                        'kharpatwar') || query.includes('खरपतवार')) && item.type.includes('खरपतवार')) score += 30;
+                if ((query.includes('chipku') || query.includes('chupku') || query.includes('sticker') || query.includes(
+                        'चिपकू') || query.includes('स्टिकर')) && item.name === 'Silpro') score += 100;
+                if ((query.includes('fipro') || query.includes('fipronil') || query.includes('फिप्रो') || query.includes(
+                        'फिपरोनिल')) && item.name === 'Fi Pro 6') { score += 100;
+                    maxNameScore = 100;
+                    specificProduct = item; }
+                if ((query.includes('2,4-d') || query.includes('2,4-D') || query.includes('2-4-D') || query.includes(
+                        '2,4डी')) && item.name === '2,4-D Pro') { score += 100;
+                    maxNameScore = 100;
+                    specificProduct = item; }
+                if ((query.includes('tonic') || query.includes('टॉनिक') || query.includes('growth') || query.includes(
+                        'ग्रोथ') || query.includes('बढ़वार') || query.includes('पैदावार')) && item.name === 'Aura')
+                    score += 40;
+                if ((query.includes('दीमक') || query.includes('deemak') || query.includes('termite')) && item.name ===
+                    'Fi Pro 6') { score += 80; }
+                if ((query.includes('तेला') || query.includes('tela') || query.includes('hopper') || query.includes(
+                        'हॉपर') || query.includes('bph') || query.includes('बीपीएच')) && (item.name === 'Dinozone' ||
+                        item.name === 'Pypro')) { score += 80; }
+                if ((query.includes('झुलसा') || query.includes('jhulsa') || query.includes('blight') || query.includes(
+                        'ब्लाइट')) && (item.type.includes('फफूंदनाशक') || item.type.includes('Fungicide'))) { score +=
+                        30; }
+                if ((query.includes('पत्ता लपेट') || query.includes('leaf folder') || query.includes('pata lapat')) && (
+                        item.name === 'Cartap Pro 4G' || item.name === 'Grando Power')) { score += 80; }
+
+                return { ...item, score, cropMatch, diseaseMatch };
             });
 
-            if (cropMatch && diseaseMatch) score += 100;
-            if (nameMatch) score += 30;
-            
-            // Manual overrides
-            if ((query.includes('coragen') || query.includes('कोरागेन') || query.includes('कोरजन')) && item.name === 'Ferico Pro') score += 100;
-            if ((query.includes('ghas') || query.includes('weed') || query.includes('घास') || query.includes('kharpatwar') || query.includes('खरपतवार')) && item.type.includes('खरपतवार')) score += 30;
-            if ((query.includes('chipku') || query.includes('chupku') || query.includes('sticker') || query.includes('चिपकू') || query.includes('स्टिकर')) && item.name === 'Silpro') score += 100;
-            if ((query.includes('fipro') || query.includes('fipronil') || query.includes('फिप्रो') || query.includes('फिपरोनिल')) && item.name === 'Fi Pro 6') { score += 100; maxNameScore = 100; specificProduct = item; }
-            if ((query.includes('2,4-d') || query.includes('2,4-D') || query.includes('2-4-D') || query.includes('2,4डी')) && item.name === '2,4-D Pro') { score += 100; maxNameScore = 100; specificProduct = item; }
-            if ((query.includes('tonic') || query.includes('टॉनिक') || query.includes('growth') || query.includes('ग्रोथ') || query.includes('बढ़वार') || query.includes('पैदावार')) && item.name === 'Aura') score += 40;
-            if ((query.includes('दीमक') || query.includes('deemak') || query.includes('termite')) && item.name === 'Fi Pro 6') { score += 80; }
-            if ((query.includes('तेला') || query.includes('tela') || query.includes('hopper') || query.includes('हॉपर') || query.includes('bph') || query.includes('बीपीएच')) && (item.name === 'Dinozone' || item.name === 'Pypro')) { score += 80; }
-            if ((query.includes('झुलसा') || query.includes('jhulsa') || query.includes('blight') || query.includes('ब्लाइट')) && (item.type.includes('फफूंदनाशक') || item.type.includes('Fungicide'))) { score += 30; }
-            if ((query.includes('पत्ता लपेट') || query.includes('leaf folder') || query.includes('pata lapat')) && (item.name === 'Cartap Pro 4G' || item.name === 'Grando Power')) { score += 80; }
+            // ----- INTENT DETECTION -----
+            const isInfoIntent = query.includes('kya') || query.includes('kaam') || query.includes('karti') || query
+                .includes('batao') ||
+                query.includes('क्या') || query.includes('काम') || query.includes('detail') || query.includes(
+                    'jankari') ||
+                query.includes('hai') || query.includes('use') || query.includes('kaise') || query.includes(
+                    'इस्तेमाल') ||
+                query.includes('उपयोग') || query.includes('फायदे') || query.includes('कैसे') || query.includes(
+                    'बताएं') || query.includes('बताइये') || query.includes('जानकारी') || query.includes('info');
 
-            return { ...item, score, cropMatch, diseaseMatch };
-        });
+            // ----- SPECIFIC PRODUCT DETAIL -----
+            if (specificProduct && maxNameScore >= 50 && isInfoIntent) {
+                const voice =
+                    `${specificProduct.name} एक ${specificProduct.type} है। ${specificProduct.use_hi} इसकी डोज़ ${specificProduct.dose_hi} है।`;
+                const steps = specificProduct.how_to_use_hi.split('\n').map(s => s.trim()).filter(s => s);
+                let stepsHtml = steps.map(s => `<li>${s}</li>`).join('');
 
-        // ----- INTENT DETECTION -----
-        const isInfoIntent = query.includes('kya') || query.includes('kaam') || query.includes('karti') || query.includes('batao') ||
-            query.includes('क्या') || query.includes('काम') || query.includes('detail') || query.includes('jankari') ||
-            query.includes('hai') || query.includes('use') || query.includes('kaise') || query.includes('इस्तेमाल') ||
-            query.includes('उपयोग') || query.includes('फायदे') || query.includes('कैसे') || query.includes('बताएं') || query.includes('बताइये') || query.includes('जानकारी') || query.includes('info');
-
-        // ----- SPECIFIC PRODUCT DETAIL -----
-        if (specificProduct && maxNameScore >= 50 && isInfoIntent) {
-            const voice = `${specificProduct.name} एक ${specificProduct.type} है। ${specificProduct.use_hi} इसकी डोज़ ${specificProduct.dose_hi} है।`;
-            const steps = specificProduct.how_to_use_hi.split('\n').map(s => s.trim()).filter(s => s);
-            let stepsHtml = steps.map(s => `<li>${s}</li>`).join('');
-            
-            let html = `
+                let html = `
                 <p class="mb-3 font-semibold text-[14px]">${specificProduct.name} की पूरी जानकारी:</p>
                 <div class="product-card">
                     <div class="flex items-center justify-between mb-2">
@@ -1642,57 +2036,65 @@
                     </div>
                 </div>
             `;
-            appendBotMessage(html, voice);
-            return;
-        }
-
-        // ----- RECOMMENDATIONS (MULTIPLE PRODUCTS) -----
-        let matches = scoredItems.filter(item => item.score > 8).sort((a, b) => b.score - a.score);
-
-        if (matches.length === 0) {
-            const suggestions = new Set();
-            const allWords = query.replace(/[.,!?]/g, '').split(/\s+/);
-            const dictWords = [];
-            for (const key in hindiWordMap) { dictWords.push(key); dictWords.push(hindiWordMap[key]); }
-            catalog.forEach(item => { dictWords.push(item.name.toLowerCase()); dictWords.push(item.name); });
-
-            allWords.forEach(w => {
-                if (w.length > 2) {
-                    dictWords.forEach(d => {
-                        if (getEditDistance(w, d) <= 2 && w !== d && d.length > 2) suggestions.add(d);
-                    });
-                }
-            });
-
-            const sugArray = Array.from(suggestions).slice(0, 6);
-            if (sugArray.length > 0) {
-                let msg = `<p class="mb-2 text-slate-700 text-[14px]">मुझे आपकी बात से जुड़ी कोई दवा नहीं मिली। क्या आपका मतलब इनमें से किसी से था?</p><div class="flex flex-wrap gap-2 mt-2">`;
-                sugArray.forEach(sug => {
-                    msg += `<button onclick="sendQuickMessage('${sug}')" class="suggestion-chip"><i class="fa-solid fa-wand-magic-sparkles"></i> ${sug}</button>`;
-                });
-                msg += `</div>`;
-                appendBotMessage(msg, "मुझे समझ नहीं आया। क्या आपका मतलब इनमें से किसी से था?");
-            } else {
-                const txt = "माफ़ कीजिए, मुझे आपकी बात से जुड़ी कोई दवा नहीं मिली। कृपया बीमारी, फसल या दवा का नाम साफ़-साफ़ लिखें या बोलें। मैं आपकी पूरी मदद करूँगा।";
-                appendBotMessage(`<p class="text-[15px]">${txt}</p>`, txt);
+                appendBotMessage(html, voice);
+                return;
             }
-            return;
-        }
 
-        const topMatches = matches.slice(0, 3);
-        let voice = `हाँ बिल्कुल। सबसे अच्छी दवा ${topMatches[0].name} है।`;
-        if (topMatches.length > 1) voice += ` इसके अलावा ${topMatches[1].name} भी इस्तेमाल कर सकते हैं।`;
+            // ----- RECOMMENDATIONS (MULTIPLE PRODUCTS) -----
+            let matches = scoredItems.filter(item => item.score > 8).sort((a, b) => b.score - a.score);
 
-        let html = `<p class="mb-3 font-semibold text-[14px]">आपकी समस्या के लिए ये दवाइयाँ बेहतरीन हैं:</p>`;
+            if (matches.length === 0) {
+                const suggestions = new Set();
+                const allWords = query.replace(/[.,!?]/g, '').split(/\s+/);
+                const dictWords = [];
+                for (const key in hindiWordMap) { dictWords.push(key);
+                    dictWords.push(hindiWordMap[key]); }
+                catalog.forEach(item => { dictWords.push(item.name.toLowerCase());
+                    dictWords.push(item.name); });
+                // Also add technical names
+                for (const key in technicalWordMap) { dictWords.push(key); }
 
-        topMatches.forEach(item => {
-            const uid = 'det-' + item.id + '-' + Date.now();
-            const matchTag = (item.cropMatch && item.diseaseMatch) ? ' <span class="match-badge exact">सटीक मिलान</span>' : 
-                            (item.score > 60) ? ' <span class="match-badge">बहुत अच्छा</span>' : '';
-            const steps = item.how_to_use_hi.split('\n').map(s => s.trim()).filter(s => s);
-            let stepsHtml = steps.map(s => `<li>${s}</li>`).join('');
-            
-            html += `
+                allWords.forEach(w => {
+                    if (w.length > 2) {
+                        dictWords.forEach(d => {
+                            if (getEditDistance(w, d) <= 2 && w !== d && d.length > 2) suggestions.add(
+                            d);
+                        });
+                    }
+                });
+
+                const sugArray = Array.from(suggestions).slice(0, 6);
+                if (sugArray.length > 0) {
+                    let msg =
+                        `<p class="mb-2 text-slate-700 text-[14px]">मुझे आपकी बात से जुड़ी कोई दवा नहीं मिली। क्या आपका मतलब इनमें से किसी से था?</p><div class="flex flex-wrap gap-2 mt-2">`;
+                    sugArray.forEach(sug => {
+                        msg +=
+                            `<button onclick="sendQuickMessage('${sug}')" class="suggestion-chip"><i class="fa-solid fa-wand-magic-sparkles"></i> ${sug}</button>`;
+                    });
+                    msg += `</div>`;
+                    appendBotMessage(msg, "मुझे समझ नहीं आया। क्या आपका मतलब इनमें से किसी से था?");
+                } else {
+                    const txt =
+                        "माफ़ कीजिए, मुझे आपकी बात से जुड़ी कोई दवा नहीं मिली। कृपया बीमारी, फसल या दवा का नाम साफ़-साफ़ लिखें या बोलें। मैं आपकी पूरी मदद करूँगा।";
+                    appendBotMessage(`<p class="text-[15px]">${txt}</p>`, txt);
+                }
+                return;
+            }
+
+            const topMatches = matches.slice(0, 3);
+            let voice = `हाँ बिल्कुल। सबसे अच्छी दवा ${topMatches[0].name} है।`;
+            if (topMatches.length > 1) voice += ` इसके अलावा ${topMatches[1].name} भी इस्तेमाल कर सकते हैं।`;
+
+            let html = `<p class="mb-3 font-semibold text-[14px]">आपकी समस्या के लिए ये दवाइयाँ बेहतरीन हैं:</p>`;
+
+            topMatches.forEach(item => {
+                const uid = 'det-' + item.id + '-' + Date.now();
+                const matchTag = (item.cropMatch && item.diseaseMatch) ? ' <span class="match-badge exact">सटीक मिलान</span>' :
+                    (item.score > 60) ? ' <span class="match-badge">बहुत अच्छा</span>' : '';
+                const steps = item.how_to_use_hi.split('\n').map(s => s.trim()).filter(s => s);
+                let stepsHtml = steps.map(s => `<li>${s}</li>`).join('');
+
+                html += `
                 <div class="product-card text-[13px]">
                     <div class="flex items-center justify-between mb-2">
                         <div class="flex items-center gap-2.5">
@@ -1729,34 +2131,35 @@
                     </div>
                 </div>
             `;
-        });
+            });
 
-        if (matches.length > 3) {
-            html += `<p class="text-[11px] text-slate-400 mt-3 italic text-center">*${matches.length - 3} और दवाइयाँ भी हैं, पर ये सबसे सटीक विकल्प हैं।</p>`;
+            if (matches.length > 3) {
+                html +=
+                    `<p class="text-[11px] text-slate-400 mt-3 italic text-center">*${matches.length - 3} और दवाइयाँ भी हैं, पर ये सबसे सटीक विकल्प हैं।</p>`;
+            }
+
+            appendBotMessage(html, voice);
         }
 
-        appendBotMessage(html, voice);
-    }
-
-    // ============================================================
-    //  9. CLEAR CHAT
-    // ============================================================
-    function clearChat() {
-        if (confirm('क्या आप पूरी चैट हटाना चाहते हैं?')) {
-            window.speechSynthesis.cancel();
-            const initial = document.getElementById('chatArea').children[0].outerHTML;
-            document.getElementById('chatArea').innerHTML = initial;
+        // ============================================================
+        //  10. CLEAR CHAT
+        // ============================================================
+        function clearChat() {
+            if (confirm('क्या आप पूरी चैट हटाना चाहते हैं?')) {
+                window.speechSynthesis.cancel();
+                const initial = document.getElementById('chatArea').children[0].outerHTML;
+                document.getElementById('chatArea').innerHTML = initial;
+            }
         }
-    }
 
-    // ============================================================
-    //  10. INIT
-    // ============================================================
-    window.onload = function() {
-        if ('speechSynthesis' in window) {
-            speechSynthesis.getVoices();
-        }
-    };
-</script>
+        // ============================================================
+        //  11. INIT
+        // ============================================================
+        window.onload = function() {
+            if ('speechSynthesis' in window) {
+                speechSynthesis.getVoices();
+            }
+        };
+    </script>
 </body>
 </html>
