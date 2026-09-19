@@ -14,7 +14,7 @@
 <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-database-compat.js"></script>
 <style>
-:root{--p50:#eff6ff;--p200:#bfdbfe;--p600:#2563eb;--p700:#1d4ed8;--p800:#1e40af;--s50:#f8fafc;--s100:#f1f5f9;--s200:#e2e8f0;--s300:#cbd5e1;--s400:#94a3b8;--s500:#64748b;--s600:#475569;--s700:#334155;--s800:#1e293b;--s900:#0f172a;--g50:#f0fdf4;--g500:#22c55e;--g600:#16a34a;--g700:#15803d;--r500:#ef4444;--y500:#f59e0b;--font:'Inter',sans-serif;--serif:'Merriweather',serif}
+:root{--p50:#eff6ff;--p100:#dbeafe;--p200:#bfdbfe;--p400:#60a5fa;--p500:#3b82f6;--p600:#2563eb;--p700:#1d4ed8;--p800:#1e40af;--p900:#1e3a8a;--s50:#f8fafc;--s100:#f1f5f9;--s200:#e2e8f0;--s300:#cbd5e1;--s400:#94a3b8;--s500:#64748b;--s600:#475569;--s700:#334155;--s800:#1e293b;--s900:#0f172a;--g50:#f0fdf4;--g500:#22c55e;--g600:#16a34a;--g700:#15803d;--r500:#ef4444;--y500:#f59e0b;--font:'Inter',sans-serif;--serif:'Merriweather',serif}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:var(--font);background:var(--s100);color:var(--s800);line-height:1.6}
 a{text-decoration:none;color:inherit;transition:all .2s;cursor:pointer}
@@ -147,9 +147,13 @@ button{font-family:inherit;cursor:pointer;border:none}
 
 <div id="toastBox"></div>
 
+<!-- ✅ TOPBAR: Icon HTML mein sirf ek baar, JS sirf text update karega -->
 <div class="topbar">
 <div class="container">
-<div class="topbar-left"><i class="fas fa-map-marker-alt"></i><span id="topAddr">India</span></div>
+<div class="topbar-left">
+<i class="fas fa-map-marker-alt"></i>
+<span id="topAddr">India</span>
+</div>
 <div class="topbar-links">
 <a id="waLink" target="_blank" rel="noopener" class="help"><i class="fab fa-whatsapp"></i><span>Help</span></a>
 </div>
@@ -260,7 +264,6 @@ const firebaseConfig={apiKey:"AIzaSyDLnDVmkVcXxOFDxxfmXmqU1HflB2EpalQ",authDomai
 firebase.initializeApp(firebaseConfig);
 const db=firebase.database();
 
-// Default services with FULL data (steps, docs, links)
 const DEFAULT_SERVICES={
     aadhar:{name:'Aadhar Card',sub:'Update & Download',icon:'fa-id-card',color:'ic-aadhar',about:'Aadhar Card ek 12-digit unique identification number hai jo UIDAI dwara issue kiya jata hai. Ye India ke har citizen ke liye zaroori document hai.',steps:['Aadhar Enrollment Center par jayein (ya online appointment lein)','Biometric data (fingerprint, iris scan) aur photo diya jayega','Enrollment slip milegi jisme 14-digit number hoga','SMS se Aadhar number aayega (usually 90 days mein)','Post se Aadhar card ghar aa jayega'],links:[{name:'Aadhar Update Online',url:'https://myaadhaar.uidai.gov.in'},{name:'Download e-Aadhar',url:'https://myaadhaar.uidai.gov.in/genricDownloadAadhaar'},{name:'Check Update Status',url:'https://myaadhaar.uidai.gov.in/checkAadhaarStatus'},{name:'Book Appointment',url:'https://appointments.uidai.gov.in'},{name:'UIDAI Official Website',url:'https://uidai.gov.in'}],docs:['Aadhar number / Enrollment ID','Registered mobile number','Original documents for update']},
     pan:{name:'PAN Card',sub:'Apply & Correction',icon:'fa-credit-card',color:'ic-pan',about:'PAN (Permanent Account Number) 10-character alphanumeric identity number hai jo Income Tax Department dwara issue hota hai.',steps:['Online PAN application form (49A) bharein','Required documents upload karein','Application fee pay karein (₹107 for Indian)','Acknowledgement number save karein','7-10 working days mein PAN card aa jayega'],links:[{name:'Apply New PAN (NSDL)',url:'https://onlineservices.tin.egov-nsdl.com/etaxnew/tdsnontds.jsp'},{name:'Apply via UTIITSL',url:'https://www.pan.utiitsl.com/PAN_ONLINE/'},{name:'e-PAN Download',url:'https://eportal.incometax.gov.in'},{name:'Link Aadhar with PAN',url:'https://eportal.incometax.gov.in'}],docs:['Aadhar Card','Passport size photo','Date of birth proof','Address proof']},
@@ -304,7 +307,10 @@ async function loadService(){
             const s=ss.val();
             document.getElementById('siteTitle').innerText=s.title||'IBAD TECH CSC';
             document.getElementById('siteTagline').innerText=s.tagline||'Sarkari Kaam & Digital Seva';
-            document.getElementById('topAddr').innerHTML=`<i class="fas fa-map-marker-alt"></i> ${s.address||'India'}`;
+            
+            // ✅ FIX: innerText use karo, icon dobara add nahi hoga
+            document.getElementById('topAddr').innerText=s.address||'India';
+            
             document.getElementById('footTitle').innerText=s.title||'IBAD TECH CSC';
             document.getElementById('footAbout').innerText=s.about||'Your trusted Digital Seva Kendra.';
             const waUrl=`https://wa.me/${s.whatsapp||'917056836166'}`;
