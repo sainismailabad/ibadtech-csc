@@ -69,11 +69,117 @@ img{max-width:100%;height:auto;display:block}
 .logo-icon{width:54px;height:54px;background:linear-gradient(135deg,var(--p600),var(--p800));border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.5rem;box-shadow:0 4px 12px rgba(37,99,235,.3);flex-shrink:0}
 .logo-text h1{font-family:var(--serif);color:var(--p700);font-size:1.65rem;font-weight:900;line-height:1.2}
 .logo-text p{color:var(--s500);font-size:.78rem;margin-top:3px;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
-.search-box{display:flex;align-items:center;background:var(--s100);border-radius:9999px;padding:4px;min-width:300px;border:2px solid transparent;transition:all .2s}
-.search-box:focus-within{border-color:var(--p500);background:#fff}
+
+/* =========================================
+   SEARCH BOX WITH LIVE SUGGESTIONS
+   ========================================= */
+.search-wrap{position:relative;min-width:340px;flex:1;max-width:480px}
+.search-box{display:flex;align-items:center;background:var(--s100);border-radius:9999px;padding:4px;border:2px solid transparent;transition:all .2s;width:100%}
+.search-box:focus-within{border-color:var(--p500);background:#fff;box-shadow:0 0 0 4px rgba(37,99,235,.1)}
 .search-box input{flex:1;padding:10px 16px;border:none;background:transparent;outline:none;font-size:.9rem;color:var(--s800);font-family:inherit}
-.search-box button{padding:10px 20px;background:var(--p600);color:#fff;border-radius:9999px;font-weight:700;font-size:.85rem;display:flex;align-items:center;gap:6px}
+.search-box button{padding:10px 20px;background:var(--p600);color:#fff;border-radius:9999px;font-weight:700;font-size:.85rem;display:flex;align-items:center;gap:6px;transition:all .2s}
 .search-box button:hover{background:var(--p700)}
+
+/* Suggestions Dropdown */
+.search-suggestions{
+position:absolute;
+top:calc(100% + 8px);
+left:0;
+right:0;
+background:#fff;
+border-radius:14px;
+box-shadow:0 20px 40px rgba(0,0,0,.12);
+border:1px solid var(--s200);
+max-height:420px;
+overflow-y:auto;
+z-index:1000;
+display:none;
+}
+.search-suggestions.show{display:block;animation:fadeIn .2s ease}
+.search-suggestions::-webkit-scrollbar{width:6px}
+.search-suggestions::-webkit-scrollbar-thumb{background:var(--s300);border-radius:3px}
+
+.suggestion-header{
+padding:10px 16px 8px;
+font-size:.7rem;
+text-transform:uppercase;
+letter-spacing:.08em;
+color:var(--s400);
+font-weight:800;
+background:var(--s50);
+border-bottom:1px solid var(--s200);
+display:flex;
+align-items:center;
+gap:6px;
+}
+.suggestion-header i{color:var(--p600)}
+
+.suggestion-item{
+display:flex;
+align-items:center;
+gap:12px;
+padding:12px 16px;
+cursor:pointer;
+transition:all .15s;
+border-bottom:1px solid var(--s100);
+text-decoration:none;
+color:inherit;
+}
+.suggestion-item:last-child{border-bottom:none}
+.suggestion-item:hover,.suggestion-item.selected{background:var(--p50)}
+.suggestion-item .icon-box{
+width:38px;
+height:38px;
+border-radius:9px;
+display:flex;
+align-items:center;
+justify-content:center;
+color:#fff;
+font-size:1rem;
+flex-shrink:0;
+}
+.suggestion-item .info{flex:1;min-width:0}
+.suggestion-item .info .title{
+font-size:.88rem;
+font-weight:700;
+color:var(--s900);
+line-height:1.35;
+margin-bottom:2px;
+overflow:hidden;
+text-overflow:ellipsis;
+display:-webkit-box;
+-webkit-line-clamp:1;
+-webkit-box-orient:vertical;
+}
+.suggestion-item .info .title mark{background:#fef3c7;color:var(--s900);padding:0 2px;border-radius:3px;font-weight:900}
+.suggestion-item .info .subtitle{
+font-size:.74rem;
+color:var(--s500);
+font-weight:600;
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap;
+}
+.suggestion-item .type-badge{
+font-size:.62rem;
+font-weight:800;
+padding:3px 8px;
+border-radius:5px;
+text-transform:uppercase;
+letter-spacing:.05em;
+flex-shrink:0;
+}
+.type-badge.post{background:var(--p50);color:var(--p700)}
+.type-badge.service{background:var(--g50);color:var(--g700)}
+
+.suggestion-empty{
+padding:24px 20px;
+text-align:center;
+color:var(--s400);
+font-size:.85rem;
+font-weight:600;
+}
+.suggestion-empty i{font-size:1.6rem;color:var(--s300);margin-bottom:8px;display:block}
 
 /* NAVBAR */
 .navbar{background:#fff;border-bottom:1px solid var(--s200);position:sticky;top:0;z-index:100;box-shadow:0 2px 4px rgba(0,0,0,.04)}
@@ -136,31 +242,8 @@ img{max-width:100%;height:auto;display:block}
 .stat-lbl{font-size:.76rem;color:var(--s500);font-weight:700;margin-top:6px;text-transform:uppercase;letter-spacing:.05em}
 
 /* AD CONTAINER */
-.ad-container{
-background:var(--s50);
-border:1px dashed var(--s300);
-border-radius:10px;
-padding:12px;
-text-align:center;
-margin:20px 0;
-min-height:100px;
-display:flex;
-align-items:center;
-justify-content:center;
-position:relative;
-overflow:hidden;
-}
-.ad-container::before{
-content:'Advertisement';
-position:absolute;
-top:6px;
-left:10px;
-font-size:.62rem;
-text-transform:uppercase;
-letter-spacing:.1em;
-color:var(--s400);
-font-weight:700;
-}
+.ad-container{background:var(--s50);border:1px dashed var(--s300);border-radius:10px;padding:12px;text-align:center;margin:20px 0;min-height:100px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.ad-container::before{content:'Advertisement';position:absolute;top:6px;left:10px;font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:var(--s400);font-weight:700}
 .ad-placeholder{color:var(--s400);font-size:.8rem;padding:20px}
 
 /* LAYOUT */
@@ -205,6 +288,13 @@ font-weight:700;
 .card-meta .date i{color:var(--p500)}
 .btn-view{background:var(--p600);color:#fff;padding:7px 14px;border-radius:6px;font-weight:700;font-size:.74rem;display:flex;align-items:center;gap:5px;transition:all .2s;text-decoration:none}
 .btn-view:hover{background:var(--p700);transform:translateX(2px)}
+
+/* SERVICE CARD (for search results) */
+.service-card{background:#fff;border:1px solid var(--s200);border-radius:14px;padding:20px;text-align:center;transition:all .25s;display:block;text-decoration:none;color:inherit}
+.service-card:hover{transform:translateY(-6px);border-color:var(--p600);box-shadow:0 12px 24px rgba(37,99,235,.15)}
+.service-card .icon{width:56px;height:56px;margin:0 auto 12px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:#fff;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.service-card h3{font-size:.92rem;font-weight:800;color:var(--s900);margin-bottom:5px}
+.service-card p{font-size:.74rem;color:var(--s500);font-weight:600}
 
 .side-widget{background:#fff;border:1px solid var(--s200);border-radius:14px;padding:22px;margin-bottom:22px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
 .side-title{font-size:.9rem;font-weight:800;margin-bottom:16px;color:var(--s900);border-bottom:2px solid var(--s200);padding-bottom:10px;text-transform:uppercase;display:flex;align-items:center;gap:10px;letter-spacing:.04em}
@@ -258,7 +348,7 @@ font-weight:700;
 }
 @media(max-width:768px){
 .hero h2{font-size:1.6rem}.hero p{font-size:.95rem}
-.header .container{flex-direction:column;text-align:center}.logo{justify-content:center}.search-box{width:100%;min-width:auto}
+.header .container{flex-direction:column;text-align:center}.logo{justify-content:center}.search-wrap{width:100%;min-width:auto;max-width:none}
 .layout{margin:20px auto;gap:20px}.foot-grid{grid-template-columns:1fr;gap:24px}
 .feat-content{padding:20px}.feat-title{font-size:1.2rem}.stats-grid{grid-template-columns:repeat(2,1fr);gap:14px}
 .sarkari-grid{grid-template-columns:repeat(2,1fr)}
@@ -266,6 +356,7 @@ font-weight:700;
 @media(max-width:480px){
 .container{padding:0 14px}.topbar-links a span{display:none}.grid{grid-template-columns:1fr}
 .hero{padding:36px 0}.hero h2{font-size:1.35rem}.sarkari-grid{grid-template-columns:1fr}
+.suggestion-item .icon-box{width:34px;height:34px;font-size:.9rem}
 }
 </style>
 </head>
@@ -273,7 +364,7 @@ font-weight:700;
 
 <div id="toastBox"></div>
 
-<!-- TOPBAR - ICON FIXED (only 1 icon) -->
+<!-- TOPBAR -->
 <div class="topbar">
 <div class="container">
 <div class="topbar-left"><i class="fas fa-map-marker-alt"></i><span id="topAddr">India</span></div>
@@ -293,9 +384,17 @@ font-weight:700;
 <p id="siteTagline">Sarkari Kaam & Digital Seva</p>
 </div>
 </a>
+
+<!-- SEARCH WITH SUGGESTIONS -->
+<div class="search-wrap">
 <div class="search-box">
-<input type="text" id="searchInput" placeholder="Search jobs, yojna, documents..." onkeypress="if(event.key==='Enter')searchNow()">
+<input type="text" id="searchInput" placeholder="Search jobs, yojna, services..." autocomplete="off" 
+oninput="handleSearchInput()" 
+onkeydown="handleSearchKey(event)"
+onfocus="handleSearchFocus()">
 <button onclick="searchNow()"><i class="fas fa-search"></i> Search</button>
+</div>
+<div class="search-suggestions" id="searchSuggestions"></div>
 </div>
 </div>
 </div>
@@ -493,8 +592,10 @@ let allPosts = [];
 let allCats = {};
 let allServices = {};
 let currentFilter = 'all';
+let searchTimeout = null;
+let selectedSuggestionIndex = -1;
 
-// Default services (agar Firebase khaali hai to ye use honge)
+// Default services
 const DEFAULT_SERVICES = {
     aadhar:{name:'Aadhar Card',sub:'Update & Download',icon:'fa-id-card',color:'ic-aadhar'},
     pan:{name:'PAN Card',sub:'Apply & Correction',icon:'fa-credit-card',color:'ic-pan'},
@@ -526,6 +627,9 @@ function toast(msg, type='success'){
     setTimeout(()=>t.remove(),3200);
 }
 
+// ==========================================
+// LOAD DATA
+// ==========================================
 async function loadData(){
     try{
         const ss=await db.ref('settings/general').once('value');
@@ -535,7 +639,6 @@ async function loadData(){
             document.getElementById('siteTitle').innerText=title;
             document.getElementById('siteTagline').innerText=s.tagline||'Sarkari Kaam & Digital Seva';
             document.title=`${title} - Sarkari Job, Result, Yojna & Digital Seva 2026`;
-            // ✅ FIX: sirf TEXT update karo, icon HTML mein pehle se hai
             document.getElementById('topAddr').innerText=s.address||'India';
             document.getElementById('dynAbout').innerText=s.about||'Welcome to our Digital Seva Kendra.';
             document.getElementById('footTitle').innerText=title;
@@ -566,9 +669,19 @@ async function loadData(){
     }
 }
 
+// ==========================================
+// GET ALL SERVICES (Firebase or Default)
+// ==========================================
+function getServices(){
+    return Object.keys(allServices).length>0?allServices:DEFAULT_SERVICES;
+}
+
+// ==========================================
+// RENDER SARKARI GRID
+// ==========================================
 function renderSarkariGrid(){
     const grid=document.getElementById('sarkariGrid');
-    const services=Object.keys(allServices).length>0?allServices:DEFAULT_SERVICES;
+    const services=getServices();
     let html='';
     Object.entries(services).forEach(([key,s])=>{
         html+=`
@@ -582,6 +695,9 @@ function renderSarkariGrid(){
     grid.innerHTML=html||'<p style="grid-column:1/-1;text-align:center;color:var(--s400)">No services</p>';
 }
 
+// ==========================================
+// RENDER FEATURED
+// ==========================================
 function renderFeatured(){
     const box=document.getElementById('featuredBox');
     if(allPosts.length===0){box.innerHTML='';return;}
@@ -606,6 +722,9 @@ function renderFeatured(){
     `;
 }
 
+// ==========================================
+// RENDER GRID
+// ==========================================
 function renderGrid(){
     const grid=document.getElementById('postsGrid');
     let posts=allPosts;
@@ -639,6 +758,9 @@ function renderGrid(){
     grid.innerHTML=html;
 }
 
+// ==========================================
+// RENDER TRENDING
+// ==========================================
 function renderTrending(){
     const box=document.getElementById('trendBox');
     const tr=allPosts.slice(0,5);
@@ -655,6 +777,265 @@ function renderTrending(){
     box.innerHTML=html;
 }
 
+// ==========================================
+// 🔍 LIVE SEARCH WITH SUGGESTIONS
+// ==========================================
+function highlightMatch(text, query){
+    if(!query||!text)return text;
+    const regex=new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`,'gi');
+    return text.replace(regex,'<mark>$1</mark>');
+}
+
+function handleSearchInput(){
+    const input=document.getElementById('searchInput');
+    const query=input.value.trim().toLowerCase();
+
+    clearTimeout(searchTimeout);
+    if(!query){
+        hideSuggestions();
+        return;
+    }
+
+    searchTimeout=setTimeout(()=>showSuggestions(query),150);
+}
+
+function showSuggestions(query){
+    const box=document.getElementById('searchSuggestions');
+    const services=getServices();
+    let matches=[];
+
+    // Search in Services
+    Object.entries(services).forEach(([key,s])=>{
+        const name=(s.name||'').toLowerCase();
+        const sub=(s.sub||'').toLowerCase();
+        if(name.includes(query)||sub.includes(query)){
+            matches.push({
+                type:'service',
+                key,
+                title:s.name,
+                subtitle:s.sub||'Government Service',
+                icon:s.icon||'fa-id-card',
+                color:s.color||'ic-aadhar',
+                url:`service.html?service=${key}`
+            });
+        }
+    });
+
+    // Search in Posts
+    allPosts.forEach(p=>{
+        const title=(p.title||'').toLowerCase();
+        const summary=(p.summary||'').toLowerCase();
+        const catName=(allCats[p.category]?.name||'').toLowerCase();
+        if(title.includes(query)||summary.includes(query)||catName.includes(query)){
+            matches.push({
+                type:'post',
+                key:p.id,
+                title:p.title,
+                subtitle:`${allCats[p.category]?.name||'Update'} • ${p.lastDate||'Check Notice'}`,
+                icon:'fa-newspaper',
+                color:'ic-pan',
+                url:`post.html?id=${p.id}`
+            });
+        }
+    });
+
+    // Sort: services first, then posts
+    matches.sort((a,b)=>a.type===b.type?0:a.type==='service'?-1:1);
+    matches=matches.slice(0,8); // Top 8
+
+    if(matches.length===0){
+        box.innerHTML=`
+            <div class="suggestion-empty">
+                <i class="fas fa-search"></i>
+                <p>No results for "${query}"</p>
+            </div>
+        `;
+        box.classList.add('show');
+        return;
+    }
+
+    let html='';
+    const services_count=matches.filter(m=>m.type==='service').length;
+    const posts_count=matches.filter(m=>m.type==='post').length;
+    let currentType='';
+
+    matches.forEach((m,i)=>{
+        // Add section header
+        if(m.type!==currentType){
+            if(m.type==='service'&&services_count>0){
+                html+=`<div class="suggestion-header"><i class="fas fa-briefcase"></i> Sarkari Kaam Services</div>`;
+            }
+            if(m.type==='post'&&posts_count>0){
+                html+=`<div class="suggestion-header"><i class="fas fa-newspaper"></i> Latest Updates</div>`;
+            }
+            currentType=m.type;
+        }
+
+        html+=`
+            <a href="${m.url}" class="suggestion-item" data-index="${i}">
+                <div class="icon-box ${m.color}">
+                    <i class="fas ${m.icon}"></i>
+                </div>
+                <div class="info">
+                    <div class="title">${highlightMatch(m.title,query)}</div>
+                    <div class="subtitle">${m.subtitle}</div>
+                </div>
+                <span class="type-badge ${m.type}">${m.type}</span>
+            </a>
+        `;
+    });
+
+    box.innerHTML=html;
+    box.classList.add('show');
+    selectedSuggestionIndex=-1;
+}
+
+function hideSuggestions(){
+    const box=document.getElementById('searchSuggestions');
+    box.classList.remove('show');
+    box.innerHTML='';
+    selectedSuggestionIndex=-1;
+}
+
+function handleSearchFocus(){
+    const query=document.getElementById('searchInput').value.trim().toLowerCase();
+    if(query){
+        showSuggestions(query);
+    }
+}
+
+function handleSearchKey(e){
+    const box=document.getElementById('searchSuggestions');
+    const items=box.querySelectorAll('.suggestion-item');
+    
+    if(e.key==='Enter'){
+        e.preventDefault();
+        if(selectedSuggestionIndex>=0&&items[selectedSuggestionIndex]){
+            items[selectedSuggestionIndex].click();
+            return;
+        }
+        searchNow();
+        hideSuggestions();
+        return;
+    }
+
+    if(e.key==='Escape'){
+        hideSuggestions();
+        return;
+    }
+
+    if(!items.length)return;
+
+    if(e.key==='ArrowDown'){
+        e.preventDefault();
+        selectedSuggestionIndex=(selectedSuggestionIndex+1)%items.length;
+        updateSelectedSuggestion(items);
+    }
+
+    if(e.key==='ArrowUp'){
+        e.preventDefault();
+        selectedSuggestionIndex=(selectedSuggestionIndex-1+items.length)%items.length;
+        updateSelectedSuggestion(items);
+    }
+}
+
+function updateSelectedSuggestion(items){
+    items.forEach((el,i)=>{
+        if(i===selectedSuggestionIndex){
+            el.classList.add('selected');
+            el.scrollIntoView({block:'nearest',behavior:'smooth'});
+        }else{
+            el.classList.remove('selected');
+        }
+    });
+}
+
+// Close suggestions on outside click
+document.addEventListener('click',(e)=>{
+    const wrap=document.querySelector('.search-wrap');
+    if(wrap&&!wrap.contains(e.target)){
+        hideSuggestions();
+    }
+});
+
+// ==========================================
+// 🔍 SEARCH NOW (Full Results)
+// ==========================================
+window.searchNow=function(){
+    const q=document.getElementById('searchInput').value.trim().toLowerCase();
+    hideSuggestions();
+    if(!q){
+        renderGrid();
+        document.getElementById('secTitleText').innerText='Latest Sarkari Updates';
+        return;
+    }
+
+    const services=getServices();
+    const grid=document.getElementById('postsGrid');
+
+    // Match services
+    const serviceMatches=Object.entries(services).filter(([key,s])=>{
+        const name=(s.name||'').toLowerCase();
+        const sub=(s.sub||'').toLowerCase();
+        return name.includes(q)||sub.includes(q);
+    }).map(([key,s])=>({type:'service',key,...s}));
+
+    // Match posts
+    const postMatches=allPosts.filter(p=>
+        p.title.toLowerCase().includes(q)||
+        (p.summary&&p.summary.toLowerCase().includes(q))||
+        (allCats[p.category]?.name||'').toLowerCase().includes(q)
+    );
+
+    if(serviceMatches.length===0&&postMatches.length===0){
+        grid.innerHTML=`<div class="empty" style="grid-column:1/-1"><i class="fas fa-search"></i><p>No results for "${q}"</p></div>`;
+        document.getElementById('secTitleText').innerText=`Search: "${q}"`;
+        return;
+    }
+
+    let html='';
+
+    // Services section
+    if(serviceMatches.length>0){
+        serviceMatches.forEach(s=>{
+            html+=`
+                <a href="service.html?service=${s.key}" class="service-card">
+                    <div class="icon ${s.color||'ic-aadhar'}"><i class="fas ${s.icon||'fa-id-card'}"></i></div>
+                    <h3>${highlightMatch(s.name,q)}</h3>
+                    <p>${s.sub||''}</p>
+                </a>
+            `;
+        });
+    }
+
+    // Posts section
+    if(postMatches.length>0){
+        postMatches.forEach(p=>{
+            html+=`
+                <div class="card">
+                    <div class="card-cat">${allCats[p.category]?.name||'Update'}</div>
+                    <div class="card-body">
+                        <a href="post.html?id=${p.id}" class="card-title">${highlightMatch(p.title,q)}</a>
+                        <p class="card-sum">${p.summary||''}</p>
+                        <div class="card-meta">
+                            <span class="date"><i class="fas fa-clock"></i> ${p.lastDate||'N/A'}</span>
+                            <a href="post.html?id=${p.id}" class="btn-view">View</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    grid.innerHTML=html;
+    const total=serviceMatches.length+postMatches.length;
+    document.getElementById('secTitleText').innerText=`Search: "${q}" — ${total} result${total!==1?'s':''} found`;
+    window.scrollTo({top:document.getElementById('secTitle').offsetTop-100,behavior:'smooth'});
+};
+
+// ==========================================
+// FILTER CATEGORY
+// ==========================================
 window.filterCat=function(cat,e){
     if(e)e.preventDefault();
     currentFilter=cat;
@@ -673,39 +1054,9 @@ window.filterCat=function(cat,e){
     window.scrollTo({top:document.getElementById('secTitle').offsetTop-100,behavior:'smooth'});
 };
 
-window.searchNow=function(){
-    const q=document.getElementById('searchInput').value.trim().toLowerCase();
-    if(!q){renderGrid();return;}
-    const results=allPosts.filter(p=>
-        p.title.toLowerCase().includes(q)||
-        (p.summary&&p.summary.toLowerCase().includes(q))||
-        (allCats[p.category]?.name||'').toLowerCase().includes(q)
-    );
-    const grid=document.getElementById('postsGrid');
-    if(results.length===0){
-        grid.innerHTML=`<div class="empty" style="grid-column:1/-1"><i class="fas fa-search"></i><p>No results for "${q}"</p></div>`;
-    }else{
-        let html='';
-        results.forEach(p=>{
-            html+=`
-                <div class="card">
-                    <div class="card-cat">${allCats[p.category]?.name||'Update'}</div>
-                    <div class="card-body">
-                        <a href="post.html?id=${p.id}" class="card-title">${p.title}</a>
-                        <p class="card-sum">${p.summary||''}</p>
-                        <div class="card-meta">
-                            <span class="date"><i class="fas fa-clock"></i> ${p.lastDate||'N/A'}</span>
-                            <a href="post.html?id=${p.id}" class="btn-view">View</a>
-                        </div>
-                    </div>
-                </div>
-            `;
-        });
-        grid.innerHTML=html;
-    }
-    document.getElementById('secTitleText').innerText=`Search: "${q}"`;
-};
-
+// ==========================================
+// NEWSLETTER
+// ==========================================
 window.subscribeNL=async function(){
     const email=document.getElementById('nlEmail').value.trim();
     if(!email||!email.includes('@'))return toast('Enter valid email','warning');
@@ -716,6 +1067,9 @@ window.subscribeNL=async function(){
     }catch(e){toast('Error. Try again.','error');}
 };
 
+// ==========================================
+// HELPERS
+// ==========================================
 function fmtDate(iso){
     if(!iso)return 'N/A';
     const d=new Date(iso);
@@ -729,9 +1083,11 @@ window.addEventListener('scroll',()=>{
     else b.classList.remove('show');
 });
 
+// ==========================================
+// INIT
+// ==========================================
 document.addEventListener('DOMContentLoaded',()=>{
     loadData();
-    // Push AdSense
     try{
         document.querySelectorAll('.adsbygoogle').forEach(()=>{
             (adsbygoogle=window.adsbygoogle||[]).push({});
