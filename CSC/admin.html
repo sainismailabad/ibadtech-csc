@@ -33,509 +33,165 @@ a{text-decoration:none;color:inherit}
 .toast.info{border-left:4px solid var(--p500)}.toast.info i{color:var(--p500)}
 @keyframes toastIn{from{transform:translateX(120%);opacity:0}to{transform:translateX(0);opacity:1}}
 
-/* VIEWS */
 .view{display:none}
 .view.active{display:block}
 .view-flex.active{display:flex}
 
-/* =========================================
-   LOGIN VIEW
-   ========================================= */
-#loginView{
-min-height:100vh;
-background:linear-gradient(135deg,#0f172a 0%,#1e293b 50%,#1e40af 100%);
-display:none;
-align-items:center;
-justify-content:center;
-padding:20px;
-position:relative;
-overflow:hidden;
-}
+/* LOGIN */
+#loginView{min-height:100vh;background:linear-gradient(135deg,#0f172a 0%,#1e293b 50%,#1e40af 100%);display:none;align-items:center;justify-content:center;padding:20px;position:relative;overflow:hidden}
 #loginView.active{display:flex}
-#loginView::before{
-content:'';
-position:absolute;
-width:600px;height:600px;
-background:radial-gradient(circle,rgba(59,130,246,.3),transparent 70%);
-top:-200px;right:-200px;
-border-radius:50%;
-}
-#loginView::after{
-content:'';
-position:absolute;
-width:400px;height:400px;
-background:radial-gradient(circle,rgba(37,99,235,.2),transparent 70%);
-bottom:-150px;left:-150px;
-border-radius:50%;
-}
-.login-box{
-background:#fff;
-padding:44px 40px;
-border-radius:20px;
-width:100%;
-max-width:440px;
-box-shadow:0 30px 60px rgba(0,0,0,.3);
-position:relative;
-z-index:1;
-animation:loginSlide .5s cubic-bezier(.16,1,.3,1);
-}
+#loginView::before{content:'';position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(59,130,246,.3),transparent 70%);top:-200px;right:-200px;border-radius:50%}
+#loginView::after{content:'';position:absolute;width:400px;height:400px;background:radial-gradient(circle,rgba(37,99,235,.2),transparent 70%);bottom:-150px;left:-150px;border-radius:50%}
+.login-box{background:#fff;padding:44px 40px;border-radius:20px;width:100%;max-width:440px;box-shadow:0 30px 60px rgba(0,0,0,.3);position:relative;z-index:1;animation:loginSlide .5s cubic-bezier(.16,1,.3,1)}
 @keyframes loginSlide{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-.login-logo{
-width:70px;height:70px;
-background:linear-gradient(135deg,var(--p600),var(--p800));
-border-radius:16px;
-display:flex;align-items:center;justify-content:center;
-color:#fff;font-size:1.8rem;
-margin:0 auto 20px;
-box-shadow:0 8px 24px rgba(37,99,235,.35);
-}
-.login-box h1{
-font-family:var(--serif);
-font-size:1.5rem;
-font-weight:900;
-text-align:center;
-margin-bottom:6px;
-color:var(--s900);
-}
-.login-box .subtitle{
-text-align:center;
-color:var(--s500);
-font-size:.88rem;
-margin-bottom:28px;
-}
-.login-box label{
-display:block;
-font-weight:700;
-font-size:.84rem;
-color:var(--s700);
-margin-bottom:7px;
-}
-.login-box input{
-width:100%;
-padding:14px 16px;
-border:2px solid var(--s200);
-border-radius:10px;
-font-size:.94rem;
-margin-bottom:16px;
-background:var(--s50);
-transition:all .2s;
-color:var(--s800);
-}
-.login-box input:focus{
-outline:none;
-border-color:var(--p500);
-background:#fff;
-box-shadow:0 0 0 4px rgba(37,99,235,.1);
-}
-.login-btn{
-width:100%;
-padding:15px;
-background:linear-gradient(135deg,var(--p600),var(--p700));
-color:#fff;
-border-radius:10px;
-font-weight:800;
-font-size:.95rem;
-display:flex;
-align-items:center;
-justify-content:center;
-gap:10px;
-transition:all .25s;
-box-shadow:0 6px 18px rgba(37,99,235,.35);
-margin-bottom:18px;
-letter-spacing:.02em;
-}
+.login-logo{width:70px;height:70px;background:linear-gradient(135deg,var(--p600),var(--p800));border-radius:16px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.8rem;margin:0 auto 20px;box-shadow:0 8px 24px rgba(37,99,235,.35)}
+.login-box h1{font-family:var(--serif);font-size:1.5rem;font-weight:900;text-align:center;margin-bottom:6px;color:var(--s900)}
+.login-box .subtitle{text-align:center;color:var(--s500);font-size:.88rem;margin-bottom:28px}
+.login-box label{display:block;font-weight:700;font-size:.84rem;color:var(--s700);margin-bottom:7px}
+.login-box input{width:100%;padding:14px 16px;border:2px solid var(--s200);border-radius:10px;font-size:.94rem;margin-bottom:16px;background:var(--s50);transition:all .2s;color:var(--s800)}
+.login-box input:focus{outline:none;border-color:var(--p500);background:#fff;box-shadow:0 0 0 4px rgba(37,99,235,.1)}
+.login-btn{width:100%;padding:15px;background:linear-gradient(135deg,var(--p600),var(--p700));color:#fff;border-radius:10px;font-weight:800;font-size:.95rem;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .25s;box-shadow:0 6px 18px rgba(37,99,235,.35);margin-bottom:18px}
 .login-btn:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(37,99,235,.4)}
 .login-btn:disabled{opacity:.7;cursor:not-allowed;transform:none}
-.back-site{
-text-align:center;
-font-size:.85rem;
-color:var(--s500);
-font-weight:600;
-display:flex;
-align-items:center;
-justify-content:center;
-gap:6px;
-transition:color .2s;
-}
+.back-site{text-align:center;font-size:.85rem;color:var(--s500);font-weight:600;display:flex;align-items:center;justify-content:center;gap:6px;transition:color .2s}
 .back-site:hover{color:var(--p600)}
-.login-help{
-background:var(--p50);
-border:1px solid var(--p200);
-border-radius:10px;
-padding:14px 16px;
-margin-top:22px;
-font-size:.78rem;
-color:var(--p800);
-line-height:1.7;
-}
-.login-help strong{display:block;margin-bottom:6px;font-size:.82rem;color:var(--p900)}
-.login-help code{background:var(--p100);padding:2px 6px;border-radius:4px;font-family:monospace;font-size:.75rem}
 
-/* =========================================
-   DASHBOARD
-   ========================================= */
+/* DASHBOARD */
 #dashView{min-height:100vh;background:var(--s100)}
-
-/* SIDEBAR */
-.sidebar{
-width:270px;
-background:linear-gradient(180deg,#0f172a 0%,#1e293b 100%);
-height:100vh;
-position:fixed;
-padding:22px 0;
-display:flex;
-flex-direction:column;
-color:#fff;
-z-index:100;
-overflow-y:auto;
-border-right:1px solid #1e293b;
-}
+.sidebar{width:270px;background:linear-gradient(180deg,#0f172a 0%,#1e293b 100%);height:100vh;position:fixed;padding:22px 0;display:flex;flex-direction:column;color:#fff;z-index:100;overflow-y:auto;border-right:1px solid #1e293b}
 .sidebar::-webkit-scrollbar{width:4px}
 .sidebar::-webkit-scrollbar-thumb{background:var(--s700);border-radius:4px}
-.sidebar-brand{
-padding:0 24px 22px;
-border-bottom:1px solid rgba(255,255,255,.08);
-margin-bottom:18px;
-}
-.sidebar-brand h2{
-font-family:var(--serif);
-font-size:1.25rem;
-font-weight:900;
-display:flex;
-align-items:center;
-gap:10px;
-color:#fff;
-}
+.sidebar-brand{padding:0 24px 22px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:18px}
+.sidebar-brand h2{font-family:var(--serif);font-size:1.25rem;font-weight:900;display:flex;align-items:center;gap:10px;color:#fff}
 .sidebar-brand h2 i{color:var(--p400)}
-.sidebar-brand p{
-font-size:.72rem;
-color:var(--s400);
-font-weight:600;
-text-transform:uppercase;
-letter-spacing:.1em;
-margin-top:5px;
-padding-left:33px;
-}
-.nav-item{
-padding:14px 24px;
-color:var(--s400);
-cursor:pointer;
-display:flex;
-align-items:center;
-gap:14px;
-font-weight:600;
-font-size:.9rem;
-border-left:4px solid transparent;
-transition:all .2s;
-white-space:nowrap;
-position:relative;
-}
+.sidebar-brand p{font-size:.72rem;color:var(--s400);font-weight:600;text-transform:uppercase;letter-spacing:.1em;margin-top:5px;padding-left:33px}
+.nav-group{padding:8px 24px 4px;font-size:.68rem;font-weight:800;color:var(--s500);text-transform:uppercase;letter-spacing:.12em;margin-top:12px}
+.nav-item{padding:13px 24px;color:var(--s400);cursor:pointer;display:flex;align-items:center;gap:14px;font-weight:600;font-size:.88rem;border-left:4px solid transparent;transition:all .2s;white-space:nowrap;position:relative}
 .nav-item i{width:22px;text-align:center;font-size:1rem}
 .nav-item:hover{color:#fff;background:rgba(255,255,255,.06)}
-.nav-item.active{
-background:linear-gradient(90deg,rgba(37,99,235,.25),rgba(37,99,235,.05));
-color:#fff;
-border-left-color:var(--p500);
-}
+.nav-item.active{background:linear-gradient(90deg,rgba(37,99,235,.25),rgba(37,99,235,.05));color:#fff;border-left-color:var(--p500)}
 .nav-item.active i{color:var(--p400)}
-.nav-item.badge::after{
-content:attr(data-badge);
-position:absolute;
-right:20px;
-top:50%;
-transform:translateY(-50%);
-background:var(--r500);
-color:#fff;
-font-size:.68rem;
-font-weight:800;
-padding:2px 8px;
-border-radius:9999px;
-min-width:22px;
-text-align:center;
-}
 .sidebar-spacer{flex-grow:1}
 
-/* MAIN CONTENT */
-.main-content{
-margin-left:270px;
-padding:28px;
-width:calc(100% - 270px);
-min-height:100vh;
-}
+.main-content{margin-left:270px;padding:28px;width:calc(100% - 270px);min-height:100vh}
 
-/* TOP BAR */
-.top-bar{
-background:#fff;
-padding:20px 26px;
-border-radius:14px;
-box-shadow:0 2px 8px rgba(0,0,0,.04);
-margin-bottom:26px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-border:1px solid var(--s200);
-flex-wrap:wrap;
-gap:14px;
-}
-.top-bar h2{
-font-family:var(--serif);
-font-size:1.35rem;
-font-weight:900;
-display:flex;
-align-items:center;
-gap:12px;
-color:var(--s900);
-}
+.top-bar{background:#fff;padding:20px 26px;border-radius:14px;box-shadow:0 2px 8px rgba(0,0,0,.04);margin-bottom:26px;display:flex;justify-content:space-between;align-items:center;border:1px solid var(--s200);flex-wrap:wrap;gap:14px}
+.top-bar h2{font-family:var(--serif);font-size:1.35rem;font-weight:900;display:flex;align-items:center;gap:12px;color:var(--s900)}
 .top-bar h2 i{color:var(--p600)}
-.user-info{
-display:flex;
-align-items:center;
-gap:12px;
-}
-.user-avatar{
-width:42px;height:42px;
-border-radius:50%;
-background:linear-gradient(135deg,var(--p600),var(--p800));
-color:#fff;
-display:flex;align-items:center;justify-content:center;
-font-weight:800;
-font-size:.92rem;
-box-shadow:0 4px 12px rgba(37,99,235,.3);
-}
+.user-info{display:flex;align-items:center;gap:12px}
+.user-avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--p600),var(--p800));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.92rem;box-shadow:0 4px 12px rgba(37,99,235,.3)}
 .user-details{text-align:right}
 .user-details .name{font-weight:800;font-size:.88rem;color:var(--s900)}
 .user-details .role{font-size:.72rem;color:var(--s500);font-weight:600;text-transform:uppercase;letter-spacing:.05em}
 
-/* SECTIONS */
 .section{display:none;animation:fade .3s ease}
 .section.active{display:block}
 @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
-/* CARDS */
-.card{
-background:#fff;
-padding:26px;
-border-radius:14px;
-box-shadow:0 2px 8px rgba(0,0,0,.04);
-margin-bottom:24px;
-border:1px solid var(--s200);
-}
-.card-head{
-font-size:1.08rem;
-font-weight:800;
-margin-bottom:22px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-border-bottom:2px solid var(--s100);
-padding-bottom:16px;
-flex-wrap:wrap;
-gap:12px;
-}
+.card{background:#fff;padding:26px;border-radius:14px;box-shadow:0 2px 8px rgba(0,0,0,.04);margin-bottom:24px;border:1px solid var(--s200)}
+.card-head{font-size:1.08rem;font-weight:800;margin-bottom:22px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--s100);padding-bottom:16px;flex-wrap:wrap;gap:12px}
 .card-head span{display:flex;align-items:center;gap:10px}
 .card-head span i{color:var(--p600)}
 
-/* STATS CARDS */
-.stats-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:20px;
-margin-bottom:26px;
-}
-.stat-card{
-background:#fff;
-padding:22px;
-border-radius:14px;
-box-shadow:0 2px 8px rgba(0,0,0,.04);
-border:1px solid var(--s200);
-display:flex;
-align-items:center;
-gap:16px;
-transition:all .25s;
-}
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-bottom:26px}
+.stat-card{background:#fff;padding:22px;border-radius:14px;box-shadow:0 2px 8px rgba(0,0,0,.04);border:1px solid var(--s200);display:flex;align-items:center;gap:16px;transition:all .25s}
 .stat-card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,0,0,.08)}
-.stat-icon{
-width:56px;height:56px;
-border-radius:12px;
-display:flex;align-items:center;justify-content:center;
-font-size:1.5rem;
-color:#fff;
-flex-shrink:0;
-}
+.stat-icon{width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:#fff;flex-shrink:0}
 .stat-icon.blue{background:linear-gradient(135deg,#3b82f6,#1d4ed8)}
 .stat-icon.green{background:linear-gradient(135deg,#22c55e,#15803d)}
 .stat-icon.orange{background:linear-gradient(135deg,#f59e0b,#d97706)}
 .stat-icon.purple{background:linear-gradient(135deg,#8b5cf6,#6d28d9)}
+.stat-icon.red{background:linear-gradient(135deg,#ef4444,#b91c1c)}
+.stat-icon.cyan{background:linear-gradient(135deg,#06b6d4,#0e7490)}
 .stat-info h3{font-size:1.6rem;font-weight:900;color:var(--s900);font-family:var(--serif);line-height:1}
 .stat-info p{font-size:.78rem;color:var(--s500);font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-top:5px}
 
 /* TABLE */
 .table-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--s200)}
 table{width:100%;border-collapse:collapse;min-width:640px}
-th{
-text-align:left;
-padding:14px 16px;
-background:var(--s50);
-color:var(--s500);
-font-weight:800;
-text-transform:uppercase;
-font-size:.72rem;
-letter-spacing:.06em;
-border-bottom:1px solid var(--s200);
-}
+th{text-align:left;padding:14px 16px;background:var(--s50);color:var(--s500);font-weight:800;text-transform:uppercase;font-size:.72rem;letter-spacing:.06em;border-bottom:1px solid var(--s200)}
 td{padding:16px;border-bottom:1px solid var(--s200);font-size:.88rem;color:var(--s700);vertical-align:middle}
 tr:last-child td{border-bottom:none}
 tr:hover td{background:var(--s50)}
 
 /* BUTTONS */
-.btn{
-padding:11px 20px;
-border-radius:9px;
-font-weight:700;
-display:inline-flex;
-align-items:center;
-gap:8px;
-color:#fff;
-font-size:.85rem;
-transition:all .15s;
-cursor:pointer;
-border:none;
-}
+.btn{padding:11px 20px;border-radius:9px;font-weight:700;display:inline-flex;align-items:center;gap:8px;color:#fff;font-size:.85rem;transition:all .15s;cursor:pointer;border:none}
 .btn:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(0,0,0,.12)}
-.btn:active{transform:translateY(0)}
 .btn-sm{padding:8px 12px;font-size:.78rem}
 .btn-p{background:linear-gradient(135deg,var(--p600),var(--p700))}
 .btn-p:hover{background:linear-gradient(135deg,var(--p700),var(--p800))}
 .btn-g{background:linear-gradient(135deg,var(--g600),var(--g700))}
 .btn-r{background:linear-gradient(135deg,var(--r600),var(--r500))}
+.btn-y{background:linear-gradient(135deg,var(--y500),var(--y600))}
 .btn-ghost{background:var(--s200);color:var(--s700)}
 .btn-ghost:hover{background:var(--s300);color:var(--s800)}
-.btn-icon{width:36px;height:36px;padding:0;justify-content:center;border-radius:8px}
 
 /* FORMS */
 .form-group{margin-bottom:18px}
-.form-group label{
-display:block;
-font-weight:700;
-margin-bottom:8px;
-color:var(--s800);
-font-size:.84rem;
-}
+.form-group label{display:block;font-weight:700;margin-bottom:8px;color:var(--s800);font-size:.84rem}
 .form-group label .req{color:var(--r500)}
-.form-group input,
-.form-group select,
-.form-group textarea{
-width:100%;
-padding:13px 15px;
-border:2px solid var(--s200);
-border-radius:10px;
-background:var(--s50);
-font-size:.9rem;
-transition:all .2s;
-color:var(--s800);
-}
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus{
-outline:none;
-border-color:var(--p500);
-background:#fff;
-box-shadow:0 0 0 4px rgba(37,99,235,.08);
-}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:13px 15px;border:2px solid var(--s200);border-radius:10px;background:var(--s50);font-size:.9rem;transition:all .2s;color:var(--s800)}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--p500);background:#fff;box-shadow:0 0 0 4px rgba(37,99,235,.08)}
 .form-group textarea{min-height:100px;resize:vertical;line-height:1.6}
-.form-group .hint{
-font-size:.75rem;
-color:var(--s400);
-margin-top:6px;
-display:block;
-font-weight:500;
-line-height:1.5;
-}
+.form-group .hint{font-size:.75rem;color:var(--s400);margin-top:6px;display:block;font-weight:500;line-height:1.5}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
 
-/* EMPTY STATE */
-.empty{
-text-align:center;
-padding:48px 20px;
-color:var(--s400);
-}
+/* SWITCH TOGGLE */
+.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:var(--s50);border-radius:10px;margin-bottom:12px;border:1px solid var(--s200)}
+.toggle-row .label{display:flex;align-items:center;gap:12px;font-weight:700;font-size:.88rem;color:var(--s800)}
+.toggle-row .label i{width:24px;text-align:center;color:var(--p600);font-size:1rem}
+.toggle-row .label .desc{display:block;font-size:.74rem;color:var(--s500);font-weight:500;margin-top:2px}
+.switch{position:relative;width:52px;height:28px;background:var(--s300);border-radius:9999px;cursor:pointer;transition:all .25s;flex-shrink:0}
+.switch.on{background:var(--g500)}
+.switch::after{content:'';position:absolute;top:3px;left:3px;width:22px;height:22px;background:#fff;border-radius:50%;transition:all .25s;box-shadow:0 2px 4px rgba(0,0,0,.15)}
+.switch.on::after{left:27px}
+
+/* INFO BOX */
+.info-box{background:var(--p50);border-left:4px solid var(--p600);padding:14px 18px;border-radius:10px;margin-bottom:20px;font-size:.85rem;color:var(--p800);line-height:1.7}
+.info-box strong{display:block;margin-bottom:4px;color:var(--p900);font-size:.88rem}
+.info-box code{background:var(--p100);padding:2px 6px;border-radius:4px;font-family:monospace;font-size:.78rem}
+
+.warn-box{background:var(--y50);border-left:4px solid var(--y500);padding:14px 18px;border-radius:10px;margin-bottom:20px;font-size:.85rem;color:#92400e;line-height:1.7}
+.warn-box strong{display:block;margin-bottom:4px;color:#78350f}
+
+.success-box{background:var(--g50);border-left:4px solid var(--g500);padding:14px 18px;border-radius:10px;margin-bottom:20px;font-size:.85rem;color:var(--g700);line-height:1.7}
+
+/* EMPTY */
+.empty{text-align:center;padding:48px 20px;color:var(--s400)}
 .empty i{font-size:2.6rem;margin-bottom:14px;color:var(--s300);display:block}
 .empty h4{font-size:1rem;font-weight:800;color:var(--s600);margin-bottom:6px}
 .empty p{font-size:.85rem;font-weight:500}
 
-/* LOADING */
-.spinner{
-width:44px;height:44px;
-border:4px solid var(--s200);
-border-top-color:var(--p600);
-border-radius:50%;
-animation:spin .8s linear infinite;
-margin:40px auto;
-}
+/* SPINNER */
+.spinner{width:44px;height:44px;border:4px solid var(--s200);border-top-color:var(--p600);border-radius:50%;animation:spin .8s linear infinite;margin:40px auto}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* MODAL */
-.modal{
-display:none;
-position:fixed;
-inset:0;
-background:rgba(15,23,42,.75);
-z-index:2000;
-align-items:center;
-justify-content:center;
-backdrop-filter:blur(6px);
-padding:20px;
-overflow-y:auto;
-}
+.modal{display:none;position:fixed;inset:0;background:rgba(15,23,42,.75);z-index:2000;align-items:center;justify-content:center;backdrop-filter:blur(6px);padding:20px;overflow-y:auto}
 .modal.show{display:flex}
-.modal-box{
-background:#fff;
-padding:30px;
-border-radius:18px;
-width:100%;
-max-width:780px;
-max-height:92vh;
-overflow-y:auto;
-box-shadow:0 30px 60px rgba(0,0,0,.3);
-animation:modalSlide .3s cubic-bezier(.16,1,.3,1);
-}
+.modal-box{background:#fff;padding:30px;border-radius:18px;width:100%;max-width:780px;max-height:92vh;overflow-y:auto;box-shadow:0 30px 60px rgba(0,0,0,.3);animation:modalSlide .3s cubic-bezier(.16,1,.3,1)}
 @keyframes modalSlide{from{transform:translateY(30px) scale(.97);opacity:0}to{transform:translateY(0) scale(1);opacity:1}}
-.modal-head{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:22px;
-padding-bottom:16px;
-border-bottom:2px solid var(--s200);
-}
-.modal-head h2{
-font-family:var(--serif);
-font-size:1.2rem;
-font-weight:900;
-color:var(--s900);
-display:flex;
-align-items:center;
-gap:10px;
-}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px;padding-bottom:16px;border-bottom:2px solid var(--s200)}
+.modal-head h2{font-family:var(--serif);font-size:1.2rem;font-weight:900;color:var(--s900);display:flex;align-items:center;gap:10px}
 .modal-head h2 i{color:var(--p600)}
-.modal-close{
-width:38px;height:38px;
-border-radius:10px;
-background:var(--s100);
-color:var(--s500);
-display:flex;align-items:center;justify-content:center;
-transition:all .2s;
-font-size:1rem;
-}
+.modal-close{width:38px;height:38px;border-radius:10px;background:var(--s100);color:var(--s500);display:flex;align-items:center;justify-content:center;transition:all .2s;font-size:1rem}
 .modal-close:hover{background:var(--r50);color:var(--r600);transform:rotate(90deg)}
-.modal-foot{
-display:flex;
-justify-content:flex-end;
-gap:12px;
-margin-top:26px;
-padding-top:20px;
-border-top:1px solid var(--s200);
-}
+.modal-foot{display:flex;justify-content:flex-end;gap:12px;margin-top:26px;padding-top:20px;border-top:1px solid var(--s200)}
+
+/* ADSENSE GUIDE */
+.guide-step{display:flex;gap:14px;padding:16px;background:var(--s50);border-radius:10px;margin-bottom:12px;border:1px solid var(--s200)}
+.guide-num{width:32px;height:32px;background:linear-gradient(135deg,var(--p600),var(--p800));color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;flex-shrink:0}
+.guide-content{flex:1}
+.guide-content h4{font-size:.9rem;font-weight:800;color:var(--s900);margin-bottom:4px}
+.guide-content p{font-size:.82rem;color:var(--s600);line-height:1.6}
+.guide-content code{background:var(--s200);padding:2px 6px;border-radius:4px;font-family:monospace;font-size:.78rem;color:var(--p700)}
+
+/* AD SLOT PREVIEW */
+.ad-slot-preview{background:var(--s50);border:1px dashed var(--s300);border-radius:10px;padding:14px;margin-bottom:12px;position:relative}
+.ad-slot-preview .slot-label{position:absolute;top:6px;left:10px;font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:var(--s400);font-weight:800}
+.ad-slot-preview .slot-content{font-size:.85rem;color:var(--s700);font-weight:600;margin-top:6px}
 
 /* RESPONSIVE */
 @media(max-width:768px){
@@ -543,17 +199,18 @@ border-top:1px solid var(--s200);
 .sidebar-brand h2{font-size:0;justify-content:center}
 .sidebar-brand h2 i{font-size:1.4rem}
 .sidebar-brand p{display:none}
+.nav-group{display:none}
 .nav-item{justify-content:center;padding:14px 8px;border-left-width:3px}
 .nav-item span{display:none}
 .nav-item i{width:auto;font-size:1.15rem}
-.nav-item.badge::after{right:6px;top:8px;transform:none}
 .main-content{margin-left:64px;width:calc(100% - 64px);padding:16px}
-.form-row{grid-template-columns:1fr}
+.form-row,.form-row-3{grid-template-columns:1fr}
 .top-bar{flex-direction:column;align-items:flex-start;padding:16px}
 .top-bar h2{font-size:1.15rem}
 .modal-box{padding:20px}
 .stats-grid{grid-template-columns:1fr}
 .login-box{padding:32px 24px}
+.toggle-row{flex-direction:column;align-items:flex-start;gap:12px}
 }
 </style>
 </head>
@@ -573,10 +230,8 @@ border-top:1px solid var(--s200);
 <form onsubmit="event.preventDefault();doLogin()" autocomplete="on">
 <label>Email Address</label>
 <input type="email" id="lEmail" placeholder="admin@example.com" required autocomplete="email">
-
 <label>Password</label>
 <input type="password" id="lPass" placeholder="Enter your password" required autocomplete="current-password">
-
 <button type="submit" class="login-btn" id="loginBtn">
 <i class="fas fa-sign-in-alt"></i> Secure Login
 </button>
@@ -585,12 +240,6 @@ border-top:1px solid var(--s200);
 <a href="index.html" class="back-site">
 <i class="fas fa-arrow-left"></i> Back to Website
 </a>
-
-<div class="login-help">
-<strong><i class="fas fa-info-circle"></i> First Time Setup</strong>
-1. Firebase Console → <b>Authentication</b> → <b>Users</b> → <b>Add User</b><br>
-2. Login karein yahan — admin role <b>automatically assign</b> ho jayega.
-</div>
 </div>
 </div>
 
@@ -606,32 +255,50 @@ border-top:1px solid var(--s200);
 <p>Control Panel</p>
 </div>
 
-<div class="nav-item active" onclick="showSec('secDashboard',this)" data-sec="secDashboard">
+<div class="nav-item active" onclick="showSec('secDashboard',this)">
 <i class="fas fa-chart-line"></i><span>Dashboard</span>
 </div>
 
-<div class="nav-item" onclick="showSec('secPosts',this)" data-sec="secPosts">
+<div class="nav-group">Content</div>
+<div class="nav-item" onclick="showSec('secPosts',this)">
 <i class="fas fa-file-alt"></i><span>Manage Posts</span>
 </div>
-
-<div class="nav-item" onclick="showSec('secServices',this)" data-sec="secServices">
+<div class="nav-item" onclick="showSec('secServices',this)">
 <i class="fas fa-briefcase"></i><span>Sarkari Kaam</span>
 </div>
-
-<div class="nav-item" onclick="showSec('secCats',this)" data-sec="secCats">
+<div class="nav-item" onclick="showSec('secCats',this)">
 <i class="fas fa-tags"></i><span>Categories</span>
 </div>
 
-<div class="nav-item" onclick="showSec('secSettings',this)" data-sec="secSettings">
-<i class="fas fa-cog"></i><span>Settings</span>
+<div class="nav-group">Monetization</div>
+<div class="nav-item" onclick="showSec('secAdsense',this)">
+<i class="fab fa-google"></i><span>Google AdSense</span>
+</div>
+
+<div class="nav-group">SEO & Analytics</div>
+<div class="nav-item" onclick="showSec('secSEO',this)">
+<i class="fas fa-search"></i><span>SEO Settings</span>
+</div>
+<div class="nav-item" onclick="showSec('secAnalytics',this)">
+<i class="fas fa-chart-bar"></i><span>Analytics</span>
+</div>
+
+<div class="nav-group">Configuration</div>
+<div class="nav-item" onclick="showSec('secSettings',this)">
+<i class="fas fa-cog"></i><span>Site Settings</span>
+</div>
+<div class="nav-item" onclick="showSec('secSocial',this)">
+<i class="fas fa-share-alt"></i><span>Social Links</span>
+</div>
+<div class="nav-item" onclick="showSec('secCustom',this)">
+<i class="fas fa-code"></i><span>Custom Code</span>
 </div>
 
 <div class="sidebar-spacer"></div>
 
-<a href="index.html" class="nav-item" style="border-top:1px solid rgba(255,255,255,.08);color:#fff">
+<a href="index.html" target="_blank" class="nav-item" style="border-top:1px solid rgba(255,255,255,.08);color:#fff">
 <i class="fas fa-globe"></i><span>View Website</span>
 </a>
-
 <div class="nav-item" onclick="doLogout()" style="color:#fca5a5">
 <i class="fas fa-power-off"></i><span>Logout</span>
 </div>
@@ -658,30 +325,38 @@ border-top:1px solid var(--s200);
 <div class="stats-grid">
 <div class="stat-card">
 <div class="stat-icon blue"><i class="fas fa-file-alt"></i></div>
-<div class="stat-info">
-<h3 id="dashPosts">0</h3>
-<p>Total Posts</p>
-</div>
+<div class="stat-info"><h3 id="dashPosts">0</h3><p>Total Posts</p></div>
 </div>
 <div class="stat-card">
 <div class="stat-icon green"><i class="fas fa-briefcase"></i></div>
-<div class="stat-info">
-<h3 id="dashServices">0</h3>
-<p>Sarkari Services</p>
-</div>
+<div class="stat-info"><h3 id="dashServices">0</h3><p>Sarkari Services</p></div>
 </div>
 <div class="stat-card">
 <div class="stat-icon orange"><i class="fas fa-tags"></i></div>
-<div class="stat-info">
-<h3 id="dashCats">0</h3>
-<p>Categories</p>
-</div>
+<div class="stat-info"><h3 id="dashCats">0</h3><p>Categories</p></div>
 </div>
 <div class="stat-card">
 <div class="stat-icon purple"><i class="fas fa-envelope"></i></div>
-<div class="stat-info">
-<h3 id="dashSubs">0</h3>
-<p>Subscribers</p>
+<div class="stat-info"><h3 id="dashSubs">0</h3><p>Subscribers</p></div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-head">
+<span><i class="fas fa-heartbeat"></i> System Status</span>
+</div>
+<div class="stats-grid" style="margin-bottom:0">
+<div class="stat-card" style="padding:16px">
+<div class="stat-icon cyan" style="width:44px;height:44px;font-size:1.1rem"><i class="fab fa-google"></i></div>
+<div class="stat-info"><h3 id="statusAdsense" style="font-size:1rem">Not Configured</h3><p>AdSense</p></div>
+</div>
+<div class="stat-card" style="padding:16px">
+<div class="stat-icon blue" style="width:44px;height:44px;font-size:1.1rem"><i class="fas fa-search"></i></div>
+<div class="stat-info"><h3 id="statusSEO" style="font-size:1rem">Not Configured</h3><p>SEO</p></div>
+</div>
+<div class="stat-card" style="padding:16px">
+<div class="stat-icon green" style="width:44px;height:44px;font-size:1.1rem"><i class="fas fa-chart-bar"></i></div>
+<div class="stat-info"><h3 id="statusAnalytics" style="font-size:1rem">Not Configured</h3><p>Analytics</p></div>
 </div>
 </div>
 </div>
@@ -697,11 +372,11 @@ border-top:1px solid var(--s200);
 <button class="btn btn-g" onclick="openServiceModal()" style="justify-content:center;padding:16px">
 <i class="fas fa-plus-circle"></i> Add Service
 </button>
-<button class="btn btn-p" onclick="showSec('secCats',document.querySelector('[data-sec=secCats]'))" style="justify-content:center;padding:16px;background:linear-gradient(135deg,#f59e0b,#d97706)">
-<i class="fas fa-tags"></i> Add Category
+<button class="btn btn-y" onclick="showSec('secAdsense',document.querySelector('[onclick*=secAdsense]'))" style="justify-content:center;padding:16px">
+<i class="fab fa-google"></i> AdSense Setup
 </button>
-<button class="btn btn-p" onclick="showSec('secSettings',document.querySelector('[data-sec=secSettings]'))" style="justify-content:center;padding:16px;background:linear-gradient(135deg,#8b5cf6,#6d28d9)">
-<i class="fas fa-cog"></i> Settings
+<button class="btn btn-p" onclick="showSec('secSEO',document.querySelector('[onclick*=secSEO]'))" style="justify-content:center;padding:16px;background:linear-gradient(135deg,#8b5cf6,#6d28d9)">
+<i class="fas fa-search"></i> SEO Setup
 </button>
 </div>
 </div>
@@ -709,7 +384,7 @@ border-top:1px solid var(--s200);
 <div class="card">
 <div class="card-head">
 <span><i class="fas fa-clock"></i> Recent Posts</span>
-<button class="btn btn-p btn-sm" onclick="showSec('secPosts',document.querySelector('[data-sec=secPosts]'))">View All</button>
+<button class="btn btn-p btn-sm" onclick="showSec('secPosts',document.querySelector('[onclick*=secPosts]'))">View All</button>
 </div>
 <div id="recentPosts"><div class="spinner"></div></div>
 </div>
@@ -722,23 +397,14 @@ border-top:1px solid var(--s200);
 <div class="card">
 <div class="card-head">
 <span><i class="fas fa-file-alt"></i> Manage Posts</span>
-<button class="btn btn-p" onclick="openPostModal()">
-<i class="fas fa-plus"></i> Create New Post
-</button>
+<button class="btn btn-p" onclick="openPostModal()"><i class="fas fa-plus"></i> Create New Post</button>
 </div>
 <div class="table-wrap">
 <table>
 <thead>
-<tr>
-<th>Title</th>
-<th>Category</th>
-<th>Last Date</th>
-<th style="width:180px">Actions</th>
-</tr>
+<tr><th>Title</th><th>Category</th><th>Last Date</th><th style="width:180px">Actions</th></tr>
 </thead>
-<tbody id="postsTable">
-<tr><td colspan="4"><div class="spinner"></div></td></tr>
-</tbody>
+<tbody id="postsTable"><tr><td colspan="4"><div class="spinner"></div></td></tr></tbody>
 </table>
 </div>
 </div>
@@ -751,9 +417,7 @@ border-top:1px solid var(--s200);
 <div class="card">
 <div class="card-head">
 <span><i class="fas fa-briefcase"></i> Sarkari Kaam Services</span>
-<button class="btn btn-g" onclick="openServiceModal()">
-<i class="fas fa-plus"></i> Add New Service
-</button>
+<button class="btn btn-g" onclick="openServiceModal()"><i class="fas fa-plus"></i> Add New Service</button>
 </div>
 <p style="font-size:.86rem;color:var(--s500);margin-bottom:18px;line-height:1.7">
 Yahan se aap website ke <b>Sarkari Kaam section</b> ke sabhi services add/edit/delete kar sakte hain.
@@ -762,17 +426,9 @@ Har service mein multiple official links, steps, aur documents add kar sakte hai
 <div class="table-wrap">
 <table>
 <thead>
-<tr>
-<th style="width:70px">Icon</th>
-<th>Service Name</th>
-<th>Subtitle</th>
-<th>Links</th>
-<th style="width:180px">Actions</th>
-</tr>
+<tr><th style="width:70px">Icon</th><th>Service Name</th><th>Subtitle</th><th>Links</th><th style="width:180px">Actions</th></tr>
 </thead>
-<tbody id="servicesTable">
-<tr><td colspan="5"><div class="spinner"></div></td></tr>
-</tbody>
+<tbody id="servicesTable"><tr><td colspan="5"><div class="spinner"></div></td></tr></tbody>
 </table>
 </div>
 </div>
@@ -785,34 +441,354 @@ Har service mein multiple official links, steps, aur documents add kar sakte hai
 <div class="card">
 <div class="card-head">
 <span><i class="fas fa-tags"></i> Categories</span>
-<button class="btn btn-p" onclick="addCat()" style="background:linear-gradient(135deg,#f59e0b,#d97706)">
-<i class="fas fa-plus"></i> Add Category
-</button>
+<button class="btn btn-y" onclick="addCat()"><i class="fas fa-plus"></i> Add Category</button>
 </div>
 <div class="table-wrap">
 <table>
 <thead>
-<tr>
-<th>Name</th>
-<th>Slug</th>
-<th style="width:120px">Actions</th>
-</tr>
+<tr><th>Name</th><th>Slug</th><th style="width:120px">Actions</th></tr>
 </thead>
-<tbody id="catsTable">
-<tr><td colspan="3"><div class="spinner"></div></td></tr>
-</tbody>
+<tbody id="catsTable"><tr><td colspan="3"><div class="spinner"></div></td></tr></tbody>
 </table>
 </div>
 </div>
 </div>
 
 <!-- ==========================================
-     SETTINGS SECTION
+     GOOGLE ADSENSE SECTION
+     ========================================== -->
+<div id="secAdsense" class="section">
+<div class="card">
+<div class="card-head">
+<span><i class="fab fa-google" style="color:#ea4335"></i> Google AdSense Configuration</span>
+</div>
+
+<div class="info-box">
+<strong><i class="fas fa-info-circle"></i> AdSense Setup Guide</strong>
+Apna Publisher ID aur Ad Slot IDs yahan enter karein. Ye automatically website par apply ho jayenge.
+AdSense account ke liye <a href="https://adsense.google.com" target="_blank" style="color:var(--p600);font-weight:700">adsense.google.com</a> par jayein.
+</div>
+
+<div class="form-group">
+<label>AdSense Publisher ID <span class="req">*</span></label>
+<input type="text" id="ads_client" placeholder="ca-pub-1234567890123456">
+<span class="hint">Format: ca-pub-XXXXXXXXXXXXXXXX (AdSense Dashboard → Account → Account Information)</span>
+</div>
+
+<div class="form-row">
+<div class="form-group">
+<label>Auto Ads Enabled?</label>
+<select id="ads_auto">
+<option value="no">No</option>
+<option value="yes">Yes (Recommended)</option>
+</select>
+</div>
+<div class="form-group">
+<label>Ad Frequency</label>
+<select id="ads_freq">
+<option value="low">Low (Less ads, better UX)</option>
+<option value="medium" selected>Medium (Balanced)</option>
+<option value="high">High (Max revenue)</option>
+</select>
+</div>
+</div>
+
+<h3 style="font-size:1rem;font-weight:800;color:var(--s900);margin:24px 0 14px;padding-bottom:10px;border-bottom:2px solid var(--s200)">
+<i class="fas fa-th" style="color:var(--p600)"></i> Ad Slot IDs
+</h3>
+
+<div class="form-row">
+<div class="form-group">
+<label>Top Banner Ad Slot</label>
+<input type="text" id="ads_slot_top" placeholder="1234567890">
+<span class="hint">Homepage top par dikhega (728x90)</span>
+</div>
+<div class="form-group">
+<label>Mid Content Ad Slot</label>
+<input type="text" id="ads_slot_mid" placeholder="1234567890">
+<span class="hint">Posts grid ke beech</span>
+</div>
+</div>
+
+<div class="form-row">
+<div class="form-group">
+<label>Sidebar Ad Slot</label>
+<input type="text" id="ads_slot_side" placeholder="1234567890">
+<span class="hint">Right sidebar (300x250)</span>
+</div>
+<div class="form-group">
+<label>Bottom Ad Slot</label>
+<input type="text" id="ads_slot_bottom" placeholder="1234567890">
+<span class="hint">Content ke neeche</span>
+</div>
+</div>
+
+<div class="form-group">
+<label>In-Article Ad Slot (Post pages)</label>
+<input type="text" id="ads_slot_article" placeholder="1234567890">
+<span class="hint">Post ke andar 2-3 ads ke liye</span>
+</div>
+
+<h3 style="font-size:1rem;font-weight:800;color:var(--s900);margin:24px 0 14px;padding-bottom:10px;border-bottom:2px solid var(--s200)">
+<i class="fas fa-toggle-on" style="color:var(--p600)"></i> Ad Position Toggles
+</h3>
+
+<div class="toggle-row">
+<div class="label"><i class="fas fa-arrow-up"></i><div>Top Banner<span class="desc">Homepage top par</span></div></div>
+<div class="switch on" onclick="toggleSwitch(this)" data-key="ad_top"></div>
+</div>
+
+<div class="toggle-row">
+<div class="label"><i class="fas fa-align-center"></i><div>Mid Content<span class="desc">Posts grid ke beech</span></div></div>
+<div class="switch on" onclick="toggleSwitch(this)" data-key="ad_mid"></div>
+</div>
+
+<div class="toggle-row">
+<div class="label"><i class="fas fa-columns"></i><div>Sidebar Ads<span class="desc">Right sidebar</span></div></div>
+<div class="switch on" onclick="toggleSwitch(this)" data-key="ad_side"></div>
+</div>
+
+<div class="toggle-row">
+<div class="label"><i class="fas fa-arrow-down"></i><div>Bottom Ad<span class="desc">Content ke neeche</span></div></div>
+<div class="switch on" onclick="toggleSwitch(this)" data-key="ad_bottom"></div>
+</div>
+
+<div class="toggle-row">
+<div class="label"><i class="fas fa-file-alt"></i><div>In-Article Ads<span class="desc">Post pages ke andar</span></div></div>
+<div class="switch on" onclick="toggleSwitch(this)" data-key="ad_article"></div>
+</div>
+
+<div class="info-box" style="margin-top:20px">
+<strong><i class="fas fa-lightbulb"></i> High CPC Tip</strong>
+Finance, Insurance, Loan, Credit Card, Jobs related content mein high CPC ads aate hain.
+Isliye aise keywords wale posts zyada publish karein.
+</div>
+
+<button class="btn btn-g" onclick="saveAdsense()" style="padding:14px 28px">
+<i class="fas fa-save"></i> Save AdSense Configuration
+</button>
+</div>
+
+<!-- Guide Card -->
+<div class="card">
+<div class="card-head">
+<span><i class="fas fa-book"></i> AdSense Approval Guide</span>
+</div>
+
+<div class="guide-step">
+<div class="guide-num">1</div>
+<div class="guide-content">
+<h4>Required Pages Banayein</h4>
+<p>About Us, Contact Us, Privacy Policy, Disclaimer, Terms & Conditions — ye 5 pages zaroor honi chahiye.</p>
+</div>
+</div>
+
+<div class="guide-step">
+<div class="guide-num">2</div>
+<div class="guide-content">
+<h4>20+ Quality Posts Publish Karein</h4>
+<p>Har post minimum <b>800+ words</b> ka ho. Original content likhein — copy-paste bilkul na karein.</p>
+</div>
+</div>
+
+<div class="guide-step">
+<div class="guide-num">3</div>
+<div class="guide-content">
+<h4>Traffic Generate Karein</h4>
+<p>Google Search Console mein site submit karein. WhatsApp, Facebook, Telegram par content share karein.</p>
+</div>
+</div>
+
+<div class="guide-step">
+<div class="guide-num">4</div>
+<div class="guide-content">
+<h4>AdSense Apply Karein</h4>
+<p><a href="https://adsense.google.com" target="_blank" style="color:var(--p600);font-weight:700">adsense.google.com</a> par jayein → Sign up → Site URL add karein → Wait for approval (1-2 weeks).</p>
+</div>
+</div>
+
+<div class="guide-step">
+<div class="guide-num">5</div>
+<div class="guide-content">
+<h4>Publisher ID Copy Karein</h4>
+<p>Approval ke baad AdSense Dashboard → Account → Account Information mein <code>ca-pub-XXXXXXXX</code> milega. Ye upar wale field mein paste karein.</p>
+</div>
+</div>
+
+<div class="guide-step">
+<div class="guide-num">6</div>
+<div class="guide-content">
+<h4>Ad Units Create Karein</h4>
+<p>AdSense Dashboard → Ads → By ad unit → Create new ad unit → Display ads → Copy the <code>data-ad-slot</code> number.</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ==========================================
+     SEO SECTION
+     ========================================== -->
+<div id="secSEO" class="section">
+<div class="card">
+<div class="card-head">
+<span><i class="fas fa-search"></i> SEO Settings</span>
+</div>
+
+<div class="info-box">
+<strong><i class="fas fa-info-circle"></i> SEO Configuration</strong>
+Ye settings Google Search mein aapki website ko rank karne mein help karti hain.
+Har page ke liye proper meta tags auto-apply honge.
+</div>
+
+<h3 style="font-size:1rem;font-weight:800;color:var(--s900);margin:8px 0 14px;padding-bottom:10px;border-bottom:2px solid var(--s200)">
+<i class="fas fa-home" style="color:var(--p600)"></i> Homepage Meta
+</h3>
+
+<div class="form-group">
+<label>Meta Title <span class="req">*</span></label>
+<input type="text" id="seo_home_title" placeholder="IBAD TECH CSC - Sarkari Job, Result, Yojna 2026">
+<span class="hint">50-60 characters recommended</span>
+</div>
+
+<div class="form-group">
+<label>Meta Description <span class="req">*</span></label>
+<textarea id="seo_home_desc" style="min-height:80px" placeholder="India's trusted portal for latest Sarkari Job notifications, exam results..."></textarea>
+<span class="hint">150-160 characters recommended</span>
+</div>
+
+<div class="form-group">
+<label>Meta Keywords</label>
+<textarea id="seo_home_keywords" style="min-height:60px" placeholder="sarkari job, sarkari result, government jobs, sarkari yojna..."></textarea>
+<span class="hint">Comma se separate karein</span>
+</div>
+
+<h3 style="font-size:1rem;font-weight:800;color:var(--s900);margin:24px 0 14px;padding-bottom:10px;border-bottom:2px solid var(--s200)">
+<i class="fas fa-globe" style="color:var(--p600)"></i> Site Information
+</h3>
+
+<div class="form-row">
+<div class="form-group">
+<label>Site URL</label>
+<input type="text" id="seo_site_url" placeholder="https://ibadtechcsc.com">
+<span class="hint">Full URL with https://</span>
+</div>
+<div class="form-group">
+<label>Site Language</label>
+<select id="seo_lang">
+<option value="en">English</option>
+<option value="hi">Hindi</option>
+<option value="en-IN" selected>English (India)</option>
+</select>
+</div>
+</div>
+
+<div class="form-row">
+<div class="form-group">
+<label>Author Name</label>
+<input type="text" id="seo_author" placeholder="IBAD TECH CSC">
+</div>
+<div class="form-group">
+<label>Robots</label>
+<select id="seo_robots">
+<option value="index, follow" selected>Index, Follow (Recommended)</option>
+<option value="noindex, nofollow">No Index, No Follow</option>
+<option value="index, nofollow">Index, No Follow</option>
+</select>
+</div>
+</div>
+
+<h3 style="font-size:1rem;font-weight:800;color:var(--s900);margin:24px 0 14px;padding-bottom:10px;border-bottom:2px solid var(--s200)">
+<i class="fab fa-facebook" style="color:var(--p600)"></i> Open Graph (Facebook/WhatsApp)
+</h3>
+
+<div class="form-group">
+<label>OG Title</label>
+<input type="text" id="seo_og_title" placeholder="Leave empty to use Meta Title">
+</div>
+
+<div class="form-group">
+<label>OG Description</label>
+<textarea id="seo_og_desc" style="min-height:70px" placeholder="Leave empty to use Meta Description"></textarea>
+</div>
+
+<div class="form-group">
+<label>OG Image URL</label>
+<input type="text" id="seo_og_image" placeholder="https://example.com/image.jpg">
+<span class="hint">1200x630 px recommended</span>
+</div>
+
+<h3 style="font-size:1rem;font-weight:800;color:var(--s900);margin:24px 0 14px;padding-bottom:10px;border-bottom:2px solid var(--s200)">
+<i class="fas fa-check-double" style="color:var(--p600)"></i> Verification
+</h3>
+
+<div class="form-group">
+<label>Google Search Console Verification Code</label>
+<input type="text" id="seo_gsc" placeholder="abc123xyz...">
+<span class="hint">Search Console → Settings → Verification → HTML tag → content value</span>
+</div>
+
+<div class="form-group">
+<label>Bing Webmaster Verification</label>
+<input type="text" id="seo_bing" placeholder="Verification code">
+</div>
+
+<button class="btn btn-g" onclick="saveSEO()" style="padding:14px 28px">
+<i class="fas fa-save"></i> Save SEO Settings
+</button>
+</div>
+</div>
+
+<!-- ==========================================
+     ANALYTICS SECTION
+     ========================================== -->
+<div id="secAnalytics" class="section">
+<div class="card">
+<div class="card-head">
+<span><i class="fas fa-chart-bar"></i> Analytics & Tracking</span>
+</div>
+
+<div class="info-box">
+<strong><i class="fas fa-info-circle"></i> Analytics Setup</strong>
+Google Analytics aur other tracking IDs yahan add karein. Ye automatically website par inject ho jayenge.
+</div>
+
+<div class="form-group">
+<label>Google Analytics ID (GA4)</label>
+<input type="text" id="an_ga4" placeholder="G-XXXXXXXXXX">
+<span class="hint">analytics.google.com → Admin → Data Streams → Measurement ID</span>
+</div>
+
+<div class="form-group">
+<label>Google Tag Manager ID</label>
+<input type="text" id="an_gtm" placeholder="GTM-XXXXXXX">
+<span class="hint">tagmanager.google.com → Container ID</span>
+</div>
+
+<div class="form-group">
+<label>Facebook Pixel ID</label>
+<input type="text" id="an_fb" placeholder="1234567890">
+<span class="hint">business.facebook.com → Events Manager → Pixel ID</span>
+</div>
+
+<div class="form-group">
+<label>Microsoft Clarity ID</label>
+<input type="text" id="an_clarity" placeholder="abcdefghij">
+<span class="hint">clarity.microsoft.com → Project ID</span>
+</div>
+
+<button class="btn btn-g" onclick="saveAnalytics()" style="padding:14px 28px">
+<i class="fas fa-save"></i> Save Analytics
+</button>
+</div>
+</div>
+
+<!-- ==========================================
+     SITE SETTINGS SECTION
      ========================================== -->
 <div id="secSettings" class="section">
 <div class="card">
 <div class="card-head">
-<span><i class="fas fa-cog"></i> Portal Settings</span>
+<span><i class="fas fa-cog"></i> Site Settings</span>
 </div>
 
 <div class="form-row">
@@ -833,8 +809,19 @@ Har service mein multiple official links, steps, aur documents add kar sakte hai
 <span class="hint">Country code ke saath, no spaces or + sign</span>
 </div>
 <div class="form-group">
+<label>Email Address</label>
+<input type="text" id="set_email" placeholder="info@ibadtechcsc.com">
+</div>
+</div>
+
+<div class="form-row">
+<div class="form-group">
 <label>Address</label>
 <input type="text" id="set_address" placeholder="City, State, India">
+</div>
+<div class="form-group">
+<label>Copyright Text</label>
+<input type="text" id="set_copyright" placeholder="&copy; 2026 IBAD TECH CSC">
 </div>
 </div>
 
@@ -854,8 +841,98 @@ Har service mein multiple official links, steps, aur documents add kar sakte hai
 <textarea id="set_about" placeholder="Describe your center and mission..."></textarea>
 </div>
 
-<button class="btn btn-g" onclick="saveSettings()">
-<i class="fas fa-save"></i> Save Settings
+<div class="form-group">
+<label>Footer Disclaimer</label>
+<textarea id="set_disclaimer" placeholder="This website is not an official government website..."></textarea>
+</div>
+
+<button class="btn btn-g" onclick="saveSettings()" style="padding:14px 28px">
+<i class="fas fa-save"></i> Save Site Settings
+</button>
+</div>
+</div>
+
+<!-- ==========================================
+     SOCIAL LINKS SECTION
+     ========================================== -->
+<div id="secSocial" class="section">
+<div class="card">
+<div class="card-head">
+<span><i class="fas fa-share-alt"></i> Social Media Links</span>
+</div>
+
+<p style="font-size:.86rem;color:var(--s500);margin-bottom:18px;line-height:1.7">
+Apne social media profiles ke URLs yahan add karein. Ye footer mein automatically show honge.
+</p>
+
+<div class="form-row">
+<div class="form-group">
+<label><i class="fab fa-facebook" style="color:#1877F2"></i> Facebook Page URL</label>
+<input type="text" id="soc_facebook" placeholder="https://facebook.com/yourpage">
+</div>
+<div class="form-group">
+<label><i class="fab fa-twitter" style="color:#1DA1F2"></i> Twitter / X URL</label>
+<input type="text" id="soc_twitter" placeholder="https://twitter.com/yourhandle">
+</div>
+</div>
+
+<div class="form-row">
+<div class="form-group">
+<label><i class="fab fa-instagram" style="color:#E4405F"></i> Instagram URL</label>
+<input type="text" id="soc_instagram" placeholder="https://instagram.com/yourhandle">
+</div>
+<div class="form-group">
+<label><i class="fab fa-youtube" style="color:#FF0000"></i> YouTube Channel URL</label>
+<input type="text" id="soc_youtube" placeholder="https://youtube.com/@yourchannel">
+</div>
+</div>
+
+<div class="form-row">
+<div class="form-group">
+<label><i class="fab fa-telegram-plane" style="color:#0088cc"></i> Telegram Channel URL</label>
+<input type="text" id="soc_telegram" placeholder="https://t.me/yourchannel">
+</div>
+<div class="form-group">
+<label><i class="fab fa-whatsapp" style="color:#25D366"></i> WhatsApp Channel URL</label>
+<input type="text" id="soc_whatsapp_ch" placeholder="https://whatsapp.com/channel/...">
+</div>
+</div>
+
+<button class="btn btn-g" onclick="saveSocial()" style="padding:14px 28px">
+<i class="fas fa-save"></i> Save Social Links
+</button>
+</div>
+</div>
+
+<!-- ==========================================
+     CUSTOM CODE SECTION
+     ========================================== -->
+<div id="secCustom" class="section">
+<div class="card">
+<div class="card-head">
+<span><i class="fas fa-code"></i> Custom Code Injection</span>
+</div>
+
+<div class="warn-box">
+<strong><i class="fas fa-exclamation-triangle"></i> Warning!</strong>
+Ye advanced feature hai. Sirf tab use karein jab aapko HTML/CSS/JS ka knowledge ho.
+Galat code website break kar sakta hai.
+</div>
+
+<div class="form-group">
+<label>Custom Code in &lt;head&gt; Section</label>
+<textarea id="custom_head" placeholder="<!-- Custom meta tags, CSS, or scripts -->" style="min-height:140px;font-family:monospace;font-size:.82rem"></textarea>
+<span class="hint">Example: Verification meta tags, custom CSS, head scripts</span>
+</div>
+
+<div class="form-group">
+<label>Custom Code Before &lt;/body&gt;</label>
+<textarea id="custom_body" placeholder="<!-- Custom scripts before body close -->" style="min-height:140px;font-family:monospace;font-size:.82rem"></textarea>
+<span class="hint">Example: Chat widgets, tracking scripts, custom JS</span>
+</div>
+
+<button class="btn btn-g" onclick="saveCustom()" style="padding:14px 28px">
+<i class="fas fa-save"></i> Save Custom Code
 </button>
 </div>
 </div>
@@ -991,7 +1068,7 @@ Har service mein multiple official links, steps, aur documents add kar sakte hai
 
 <div class="form-group">
 <label>How to Apply (Steps)</label>
-<textarea id="es_steps" placeholder="One step per line:&#10;Visit official website&#10;Register with mobile number&#10;Upload required documents"></textarea>
+<textarea id="es_steps" placeholder="One step per line:&#10;Visit official website&#10;Register with mobile number"></textarea>
 </div>
 
 <div class="form-group">
@@ -1014,7 +1091,7 @@ Har service mein multiple official links, steps, aur documents add kar sakte hai
 
 <script>
 // ==========================================
-// FIREBASE CONFIG
+// FIREBASE
 // ==========================================
 const firebaseConfig = {
     apiKey: "AIzaSyDLnDVmkVcXxOFDxxfmXmqU1HflB2EpalQ",
@@ -1025,7 +1102,6 @@ const firebaseConfig = {
     messagingSenderId: "106244842489",
     appId: "1:106244842489:web:ac67a8cdf714b4231d1328"
 };
-
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.database();
@@ -1033,18 +1109,20 @@ const db = firebase.database();
 let allPosts = [];
 let allCats = {};
 let allServices = {};
+let adToggles = {
+    ad_top: true,
+    ad_mid: true,
+    ad_side: true,
+    ad_bottom: true,
+    ad_article: true
+};
 
 // ==========================================
 // TOAST
 // ==========================================
 function toast(msg, type = 'success') {
     const box = document.getElementById('toastBox');
-    const icons = {
-        success: 'fa-check-circle',
-        error: 'fa-times-circle',
-        warning: 'fa-exclamation-triangle',
-        info: 'fa-info-circle'
-    };
+    const icons = {success:'fa-check-circle',error:'fa-times-circle',warning:'fa-exclamation-triangle',info:'fa-info-circle'};
     const t = document.createElement('div');
     t.className = `toast ${type}`;
     t.innerHTML = `<i class="fas ${icons[type]}"></i><span>${msg}</span>`;
@@ -1070,26 +1148,17 @@ window.doLogin = async function() {
     const pass = document.getElementById('lPass').value;
     const btn = document.getElementById('loginBtn');
 
-    if (!email || !pass) {
-        toast('Please enter email & password', 'warning');
-        return;
-    }
+    if (!email || !pass) return toast('Please enter email & password', 'warning');
 
-    // Disable button
     btn.disabled = true;
     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in...';
 
     try {
-        // Sign in
         const cred = await auth.signInWithEmailAndPassword(email, pass);
-        console.log('✅ Login success:', cred.user.uid);
-
-        // Check or create user record in database
         const userRef = db.ref(`users/${cred.user.uid}`);
         const snap = await userRef.once('value');
 
         if (!snap.exists()) {
-            // First time - auto assign admin role
             await userRef.set({
                 email: cred.user.email,
                 role: 'admin',
@@ -1104,39 +1173,30 @@ window.doLogin = async function() {
             return;
         }
 
-        // Show dashboard
         updateUserUI(cred.user);
         showView('dashView');
         toast('Welcome back, ' + cred.user.email.split('@')[0] + '!', 'success');
-
-        // Load data
         await loadAllData();
         await loadDashboard();
-
     } catch (e) {
-        console.error('❌ Login error:', e);
+        console.error('Login error:', e);
         const msgs = {
-            'auth/user-not-found': 'No account found with this email.',
-            'auth/wrong-password': 'Incorrect password. Please try again.',
-            'auth/invalid-email': 'Invalid email format.',
-            'auth/invalid-credential': 'Invalid email or password.',
-            'auth/too-many-requests': 'Too many attempts. Please try again later.',
-            'auth/network-request-failed': 'Network error. Check your connection.',
-            'auth/user-disabled': 'This account has been disabled.'
+            'auth/user-not-found':'No account found with this email.',
+            'auth/wrong-password':'Incorrect password. Please try again.',
+            'auth/invalid-email':'Invalid email format.',
+            'auth/invalid-credential':'Invalid email or password.',
+            'auth/too-many-requests':'Too many attempts. Try again later.',
+            'auth/network-request-failed':'Network error. Check your connection.',
+            'auth/user-disabled':'This account has been disabled.'
         };
         toast(msgs[e.code] || 'Login failed: ' + e.message, 'error');
-
         btn.disabled = false;
         btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Secure Login';
     }
 };
 
-// ==========================================
-// AUTH STATE OBSERVER
-// ==========================================
 auth.onAuthStateChanged(async (user) => {
     if (user) {
-        console.log('👤 User signed in:', user.email);
         try {
             const snap = await db.ref(`users/${user.uid}`).once('value');
             if (snap.exists() && snap.val().role === 'admin') {
@@ -1145,12 +1205,8 @@ auth.onAuthStateChanged(async (user) => {
                 loadAllData();
                 loadDashboard();
             }
-        } catch (e) {
-            console.error('Auth state error:', e);
-        }
+        } catch (e) { console.error('Auth state error:', e); }
     } else {
-        console.log('👤 No user signed in');
-        // Only show login if currently not on login
         if (!document.getElementById('loginView').classList.contains('active')) {
             showView('loginView');
         }
@@ -1174,9 +1230,7 @@ window.doLogout = async function() {
         document.getElementById('lEmail').value = '';
         document.getElementById('lPass').value = '';
         showView('loginView');
-    } catch (e) {
-        toast('Error logging out', 'error');
-    }
+    } catch (e) { toast('Error logging out', 'error'); }
 };
 
 // ==========================================
@@ -1188,19 +1242,23 @@ window.showSec = function(sectionId, el) {
 
     const sec = document.getElementById(sectionId);
     if (sec) sec.classList.add('active');
-    if (el) el.classList.add('active');
+    if (el && el.classList.contains('nav-item')) el.classList.add('active');
 
     const titles = {
-        secDashboard: { title: 'Dashboard', icon: 'fa-chart-line' },
-        secPosts: { title: 'Manage Posts', icon: 'fa-file-alt' },
-        secServices: { title: 'Sarkari Kaam Services', icon: 'fa-briefcase' },
-        secCats: { title: 'Categories', icon: 'fa-tags' },
-        secSettings: { title: 'Settings', icon: 'fa-cog' }
+        secDashboard: { title:'Dashboard', icon:'fa-chart-line' },
+        secPosts: { title:'Manage Posts', icon:'fa-file-alt' },
+        secServices: { title:'Sarkari Kaam Services', icon:'fa-briefcase' },
+        secCats: { title:'Categories', icon:'fa-tags' },
+        secAdsense: { title:'Google AdSense', icon:'fa-google' },
+        secSEO: { title:'SEO Settings', icon:'fa-search' },
+        secAnalytics: { title:'Analytics', icon:'fa-chart-bar' },
+        secSettings: { title:'Site Settings', icon:'fa-cog' },
+        secSocial: { title:'Social Links', icon:'fa-share-alt' },
+        secCustom: { title:'Custom Code', icon:'fa-code' }
     };
 
     if (titles[sectionId]) {
-        document.getElementById('pageTitle').innerHTML =
-            `<i class="fas ${titles[sectionId].icon}"></i> ${titles[sectionId].title}`;
+        document.getElementById('pageTitle').innerHTML = `<i class="fas ${titles[sectionId].icon}"></i> ${titles[sectionId].title}`;
     }
 };
 
@@ -1214,33 +1272,122 @@ window.closeModal = function(id) {
 };
 
 document.querySelectorAll('.modal').forEach(m => {
-    m.addEventListener('click', e => {
-        if (e.target === m) closeModal(m.id);
-    });
+    m.addEventListener('click', e => { if (e.target === m) closeModal(m.id); });
+});
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') document.querySelectorAll('.modal.show').forEach(m => closeModal(m.id));
 });
 
-document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') {
-        document.querySelectorAll('.modal.show').forEach(m => closeModal(m.id));
-    }
-});
+// ==========================================
+// TOGGLE SWITCH
+// ==========================================
+window.toggleSwitch = function(el) {
+    el.classList.toggle('on');
+    const key = el.dataset.key;
+    if (key) adToggles[key] = el.classList.contains('on');
+};
 
 // ==========================================
 // LOAD ALL DATA
 // ==========================================
 async function loadAllData() {
     try {
-        // Settings
+        // Site Settings
         const ss = await db.ref('settings/general').once('value');
         if (ss.exists()) {
             const s = ss.val();
             document.getElementById('set_title').value = s.title || '';
             document.getElementById('set_tagline').value = s.tagline || '';
             document.getElementById('set_wa').value = s.whatsapp || '';
+            document.getElementById('set_email').value = s.email || '';
             document.getElementById('set_address').value = s.address || '';
+            document.getElementById('set_copyright').value = s.copyright || '';
             document.getElementById('set_about').value = s.about || '';
+            document.getElementById('set_disclaimer').value = s.disclaimer || '';
             document.getElementById('set_hero_title').value = s.heroTitle || '';
             document.getElementById('set_hero_sub').value = s.heroSubtitle || '';
+        }
+
+        // AdSense
+        const ads = await db.ref('settings/adsense').once('value');
+        if (ads.exists()) {
+            const a = ads.val();
+            document.getElementById('ads_client').value = a.client || '';
+            document.getElementById('ads_auto').value = a.autoAds || 'no';
+            document.getElementById('ads_freq').value = a.frequency || 'medium';
+            document.getElementById('ads_slot_top').value = a.slotTop || '';
+            document.getElementById('ads_slot_mid').value = a.slotMid || '';
+            document.getElementById('ads_slot_side').value = a.slotSide || '';
+            document.getElementById('ads_slot_bottom').value = a.slotBottom || '';
+            document.getElementById('ads_slot_article').value = a.slotArticle || '';
+            
+            // Toggles
+            adToggles = {
+                ad_top: a.toggleTop !== false,
+                ad_mid: a.toggleMid !== false,
+                ad_side: a.toggleSide !== false,
+                ad_bottom: a.toggleBottom !== false,
+                ad_article: a.toggleArticle !== false
+            };
+            document.querySelectorAll('.switch[data-key]').forEach(el => {
+                const key = el.dataset.key;
+                if (adToggles[key]) el.classList.add('on');
+                else el.classList.remove('on');
+            });
+            document.getElementById('statusAdsense').innerText = a.client ? 'Configured ✓' : 'Not Configured';
+            document.getElementById('statusAdsense').style.color = a.client ? 'var(--g600)' : 'var(--r500)';
+        }
+
+        // SEO
+        const seo = await db.ref('settings/seo').once('value');
+        if (seo.exists()) {
+            const s = seo.val();
+            document.getElementById('seo_home_title').value = s.homeTitle || '';
+            document.getElementById('seo_home_desc').value = s.homeDesc || '';
+            document.getElementById('seo_home_keywords').value = s.keywords || '';
+            document.getElementById('seo_site_url').value = s.siteUrl || '';
+            document.getElementById('seo_lang').value = s.lang || 'en-IN';
+            document.getElementById('seo_author').value = s.author || '';
+            document.getElementById('seo_robots').value = s.robots || 'index, follow';
+            document.getElementById('seo_og_title').value = s.ogTitle || '';
+            document.getElementById('seo_og_desc').value = s.ogDesc || '';
+            document.getElementById('seo_og_image').value = s.ogImage || '';
+            document.getElementById('seo_gsc').value = s.gsc || '';
+            document.getElementById('seo_bing').value = s.bing || '';
+            document.getElementById('statusSEO').innerText = s.homeTitle ? 'Configured ✓' : 'Not Configured';
+            document.getElementById('statusSEO').style.color = s.homeTitle ? 'var(--g600)' : 'var(--r500)';
+        }
+
+        // Analytics
+        const an = await db.ref('settings/analytics').once('value');
+        if (an.exists()) {
+            const a = an.val();
+            document.getElementById('an_ga4').value = a.ga4 || '';
+            document.getElementById('an_gtm').value = a.gtm || '';
+            document.getElementById('an_fb').value = a.fb || '';
+            document.getElementById('an_clarity').value = a.clarity || '';
+            document.getElementById('statusAnalytics').innerText = a.ga4 ? 'Configured ✓' : 'Not Configured';
+            document.getElementById('statusAnalytics').style.color = a.ga4 ? 'var(--g600)' : 'var(--r500)';
+        }
+
+        // Social
+        const soc = await db.ref('settings/social').once('value');
+        if (soc.exists()) {
+            const s = soc.val();
+            document.getElementById('soc_facebook').value = s.facebook || '';
+            document.getElementById('soc_twitter').value = s.twitter || '';
+            document.getElementById('soc_instagram').value = s.instagram || '';
+            document.getElementById('soc_youtube').value = s.youtube || '';
+            document.getElementById('soc_telegram').value = s.telegram || '';
+            document.getElementById('soc_whatsapp_ch').value = s.whatsappChannel || '';
+        }
+
+        // Custom Code
+        const cc = await db.ref('settings/customCode').once('value');
+        if (cc.exists()) {
+            const c = cc.val();
+            document.getElementById('custom_head').value = c.head || '';
+            document.getElementById('custom_body').value = c.body || '';
         }
 
         // Categories
@@ -1250,9 +1397,7 @@ async function loadAllData() {
 
         // Posts
         const ps = await db.ref('posts').once('value');
-        allPosts = ps.exists()
-            ? Object.keys(ps.val()).map(k => ({ id: k, ...ps.val()[k] }))
-            : [];
+        allPosts = ps.exists() ? Object.keys(ps.val()).map(k => ({id:k,...ps.val()[k]})) : [];
         allPosts.sort((a, b) => new Date(b.timestamp || 0) - new Date(a.timestamp || 0));
         renderPosts();
 
@@ -1276,12 +1421,9 @@ async function loadDashboard() {
         document.getElementById('dashServices').innerText = Object.keys(allServices).length || 18;
         document.getElementById('dashCats').innerText = Object.keys(allCats).length;
 
-        // Subscribers count
         const subs = await db.ref('subscribers').once('value');
-        const subsCount = subs.exists() ? Object.keys(subs.val()).length : 0;
-        document.getElementById('dashSubs').innerText = subsCount;
+        document.getElementById('dashSubs').innerText = subs.exists() ? Object.keys(subs.val()).length : 0;
 
-        // Recent posts
         const recentBox = document.getElementById('recentPosts');
         const recent = allPosts.slice(0, 5);
         if (recent.length === 0) {
@@ -1298,9 +1440,7 @@ async function loadDashboard() {
             html += '</tbody></table></div>';
             recentBox.innerHTML = html;
         }
-    } catch (e) {
-        console.error('Dashboard error:', e);
-    }
+    } catch (e) { console.error('Dashboard error:', e); }
 }
 
 // ==========================================
@@ -1309,7 +1449,6 @@ async function loadDashboard() {
 function renderCats() {
     const ct = document.getElementById('catsTable');
     const pc = document.getElementById('ep_cat');
-
     ct.innerHTML = '';
     pc.innerHTML = '<option value="">Select Category</option>';
 
@@ -1321,11 +1460,7 @@ function renderCats() {
             ct.innerHTML += `<tr>
                 <td style="font-weight:700">${v.name}</td>
                 <td><code style="background:var(--s100);padding:4px 10px;border-radius:6px;font-size:.82rem">${v.slug}</code></td>
-                <td>
-                    <button class="btn btn-r btn-sm" onclick="delItem('categories','${k}')">
-                        <i class="fas fa-trash"></i> Delete
-                    </button>
-                </td>
+                <td><button class="btn btn-r btn-sm" onclick="delItem('categories','${k}')"><i class="fas fa-trash"></i> Delete</button></td>
             </tr>`;
             pc.innerHTML += `<option value="${k}">${v.name}</option>`;
         });
@@ -1338,12 +1473,10 @@ function renderCats() {
 function renderPosts() {
     const pt = document.getElementById('postsTable');
     pt.innerHTML = '';
-
     if (allPosts.length === 0) {
-        pt.innerHTML = `<tr><td colspan="4" class="empty"><i class="fas fa-inbox"></i><h4>No posts yet</h4><p>Click "Create New Post" to publish your first post</p></td></tr>`;
+        pt.innerHTML = `<tr><td colspan="4" class="empty"><i class="fas fa-inbox"></i><h4>No posts yet</h4><p>Click "Create New Post"</p></td></tr>`;
         return;
     }
-
     allPosts.forEach(p => {
         const title = p.title.length > 50 ? p.title.substring(0, 50) + '...' : p.title;
         pt.innerHTML += `<tr>
@@ -1351,12 +1484,8 @@ function renderPosts() {
             <td><span style="background:var(--p50);color:var(--p700);padding:4px 10px;border-radius:9999px;font-size:.78rem;font-weight:700">${allCats[p.category]?.name || 'Unknown'}</span></td>
             <td>${p.lastDate || 'N/A'}</td>
             <td>
-                <button class="btn btn-p btn-sm" onclick="editPost('${p.id}')" style="margin-right:6px">
-                    <i class="fas fa-edit"></i> Edit
-                </button>
-                <button class="btn btn-r btn-sm" onclick="delItem('posts','${p.id}')">
-                    <i class="fas fa-trash"></i> Delete
-                </button>
+                <button class="btn btn-p btn-sm" onclick="editPost('${p.id}')" style="margin-right:6px"><i class="fas fa-edit"></i> Edit</button>
+                <button class="btn btn-r btn-sm" onclick="delItem('posts','${p.id}')"><i class="fas fa-trash"></i> Delete</button>
             </td>
         </tr>`;
     });
@@ -1368,41 +1497,27 @@ function renderPosts() {
 function renderServices() {
     const st = document.getElementById('servicesTable');
     st.innerHTML = '';
-
     const entries = Object.entries(allServices);
     if (entries.length === 0) {
-        st.innerHTML = `<tr><td colspan="5" class="empty"><i class="fas fa-briefcase"></i><h4>No custom services</h4><p>Default 18 services are showing on website. Click "Add New Service" to customize!</p></td></tr>`;
+        st.innerHTML = `<tr><td colspan="5" class="empty"><i class="fas fa-briefcase"></i><h4>No custom services</h4><p>Default 18 services showing on website. Click "Add New Service" to customize!</p></td></tr>`;
         return;
     }
-
     entries.forEach(([k, s]) => {
         st.innerHTML += `<tr>
-            <td>
-                <div style="width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.1rem;background:linear-gradient(135deg,var(--p600),var(--p800))">
-                    <i class="fas ${s.icon || 'fa-id-card'}"></i>
-                </div>
-            </td>
+            <td><div style="width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.1rem;background:linear-gradient(135deg,var(--p600),var(--p800))"><i class="fas ${s.icon || 'fa-id-card'}"></i></div></td>
             <td style="font-weight:700">${s.name}</td>
             <td style="color:var(--s500)">${s.sub || '-'}</td>
+            <td><span style="background:var(--g50);color:var(--g700);padding:4px 10px;border-radius:9999px;font-size:.78rem;font-weight:700">${(s.links || []).length} links</span></td>
             <td>
-                <span style="background:var(--g50);color:var(--g700);padding:4px 10px;border-radius:9999px;font-size:.78rem;font-weight:700">
-                    ${(s.links || []).length} links
-                </span>
-            </td>
-            <td>
-                <button class="btn btn-p btn-sm" onclick="editService('${k}')" style="margin-right:6px">
-                    <i class="fas fa-edit"></i> Edit
-                </button>
-                <button class="btn btn-r btn-sm" onclick="delItem('services','${k}')">
-                    <i class="fas fa-trash"></i> Delete
-                </button>
+                <button class="btn btn-p btn-sm" onclick="editService('${k}')" style="margin-right:6px"><i class="fas fa-edit"></i> Edit</button>
+                <button class="btn btn-r btn-sm" onclick="delItem('services','${k}')"><i class="fas fa-trash"></i> Delete</button>
             </td>
         </tr>`;
     });
 }
 
 // ==========================================
-// SETTINGS
+// SAVE SETTINGS (Site)
 // ==========================================
 window.saveSettings = async function() {
     try {
@@ -1410,16 +1525,119 @@ window.saveSettings = async function() {
             title: document.getElementById('set_title').value.trim(),
             tagline: document.getElementById('set_tagline').value.trim(),
             whatsapp: document.getElementById('set_wa').value.trim(),
+            email: document.getElementById('set_email').value.trim(),
             address: document.getElementById('set_address').value.trim(),
+            copyright: document.getElementById('set_copyright').value.trim(),
             about: document.getElementById('set_about').value.trim(),
+            disclaimer: document.getElementById('set_disclaimer').value.trim(),
             heroTitle: document.getElementById('set_hero_title').value.trim(),
             heroSubtitle: document.getElementById('set_hero_sub').value.trim()
         });
-        toast('Settings saved successfully!', 'success');
-    } catch (e) {
-        console.error(e);
-        toast('Error saving settings', 'error');
-    }
+        toast('Site settings saved!', 'success');
+    } catch (e) { toast('Error saving settings', 'error'); }
+};
+
+// ==========================================
+// SAVE ADSENSE
+// ==========================================
+window.saveAdsense = async function() {
+    try {
+        await db.ref('settings/adsense').set({
+            client: document.getElementById('ads_client').value.trim(),
+            autoAds: document.getElementById('ads_auto').value,
+            frequency: document.getElementById('ads_freq').value,
+            slotTop: document.getElementById('ads_slot_top').value.trim(),
+            slotMid: document.getElementById('ads_slot_mid').value.trim(),
+            slotSide: document.getElementById('ads_slot_side').value.trim(),
+            slotBottom: document.getElementById('ads_slot_bottom').value.trim(),
+            slotArticle: document.getElementById('ads_slot_article').value.trim(),
+            toggleTop: adToggles.ad_top,
+            toggleMid: adToggles.ad_mid,
+            toggleSide: adToggles.ad_side,
+            toggleBottom: adToggles.ad_bottom,
+            toggleArticle: adToggles.ad_article,
+            updatedAt: new Date().toISOString()
+        });
+        document.getElementById('statusAdsense').innerText = 'Configured ✓';
+        document.getElementById('statusAdsense').style.color = 'var(--g600)';
+        toast('AdSense configuration saved!', 'success');
+    } catch (e) { toast('Error saving AdSense config', 'error'); }
+};
+
+// ==========================================
+// SAVE SEO
+// ==========================================
+window.saveSEO = async function() {
+    try {
+        await db.ref('settings/seo').set({
+            homeTitle: document.getElementById('seo_home_title').value.trim(),
+            homeDesc: document.getElementById('seo_home_desc').value.trim(),
+            keywords: document.getElementById('seo_home_keywords').value.trim(),
+            siteUrl: document.getElementById('seo_site_url').value.trim(),
+            lang: document.getElementById('seo_lang').value,
+            author: document.getElementById('seo_author').value.trim(),
+            robots: document.getElementById('seo_robots').value,
+            ogTitle: document.getElementById('seo_og_title').value.trim(),
+            ogDesc: document.getElementById('seo_og_desc').value.trim(),
+            ogImage: document.getElementById('seo_og_image').value.trim(),
+            gsc: document.getElementById('seo_gsc').value.trim(),
+            bing: document.getElementById('seo_bing').value.trim(),
+            updatedAt: new Date().toISOString()
+        });
+        document.getElementById('statusSEO').innerText = 'Configured ✓';
+        document.getElementById('statusSEO').style.color = 'var(--g600)';
+        toast('SEO settings saved!', 'success');
+    } catch (e) { toast('Error saving SEO', 'error'); }
+};
+
+// ==========================================
+// SAVE ANALYTICS
+// ==========================================
+window.saveAnalytics = async function() {
+    try {
+        await db.ref('settings/analytics').set({
+            ga4: document.getElementById('an_ga4').value.trim(),
+            gtm: document.getElementById('an_gtm').value.trim(),
+            fb: document.getElementById('an_fb').value.trim(),
+            clarity: document.getElementById('an_clarity').value.trim(),
+            updatedAt: new Date().toISOString()
+        });
+        document.getElementById('statusAnalytics').innerText = 'Configured ✓';
+        document.getElementById('statusAnalytics').style.color = 'var(--g600)';
+        toast('Analytics saved!', 'success');
+    } catch (e) { toast('Error saving analytics', 'error'); }
+};
+
+// ==========================================
+// SAVE SOCIAL
+// ==========================================
+window.saveSocial = async function() {
+    try {
+        await db.ref('settings/social').set({
+            facebook: document.getElementById('soc_facebook').value.trim(),
+            twitter: document.getElementById('soc_twitter').value.trim(),
+            instagram: document.getElementById('soc_instagram').value.trim(),
+            youtube: document.getElementById('soc_youtube').value.trim(),
+            telegram: document.getElementById('soc_telegram').value.trim(),
+            whatsappChannel: document.getElementById('soc_whatsapp_ch').value.trim(),
+            updatedAt: new Date().toISOString()
+        });
+        toast('Social links saved!', 'success');
+    } catch (e) { toast('Error saving social', 'error'); }
+};
+
+// ==========================================
+// SAVE CUSTOM CODE
+// ==========================================
+window.saveCustom = async function() {
+    try {
+        await db.ref('settings/customCode').set({
+            head: document.getElementById('custom_head').value,
+            body: document.getElementById('custom_body').value,
+            updatedAt: new Date().toISOString()
+        });
+        toast('Custom code saved!', 'success');
+    } catch (e) { toast('Error saving custom code', 'error'); }
 };
 
 // ==========================================
@@ -1428,7 +1646,6 @@ window.saveSettings = async function() {
 window.addCat = async function() {
     const name = prompt('Enter Category Name:\n(e.g., Latest Jobs, Results, Sarkari Yojna)');
     if (!name || !name.trim()) return;
-
     try {
         await db.ref('categories').push({
             name: name.trim(),
@@ -1437,9 +1654,7 @@ window.addCat = async function() {
         toast('Category added!', 'success');
         await loadAllData();
         await loadDashboard();
-    } catch (e) {
-        toast('Error adding category', 'error');
-    }
+    } catch (e) { toast('Error adding category', 'error'); }
 };
 
 // ==========================================
@@ -1459,7 +1674,6 @@ window.openPostModal = function() {
 window.editPost = function(id) {
     const p = allPosts.find(x => x.id === id);
     if (!p) return toast('Post not found', 'error');
-
     document.getElementById('ep_id').value = id;
     document.getElementById('ep_title').value = p.title || '';
     document.getElementById('ep_cat').value = p.category || '';
@@ -1469,13 +1683,9 @@ window.editPost = function(id) {
     document.getElementById('ep_edu').value = p.education || '';
     document.getElementById('ep_steps').value = p.steps || '';
     document.getElementById('ep_docs').value = p.documents || '';
-
     let faqTxt = '';
-    if (p.faq && Array.isArray(p.faq)) {
-        faqTxt = p.faq.map(f => `${f.q}|${f.a}`).join('\n');
-    }
+    if (p.faq && Array.isArray(p.faq)) faqTxt = p.faq.map(f => `${f.q}|${f.a}`).join('\n');
     document.getElementById('ep_faq').value = faqTxt;
-
     document.getElementById('postModal').classList.add('show');
     document.body.style.overflow = 'hidden';
     setTimeout(() => document.getElementById('ep_title').focus(), 100);
@@ -1484,28 +1694,17 @@ window.editPost = function(id) {
 window.savePost = async function() {
     const id = document.getElementById('ep_id').value;
     const title = document.getElementById('ep_title').value.trim();
-
-    if (!title) {
-        toast('Title is required', 'warning');
-        document.getElementById('ep_title').focus();
-        return;
-    }
-
+    if (!title) { toast('Title is required', 'warning'); return; }
     let link = document.getElementById('ep_link').value.trim();
     if (link && !link.startsWith('http')) link = 'https://' + link;
-
-    // Parse FAQ
     const faqRaw = document.getElementById('ep_faq').value.trim();
     const faq = [];
     if (faqRaw) {
         faqRaw.split('\n').forEach(line => {
             const parts = line.split('|');
-            if (parts.length >= 2) {
-                faq.push({ q: parts[0].trim(), a: parts.slice(1).join('|').trim() });
-            }
+            if (parts.length >= 2) faq.push({ q: parts[0].trim(), a: parts.slice(1).join('|').trim() });
         });
     }
-
     const data = {
         title,
         category: document.getElementById('ep_cat').value,
@@ -1518,22 +1717,18 @@ window.savePost = async function() {
         faq,
         timestamp: new Date().toISOString()
     };
-
     try {
         if (id) {
             await db.ref(`posts/${id}`).update(data);
-            toast('Post updated successfully!', 'success');
+            toast('Post updated!', 'success');
         } else {
             await db.ref('posts').push(data);
-            toast('Post published successfully!', 'success');
+            toast('Post published!', 'success');
         }
         closeModal('postModal');
         await loadAllData();
         await loadDashboard();
-    } catch (e) {
-        console.error(e);
-        toast('Error saving post: ' + e.message, 'error');
-    }
+    } catch (e) { toast('Error saving post', 'error'); }
 };
 
 // ==========================================
@@ -1555,7 +1750,6 @@ window.openServiceModal = function() {
 window.editService = function(key) {
     const s = allServices[key];
     if (!s) return toast('Service not found', 'error');
-
     document.getElementById('es_id').value = key;
     document.getElementById('es_name').value = s.name || '';
     document.getElementById('es_sub').value = s.sub || '';
@@ -1565,7 +1759,6 @@ window.editService = function(key) {
     document.getElementById('es_steps').value = (s.steps || []).join('\n');
     document.getElementById('es_docs').value = (s.docs || []).join('\n');
     document.getElementById('es_links').value = (s.links || []).map(l => `${l.name}|${l.url}`).join('\n');
-
     document.getElementById('serviceModal').classList.add('show');
     document.body.style.overflow = 'hidden';
     setTimeout(() => document.getElementById('es_name').focus(), 100);
@@ -1574,16 +1767,9 @@ window.editService = function(key) {
 window.saveService = async function() {
     const id = document.getElementById('es_id').value;
     const name = document.getElementById('es_name').value.trim();
-
-    if (!name) {
-        toast('Service name is required', 'warning');
-        document.getElementById('es_name').focus();
-        return;
-    }
-
+    if (!name) { toast('Service name is required', 'warning'); return; }
     const steps = document.getElementById('es_steps').value.split('\n').filter(l => l.trim());
     const docs = document.getElementById('es_docs').value.split('\n').filter(l => l.trim());
-
     const linksRaw = document.getElementById('es_links').value.trim();
     const links = [];
     if (linksRaw) {
@@ -1596,15 +1782,8 @@ window.saveService = async function() {
             }
         });
     }
-
-    if (links.length === 0) {
-        toast('At least one official link is required', 'warning');
-        document.getElementById('es_links').focus();
-        return;
-    }
-
+    if (links.length === 0) { toast('At least one official link is required', 'warning'); return; }
     const slug = name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-
     const data = {
         name,
         sub: document.getElementById('es_sub').value.trim(),
@@ -1616,22 +1795,18 @@ window.saveService = async function() {
         links,
         timestamp: new Date().toISOString()
     };
-
     try {
         if (id) {
             await db.ref(`services/${id}`).update(data);
-            toast('Service updated successfully!', 'success');
+            toast('Service updated!', 'success');
         } else {
             await db.ref(`services/${slug}`).set(data);
-            toast('Service added successfully!', 'success');
+            toast('Service added!', 'success');
         }
         closeModal('serviceModal');
         await loadAllData();
         await loadDashboard();
-    } catch (e) {
-        console.error(e);
-        toast('Error saving service: ' + e.message, 'error');
-    }
+    } catch (e) { toast('Error saving service', 'error'); }
 };
 
 // ==========================================
@@ -1644,9 +1819,7 @@ window.delItem = async function(col, key) {
         toast('Deleted successfully', 'info');
         await loadAllData();
         await loadDashboard();
-    } catch (e) {
-        toast('Error deleting item', 'error');
-    }
+    } catch (e) { toast('Error deleting item', 'error'); }
 };
 
 // ==========================================
@@ -1655,7 +1828,7 @@ window.delItem = async function(col, key) {
 function formatDate(iso) {
     if (!iso) return 'N/A';
     const d = new Date(iso);
-    const m = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const m = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     return `${d.getDate()} ${m[d.getMonth()]} ${d.getFullYear()}`;
 }
 
@@ -1664,7 +1837,6 @@ function formatDate(iso) {
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
     console.log('🚀 Admin panel initialized');
-    // The auth.onAuthStateChanged handles everything
 });
 </script>
 </body>
