@@ -273,7 +273,7 @@ font-weight:700;
 
 <div id="toastBox"></div>
 
-<!-- TOPBAR -->
+<!-- TOPBAR - ICON FIXED (only 1 icon) -->
 <div class="topbar">
 <div class="container">
 <div class="topbar-left"><i class="fas fa-map-marker-alt"></i><span id="topAddr">India</span></div>
@@ -535,7 +535,8 @@ async function loadData(){
             document.getElementById('siteTitle').innerText=title;
             document.getElementById('siteTagline').innerText=s.tagline||'Sarkari Kaam & Digital Seva';
             document.title=`${title} - Sarkari Job, Result, Yojna & Digital Seva 2026`;
-            document.getElementById('topAddr').innerHTML=`<i class="fas fa-map-marker-alt"></i> ${s.address||'India'}`;
+            // ✅ FIX: sirf TEXT update karo, icon HTML mein pehle se hai
+            document.getElementById('topAddr').innerText=s.address||'India';
             document.getElementById('dynAbout').innerText=s.about||'Welcome to our Digital Seva Kendra.';
             document.getElementById('footTitle').innerText=title;
             document.getElementById('footAbout').innerText=s.about||'Your trusted Digital Seva Kendra.';
