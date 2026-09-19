@@ -5,25 +5,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#2563eb">
 
-<title>IBAD TECH CSC - Sarkari Job, Result, Yojna & Digital Seva 2026</title>
-<meta name="description" content="India's trusted portal for latest Sarkari Job notifications, exam results, government schemes, Aadhar, PAN, Voter ID & Digital Seva. Verified updates in easy language.">
-<meta name="keywords" content="sarkari job, sarkari result, government jobs, sarkari yojna, pm kisan, aadhar, pan card, voter id, csc services, digital seva">
-<meta name="author" content="IBAD TECH CSC">
-<meta name="robots" content="index, follow, max-image-preview:large">
-<meta name="google-adsense-account" content="ca-pub-XXXXXXXXXXXXXXXX">
+<!-- =========================================
+     DYNAMIC META TAGS (SEO from Admin Panel)
+     ========================================= -->
+<title id="pageTitle">IBAD TECH CSC - Sarkari Job, Result, Yojna & Digital Seva 2026</title>
+<meta name="description" id="metaDesc" content="India's trusted portal for latest Sarkari Job notifications, exam results, government schemes, Aadhar, PAN, Voter ID & Digital Seva. Verified updates in easy language.">
+<meta name="keywords" id="metaKeywords" content="sarkari job, sarkari result, government jobs, sarkari yojna, pm kisan, aadhar, pan card, voter id, csc services, digital seva">
+<meta name="author" id="metaAuthor" content="IBAD TECH CSC">
+<meta name="robots" id="metaRobots" content="index, follow, max-image-preview:large">
+<meta name="google-adsense-account" id="adsenseAccount" content="ca-pub-XXXXXXXXXXXXXXXX">
 
-<link rel="canonical" href="https://ibadtechcsc.com/">
+<link rel="canonical" id="canonicalLink" href="https://ibadtechcsc.com/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="IBAD TECH CSC - Sarkari Job, Result & Digital Seva">
-<meta property="og:description" content="Trusted portal for government jobs, schemes & financial guidance.">
-<meta property="og:url" content="https://ibadtechcsc.com/">
+<meta property="og:title" id="ogTitle" content="IBAD TECH CSC - Sarkari Job, Result & Digital Seva">
+<meta property="og:description" id="ogDesc" content="Trusted portal for government jobs, schemes & financial guidance.">
+<meta property="og:url" id="ogUrl" content="https://ibadtechcsc.com/">
+<meta property="og:image" id="ogImage" content="">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" id="twTitle" content="IBAD TECH CSC">
+<meta name="twitter:description" id="twDesc" content="Trusted Sarkari portal">
+
+<!-- =========================================
+     GOOGLE ANALYTICS / GTM / PIXEL (Auto-Injected)
+     ========================================= -->
+<!-- These will be injected dynamically by JS -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous" id="adsenseScript"></script>
 <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-database-compat.js"></script>
 
@@ -70,9 +82,7 @@ img{max-width:100%;height:auto;display:block}
 .logo-text h1{font-family:var(--serif);color:var(--p700);font-size:1.65rem;font-weight:900;line-height:1.2}
 .logo-text p{color:var(--s500);font-size:.78rem;margin-top:3px;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
 
-/* =========================================
-   SEARCH BOX WITH LIVE SUGGESTIONS
-   ========================================= */
+/* SEARCH */
 .search-wrap{position:relative;min-width:340px;flex:1;max-width:480px}
 .search-box{display:flex;align-items:center;background:var(--s100);border-radius:9999px;padding:4px;border:2px solid transparent;transition:all .2s;width:100%}
 .search-box:focus-within{border-color:var(--p500);background:#fff;box-shadow:0 0 0 4px rgba(37,99,235,.1)}
@@ -80,105 +90,24 @@ img{max-width:100%;height:auto;display:block}
 .search-box button{padding:10px 20px;background:var(--p600);color:#fff;border-radius:9999px;font-weight:700;font-size:.85rem;display:flex;align-items:center;gap:6px;transition:all .2s}
 .search-box button:hover{background:var(--p700)}
 
-/* Suggestions Dropdown */
-.search-suggestions{
-position:absolute;
-top:calc(100% + 8px);
-left:0;
-right:0;
-background:#fff;
-border-radius:14px;
-box-shadow:0 20px 40px rgba(0,0,0,.12);
-border:1px solid var(--s200);
-max-height:420px;
-overflow-y:auto;
-z-index:1000;
-display:none;
-}
+.search-suggestions{position:absolute;top:calc(100% + 8px);left:0;right:0;background:#fff;border-radius:14px;box-shadow:0 20px 40px rgba(0,0,0,.12);border:1px solid var(--s200);max-height:420px;overflow-y:auto;z-index:1000;display:none}
 .search-suggestions.show{display:block;animation:fadeIn .2s ease}
 .search-suggestions::-webkit-scrollbar{width:6px}
 .search-suggestions::-webkit-scrollbar-thumb{background:var(--s300);border-radius:3px}
-
-.suggestion-header{
-padding:10px 16px 8px;
-font-size:.7rem;
-text-transform:uppercase;
-letter-spacing:.08em;
-color:var(--s400);
-font-weight:800;
-background:var(--s50);
-border-bottom:1px solid var(--s200);
-display:flex;
-align-items:center;
-gap:6px;
-}
+.suggestion-header{padding:10px 16px 8px;font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--s400);font-weight:800;background:var(--s50);border-bottom:1px solid var(--s200);display:flex;align-items:center;gap:6px}
 .suggestion-header i{color:var(--p600)}
-
-.suggestion-item{
-display:flex;
-align-items:center;
-gap:12px;
-padding:12px 16px;
-cursor:pointer;
-transition:all .15s;
-border-bottom:1px solid var(--s100);
-text-decoration:none;
-color:inherit;
-}
+.suggestion-item{display:flex;align-items:center;gap:12px;padding:12px 16px;cursor:pointer;transition:all .15s;border-bottom:1px solid var(--s100);text-decoration:none;color:inherit}
 .suggestion-item:last-child{border-bottom:none}
 .suggestion-item:hover,.suggestion-item.selected{background:var(--p50)}
-.suggestion-item .icon-box{
-width:38px;
-height:38px;
-border-radius:9px;
-display:flex;
-align-items:center;
-justify-content:center;
-color:#fff;
-font-size:1rem;
-flex-shrink:0;
-}
+.suggestion-item .icon-box{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem;flex-shrink:0}
 .suggestion-item .info{flex:1;min-width:0}
-.suggestion-item .info .title{
-font-size:.88rem;
-font-weight:700;
-color:var(--s900);
-line-height:1.35;
-margin-bottom:2px;
-overflow:hidden;
-text-overflow:ellipsis;
-display:-webkit-box;
--webkit-line-clamp:1;
--webkit-box-orient:vertical;
-}
+.suggestion-item .info .title{font-size:.88rem;font-weight:700;color:var(--s900);line-height:1.35;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical}
 .suggestion-item .info .title mark{background:#fef3c7;color:var(--s900);padding:0 2px;border-radius:3px;font-weight:900}
-.suggestion-item .info .subtitle{
-font-size:.74rem;
-color:var(--s500);
-font-weight:600;
-overflow:hidden;
-text-overflow:ellipsis;
-white-space:nowrap;
-}
-.suggestion-item .type-badge{
-font-size:.62rem;
-font-weight:800;
-padding:3px 8px;
-border-radius:5px;
-text-transform:uppercase;
-letter-spacing:.05em;
-flex-shrink:0;
-}
+.suggestion-item .info .subtitle{font-size:.74rem;color:var(--s500);font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.suggestion-item .type-badge{font-size:.62rem;font-weight:800;padding:3px 8px;border-radius:5px;text-transform:uppercase;letter-spacing:.05em;flex-shrink:0}
 .type-badge.post{background:var(--p50);color:var(--p700)}
 .type-badge.service{background:var(--g50);color:var(--g700)}
-
-.suggestion-empty{
-padding:24px 20px;
-text-align:center;
-color:var(--s400);
-font-size:.85rem;
-font-weight:600;
-}
+.suggestion-empty{padding:24px 20px;text-align:center;color:var(--s400);font-size:.85rem;font-weight:600}
 .suggestion-empty i{font-size:1.6rem;color:var(--s300);margin-bottom:8px;display:block}
 
 /* NAVBAR */
@@ -244,7 +173,7 @@ font-weight:600;
 /* AD CONTAINER */
 .ad-container{background:var(--s50);border:1px dashed var(--s300);border-radius:10px;padding:12px;text-align:center;margin:20px 0;min-height:100px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
 .ad-container::before{content:'Advertisement';position:absolute;top:6px;left:10px;font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:var(--s400);font-weight:700}
-.ad-placeholder{color:var(--s400);font-size:.8rem;padding:20px}
+.ad-container.hidden{display:none}
 
 /* LAYOUT */
 .layout{display:grid;grid-template-columns:1fr 340px;gap:32px;margin:32px auto;min-height:50vh}
@@ -289,7 +218,6 @@ font-weight:600;
 .btn-view{background:var(--p600);color:#fff;padding:7px 14px;border-radius:6px;font-weight:700;font-size:.74rem;display:flex;align-items:center;gap:5px;transition:all .2s;text-decoration:none}
 .btn-view:hover{background:var(--p700);transform:translateX(2px)}
 
-/* SERVICE CARD (for search results) */
 .service-card{background:#fff;border:1px solid var(--s200);border-radius:14px;padding:20px;text-align:center;transition:all .25s;display:block;text-decoration:none;color:inherit}
 .service-card:hover{transform:translateY(-6px);border-color:var(--p600);box-shadow:0 12px 24px rgba(37,99,235,.15)}
 .service-card .icon{width:56px;height:56px;margin:0 auto 12px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:#fff;box-shadow:0 4px 12px rgba(0,0,0,.15)}
@@ -325,6 +253,7 @@ font-weight:600;
 .foot-social{display:flex;gap:8px}
 .foot-social a{width:36px;height:36px;border-radius:50%;background:var(--s800);color:var(--s400);display:flex;align-items:center;justify-content:center;transition:all .2s}
 .foot-social a:hover{background:var(--p600);color:#fff;transform:translateY(-3px)}
+.foot-social a.hidden{display:none}
 .foot-grid h4{color:#fff;margin-bottom:16px;font-size:.88rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
 .foot-links a{display:block;margin-bottom:8px;font-size:.84rem;transition:all .2s;text-decoration:none}
 .foot-links a:hover{color:var(--p400);padding-left:4px}
@@ -385,7 +314,6 @@ font-weight:600;
 </div>
 </a>
 
-<!-- SEARCH WITH SUGGESTIONS -->
 <div class="search-wrap">
 <div class="search-box">
 <input type="text" id="searchInput" placeholder="Search jobs, yojna, services..." autocomplete="off" 
@@ -452,7 +380,7 @@ onfocus="handleSearchFocus()">
 <!-- MAIN -->
 <div class="container layout">
 <main>
-<div class="ad-container">
+<div class="ad-container" id="adTop">
 <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1111111111" data-ad-format="auto" data-full-width-responsive="true"></ins>
 </div>
 
@@ -471,12 +399,12 @@ onfocus="handleSearchFocus()">
 
 <div class="grid" id="postsGrid"><div class="spinner"></div></div>
 
-<div class="ad-container">
+<div class="ad-container" id="adMid">
 <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="2222222222" data-ad-format="auto" data-full-width-responsive="true"></ins>
 </div>
 
 <div class="side-widget" style="background:linear-gradient(135deg,#f0fdf4,#ecfdf5);border-color:rgba(22,163,74,.15)">
-<h3 style="color:var(--g700);margin-bottom:10px;font-weight:800;font-size:1rem;display:flex;align-items:center;gap:8px"><i class="fas fa-building"></i> About IBAD TECH CSC</h3>
+<h3 style="color:var(--g700);margin-bottom:10px;font-weight:800;font-size:1rem;display:flex;align-items:center;gap:8px"><i class="fas fa-building"></i> About <span id="aboutTitle">IBAD TECH CSC</span></h3>
 <p id="dynAbout" style="color:var(--g700);font-size:.88rem;line-height:1.7">Loading...</p>
 </div>
 </main>
@@ -511,7 +439,7 @@ onfocus="handleSearchFocus()">
 <div class="trust"><i class="fas fa-clock"></i><div><h4>Fast Updates</h4><p>Within 24 hours</p></div></div>
 </div>
 
-<div class="ad-container" style="min-height:250px">
+<div class="ad-container" id="adSide" style="min-height:250px">
 <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="3333333333" data-ad-format="auto" data-full-width-responsive="true"></ins>
 </div>
 
@@ -530,12 +458,12 @@ onfocus="handleSearchFocus()">
 <div class="foot-brand">
 <h3><i class="fas fa-shield-halved"></i> <span id="footTitle">IBAD TECH CSC</span></h3>
 <p id="footAbout">Your trusted Digital Seva Kendra for government jobs, schemes, documents and financial guidance.</p>
-<div class="foot-social">
-<a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-<a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-<a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-<a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-<a href="#" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+<div class="foot-social" id="footSocial">
+<a href="#" id="socFacebook" class="hidden" aria-label="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+<a href="#" id="socTwitter" class="hidden" aria-label="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+<a href="#" id="socInstagram" class="hidden" aria-label="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+<a href="#" id="socYoutube" class="hidden" aria-label="YouTube" target="_blank"><i class="fab fa-youtube"></i></a>
+<a href="#" id="socTelegram" class="hidden" aria-label="Telegram" target="_blank"><i class="fab fa-telegram-plane"></i></a>
 </div>
 </div>
 <div>
@@ -561,12 +489,12 @@ onfocus="handleSearchFocus()">
 <h4>Support</h4>
 <div class="foot-links">
 <a id="waFoot" target="_blank" rel="noopener">WhatsApp Help</a>
-<a href="mailto:info@ibadtechcsc.com">Email Support</a>
+<a id="emailFoot" href="mailto:info@ibadtechcsc.com">Email Support</a>
 </div>
 </div>
 </div>
-<div class="foot-disc"><strong>Disclaimer:</strong> This website is not an official government website. All information is provided for informational purposes only. Please always verify details from official government websites before applying.</div>
-<div class="foot-bottom">&copy; 2026 IBAD TECH CSC. All Rights Reserved. Made with <i class="fas fa-heart"></i> for Digital India.</div>
+<div class="foot-disc" id="footDisc"><strong>Disclaimer:</strong> This website is not an official government website. All information is provided for informational purposes only. Please always verify details from official government websites before applying.</div>
+<div class="foot-bottom" id="footBottom">&copy; 2026 IBAD TECH CSC. All Rights Reserved. Made with <i class="fas fa-heart"></i> for Digital India.</div>
 </div>
 </footer>
 
@@ -574,7 +502,7 @@ onfocus="handleSearchFocus()">
 
 <script>
 // ==========================================
-// FIREBASE
+// FIREBASE CONFIG
 // ==========================================
 const firebaseConfig = {
     apiKey: "AIzaSyDLnDVmkVcXxOFDxxfmXmqU1HflB2EpalQ",
@@ -594,8 +522,9 @@ let allServices = {};
 let currentFilter = 'all';
 let searchTimeout = null;
 let selectedSuggestionIndex = -1;
+let adsenseConfig = {};
 
-// Default services
+// Default services (fallback)
 const DEFAULT_SERVICES = {
     aadhar:{name:'Aadhar Card',sub:'Update & Download',icon:'fa-id-card',color:'ic-aadhar'},
     pan:{name:'PAN Card',sub:'Apply & Correction',icon:'fa-credit-card',color:'ic-pan'},
@@ -628,49 +557,296 @@ function toast(msg, type='success'){
 }
 
 // ==========================================
-// LOAD DATA
+// 🎯 APPLY ADMIN SETTINGS - AUTOMATIC
+// ==========================================
+
+// SEO Settings Apply
+async function applySEOSettings(){
+    try{
+        const snap=await db.ref('settings/seo').once('value');
+        if(!snap.exists())return;
+        const s=snap.val();
+        if(s.homeTitle)document.title=s.homeTitle;
+        if(s.homeTitle)document.getElementById('pageTitle').innerText=s.homeTitle;
+        if(s.homeDesc)document.getElementById('metaDesc').setAttribute('content',s.homeDesc);
+        if(s.keywords)document.getElementById('metaKeywords').setAttribute('content',s.keywords);
+        if(s.author)document.getElementById('metaAuthor').setAttribute('content',s.author);
+        if(s.robots)document.getElementById('metaRobots').setAttribute('content',s.robots);
+        if(s.siteUrl){
+            document.getElementById('canonicalLink').setAttribute('href',s.siteUrl);
+            document.getElementById('ogUrl').setAttribute('content',s.siteUrl);
+        }
+        if(s.ogTitle){
+            document.getElementById('ogTitle').setAttribute('content',s.ogTitle);
+            document.getElementById('twTitle').setAttribute('content',s.ogTitle);
+        }else if(s.homeTitle){
+            document.getElementById('ogTitle').setAttribute('content',s.homeTitle);
+            document.getElementById('twTitle').setAttribute('content',s.homeTitle);
+        }
+        if(s.ogDesc){
+            document.getElementById('ogDesc').setAttribute('content',s.ogDesc);
+            document.getElementById('twDesc').setAttribute('content',s.ogDesc);
+        }else if(s.homeDesc){
+            document.getElementById('ogDesc').setAttribute('content',s.homeDesc);
+            document.getElementById('twDesc').setAttribute('content',s.homeDesc);
+        }
+        if(s.ogImage)document.getElementById('ogImage').setAttribute('content',s.ogImage);
+        if(s.lang)document.documentElement.lang=s.lang;
+        
+        // Google Search Console Verification
+        if(s.gsc){
+            const meta=document.createElement('meta');
+            meta.name='google-site-verification';
+            meta.content=s.gsc;
+            document.head.appendChild(meta);
+        }
+        // Bing Verification
+        if(s.bing){
+            const meta=document.createElement('meta');
+            meta.name='msvalidate.01';
+            meta.content=s.bing;
+            document.head.appendChild(meta);
+        }
+        console.log('✅ SEO Settings Applied');
+    }catch(e){console.warn('SEO apply error:',e);}
+}
+
+// AdSense Settings Apply
+async function applyAdsenseSettings(){
+    try{
+        const snap=await db.ref('settings/adsense').once('value');
+        if(!snap.exists())return;
+        const a=snap.val();
+        adsenseConfig=a;
+
+        // Update meta tag
+        if(a.client){
+            document.getElementById('adsenseAccount').setAttribute('content',a.client);
+            // Update AdSense script
+            const script=document.getElementById('adsenseScript');
+            if(script){
+                script.src=`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${a.client}`;
+            }
+        }
+
+        // Update all ad slots
+        document.querySelectorAll('.adsbygoogle').forEach(el=>{
+            if(a.client)el.setAttribute('data-ad-client',a.client);
+        });
+
+        // Update specific ad slot IDs
+        const slotMap={
+            '1111111111':a.slotTop,
+            '2222222222':a.slotMid,
+            '3333333333':a.slotSide,
+            '4444444444':a.slotBottom
+        };
+
+        Object.entries(slotMap).forEach(([oldSlot,newSlot])=>{
+            if(newSlot){
+                document.querySelectorAll(`[data-ad-slot="${oldSlot}"]`).forEach(el=>{
+                    el.setAttribute('data-ad-slot',newSlot);
+                });
+            }
+        });
+
+        // Ad Toggles
+        if(a.toggleTop===false)document.getElementById('adTop')?.classList.add('hidden');
+        if(a.toggleMid===false)document.getElementById('adMid')?.classList.add('hidden');
+        if(a.toggleSide===false)document.getElementById('adSide')?.classList.add('hidden');
+
+        // Push AdSense
+        setTimeout(()=>{
+            try{
+                document.querySelectorAll('.adsbygoogle').forEach(()=>{
+                    (adsbygoogle=window.adsbygoogle||[]).push({});
+                });
+            }catch(e){}
+        },100);
+
+        console.log('✅ AdSense Settings Applied');
+    }catch(e){console.warn('AdSense apply error:',e);}
+}
+
+// Analytics Settings Apply
+async function applyAnalyticsSettings(){
+    try{
+        const snap=await db.ref('settings/analytics').once('value');
+        if(!snap.exists())return;
+        const a=snap.val();
+
+        // Google Analytics GA4
+        if(a.ga4){
+            const s1=document.createElement('script');
+            s1.async=true;
+            s1.src=`https://www.googletagmanager.com/gtag/js?id=${a.ga4}`;
+            document.head.appendChild(s1);
+            
+            const s2=document.createElement('script');
+            s2.innerHTML=`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${a.ga4}');
+            `;
+            document.head.appendChild(s2);
+        }
+
+        // Google Tag Manager
+        if(a.gtm){
+            const s=document.createElement('script');
+            s.innerHTML=`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${a.gtm}');`;
+            document.head.appendChild(s);
+        }
+
+        // Facebook Pixel
+        if(a.fb){
+            const s=document.createElement('script');
+            s.innerHTML=`
+                !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+                fbq('init', '${a.fb}');
+                fbq('track', 'PageView');
+            `;
+            document.head.appendChild(s);
+        }
+
+        // Microsoft Clarity
+        if(a.clarity){
+            const s=document.createElement('script');
+            s.innerHTML=`
+                (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "${a.clarity}");
+            `;
+            document.head.appendChild(s);
+        }
+
+        console.log('✅ Analytics Settings Applied');
+    }catch(e){console.warn('Analytics apply error:',e);}
+}
+
+// Social Links Apply
+async function applySocialSettings(){
+    try{
+        const snap=await db.ref('settings/social').once('value');
+        if(!snap.exists())return;
+        const s=snap.val();
+
+        const socialMap={
+            facebook:{el:'socFacebook',url:s.facebook},
+            twitter:{el:'socTwitter',url:s.twitter},
+            instagram:{el:'socInstagram',url:s.instagram},
+            youtube:{el:'socYoutube',url:s.youtube},
+            telegram:{el:'socTelegram',url:s.telegram}
+        };
+
+        Object.values(socialMap).forEach(({el,url})=>{
+            const element=document.getElementById(el);
+            if(element&&url&&url.trim()){
+                element.href=url;
+                element.classList.remove('hidden');
+            }
+        });
+
+        console.log('✅ Social Links Applied');
+    }catch(e){console.warn('Social apply error:',e);}
+}
+
+// Custom Code Apply
+async function applyCustomCode(){
+    try{
+        const snap=await db.ref('settings/customCode').once('value');
+        if(!snap.exists())return;
+        const c=snap.val();
+        if(c.head&&c.head.trim()){
+            document.head.insertAdjacentHTML('beforeend',c.head);
+        }
+        if(c.body&&c.body.trim()){
+            document.body.insertAdjacentHTML('beforeend',c.body);
+        }
+        console.log('✅ Custom Code Applied');
+    }catch(e){console.warn('Custom code apply error:',e);}
+}
+
+// ==========================================
+// LOAD ALL DATA
 // ==========================================
 async function loadData(){
     try{
+        // Apply all settings FIRST
+        await Promise.all([
+            applySEOSettings(),
+            applyAdsenseSettings(),
+            applyAnalyticsSettings(),
+            applySocialSettings(),
+            applyCustomCode()
+        ]);
+
+        // Site Settings
         const ss=await db.ref('settings/general').once('value');
         if(ss.exists()){
             const s=ss.val();
             const title=s.title||'IBAD TECH CSC';
             document.getElementById('siteTitle').innerText=title;
+            document.getElementById('aboutTitle').innerText=title;
             document.getElementById('siteTagline').innerText=s.tagline||'Sarkari Kaam & Digital Seva';
-            document.title=`${title} - Sarkari Job, Result, Yojna & Digital Seva 2026`;
+            if(!s.homeTitle)document.title=`${title} - Sarkari Job, Result, Yojna & Digital Seva 2026`;
             document.getElementById('topAddr').innerText=s.address||'India';
             document.getElementById('dynAbout').innerText=s.about||'Welcome to our Digital Seva Kendra.';
             document.getElementById('footTitle').innerText=title;
             document.getElementById('footAbout').innerText=s.about||'Your trusted Digital Seva Kendra.';
             document.getElementById('heroTitle').innerText=s.heroTitle||"🎯 India's Trusted Sarkari Kaam Portal";
             document.getElementById('heroSubtitle').innerText=s.heroSubtitle||"Sarkari Jobs, Yojna, Documents, Aadhar, PAN, Voter ID - Sab Kuch Ek Jagah!";
+            
+            // WhatsApp
             const waUrl=`https://wa.me/${s.whatsapp||'917056836166'}`;
             ['waLink','waSide','waFoot'].forEach(id=>{
                 const el=document.getElementById(id);
                 if(el)el.href=waUrl;
             });
+
+            // Email
+            if(s.email){
+                const el=document.getElementById('emailFoot');
+                if(el){el.href=`mailto:${s.email}`;el.innerText='Email: '+s.email;}
+            }
+
+            // Disclaimer
+            if(s.disclaimer){
+                document.getElementById('footDisc').innerHTML=`<strong>Disclaimer:</strong> ${s.disclaimer}`;
+            }
+
+            // Copyright
+            if(s.copyright){
+                document.getElementById('footBottom').innerHTML=`${s.copyright} Made with <i class="fas fa-heart"></i> for Digital India.`;
+            }
         }
+
+        // Categories
         const cs=await db.ref('categories').once('value');
         allCats=cs.exists()?cs.val():{};
+
+        // Posts
         const ps=await db.ref('posts').once('value');
         allPosts=ps.exists()?Object.keys(ps.val()).map(k=>({id:k,...ps.val()[k]})):[];
         allPosts.sort((a,b)=>new Date(b.timestamp||0)-new Date(a.timestamp||0));
         document.getElementById('statPosts').innerText=allPosts.length+'+';
+
+        // Services
         const svs=await db.ref('services').once('value');
         allServices=svs.exists()?svs.val():{};
+
+        // Render everything
         renderSarkariGrid();
         renderFeatured();
         renderGrid();
         renderTrending();
     }catch(e){
-        console.error(e);
+        console.error('Load data error:',e);
         renderSarkariGrid();
     }
 }
 
 // ==========================================
-// GET ALL SERVICES (Firebase or Default)
+// GET ALL SERVICES
 // ==========================================
 function getServices(){
     return Object.keys(allServices).length>0?allServices:DEFAULT_SERVICES;
@@ -778,7 +954,7 @@ function renderTrending(){
 }
 
 // ==========================================
-// 🔍 LIVE SEARCH WITH SUGGESTIONS
+// LIVE SEARCH WITH SUGGESTIONS
 // ==========================================
 function highlightMatch(text, query){
     if(!query||!text)return text;
@@ -789,13 +965,8 @@ function highlightMatch(text, query){
 function handleSearchInput(){
     const input=document.getElementById('searchInput');
     const query=input.value.trim().toLowerCase();
-
     clearTimeout(searchTimeout);
-    if(!query){
-        hideSuggestions();
-        return;
-    }
-
+    if(!query){hideSuggestions();return;}
     searchTimeout=setTimeout(()=>showSuggestions(query),150);
 }
 
@@ -804,7 +975,6 @@ function showSuggestions(query){
     const services=getServices();
     let matches=[];
 
-    // Search in Services
     Object.entries(services).forEach(([key,s])=>{
         const name=(s.name||'').toLowerCase();
         const sub=(s.sub||'').toLowerCase();
@@ -821,7 +991,6 @@ function showSuggestions(query){
         }
     });
 
-    // Search in Posts
     allPosts.forEach(p=>{
         const title=(p.title||'').toLowerCase();
         const summary=(p.summary||'').toLowerCase();
@@ -839,17 +1008,11 @@ function showSuggestions(query){
         }
     });
 
-    // Sort: services first, then posts
     matches.sort((a,b)=>a.type===b.type?0:a.type==='service'?-1:1);
-    matches=matches.slice(0,8); // Top 8
+    matches=matches.slice(0,8);
 
     if(matches.length===0){
-        box.innerHTML=`
-            <div class="suggestion-empty">
-                <i class="fas fa-search"></i>
-                <p>No results for "${query}"</p>
-            </div>
-        `;
+        box.innerHTML=`<div class="suggestion-empty"><i class="fas fa-search"></i><p>No results for "${query}"</p></div>`;
         box.classList.add('show');
         return;
     }
@@ -860,7 +1023,6 @@ function showSuggestions(query){
     let currentType='';
 
     matches.forEach((m,i)=>{
-        // Add section header
         if(m.type!==currentType){
             if(m.type==='service'&&services_count>0){
                 html+=`<div class="suggestion-header"><i class="fas fa-briefcase"></i> Sarkari Kaam Services</div>`;
@@ -899,15 +1061,13 @@ function hideSuggestions(){
 
 function handleSearchFocus(){
     const query=document.getElementById('searchInput').value.trim().toLowerCase();
-    if(query){
-        showSuggestions(query);
-    }
+    if(query){showSuggestions(query);}
 }
 
 function handleSearchKey(e){
     const box=document.getElementById('searchSuggestions');
     const items=box.querySelectorAll('.suggestion-item');
-    
+
     if(e.key==='Enter'){
         e.preventDefault();
         if(selectedSuggestionIndex>=0&&items[selectedSuggestionIndex]){
@@ -918,20 +1078,13 @@ function handleSearchKey(e){
         hideSuggestions();
         return;
     }
-
-    if(e.key==='Escape'){
-        hideSuggestions();
-        return;
-    }
-
+    if(e.key==='Escape'){hideSuggestions();return;}
     if(!items.length)return;
-
     if(e.key==='ArrowDown'){
         e.preventDefault();
         selectedSuggestionIndex=(selectedSuggestionIndex+1)%items.length;
         updateSelectedSuggestion(items);
     }
-
     if(e.key==='ArrowUp'){
         e.preventDefault();
         selectedSuggestionIndex=(selectedSuggestionIndex-1+items.length)%items.length;
@@ -950,16 +1103,13 @@ function updateSelectedSuggestion(items){
     });
 }
 
-// Close suggestions on outside click
 document.addEventListener('click',(e)=>{
     const wrap=document.querySelector('.search-wrap');
-    if(wrap&&!wrap.contains(e.target)){
-        hideSuggestions();
-    }
+    if(wrap&&!wrap.contains(e.target))hideSuggestions();
 });
 
 // ==========================================
-// 🔍 SEARCH NOW (Full Results)
+// SEARCH NOW
 // ==========================================
 window.searchNow=function(){
     const q=document.getElementById('searchInput').value.trim().toLowerCase();
@@ -973,14 +1123,12 @@ window.searchNow=function(){
     const services=getServices();
     const grid=document.getElementById('postsGrid');
 
-    // Match services
     const serviceMatches=Object.entries(services).filter(([key,s])=>{
         const name=(s.name||'').toLowerCase();
         const sub=(s.sub||'').toLowerCase();
         return name.includes(q)||sub.includes(q);
     }).map(([key,s])=>({type:'service',key,...s}));
 
-    // Match posts
     const postMatches=allPosts.filter(p=>
         p.title.toLowerCase().includes(q)||
         (p.summary&&p.summary.toLowerCase().includes(q))||
@@ -995,7 +1143,6 @@ window.searchNow=function(){
 
     let html='';
 
-    // Services section
     if(serviceMatches.length>0){
         serviceMatches.forEach(s=>{
             html+=`
@@ -1008,7 +1155,6 @@ window.searchNow=function(){
         });
     }
 
-    // Posts section
     if(postMatches.length>0){
         postMatches.forEach(p=>{
             html+=`
@@ -1088,11 +1234,6 @@ window.addEventListener('scroll',()=>{
 // ==========================================
 document.addEventListener('DOMContentLoaded',()=>{
     loadData();
-    try{
-        document.querySelectorAll('.adsbygoogle').forEach(()=>{
-            (adsbygoogle=window.adsbygoogle||[]).push({});
-        });
-    }catch(e){}
 });
 </script>
 </body>
