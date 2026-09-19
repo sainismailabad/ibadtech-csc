@@ -115,6 +115,9 @@ td{padding:16px;border-bottom:1px solid var(--s200);font-size:.88rem;color:var(-
 tr:last-child td{border-bottom:none}
 tr:hover td{background:var(--s50)}
 
+.thumb{width:50px;height:50px;border-radius:10px;object-fit:cover;border:2px solid var(--s200);background:var(--s100)}
+.thumb-icon{width:50px;height:50px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.2rem;background:linear-gradient(135deg,var(--p600),var(--p800))}
+
 /* BUTTONS */
 .btn{padding:11px 20px;border-radius:9px;font-weight:700;display:inline-flex;align-items:center;gap:8px;color:#fff;font-size:.85rem;transition:all .15s;cursor:pointer;border:none}
 .btn:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(0,0,0,.12)}
@@ -137,6 +140,12 @@ tr:hover td{background:var(--s50)}
 .form-group .hint{font-size:.75rem;color:var(--s400);margin-top:6px;display:block;font-weight:500;line-height:1.5}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 .form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+
+/* IMAGE PREVIEW */
+.image-preview{display:none;margin-bottom:18px;position:relative;border-radius:12px;overflow:hidden;border:2px solid var(--s200);background:var(--s50)}
+.image-preview img{width:100%;max-height:220px;object-fit:cover;display:block}
+.image-preview .remove-img{position:absolute;top:10px;right:10px;width:34px;height:34px;border-radius:50%;background:rgba(220,38,38,.95);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.9rem;border:none}
+.image-preview .remove-img:hover{background:var(--r600)}
 
 /* SWITCH TOGGLE */
 .toggle-row{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:var(--s50);border-radius:10px;margin-bottom:12px;border:1px solid var(--s200)}
@@ -402,9 +411,9 @@ tr:hover td{background:var(--s50)}
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th>Title</th><th>Category</th><th>Last Date</th><th style="width:180px">Actions</th></tr>
+<tr><th style="width:70px">Image</th><th>Title</th><th>Category</th><th>Last Date</th><th style="width:180px">Actions</th></tr>
 </thead>
-<tbody id="postsTable"><tr><td colspan="4"><div class="spinner"></div></td></tr></tbody>
+<tbody id="postsTable"><tr><td colspan="5"><div class="spinner"></div></td></tr></tbody>
 </table>
 </div>
 </div>
@@ -426,7 +435,7 @@ Har service mein multiple official links, steps, aur documents add kar sakte hai
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th style="width:70px">Icon</th><th>Service Name</th><th>Subtitle</th><th>Links</th><th style="width:180px">Actions</th></tr>
+<tr><th style="width:70px">Image</th><th>Service Name</th><th>Subtitle</th><th>Links</th><th style="width:180px">Actions</th></tr>
 </thead>
 <tbody id="servicesTable"><tr><td colspan="5"><div class="spinner"></div></td></tr></tbody>
 </table>
@@ -968,6 +977,17 @@ Galat code website break kar sakta hai.
 </div>
 </div>
 
+<!-- ✅ IMAGE URL FIELD -->
+<div class="form-group">
+<label>📷 Featured Image URL</label>
+<input type="url" id="ep_image" placeholder="https://example.com/image.jpg">
+<span class="hint">Post ki featured image ka URL (1200x630 recommended). Image instantly preview hogi neeche.</span>
+</div>
+<div class="image-preview" id="ep_imagePreview">
+<button type="button" class="remove-img" onclick="removePostImage()"><i class="fas fa-times"></i></button>
+<img id="ep_imagePreviewImg" alt="Preview">
+</div>
+
 <div class="form-group">
 <label>Short Summary</label>
 <textarea id="ep_sum" style="min-height:70px" placeholder="Brief description shown on card..."></textarea>
@@ -1059,6 +1079,17 @@ Galat code website break kar sakta hai.
 <option value="ic-bank">Cyan (Bank)</option>
 </select>
 </div>
+</div>
+
+<!-- ✅ SERVICE IMAGE URL FIELD -->
+<div class="form-group">
+<label>📷 Service Image URL</label>
+<input type="url" id="es_image" placeholder="https://example.com/service-image.jpg">
+<span class="hint">Service ki image ka URL (optional). Agar nahi diya to icon dikhega.</span>
+</div>
+<div class="image-preview" id="es_imagePreview">
+<button type="button" class="remove-img" onclick="removeServiceImage()"><i class="fas fa-times"></i></button>
+<img id="es_imagePreviewImg" alt="Preview">
 </div>
 
 <div class="form-group">
@@ -1288,6 +1319,36 @@ window.toggleSwitch = function(el) {
 };
 
 // ==========================================
+// IMAGE PREVIEW HANDLERS
+// ==========================================
+function setupImagePreview(inputId, previewId, imgId){
+    const input = document.getElementById(inputId);
+    const preview = document.getElementById(previewId);
+    const img = document.getElementById(imgId);
+    if(!input || !preview || !img) return;
+    input.addEventListener('input', function(){
+        const url = input.value.trim();
+        if(url && (url.startsWith('http://') || url.startsWith('https://'))){
+            img.src = url;
+            img.onerror = () => { preview.style.display = 'none'; };
+            img.onload = () => { preview.style.display = 'block'; };
+        } else {
+            preview.style.display = 'none';
+        }
+    });
+}
+
+window.removePostImage = function(){
+    document.getElementById('ep_image').value = '';
+    document.getElementById('ep_imagePreview').style.display = 'none';
+};
+
+window.removeServiceImage = function(){
+    document.getElementById('es_image').value = '';
+    document.getElementById('es_imagePreview').style.display = 'none';
+};
+
+// ==========================================
 // LOAD ALL DATA
 // ==========================================
 async function loadAllData() {
@@ -1321,7 +1382,6 @@ async function loadAllData() {
             document.getElementById('ads_slot_bottom').value = a.slotBottom || '';
             document.getElementById('ads_slot_article').value = a.slotArticle || '';
             
-            // Toggles
             adToggles = {
                 ad_top: a.toggleTop !== false,
                 ad_mid: a.toggleMid !== false,
@@ -1474,12 +1534,16 @@ function renderPosts() {
     const pt = document.getElementById('postsTable');
     pt.innerHTML = '';
     if (allPosts.length === 0) {
-        pt.innerHTML = `<tr><td colspan="4" class="empty"><i class="fas fa-inbox"></i><h4>No posts yet</h4><p>Click "Create New Post"</p></td></tr>`;
+        pt.innerHTML = `<tr><td colspan="5" class="empty"><i class="fas fa-inbox"></i><h4>No posts yet</h4><p>Click "Create New Post"</p></td></tr>`;
         return;
     }
     allPosts.forEach(p => {
         const title = p.title.length > 50 ? p.title.substring(0, 50) + '...' : p.title;
+        const thumbHtml = p.image
+            ? `<img src="${p.image}" class="thumb" alt="" onerror="this.outerHTML='<div class=\\'thumb-icon\\'><i class=\\'fas fa-file-alt\\'></i></div>'">`
+            : `<div class="thumb-icon"><i class="fas fa-file-alt"></i></div>`;
         pt.innerHTML += `<tr>
+            <td>${thumbHtml}</td>
             <td style="font-weight:700;color:var(--p600)">${title}</td>
             <td><span style="background:var(--p50);color:var(--p700);padding:4px 10px;border-radius:9999px;font-size:.78rem;font-weight:700">${allCats[p.category]?.name || 'Unknown'}</span></td>
             <td>${p.lastDate || 'N/A'}</td>
@@ -1503,8 +1567,11 @@ function renderServices() {
         return;
     }
     entries.forEach(([k, s]) => {
+        const thumbHtml = s.image
+            ? `<img src="${s.image}" class="thumb" alt="" onerror="this.outerHTML='<div class=\\'thumb-icon\\'><i class=\\'fas ${s.icon||'fa-id-card'}\\'></i></div>'">`
+            : `<div class="thumb-icon"><i class="fas ${s.icon || 'fa-id-card'}"></i></div>`;
         st.innerHTML += `<tr>
-            <td><div style="width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.1rem;background:linear-gradient(135deg,var(--p600),var(--p800))"><i class="fas ${s.icon || 'fa-id-card'}"></i></div></td>
+            <td>${thumbHtml}</td>
             <td style="font-weight:700">${s.name}</td>
             <td style="color:var(--s500)">${s.sub || '-'}</td>
             <td><span style="background:var(--g50);color:var(--g700);padding:4px 10px;border-radius:9999px;font-size:.78rem;font-weight:700">${(s.links || []).length} links</span></td>
@@ -1662,10 +1729,11 @@ window.addCat = async function() {
 // ==========================================
 window.openPostModal = function() {
     document.getElementById('ep_id').value = '';
-    ['ep_title', 'ep_sum', 'ep_link', 'ep_date', 'ep_edu', 'ep_steps', 'ep_docs', 'ep_faq'].forEach(id => {
+    ['ep_title', 'ep_sum', 'ep_link', 'ep_date', 'ep_edu', 'ep_steps', 'ep_docs', 'ep_faq', 'ep_image'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.value = '';
     });
+    document.getElementById('ep_imagePreview').style.display = 'none';
     document.getElementById('postModal').classList.add('show');
     document.body.style.overflow = 'hidden';
     setTimeout(() => document.getElementById('ep_title').focus(), 100);
@@ -1683,6 +1751,11 @@ window.editPost = function(id) {
     document.getElementById('ep_edu').value = p.education || '';
     document.getElementById('ep_steps').value = p.steps || '';
     document.getElementById('ep_docs').value = p.documents || '';
+    document.getElementById('ep_image').value = p.image || '';
+    const preview = document.getElementById('ep_imagePreview');
+    const img = document.getElementById('ep_imagePreviewImg');
+    if (p.image) { img.src = p.image; preview.style.display = 'block'; }
+    else { preview.style.display = 'none'; }
     let faqTxt = '';
     if (p.faq && Array.isArray(p.faq)) faqTxt = p.faq.map(f => `${f.q}|${f.a}`).join('\n');
     document.getElementById('ep_faq').value = faqTxt;
@@ -1697,6 +1770,8 @@ window.savePost = async function() {
     if (!title) { toast('Title is required', 'warning'); return; }
     let link = document.getElementById('ep_link').value.trim();
     if (link && !link.startsWith('http')) link = 'https://' + link;
+    let image = document.getElementById('ep_image').value.trim();
+    if (image && !image.startsWith('http')) image = 'https://' + image;
     const faqRaw = document.getElementById('ep_faq').value.trim();
     const faq = [];
     if (faqRaw) {
@@ -1709,6 +1784,7 @@ window.savePost = async function() {
         title,
         category: document.getElementById('ep_cat').value,
         summary: document.getElementById('ep_sum').value.trim(),
+        image: image,
         link,
         lastDate: document.getElementById('ep_date').value.trim(),
         education: document.getElementById('ep_edu').value.trim(),
@@ -1736,12 +1812,13 @@ window.savePost = async function() {
 // ==========================================
 window.openServiceModal = function() {
     document.getElementById('es_id').value = '';
-    ['es_name', 'es_sub', 'es_about', 'es_steps', 'es_docs', 'es_links'].forEach(id => {
+    ['es_name', 'es_sub', 'es_about', 'es_steps', 'es_docs', 'es_links', 'es_image'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.value = '';
     });
     document.getElementById('es_icon').value = 'fa-id-card';
     document.getElementById('es_color').value = 'ic-aadhar';
+    document.getElementById('es_imagePreview').style.display = 'none';
     document.getElementById('serviceModal').classList.add('show');
     document.body.style.overflow = 'hidden';
     setTimeout(() => document.getElementById('es_name').focus(), 100);
@@ -1759,6 +1836,11 @@ window.editService = function(key) {
     document.getElementById('es_steps').value = (s.steps || []).join('\n');
     document.getElementById('es_docs').value = (s.docs || []).join('\n');
     document.getElementById('es_links').value = (s.links || []).map(l => `${l.name}|${l.url}`).join('\n');
+    document.getElementById('es_image').value = s.image || '';
+    const preview = document.getElementById('es_imagePreview');
+    const img = document.getElementById('es_imagePreviewImg');
+    if (s.image) { img.src = s.image; preview.style.display = 'block'; }
+    else { preview.style.display = 'none'; }
     document.getElementById('serviceModal').classList.add('show');
     document.body.style.overflow = 'hidden';
     setTimeout(() => document.getElementById('es_name').focus(), 100);
@@ -1783,12 +1865,15 @@ window.saveService = async function() {
         });
     }
     if (links.length === 0) { toast('At least one official link is required', 'warning'); return; }
+    let image = document.getElementById('es_image').value.trim();
+    if (image && !image.startsWith('http')) image = 'https://' + image;
     const slug = name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
     const data = {
         name,
         sub: document.getElementById('es_sub').value.trim(),
         icon: document.getElementById('es_icon').value.trim() || 'fa-id-card',
         color: document.getElementById('es_color').value,
+        image: image,
         about: document.getElementById('es_about').value.trim(),
         steps,
         docs,
@@ -1836,6 +1921,8 @@ function formatDate(iso) {
 // INIT
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
+    setupImagePreview('ep_image','ep_imagePreview','ep_imagePreviewImg');
+    setupImagePreview('es_image','es_imagePreview','es_imagePreviewImg');
     console.log('🚀 Admin panel initialized');
 });
 </script>
